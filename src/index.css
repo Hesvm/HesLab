@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'IRANYekanX';
+  src: url('./assets/fonts/IRANYekanXVF.ttf') format('truetype-variations'),
+       url('./assets/fonts/IRANYekanXVF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Display';
+  src: url('./assets/fonts/plus-jakarta/PlusJakartaDisplay-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-persian: 'IRANYekanX', sans-serif;
+    --font-english: 'Plus Jakarta Display', sans-serif;
+  }
+
+  [dir="rtl"] {
+    font-family: 'IRANYekanX', 'Plus Jakarta Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  [dir="ltr"] {
+    font-family: 'Plus Jakarta Display', 'IRANYekanX', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html, body {
+    background-color: #ffffff;
+    font-family: 'IRANYekanX', 'Plus Jakarta Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+.font-fa {
+  font-family: 'IRANYekanX', sans-serif;
+}
+
+.font-en {
+  font-family: 'Plus Jakarta Display', sans-serif;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--card-rot, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--card-rot, 0deg));
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--card-rot, 0deg));
+  }
+  50% {
+    transform: translateY(8px) rotate(var(--card-rot, 0deg));
+  }
+}
+
+.animate-float-1 {
+  animation: float-slow 5.5s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-reverse 6.5s ease-in-out infinite 0.5s;
+}
+
+.animate-float-3 {
+  animation: float-slow 7.5s ease-in-out infinite 1.2s;
+}
+
+.animate-float-4 {
+  animation: float-reverse 6s ease-in-out infinite 1.8s;
+}
+
+/* Hide scrollbar for Chrome, Safari, Opera and WebKit */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+
