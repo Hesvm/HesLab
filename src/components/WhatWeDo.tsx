@@ -34,7 +34,7 @@ export const WhatWeDo: FC = () => {
     <section id="services" className="py-24 sm:py-32 px-4 max-w-6xl mx-auto border-t border-slate-900/10">
       {/* Header */}
       <div className="text-center mb-16 sm:mb-20">
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-950">
+        <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title}
         </h2>
         <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-lg mx-auto font-medium">
