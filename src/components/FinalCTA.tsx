@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 export const FinalCTA: FC = () => {
@@ -83,12 +84,12 @@ export const FinalCTA: FC = () => {
 
           {/* Navigation Links */}
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-[12.5px] font-bold text-slate-400">
-            <a href="#work" className="hover:text-white transition-colors">{lang === 'fa' ? 'نمونه‌کارها' : 'Work'}</a>
-            <a href="#services" className="hover:text-white transition-colors">{lang === 'fa' ? 'مخاطبان' : 'Audience'}</a>
-            <a href="#process" className="hover:text-white transition-colors">{lang === 'fa' ? 'مراحل کار' : 'Process'}</a>
-            <a href="#pricing" className="hover:text-white transition-colors">{lang === 'fa' ? 'قیمت‌گذاری' : 'Pricing'}</a>
-            <a href="#about" className="hover:text-white transition-colors">{lang === 'fa' ? 'درباره ما' : 'About'}</a>
-            <a href="#faq" className="hover:text-white transition-colors">{lang === 'fa' ? 'سوالات متداول' : 'FAQ'}</a>
+            <Link to="/work" className="hover:text-white transition-colors">{lang === 'fa' ? 'نمونه‌کارها' : 'Work'}</Link>
+            <Link to="/services" className="hover:text-white transition-colors">{lang === 'fa' ? 'خدمات' : 'Services'}</Link>
+            <Link to="/resources" className="hover:text-white transition-colors">{lang === 'fa' ? 'منابع و مقالات' : 'Resources'}</Link>
+            <Link to="/services/ongoing-content" className="hover:text-white transition-colors">{lang === 'fa' ? 'قیمت‌گذاری' : 'Pricing'}</Link>
+            <Link to="/about" className="hover:text-white transition-colors">{lang === 'fa' ? 'درباره ما' : 'About'}</Link>
+            <Link to="/contact" className="hover:text-white transition-colors">{lang === 'fa' ? 'تماس' : 'Contact'}</Link>
           </div>
 
           {/* Social Media Links (Replacing copyright text) */}

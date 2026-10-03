@@ -1,18 +1,22 @@
 import { FC } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { StatsBar } from './components/StatsBar';
-import { ManifestoScroll } from './components/ManifestoScroll';
-import { SelectedWork } from './components/SelectedWork';
-import { TargetAudience } from './components/TargetAudience';
-import { HowItWorks } from './components/HowItWorks';
-import { Pricing } from './components/Pricing';
-import { WhoIsBehind } from './components/WhoIsBehind';
-import { FAQ } from './components/FAQ';
-import { FinalCTA } from './components/FinalCTA';
+import { Toaster } from './components/Toaster';
+import { ScrollToTop } from './components/ScrollToTop';
 
-const MainContent: FC = () => {
+import { HomePage } from './pages/HomePage';
+import { WorkPage } from './pages/WorkPage';
+import { ProjectDetailPage } from './pages/ProjectDetailPage';
+import { ServicesIndexPage } from './pages/ServicesIndexPage';
+import { ServicePillarPage } from './pages/ServicePillarPage';
+import { ResourcesPage } from './pages/ResourcesPage';
+import { ResourceDetailPage } from './pages/ResourceDetailPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
+const AppShell: FC = () => {
   const { lang, isRtl } = useLanguage();
 
   return (
@@ -22,51 +26,35 @@ const MainContent: FC = () => {
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
-      {/* 1. Header Navigation */}
+      <ScrollToTop />
       <Navbar />
 
-      <main>
-        {/* 2. Hero Section: SHORT-FORM CONTENT STUDIO + SHOWREEL */}
-        <Hero />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/work" element={<WorkPage />} />
+        <Route path="/work/:slug" element={<ProjectDetailPage />} />
+        <Route path="/services" element={<ServicesIndexPage />} />
+        <Route path="/services/:slug" element={<ServicePillarPage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/resources/:slug" element={<ResourceDetailPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
 
-        {/* 3. Stats Bar: 50+ videos | 2M+ views | 24-48h turnaround */}
-        <StatsBar />
-
-        {/* 4. Manifesto Scroll: Interactive illuminated editorial text */}
-        <ManifestoScroll />
-
-        {/* 5. Portfolio: SELECTED WORK */}
-        <SelectedWork />
-
-        {/* 6. Target Audience: MADE FOR PEOPLE WHO HAVE SOMETHING TO SAY */}
-        <TargetAudience />
-
-        {/* 8. Process: HOW IT WORKS (01 Send, 02 Edit, 03 Review, 04 Deliver) */}
-        <HowItWorks />
-
-        {/* 9. Pricing: Starter (4/mo), Growth (12/mo), Studio (20+/mo) */}
-        <Pricing />
-
-        {/* 10. Founder Section: WHO'S BEHIND HESLAB? (HES) - Hidden for now */}
-        {/* <WhoIsBehind /> */}
-
-        {/* 12. FAQ Section */}
-        <FAQ />
-
-        {/* 13. Final Action Callout & Footer */}
-        <FinalCTA />
-      </main>
+      <Toaster />
     </div>
   );
 };
 
 export const App: FC = () => {
   return (
-    <LanguageProvider>
-      <MainContent />
-    </LanguageProvider>
+    <BrowserRouter>
+      <LanguageProvider>
+        <AppShell />
+      </LanguageProvider>
+    </BrowserRouter>
   );
 };
 
 export default App;
-

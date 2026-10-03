@@ -1,0 +1,39 @@
+# HesLab Production Robots Configuration
+# Canonical domain: https://heslab.studio
+# Explicitly configured for modern crawlers, LLM search agents, and AI discovery bots.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# Search Engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI Discovery & Search Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Canonical Sitemap Reference
+Sitemap: https://heslab.studio/sitemap.xml

@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-surface: var(--color-surface);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-border: var(--color-border);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+}
+
 @font-face {
   font-family: 'IRANYekanX';
   src: url('./assets/fonts/IRANYekanXVF.ttf') format('truetype-variations'),
@@ -93,6 +103,13 @@
   :root {
     --font-persian: 'IRANYekanX', sans-serif;
     --font-english: 'Plus Jakarta Display', sans-serif;
+    --color-background: #ffffff;
+    --color-foreground: #09090b;
+    --color-surface: #f4f4f5;
+    --color-muted-foreground: #71717a;
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-primary: #18181b;
+    --color-primary-foreground: #fafafa;
   }
 
   [dir="rtl"] {
