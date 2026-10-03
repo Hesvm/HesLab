@@ -8,7 +8,7 @@ import { SEOHead } from '../components/seo/SEOHead';
 import { generateArticleSchema } from '../utils/schema';
 import { playBenchoSound } from '../content/soundData';
 import { toast } from '../lib/toast';
-import { trackEvent } from '../lib/analytics';
+import { analytics } from '../lib/analytics';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowLeft, ArrowRight, Clock, Share } from 'iconsax-react';
 
@@ -33,12 +33,18 @@ export const ResourceDetailPage: FC = () => {
   useEffect(() => {
     if (article) {
       window.scrollTo({ top: 0, behavior: 'instant' });
-      trackEvent('resource_view', {
-        resourceSlug: article.slug,
-        path: `/resources/${article.slug}`,
+      analytics.trackResourceView({
+        resource_slug: article.slug,
+        resource_title: lang === 'fa' ? article.title : (article.titleEn || article.title),
+        resource_category: article.category,
+        resource_intent: article.searchIntent.primaryIntent,
+        funnel_stage: article.searchIntent.funnelStage,
+        target_audience: article.searchIntent.audience,
+        target_topic: article.searchIntent.targetTopic,
+        page_path: `/resources/${article.slug}`,
       });
     }
-  }, [article]);
+  }, [article, lang]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -357,6 +363,16 @@ export const ResourceDetailPage: FC = () => {
                   <Link
                     key={idx}
                     to={srv.path}
+                    onClick={() => {
+                      analytics.trackContentNavigation({
+                        discovery_type: 'resource_to_service',
+                        from_type: 'resource',
+                        from_slug: article.slug,
+                        to_type: 'service',
+                        to_slug: srv.path.replace('/services/', ''),
+                        page_path: `/resources/${article.slug}`,
+                      });
+                    }}
                     className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-800 hover:text-sky-600 bg-white border border-slate-200 px-3.5 py-1.5 rounded-full transition-colors"
                   >
                     <span>{srv.title}</span>
@@ -377,7 +393,18 @@ export const ResourceDetailPage: FC = () => {
               </p>
               <Link
                 to={article.cta.link}
-                onClick={() => trackEvent('primary_cta_click', { source: 'resource_detail_cta' })}
+                data-analytics="primary-cta"
+                data-analytics-name="start_a_project"
+                data-analytics-location="resource"
+                onClick={() =>
+                  analytics.trackPrimaryCta({
+                    cta_name: 'start_a_project',
+                    cta_location: 'resource',
+                    resource_slug: article.slug,
+                    page_path: `/resources/${article.slug}`,
+                    page_type: 'resource_detail',
+                  })
+                }
                 className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[14.5px] font-medium px-7 py-3 rounded-full shadow-lg transition-transform active:scale-95 cursor-pointer"
               >
                 {lang === 'en' && article.cta.buttonTextEn ? article.cta.buttonTextEn : article.cta.buttonText}

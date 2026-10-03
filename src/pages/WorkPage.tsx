@@ -5,7 +5,6 @@ import { PROJECTS } from '../data/projects';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
 import { playBenchoSound } from '../content/soundData';
 
 export const WorkPage: FC = () => {
@@ -158,7 +157,6 @@ export const WorkPage: FC = () => {
 
                 <Link
                   to={`/work/${project.slug}`}
-                  onClick={() => trackEvent('work_view', { workId: project.slug, path: `/work/${project.slug}` })}
                   className="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-950 hover:text-white text-slate-900 text-xs font-semibold transition-colors duration-200"
                 >
                   <span>{lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View Edit Breakdown'}</span>

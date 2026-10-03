@@ -7,7 +7,7 @@ import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateServiceSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
+import { analytics } from '../lib/analytics';
 import { Check } from 'iconsax-react';
 import { ContentOpportunityCalculator } from '../components/tools/ContentOpportunityCalculator';
 
@@ -19,9 +19,14 @@ export const ServicePillarPage: FC = () => {
   useEffect(() => {
     if (service) {
       window.scrollTo({ top: 0, behavior: 'instant' });
-      trackEvent('service_view', { serviceId: service.slug, path: service.path });
+      analytics.trackServiceView({
+        service_slug: service.slug,
+        service_name: lang === 'fa' ? service.nameFa : service.nameEn,
+        service_type: service.serviceType,
+        page_path: service.path,
+      });
     }
-  }, [service]);
+  }, [service, lang]);
 
   if (!service) {
     return (
@@ -98,7 +103,18 @@ export const ServicePillarPage: FC = () => {
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/contact"
-              onClick={() => trackEvent('primary_cta_click', { source: `service_hero_${service.slug}` })}
+              data-analytics="primary-cta"
+              data-analytics-name="get_a_project_quote"
+              data-analytics-location="service_hero"
+              onClick={() =>
+                analytics.trackPrimaryCta({
+                  cta_name: 'get_a_project_quote',
+                  cta_location: 'service_hero',
+                  service_slug: service.slug,
+                  page_path: service.path,
+                  page_type: 'service_detail',
+                })
+              }
               className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-semibold px-6 py-3 rounded-full shadow-md transition-transform active:scale-95 cursor-pointer"
             >
               {lang === 'fa' ? 'دریافت برآورد هزینه پروژه' : 'Get a Project Quote'}
@@ -373,7 +389,18 @@ export const ServicePillarPage: FC = () => {
 
             <Link
               to="/contact"
-              onClick={() => trackEvent('primary_cta_click', { source: `service_pricing_${service.slug}` })}
+              data-analytics="primary-cta"
+              data-analytics-name="get_a_project_quote"
+              data-analytics-location="service_pricing"
+              onClick={() =>
+                analytics.trackPrimaryCta({
+                  cta_name: 'get_a_project_quote',
+                  cta_location: 'service_pricing',
+                  service_slug: service.slug,
+                  page_path: service.path,
+                  page_type: 'service_detail',
+                })
+              }
               className="bg-slate-950 hover:bg-slate-800 text-white text-xs font-semibold px-6 py-3 rounded-full text-center shrink-0 transition-colors cursor-pointer"
             >
               {lang === 'fa' ? 'استعلام قیمت دقیق' : 'Request Pricing'}
@@ -393,6 +420,16 @@ export const ServicePillarPage: FC = () => {
                 <Link
                   key={res.slug}
                   to={`/resources/${res.slug}`}
+                  onClick={() => {
+                    analytics.trackContentNavigation({
+                      discovery_type: 'service_to_resource',
+                      from_type: 'service',
+                      from_slug: service.slug,
+                      to_type: 'resource',
+                      to_slug: res.slug,
+                      page_path: service.path,
+                    });
+                  }}
                   className="p-5 rounded-2xl border border-slate-200 bg-white hover:border-sky-300 hover:shadow-xs transition-all flex flex-col justify-between"
                 >
                   <div>
@@ -445,7 +482,18 @@ export const ServicePillarPage: FC = () => {
           </p>
           <Link
             to="/contact"
-            onClick={() => trackEvent('primary_cta_click', { source: `service_footer_${service.slug}` })}
+            data-analytics="primary-cta"
+            data-analytics-name="start_a_project"
+            data-analytics-location="service_footer"
+            onClick={() =>
+              analytics.trackPrimaryCta({
+                cta_name: 'start_a_project',
+                cta_location: 'service_footer',
+                service_slug: service.slug,
+                page_path: service.path,
+                page_type: 'service_detail',
+              })
+            }
             className="bg-[#00A7F5] hover:bg-[#0096DC] text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-lg transition-transform active:scale-95 inline-block cursor-pointer"
           >
             {lang === 'fa' ? 'ارسال درخواست همکاری و برآورد هزینه' : 'Start a Project with HesLab'}

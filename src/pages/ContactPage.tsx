@@ -2,7 +2,7 @@ import { useState, type FC, type FormEvent } from 'react';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
+import { analytics } from '../lib/analytics';
 import { SITE_CONFIG } from '../config/site';
 import { playBenchoSound } from '../content/soundData';
 import { toast } from '../lib/toast';
@@ -23,7 +23,10 @@ export const ContactPage: FC = () => {
   const handleStartTyping = () => {
     if (!isStarted) {
       setIsStarted(true);
-      trackEvent('contact_start', { path: '/contact' });
+      analytics.trackContactStart({
+        form_type: 'project_inquiry',
+        page_path: '/contact',
+      });
     }
   };
 
@@ -31,15 +34,21 @@ export const ContactPage: FC = () => {
     e.preventDefault();
     playBenchoSound('success');
 
-    trackEvent('contact_submit', {
-      projectType,
-      videoCount,
-      hasFootageLink: Boolean(footageLink.trim()),
+    // 1. Technical successful form submission event (Zero PII)
+    analytics.trackContactSubmit({
+      form_type: 'project_inquiry',
+      service_interest: projectType,
+      video_count: videoCount,
+      has_footage_link: Boolean(footageLink.trim()),
+      page_path: '/contact',
     });
 
-    trackEvent('quote_request', {
-      projectType,
-      videoCount,
+    // 2. Business conversion event
+    analytics.trackQuoteRequest({
+      service_interest: projectType,
+      video_count: videoCount,
+      inquiry_source: 'contact_page',
+      page_path: '/contact',
     });
 
     setSubmitted(true);
@@ -47,7 +56,11 @@ export const ContactPage: FC = () => {
   };
 
   const handleEmailClick = () => {
-    trackEvent('outbound_email_click', { email: SITE_CONFIG.email });
+    analytics.trackOutboundEmail({
+      destination_type: 'direct_email',
+      cta_location: 'contact_page_direct_email',
+      page_path: '/contact',
+    });
   };
 
   return (
@@ -260,6 +273,9 @@ export const ContactPage: FC = () => {
               {/* Submit CTA */}
               <button
                 type="submit"
+                data-analytics="primary-cta"
+                data-analytics-name="submit_quote_request"
+                data-analytics-location="contact_form"
                 className="w-full bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-bold py-3.5 rounded-xl shadow-lg transition-transform active:scale-[0.99] cursor-pointer"
               >
                 {lang === 'fa' ? 'ارسال درخواست برآورد هزینه' : 'Submit Quote Request'}
@@ -279,6 +295,9 @@ export const ContactPage: FC = () => {
 
           <a
             href={`mailto:${SITE_CONFIG.email}`}
+            data-analytics="outbound-email"
+            data-analytics-name="direct_email_contact"
+            data-analytics-location="contact_page"
             onClick={handleEmailClick}
             className="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-sky-600 bg-white border border-slate-200 px-4 py-2 rounded-xl transition-colors"
           >

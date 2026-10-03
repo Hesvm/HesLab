@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Toaster } from './components/Toaster';
 import { ScrollToTop } from './components/ScrollToTop';
+import { PostHogPageviewTracker } from './components/analytics/PostHogPageviewTracker';
 
 import { HomePage } from './pages/HomePage';
 import { WorkPage } from './pages/WorkPage';
@@ -29,6 +30,7 @@ const AppShell: FC = () => {
       }`}
     >
       <ScrollToTop />
+      <PostHogPageviewTracker />
       <Navbar />
 
       <Routes>

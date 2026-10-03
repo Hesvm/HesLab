@@ -25,7 +25,6 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           motion: ['framer-motion'],
-          icons: ['iconsax-react'],
         },
       },
     },

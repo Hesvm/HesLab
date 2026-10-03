@@ -5,7 +5,6 @@ import { getAllServices } from '../data/services';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
 
 const serviceIcons: Record<string, typeof VideoPlay> = {
   VideoPlay,
@@ -100,7 +99,6 @@ export const ServicesIndexPage: FC = () => {
 
                 <Link
                   to={srv.path}
-                  onClick={() => trackEvent('service_view', { serviceId: srv.slug, path: srv.path })}
                   className="w-full inline-flex items-center justify-between py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-950 hover:text-white text-slate-900 font-semibold text-xs transition-colors duration-200"
                 >
                   <span>{lang === 'fa' ? 'مشاهده جزییات ستون خدمت' : 'Explore Pillar Service'}</span>

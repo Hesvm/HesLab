@@ -6,7 +6,7 @@ import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateVideoSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
+import { analytics } from '../lib/analytics';
 import { playBenchoSound } from '../content/soundData';
 
 export const ProjectDetailPage: FC = () => {
@@ -21,9 +21,15 @@ export const ProjectDetailPage: FC = () => {
   useEffect(() => {
     if (project) {
       window.scrollTo({ top: 0, behavior: 'instant' });
-      trackEvent('work_view', { workId: project.slug, path: `/work/${project.slug}` });
+      analytics.trackWorkView({
+        work_slug: project.slug,
+        work_title: lang === 'fa' ? project.titleFa : project.titleEn,
+        work_type: project.category,
+        service_type: project.tag,
+        page_path: `/work/${project.slug}`,
+      });
     }
-  }, [project]);
+  }, [project, lang]);
 
   const toggleSound = () => {
     playBenchoSound('switch');
@@ -252,13 +258,34 @@ export const ProjectDetailPage: FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               to="/contact"
-              onClick={() => trackEvent('primary_cta_click', { source: `project_cta_${project.slug}` })}
+              data-analytics="primary-cta"
+              data-analytics-name="start_a_project"
+              data-analytics-location="work"
+              onClick={() =>
+                analytics.trackPrimaryCta({
+                  cta_name: 'start_a_project',
+                  cta_location: 'work',
+                  work_slug: project.slug,
+                  page_path: `/work/${project.slug}`,
+                  page_type: 'work_detail',
+                })
+              }
               className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-semibold px-7 py-3 rounded-full shadow-lg transition-transform active:scale-95 cursor-pointer"
             >
               {lang === 'fa' ? 'سفارش تدوین این سبک' : 'Request This Editing Style'}
             </Link>
             <Link
               to="/services/short-form-video-editing"
+              onClick={() => {
+                analytics.trackContentNavigation({
+                  discovery_type: 'work_to_service',
+                  from_type: 'work',
+                  from_slug: project.slug,
+                  to_type: 'service',
+                  to_slug: 'short-form-video-editing',
+                  page_path: `/work/${project.slug}`,
+                });
+              }}
               className="bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors cursor-pointer"
             >
               {lang === 'fa' ? 'جزییات سرویس شورتس' : 'View Service Details'}

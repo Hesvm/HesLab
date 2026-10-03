@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../lib/analytics';
 
 export const FinalCTA: FC = () => {
   const { lang, isRtl } = useLanguage();
@@ -47,6 +48,16 @@ export const FinalCTA: FC = () => {
               href="https://t.me/heslab"
               target="_blank"
               rel="noreferrer"
+              data-analytics="primary-cta"
+              data-analytics-name="start_a_project"
+              data-analytics-location="home_final_cta"
+              onClick={() => {
+                trackEvent('primary_cta_click', {
+                  cta_name: 'start_a_project',
+                  cta_location: 'home_final_cta',
+                  page_path: '/',
+                });
+              }}
               className="px-7 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-black text-xs sm:text-sm hover:scale-105 transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer"
             >
               <span>{lang === 'fa' ? 'ثبت درخواست و شروع پروژه' : 'Get Started Now'}</span>

@@ -1,7 +1,7 @@
 import { useState, useId, type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
-import { trackEvent } from '../../lib/analytics';
+import { analytics } from '../../lib/analytics';
 import { playBenchoSound } from '../../content/soundData';
 
 export interface CalculatorState {
@@ -224,10 +224,20 @@ export const ContentOpportunityCalculator: FC<{ className?: string }> = ({ class
           <div className="mt-8 pt-4 border-t border-slate-800/80">
             <Link
               to="/contact?service=content-repurposing"
+              data-analytics="primary-cta"
+              data-analytics-name="claim_calculator_quote"
+              data-analytics-location="calculator"
               onClick={() => {
-                trackEvent('quote_request', {
-                  service: 'content-repurposing',
-                  estimatedClips: monthlyTotalClips,
+                analytics.trackPrimaryCta({
+                  cta_name: 'claim_calculator_quote',
+                  cta_location: 'calculator',
+                  page_path: window.location.pathname,
+                });
+                analytics.trackQuoteRequest({
+                  service_interest: 'content-repurposing',
+                  estimated_clips: monthlyTotalClips,
+                  inquiry_source: 'opportunity_calculator',
+                  page_path: window.location.pathname,
                 });
                 playBenchoSound('open');
               }}

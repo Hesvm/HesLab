@@ -144,7 +144,17 @@ export const AboutPage: FC = () => {
           </p>
           <Link
             to="/contact"
-            onClick={() => trackEvent('primary_cta_click', { source: 'about_cta' })}
+            data-analytics="primary-cta"
+            data-analytics-name="start_a_project"
+            data-analytics-location="about"
+            onClick={() =>
+              trackEvent('primary_cta_click', {
+                cta_name: 'start_a_project',
+                cta_location: 'about',
+                page_path: '/about',
+                page_type: 'about',
+              })
+            }
             className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-semibold px-7 py-3 rounded-full transition-transform active:scale-95 cursor-pointer shadow-md"
           >
             {lang === 'fa' ? 'ارتباط با حسام' : 'Get in Touch'}

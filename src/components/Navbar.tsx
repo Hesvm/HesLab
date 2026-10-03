@@ -188,7 +188,16 @@ export const Navbar: FC = () => {
         <div className="flex items-center gap-2">
           <Link
             to="/contact"
-            onClick={() => trackEvent('primary_cta_click', { source: 'navbar_cta' })}
+            data-analytics="primary-cta"
+            data-analytics-name="start_a_project"
+            data-analytics-location="navigation"
+            onClick={() =>
+              trackEvent('primary_cta_click', {
+                cta_name: 'start_a_project',
+                cta_location: 'navigation',
+                page_path: window.location.pathname,
+              })
+            }
             className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[14.5px] font-normal px-5 sm:px-6 h-[44px] rounded-[14px] border border-sky-400/20 shadow-[0_4px_16px_rgba(0,167,245,0.35)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
           >
             {t.cta}
@@ -284,9 +293,16 @@ export const Navbar: FC = () => {
           <div className="pt-2 border-t border-white/10 mt-1">
             <Link
               to="/contact"
+              data-analytics="primary-cta"
+              data-analytics-name="start_a_project"
+              data-analytics-location="navigation_mobile"
               onClick={() => {
                 setMobileMenuOpen(false);
-                trackEvent('primary_cta_click', { source: 'mobile_menu_cta' });
+                trackEvent('primary_cta_click', {
+                  cta_name: 'start_a_project',
+                  cta_location: 'navigation_mobile',
+                  page_path: window.location.pathname,
+                });
               }}
               className="w-full bg-[#00A7F5] hover:bg-[#0096DC] text-white py-3 rounded-full text-[15px] font-normal flex items-center justify-center cursor-pointer shadow-md"
             >

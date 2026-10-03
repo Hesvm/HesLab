@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Hero } from '../components/Hero';
 import { StatsBar } from '../components/StatsBar';
 import { ManifestoScroll } from '../components/ManifestoScroll';
@@ -11,14 +11,8 @@ import { FinalCTA } from '../components/FinalCTA';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateWebSiteSchema, generateOrganizationSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
-import { trackEvent } from '../lib/analytics';
-
 export const HomePage: FC = () => {
   const { lang } = useLanguage();
-
-  useEffect(() => {
-    trackEvent('page_view', { path: '/' });
-  }, []);
 
   const webSiteSchema = generateWebSiteSchema();
   const orgSchema = generateOrganizationSchema();

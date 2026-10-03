@@ -4,7 +4,6 @@ import { RESOURCE_ARTICLES, ResourceArticle } from '../data/resources';
 import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
 import { SEOHead } from '../components/seo/SEOHead';
 import { playBenchoSound } from '../content/soundData';
-import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../context/LanguageContext';
 
 export const ResourcesPage: FC = () => {
@@ -23,12 +22,8 @@ export const ResourcesPage: FC = () => {
     ? RESOURCE_ARTICLES
     : RESOURCE_ARTICLES.filter((a) => a.category === selectedCategory);
 
-  const handleCardClick = (article: ResourceArticle) => {
+  const handleCardClick = (_article?: ResourceArticle) => {
     playBenchoSound('pick');
-    trackEvent('resource_view', {
-      resourceSlug: article.slug,
-      path: `/resources/${article.slug}`,
-    });
   };
 
   return (
@@ -94,7 +89,7 @@ export const ResourcesPage: FC = () => {
                 className="group flex flex-col gap-3.5 text-start transition-all"
               >
                 <Link
-                  to={`/resources/${article.slug}`}
+                  to={`/blog/${article.slug}`}
                   onClick={() => handleCardClick(article)}
                   className="block cursor-pointer focus:outline-hidden"
                 >
@@ -115,7 +110,7 @@ export const ResourcesPage: FC = () => {
 
                   <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug">
                     <Link
-                      to={`/resources/${article.slug}`}
+                      to={`/blog/${article.slug}`}
                       onClick={() => handleCardClick(article)}
                       className="focus:outline-hidden"
                     >
