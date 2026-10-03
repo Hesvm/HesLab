@@ -323,8 +323,8 @@ export const translations = {
       stepBadge: 'مرحله',
     },
     pricing: {
-      tag: 'تعرفه‌ها و پلن‌ها',
-      title: 'پلن‌های انتخابی',
+      tag: 'پکیج‌ها',
+      title: 'تداوم، بر ادیت‌های تکی غلبه می‌کند.',
       desc: 'پلن‌های شفاف و بدون تعهد بلندمدت.',
       popularBadge: '🔥 به صرفه ترین',
       plans: [
@@ -473,9 +473,9 @@ export const translations = {
       subtitle: 'Short-form video editing for creators and brands, powered by custom strategy and design.',
       viewWorkBtn: 'View our work',
       pricingBtn: 'Pricing',
-      showreelBadge: 'SHOWREEL 2026',
-      playReel: 'PLAY SHOWREEL',
-      pauseReel: 'PAUSE REEL',
+      showreelBadge: 'Showreel 2026',
+      playReel: 'Play Showreel',
+      pauseReel: 'Pause Reel',
       quality: '4K 60FPS',
     },
     stats: {
@@ -486,26 +486,26 @@ export const translations = {
       ],
     },
     rawVsFinal: {
-      tag: 'TRANSFORMATION',
+      tag: 'Transformation',
       title1: 'Same footage.',
       title2: 'Different attention.',
       desc: 'See how raw unpolished talking-head clips become magnetic high-retention stories.',
-      rawTitle: 'RAW FOOTAGE',
+      rawTitle: 'Raw Footage',
       rawQuality: '1080p flat',
       rawDesc: 'Long pauses, flat lighting, no captions, boring pacing.',
       rawAvgDuration: 'Avg. View Duration',
       rawPercent: '12% (3.2s)',
-      badgeHeslab: 'HESLAB EDIT',
-      finalTitle: 'FINAL CUT',
+      badgeHeslab: 'HesLab Edit',
+      finalTitle: 'Final Cut',
       finalQuality: '4K HDR',
-      finalHookText: '🔥 THIS CHANGES EVERYTHING',
+      finalHookText: '🔥 This changes everything',
       finalFeatures: 'Hook + SFX + B-Roll + Color',
       finalAudio: 'Spatial Beat-Synced Audio',
       finalAvgDuration: 'Avg. View Duration',
       finalPercent: '88% (42.6s)',
     },
     work: {
-      tag: 'PORTFOLIO',
+      tag: 'Portfolio',
       title: 'Selected Work',
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
@@ -640,33 +640,33 @@ export const translations = {
       ],
     },
     whatWeDo: {
-      tag: 'CORE CAPABILITIES',
+      tag: 'Core Capabilities',
       title: 'What We Actually Do',
       desc: 'Not just chopping videos — we engineer short-form assets that build brand equity.',
       pillar1: {
         num: '01',
-        title: 'EDIT',
+        title: 'Edit',
         tagline: 'Precision cutting & pacing',
         desc: 'We trim filler words, dead pauses, and unnecessary seconds. Every cut is timed to the millisecond to keep the viewer’s dopamine flowing.',
       },
       pillar2: {
         num: '02',
-        title: 'MAKE IT WATCHABLE',
+        title: 'Make It Watchable',
         tagline: 'Hooks, SFX & Visual Depth',
         desc: 'We craft compelling first 3-second hooks, motion graphics, beat-synced sound effects, and color grading that command instant authority.',
       },
       pillar3: {
         num: '03',
-        title: 'MAKE IT REPEATABLE',
+        title: 'Make It Repeatable',
         tagline: 'Predictable weekly output',
         desc: 'A bulletproof async workflow. You drop raw footage into your shared folder, and ready-to-post short videos appear on your calendar.',
       },
       bottomBadge: 'Zero fluff. 100% intentional edits.',
     },
     target: {
-      tag: 'WHO WE WORK WITH',
-      title1: 'Made for people who',
-      title2: 'have something to say.',
+      tag: 'Who We Work With',
+      title1: 'Made for people',
+      title2: 'who have something to say.',
       audiences: [
         {
           title: 'Content Creators',
@@ -719,7 +719,7 @@ export const translations = {
       ],
     },
     howItWorks: {
-      tag: 'PROCESS',
+      tag: 'Process',
       title: 'How It Works',
       desc: 'Zero meetings. 100% async. From raw camera files to viral posts.',
       steps: [
@@ -747,8 +747,8 @@ export const translations = {
       stepBadge: 'Step',
     },
     pricing: {
-      tag: 'TRANSPARENT PRICING',
-      title: 'Choose Your Plan',
+      tag: 'Packages',
+      title: 'Consistency beats one-off edits.',
       desc: 'Simple, transparent pricing with zero long-term lock-in.',
       popularBadge: '🔥 Most Popular',
       plans: [
@@ -781,7 +781,7 @@ export const translations = {
       ],
     },
     philosophy: {
-      tag: 'THE HESLAB PHILOSOPHY',
+      tag: 'The HesLab Philosophy',
       title1: "You don't need",
       title2: 'another freelancer.',
       desc1: 'You need someone who',
@@ -789,7 +789,7 @@ export const translations = {
       desc3: 'and cares about the final watch-time.',
     },
     about: {
-      tag: 'FOUNDER & LEAD EDITOR',
+      tag: 'Founder & Lead Editor',
       title: "Who's Behind HesLab?",
       badge: "Hey, I'm Hesam (Hes)",
       headline: 'Obsessed with pacing, visual rhythm, and stories that hold attention.',
@@ -802,7 +802,7 @@ export const translations = {
       stat3Label: 'On-Time',
     },
     faq: {
-      tag: 'QUESTIONS & ANSWERS',
+      tag: 'Questions & Answers',
       title: 'FAQ',
       items: [
         {
@@ -828,7 +828,7 @@ export const translations = {
       ],
     },
     cta: {
-      tag: 'READY TO ELEVATE YOUR CONTENT?',
+      tag: 'Ready to elevate your content?',
       title1: 'Got footage?',
       title2: "Let's make something",
       title3: 'out of it.',
@@ -836,7 +836,7 @@ export const translations = {
       buttonText: 'Start a project',
     },
     footer: {
-      rights: 'HESLAB. All rights reserved.',
+      rights: 'HesLab. All rights reserved.',
       links: {
         work: 'Work',
         services: 'Services',

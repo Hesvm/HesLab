@@ -11,12 +11,26 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const getInitialLang = (): Language => {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const paramLang = params.get('lang');
+    if (paramLang === 'en' || paramLang === 'fa') return paramLang as Language;
+    const saved = localStorage.getItem('heslab_lang');
+    if (saved === 'en' || saved === 'fa') return saved as Language;
+  }
+  return 'en'; // Default to English as requested
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Language>('fa'); // Default to Persian as requested
+  const [lang, setLang] = useState<Language>(getInitialLang);
 
   useEffect(() => {
     document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
+    try {
+      localStorage.setItem('heslab_lang', lang);
+    } catch (_) {}
   }, [lang]);
 
   const toggleLang = () => {

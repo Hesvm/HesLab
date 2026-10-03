@@ -15,7 +15,7 @@ export const FinalCTA: FC = () => {
         {/* Center Content */}
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           {/* Main Headline */}
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[56px] font-black tracking-tight uppercase leading-[1.2] sm:leading-[1.18] text-white">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.2] sm:leading-[1.18] text-white">
             {lang === 'fa' ? (
               <>
                 <span>یه محتوایی بساز</span> <br />

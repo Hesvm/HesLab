@@ -9,12 +9,23 @@ export const TargetAudience: FC = () => {
   return (
     <section id="services" className="py-14 sm:py-20 px-4 max-w-5xl mx-auto border-t border-slate-900/10">
       {/* Section Header */}
-      <div className="text-center mb-9 sm:mb-12">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950 uppercase max-w-2xl mx-auto leading-tight">
-          {t.title1} <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">
-            {t.title2}
-          </span>
+      <div className="text-center mb-10 sm:mb-14">
+        <h2 className="text-3xl sm:text-5xl md:text-[54px] tracking-tight text-slate-950 max-w-3xl mx-auto leading-[1.25] sm:leading-[1.18]">
+          {lang === 'fa' ? (
+            <>
+              <span className="font-black block">{t.title1}</span>
+              <span className="font-black text-slate-950 block mt-1">{t.title2}</span>
+            </>
+          ) : (
+            <>
+              <span className="font-serif-italic font-normal block mb-1">
+                {t.title1}
+              </span>
+              <span className="font-['Plus_Jakarta_Display'] font-black text-slate-950 block mt-1 tracking-tight">
+                {t.title2}
+              </span>
+            </>
+          )}
         </h2>
       </div>
 
@@ -36,7 +47,7 @@ export const TargetAudience: FC = () => {
             </div>
 
             {/* Centered Title */}
-            <h3 className="text-[15.5px] sm:text-[16.5px] font-black text-slate-950 uppercase tracking-tight mb-1.5 text-center">
+            <h3 className="text-[15.5px] sm:text-[16.5px] font-black text-slate-950 tracking-tight mb-1.5 text-center">
               {item.title}
             </h3>
 

@@ -34,7 +34,7 @@ export const WhatWeDo: FC = () => {
     <section id="services" className="py-24 sm:py-32 px-4 max-w-6xl mx-auto border-t border-slate-900/10">
       {/* Header */}
       <div className="text-center mb-16 sm:mb-20">
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-950 uppercase">
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-950">
           {t.title}
         </h2>
         <p className="mt-4 text-slate-600 text-base sm:text-lg max-w-lg mx-auto font-medium">
@@ -62,10 +62,10 @@ export const WhatWeDo: FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black text-slate-950 uppercase tracking-tight mb-2">
+                <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight mb-2">
                   {pillar.title}
                 </h3>
-                <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-4">
+                <span className="text-xs font-bold text-indigo-600 tracking-wider block mb-4">
                   {pillar.tagline}
                 </span>
 

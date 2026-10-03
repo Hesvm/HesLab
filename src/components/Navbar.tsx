@@ -1,4 +1,4 @@
-import { useState, useRef, type FC } from 'react';
+import { useState, useEffect, useRef, type FC } from 'react';
 import {
   ArrowDown2,
   Category,
@@ -18,52 +18,61 @@ const serviceCardMeta = [
     icon: VideoPlay,
     badgeBg: 'bg-[#0284C7]',
     badgeText: 'text-white',
-    cardBg: 'bg-[#F0F9FF] hover:bg-[#E0F2FE]',
-    cardBorder: 'border-[#BAE6FD] hover:border-[#0284C7]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-sky-500/50',
   },
   {
     icon: Flash,
     badgeBg: 'bg-[#EA580C]',
     badgeText: 'text-white',
-    cardBg: 'bg-[#FFF7ED] hover:bg-[#FFEDD5]',
-    cardBorder: 'border-[#FED7AA] hover:border-[#EA580C]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-orange-500/50',
   },
   {
     icon: TextalignCenter,
     badgeBg: 'bg-[#16A34A]',
     badgeText: 'text-white',
-    cardBg: 'bg-[#F0FDF4] hover:bg-[#DCFCE7]',
-    cardBorder: 'border-[#BBF7D0] hover:border-[#16A34A]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-emerald-500/50',
   },
   {
     icon: Music,
     badgeBg: 'bg-[#9333EA]',
     badgeText: 'text-white',
-    cardBg: 'bg-[#FAF5FF] hover:bg-[#F3E8FF]',
-    cardBorder: 'border-[#E9D5FF] hover:border-[#9333EA]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-purple-500/50',
   },
   {
     icon: Magicpen,
     badgeBg: 'bg-[#E11D48]',
     badgeText: 'text-white',
-    cardBg: 'bg-[#FFF1F2] hover:bg-[#FFE4E6]',
-    cardBorder: 'border-[#FECDD3] hover:border-[#E11D48]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-rose-500/50',
   },
   {
     icon: BagTick,
-    badgeBg: 'bg-[#0F172A]',
+    badgeBg: 'bg-sky-600',
     badgeText: 'text-white',
-    cardBg: 'bg-[#F8FAFC] hover:bg-[#F1F5F9]',
-    cardBorder: 'border-[#E2E8F0] hover:border-[#0F172A]',
+    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
+    cardBorder: 'border-zinc-800 hover:border-sky-500/50',
   },
 ];
 
 export const Navbar: FC = () => {
-  const { lang, toggleLang, isRtl } = useLanguage();
+  const { lang, isRtl } = useLanguage();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 25);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMouseEnter = () => {
     if (leaveTimerRef.current) {
@@ -80,9 +89,17 @@ export const Navbar: FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 sm:pt-6 px-4 pointer-events-none transition-all">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-300 ease-out px-4 ${
+        scrolled ? 'pt-3 sm:pt-4' : 'pt-5 sm:pt-6'
+      }`}
+    >
       <nav
-        className="relative pointer-events-auto w-full max-w-[670px] h-[58px] bg-white/90 backdrop-blur-xl border border-slate-900/12 rounded-[14px] px-3.5 flex items-center justify-between shadow-[0_6px_28px_rgba(0,0,0,0.06),_inset_0_1px_1px_rgba(255,255,255,0.9)] origin-top"
+        className={`relative pointer-events-auto w-full max-w-[580px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
+          scrolled
+            ? 'bg-[#1E1E1F]/95 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.5)] scale-[0.94]'
+            : 'bg-[#1E1E1F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] scale-100'
+        }`}
         aria-label="Main Navigation"
       >
         {/* Brand Logo & Logotype */}
@@ -99,15 +116,15 @@ export const Navbar: FC = () => {
           <img
             src="/brand/logo_type.svg"
             alt="Hēs lab"
-            className="h-[28px] w-auto object-contain select-none group-hover:opacity-90 transition-opacity duration-200"
+            className="h-[28px] w-auto object-contain select-none group-hover:opacity-90 transition-opacity duration-200 brightness-0 invert"
           />
         </a>
 
         {/* Navigation Items */}
-        <div className="hidden md:flex items-center gap-[24px] text-[13.5px] font-semibold text-slate-700">
+        <div className="hidden md:flex items-center gap-[22px] text-[15px] font-normal text-[#A5A5A6]">
           <a
             href="#work"
-            className="hover:text-slate-950 transition-colors duration-200 select-none"
+            className="hover:text-white transition-colors duration-200 select-none"
           >
             {t.work}
           </a>
@@ -124,19 +141,19 @@ export const Navbar: FC = () => {
                 e.preventDefault();
                 setServicesDropdownOpen(!servicesDropdownOpen);
               }}
-              className={`flex items-center gap-1 transition-colors duration-200 select-none py-2 cursor-pointer ${
+              className={`flex items-center gap-1.5 transition-colors duration-200 select-none py-2 cursor-pointer ${
                 servicesDropdownOpen
-                  ? 'text-slate-950 font-bold'
-                  : 'hover:text-slate-950'
+                  ? 'text-white'
+                  : 'hover:text-white'
               }`}
             >
               <span>{t.services}</span>
               <ArrowDown2
-                size={12}
+                size={13}
                 color="currentColor"
                 variant="Linear"
                 className={`shrink-0 stroke-[2.5px] mt-0.5 transition-transform duration-200 ${
-                  servicesDropdownOpen ? 'rotate-180 text-slate-950' : ''
+                  servicesDropdownOpen ? 'rotate-180 text-white' : ''
                 }`}
               />
             </a>
@@ -144,33 +161,24 @@ export const Navbar: FC = () => {
 
           <a
             href="#pricing"
-            className="hover:text-slate-950 transition-colors duration-200 select-none"
+            className="hover:text-white transition-colors duration-200 select-none"
           >
             {t.pricing}
           </a>
 
           <a
             href="#about"
-            className="hover:text-slate-950 transition-colors duration-200 select-none"
+            className="hover:text-white transition-colors duration-200 select-none"
           >
             {t.about}
           </a>
-
-          {/* Language Switch Button */}
-          <button
-            onClick={toggleLang}
-            className="text-[12px] font-bold px-2 py-0.5 rounded-[6px] border border-slate-200 bg-slate-100/80 hover:bg-slate-200 hover:text-slate-950 text-slate-700 transition-all cursor-pointer select-none"
-            title={lang === 'fa' ? 'Switch to English' : 'تغییر به فارسی'}
-          >
-            {t.switchLang}
-          </button>
         </div>
 
         {/* CTA Button */}
         <div className="flex items-center gap-2">
           <a
             href="#contact"
-            className="bg-slate-950 hover:bg-slate-800 text-white text-[13px] font-bold px-4 h-[38px] rounded-[12px] border border-black/10 transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
+            className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[15px] font-normal px-5 sm:px-6 h-[44px] rounded-[14px] border border-sky-400/20 shadow-[0_4px_16px_rgba(0,167,245,0.35)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
           >
             {t.cta}
           </a>
@@ -178,7 +186,7 @@ export const Navbar: FC = () => {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-slate-800 hover:text-black p-1.5 rounded-[10px] transition-colors cursor-pointer"
+            className="md:hidden text-[#A5A5A6] hover:text-white p-1.5 rounded-[10px] transition-colors cursor-pointer"
             aria-label="Open menu"
           >
             {mobileMenuOpen ? (
@@ -193,7 +201,7 @@ export const Navbar: FC = () => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className={`absolute top-[calc(100%+6px)] -inset-x-2 bg-white/98 backdrop-blur-2xl border border-slate-900/12 rounded-[16px] p-3.5 shadow-[0_20px_45px_rgba(0,0,0,0.1),_inset_0_1px_1px_rgba(255,255,255,0.9)] transition-all duration-200 ease-out z-50 ${
+          className={`absolute top-[calc(100%+6px)] -inset-x-2 bg-[#1E1E1F]/98 backdrop-blur-2xl border border-white/10 rounded-[16px] p-3.5 shadow-[0_20px_45px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-200 ease-out z-50 ${
             servicesDropdownOpen
               ? 'opacity-100 translate-y-0 pointer-events-auto visible'
               : 'opacity-0 -translate-y-1 pointer-events-none invisible'
@@ -223,10 +231,10 @@ export const Navbar: FC = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-slate-900 text-[14px] font-bold tracking-tight mb-1">
+                    <h4 className="text-white text-[14px] font-bold tracking-tight mb-1">
                       {item.title}
                     </h4>
-                    <p className="text-slate-600 text-[11.5px] leading-relaxed line-clamp-2">
+                    <p className="text-zinc-400 text-[11.5px] leading-relaxed line-clamp-2">
                       {item.desc}
                     </p>
                   </div>
@@ -239,18 +247,18 @@ export const Navbar: FC = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-white/98 backdrop-blur-xl border border-slate-900/12 rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
+        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-[#1E1E1F]/98 backdrop-blur-xl border border-white/10 rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
           <a
             href="#work"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-slate-800 hover:text-black py-2 text-sm font-bold border-b border-slate-100"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
           >
             {t.work}
           </a>
           <a
             href="#services"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-slate-800 hover:text-black py-2 text-sm font-bold border-b border-slate-100 flex items-center justify-center gap-1.5"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10 flex items-center justify-center gap-1.5"
           >
             <span>{t.services}</span>
             <ArrowDown2 size={13} color="currentColor" variant="Linear" />
@@ -258,31 +266,22 @@ export const Navbar: FC = () => {
           <a
             href="#pricing"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-slate-800 hover:text-black py-2 text-sm font-bold border-b border-slate-100"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
           >
             {t.pricing}
           </a>
           <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-slate-800 hover:text-black py-2 text-sm font-bold border-b border-slate-100"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
           >
             {t.about}
           </a>
-          <button
-            onClick={() => {
-              toggleLang();
-              setMobileMenuOpen(false);
-            }}
-            className="text-slate-800 hover:text-black py-2 text-sm font-bold border-b border-slate-100"
-          >
-            {lang === 'fa' ? 'English (EN)' : 'فارسی (FA)'}
-          </button>
-          <div className="pt-2 border-t border-slate-200 mt-1">
+          <div className="pt-2 border-t border-white/10 mt-1">
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full bg-slate-950 hover:bg-slate-800 text-white py-2.5 rounded-[12px] text-sm font-bold flex items-center justify-center cursor-pointer"
+              className="w-full bg-[#00A7F5] hover:bg-[#0096DC] text-white py-3 rounded-full text-[15px] font-normal flex items-center justify-center cursor-pointer shadow-md"
             >
               {t.cta}
             </a>

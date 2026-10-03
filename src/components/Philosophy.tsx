@@ -12,7 +12,7 @@ export const Philosophy: FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-indigo-600/15 blur-[100px] pointer-events-none" />
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[1.12] text-white">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] text-white">
           {t.title1} <br />
           <span className="text-slate-500">{t.title2}</span>
         </h2>

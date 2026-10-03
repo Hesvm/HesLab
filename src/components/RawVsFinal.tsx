@@ -41,7 +41,7 @@ export const RawVsFinal: FC = () => {
     <section className="py-16 sm:py-22 px-4 max-w-5xl mx-auto text-center select-none">
       {/* Section Header */}
       <div className="mb-10 sm:mb-12">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950 uppercase leading-tight">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950 leading-tight">
           {t.title1} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">
             {t.title2}
@@ -81,7 +81,7 @@ export const RawVsFinal: FC = () => {
 
             {/* Final Cut Top Header Badge */}
             <div className="relative z-10 flex items-center justify-between">
-              <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white text-[11px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white text-[11px] font-black tracking-wider shadow-sm flex items-center gap-1.5">
                 <Flash size={12} variant="Bold" />
                 {t.finalTitle}
               </span>
@@ -92,7 +92,7 @@ export const RawVsFinal: FC = () => {
 
             {/* Final Cut Center Showcase */}
             <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto">
-              <div className="px-3.5 py-1.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/30 text-white font-black text-xs uppercase tracking-tight shadow-xl mb-2.5 animate-bounce duration-1000">
+              <div className="px-3.5 py-1.5 rounded-lg bg-black/85 backdrop-blur-md border border-white/30 text-white font-black text-xs tracking-tight shadow-xl mb-2.5 animate-bounce duration-1000">
                 {t.finalHookText}
               </div>
 
@@ -134,7 +134,7 @@ export const RawVsFinal: FC = () => {
 
               {/* Raw Top Header Badge */}
               <div className="relative z-10 flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white/70 text-[11px] font-bold tracking-wider">
                   {t.rawTitle}
                 </span>
                 <span className="text-white/50 text-[11px] font-mono">{t.rawQuality}</span>

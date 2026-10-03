@@ -54,9 +54,9 @@ export const ManifestoScroll: FC = () => {
       className="py-12 sm:py-16 px-4 max-w-4xl mx-auto bg-white select-none border-t border-slate-100"
     >
       {/* Small Clean Tag */}
-      <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8 text-[11px] font-bold tracking-widest uppercase text-slate-400">
+      <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8 text-[11px] font-bold tracking-widest text-slate-400">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span>{lang === 'fa' ? 'مانیفست حس‌لب' : 'THE HESLAB MANIFESTO'}</span>
+        <span>{lang === 'fa' ? 'مانیفست حس‌لب' : 'The HesLab Manifesto'}</span>
       </div>
 
       {/* Dynamic Compact Sentence on Pure White Background */}
@@ -86,7 +86,7 @@ export const ManifestoScroll: FC = () => {
               alt="Studio"
               className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
             />
-            <span className="text-[9px] text-white/80 font-bold uppercase tracking-wider hidden sm:inline">STUDIO</span>
+            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Studio</span>
             <span className="text-[11px] sm:text-xs font-black text-white">تیم شورت‌فرم</span>
           </span>
 
@@ -208,7 +208,7 @@ export const ManifestoScroll: FC = () => {
             className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#9E5A38] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
           >
             <span className="text-xs">👁️</span>
-            <span className="text-[9px] text-white/80 font-bold uppercase tracking-wider hidden sm:inline">RETENTION</span>
+            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Retention</span>
             <span className="text-[11px] sm:text-xs font-black text-white">چشم مخاطب</span>
           </span>
 
@@ -241,7 +241,7 @@ export const ManifestoScroll: FC = () => {
               alt="Gem"
               className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
             />
-            <span className="text-[9px] text-white/80 font-bold uppercase tracking-wider hidden sm:inline">BRAND VALUE</span>
+            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Brand Value</span>
             <span className="text-[11px] sm:text-xs font-black text-white">ارزش برند</span>
           </span>
 

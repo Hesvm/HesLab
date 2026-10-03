@@ -47,8 +47,8 @@ const MainContent: FC = () => {
         {/* 9. Pricing: Starter (4/mo), Growth (12/mo), Studio (20+/mo) */}
         <Pricing />
 
-        {/* 10. Founder Section: WHO'S BEHIND HESLAB? (HES) */}
-        <WhoIsBehind />
+        {/* 10. Founder Section: WHO'S BEHIND HESLAB? (HES) - Hidden for now */}
+        {/* <WhoIsBehind /> */}
 
         {/* 12. FAQ Section */}
         <FAQ />
