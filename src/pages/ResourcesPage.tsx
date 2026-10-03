@@ -39,7 +39,7 @@ export const ResourcesPage: FC = () => {
       }`}
     >
       <SEOHead
-        title={lang === 'fa' ? 'بلاگ تخصصی حس‌لب | مقالات تدوین شورتس و موشن' : 'HesLab Blog | Video Editing & Motion Insights'}
+        title={lang === 'fa' ? 'بلاگ حس‌لب' : 'Heslab blog'}
         description={
           lang === 'fa'
             ? 'راهنماها، کالبدشکافی هوک‌ها و تجربیات عملی استودیو حس‌لب در تدوین ریلز، یوتیوب شورتس، موشن دیزاین و فیزیک انیمیشن.'
@@ -50,20 +50,13 @@ export const ResourcesPage: FC = () => {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Clean Page Header */}
-        <header className="mb-12 text-center pt-4">
-          <div className="max-w-2xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-              {lang === 'fa' ? 'بلاگ و بینش‌های تدوین و موشن' : 'Resources & Creator Insights'}
-            </h1>
-            <p className="mt-4 text-[15px] sm:text-base text-slate-600 leading-relaxed">
-              {lang === 'fa'
-                ? 'راهنماهای تخصصی، تحلیل فریم‌به‌فریم هوک‌های وایرال و روش‌های بهینه‌سازی جریان کار ویدیوهای کوتاه.'
-                : 'Actionable breakdowns on short-form retention, motion dynamics, and repeatable editing workflows.'}
-            </p>
-          </div>
+        <header className="mb-10 text-center pt-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight font-en">
+            Heslab blog
+          </h1>
 
           {/* Category Filter Pills (Strictly Single Line) */}
-          <div className="w-full flex items-center justify-start sm:justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden gap-2 mt-8 py-1 px-2">
+          <div className="w-full flex items-center justify-start sm:justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden gap-2 mt-6 py-1 px-2">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
