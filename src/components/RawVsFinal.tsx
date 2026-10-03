@@ -41,7 +41,7 @@ export const RawVsFinal: FC = () => {
     <section className="py-16 sm:py-22 px-4 max-w-5xl mx-auto text-center select-none">
       {/* Section Header */}
       <div className="mb-10 sm:mb-12">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950 leading-tight">
+        <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title1} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">
             {t.title2}
