@@ -56,21 +56,23 @@ export const WorkPage: FC = () => {
           ]}
         />
 
-        <header className="mb-10 text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold mb-3">
-            <span>{lang === 'fa' ? 'آرشیو کارهای حس‌لب' : 'HesLab Portfolio'}</span>
+        <header className="mb-10 text-center">
+          <div className="max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold mb-3">
+              <span>{lang === 'fa' ? 'آرشیو کارهای حس‌لب' : 'HesLab Portfolio'}</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+              {lang === 'fa' ? 'پروژه‌های منتخب و ادیت‌های پربازدید' : 'Selected Work & Case Studies'}
+            </h1>
+            <p className="mt-3 text-[15px] sm:text-base text-slate-600 leading-relaxed">
+              {lang === 'fa'
+                ? 'ویدیوهای کوتاه با کیفیت 4K و ریتم مهندسی‌شده برای نگهداشت بالای ۷۵٪ نگاه مخاطب.'
+                : 'Vertical video edits engineered for high retention, viral reach, and commercial brand impact.'}
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-            {lang === 'fa' ? 'پروژه‌های منتخب و ادیت‌های پربازدید' : 'Selected Work & Case Studies'}
-          </h1>
-          <p className="mt-3 text-[15px] sm:text-base text-slate-600 leading-relaxed">
-            {lang === 'fa'
-              ? 'ویدیوهای کوتاه با کیفیت 4K و ریتم مهندسی‌شده برای نگهداشت بالای ۷۵٪ نگاه مخاطب.'
-              : 'Vertical video edits engineered for high retention, viral reach, and commercial brand impact.'}
-          </p>
 
-          {/* Category Filter */}
-          <div className="flex items-center justify-center flex-wrap gap-2 mt-7">
+          {/* Category Filter (Strictly Single Line) */}
+          <div className="w-full flex items-center justify-start sm:justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden gap-2 mt-7 py-1 px-2">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
@@ -80,7 +82,7 @@ export const WorkPage: FC = () => {
                     setSelectedCategory(cat.id);
                     playBenchoSound('select');
                   }}
-                  className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-medium transition-all duration-150 cursor-pointer ${
+                  className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-full text-[12.5px] font-medium transition-all duration-150 cursor-pointer ${
                     isActive
                       ? 'bg-slate-950 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'

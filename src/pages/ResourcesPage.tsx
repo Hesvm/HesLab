@@ -50,18 +50,20 @@ export const ResourcesPage: FC = () => {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Clean Page Header */}
-        <header className="mb-12 text-center max-w-2xl mx-auto pt-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-            {lang === 'fa' ? 'بلاگ و بینش‌های تدوین و موشن' : 'Resources & Creator Insights'}
-          </h1>
-          <p className="mt-4 text-[15px] sm:text-base text-slate-600 leading-relaxed">
-            {lang === 'fa'
-              ? 'راهنماهای تخصصی، تحلیل فریم‌به‌فریم هوک‌های وایرال و روش‌های بهینه‌سازی جریان کار ویدیوهای کوتاه.'
-              : 'Actionable breakdowns on short-form retention, motion dynamics, and repeatable editing workflows.'}
-          </p>
+        <header className="mb-12 text-center pt-4">
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+              {lang === 'fa' ? 'بلاگ و بینش‌های تدوین و موشن' : 'Resources & Creator Insights'}
+            </h1>
+            <p className="mt-4 text-[15px] sm:text-base text-slate-600 leading-relaxed">
+              {lang === 'fa'
+                ? 'راهنماهای تخصصی، تحلیل فریم‌به‌فریم هوک‌های وایرال و روش‌های بهینه‌سازی جریان کار ویدیوهای کوتاه.'
+                : 'Actionable breakdowns on short-form retention, motion dynamics, and repeatable editing workflows.'}
+            </p>
+          </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex items-center justify-center flex-wrap gap-2 mt-8">
+          {/* Category Filter Pills (Strictly Single Line) */}
+          <div className="w-full flex items-center justify-start sm:justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden gap-2 mt-8 py-1 px-2">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
@@ -71,7 +73,7 @@ export const ResourcesPage: FC = () => {
                     setSelectedCategory(cat.id);
                     playBenchoSound('select');
                   }}
-                  className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer ${
+                  className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer ${
                     isActive
                       ? 'bg-slate-950 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
