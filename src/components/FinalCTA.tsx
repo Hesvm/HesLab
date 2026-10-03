@@ -16,7 +16,7 @@ export const FinalCTA: FC = () => {
         {/* Center Content */}
         <div className="max-w-3xl mx-auto relative z-10 text-center">
           {/* Main Headline */}
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.2] sm:leading-[1.18] text-white">
+          <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight leading-[1.2] sm:leading-[1.18] text-white">
             {lang === 'fa' ? (
               <>
                 <span>یه محتوایی بساز</span> <br />
@@ -86,8 +86,7 @@ export const FinalCTA: FC = () => {
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-[12.5px] font-bold text-slate-400">
             <Link to="/work" className="hover:text-white transition-colors">{lang === 'fa' ? 'نمونه‌کارها' : 'Work'}</Link>
             <Link to="/services" className="hover:text-white transition-colors">{lang === 'fa' ? 'خدمات' : 'Services'}</Link>
-            <Link to="/resources" className="hover:text-white transition-colors">{lang === 'fa' ? 'منابع و مقالات' : 'Resources'}</Link>
-            <Link to="/services/ongoing-content" className="hover:text-white transition-colors">{lang === 'fa' ? 'قیمت‌گذاری' : 'Pricing'}</Link>
+            <Link to="/blog" className="hover:text-white transition-colors">{lang === 'fa' ? 'بلاگ' : 'Blog'}</Link>
             <Link to="/about" className="hover:text-white transition-colors">{lang === 'fa' ? 'درباره ما' : 'About'}</Link>
             <Link to="/contact" className="hover:text-white transition-colors">{lang === 'fa' ? 'تماس' : 'Contact'}</Link>
           </div>

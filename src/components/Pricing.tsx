@@ -16,7 +16,7 @@ export const Pricing: FC = () => {
               <span className="font-serif-italic font-normal block mb-1">
                 {t.tag}
               </span>
-              <span className="font-sans text-2xl sm:text-4xl md:text-[44px] font-black text-slate-950 block leading-tight">
+              <span className="font-sans text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block leading-tight">
                 {t.title}
               </span>
             </>
@@ -25,7 +25,7 @@ export const Pricing: FC = () => {
               <span className="font-serif-italic font-normal block mb-1">
                 {t.tag}
               </span>
-              <span className="font-['Plus_Jakarta_Display'] text-2xl sm:text-4xl md:text-[44px] font-black text-slate-950 block tracking-tight leading-tight">
+              <span className="font-['Plus_Jakarta_Display'] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block tracking-tight leading-tight">
                 {t.title}
               </span>
             </>

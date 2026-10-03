@@ -90,10 +90,10 @@ export const ResourceDetailPage: FC = () => {
           {lang === 'fa' ? 'ممکن است آدرس تغییر کرده باشد یا مقاله حذف شده باشد.' : 'The requested article may have moved or been deleted.'}
         </p>
         <Link
-          to="/resources"
+          to="/blog"
           className="bg-slate-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors"
         >
-          {lang === 'fa' ? 'بازگشت به مقالات' : 'Back to Resources'}
+          {lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}
         </Link>
       </div>
     );
@@ -143,7 +143,7 @@ export const ResourceDetailPage: FC = () => {
         <Breadcrumbs
           items={[
             { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: lang === 'fa' ? 'منابع و مقالات' : 'Resources', path: '/resources' },
+            { name: lang === 'fa' ? 'بلاگ' : 'Blog', path: '/blog' },
             { name: article.title, path: `/resources/${article.slug}` },
           ]}
         />
@@ -152,7 +152,7 @@ export const ResourceDetailPage: FC = () => {
           {/* Header Action Row */}
           <div className="flex items-center justify-between gap-4 mb-6">
             <Link
-              to="/resources"
+              to="/blog"
               className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-950 transition-colors"
             >
               {isRtl ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}

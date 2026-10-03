@@ -12,7 +12,7 @@ export const FAQ: FC = () => {
     <section className="py-16 sm:py-22 px-4 max-w-3xl mx-auto border-t border-slate-900/10">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-12">
-        <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-950">
+        <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title}
         </h2>
       </div>

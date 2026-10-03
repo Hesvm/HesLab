@@ -10,7 +10,7 @@ export const TargetAudience: FC = () => {
     <section id="services" className="py-14 sm:py-20 px-4 max-w-5xl mx-auto border-t border-slate-900/10">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-14">
-        <h2 className="text-3xl sm:text-5xl md:text-[54px] tracking-tight text-slate-950 max-w-3xl mx-auto leading-[1.25] sm:leading-[1.18]">
+        <h2 className="text-2xl sm:text-4xl md:text-[48px] tracking-tight text-slate-950 max-w-3xl mx-auto leading-[1.25] sm:leading-[1.18]">
           {lang === 'fa' ? (
             <>
               <span className="font-black block">{t.title1}</span>

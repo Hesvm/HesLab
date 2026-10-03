@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 import { Toaster } from './components/Toaster';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -18,6 +19,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 
 const AppShell: FC = () => {
   const { lang, isRtl } = useLanguage();
+  const location = useLocation();
 
   return (
     <div
@@ -37,10 +39,14 @@ const AppShell: FC = () => {
         <Route path="/services/:slug" element={<ServicePillarPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/resources/:slug" element={<ResourceDetailPage />} />
+        <Route path="/blog" element={<ResourcesPage />} />
+        <Route path="/blog/:slug" element={<ResourceDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      {location.pathname !== '/' && <Footer />}
 
       <Toaster />
     </div>

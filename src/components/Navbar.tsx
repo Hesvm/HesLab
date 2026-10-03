@@ -177,30 +177,6 @@ export const Navbar: FC = () => {
           </div>
 
           <Link
-            to="/resources"
-            className="hover:text-white transition-colors duration-200 select-none"
-          >
-            {t.resources || 'منابع'}
-          </Link>
-
-          {location.pathname === '/' ? (
-            <a
-              href="#pricing"
-              onClick={() => scrollToHash('#pricing')}
-              className="hover:text-white transition-colors duration-200 select-none"
-            >
-              {t.pricing}
-            </a>
-          ) : (
-            <Link
-              to="/services/ongoing-content"
-              className="hover:text-white transition-colors duration-200 select-none"
-            >
-              {t.pricing}
-            </Link>
-          )}
-
-          <Link
             to="/about"
             className="hover:text-white transition-colors duration-200 select-none"
           >
@@ -297,20 +273,6 @@ export const Navbar: FC = () => {
           >
             <span>{t.services}</span>
             <ArrowDown2 size={13} color="currentColor" variant="Linear" />
-          </Link>
-          <Link
-            to="/resources"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
-          >
-            {t.resources || 'منابع'}
-          </Link>
-          <Link
-            to="/services/ongoing-content"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
-          >
-            {t.pricing}
           </Link>
           <Link
             to="/about"

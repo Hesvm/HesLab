@@ -171,7 +171,7 @@ export const SelectedWork: FC = () => {
     >
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-950">
+        <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title}
         </h2>
         <p className="mt-2 text-slate-500 text-xs sm:text-[13px] font-medium">

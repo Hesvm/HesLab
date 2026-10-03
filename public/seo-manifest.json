@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "generatedAt": "2026-10-03T08:31:25.720Z",
+  "generatedAt": "2026-10-03T10:46:31.060Z",
   "canonicalDomain": "https://heslab.studio",
   "brand": {
     "name": "HesLab",
@@ -217,6 +217,20 @@
       "canonical": "https://heslab.studio/resources",
       "title": "منابع و مقالات تخصصی تدوین شورتس و موشن دیزاین | حس‌لب",
       "titleEn": "Resources & Video Editing Guides | HesLab",
+      "description": "راهنماها، کالبدشکافی هوک‌ها و تجربیات عملی استودیو حس‌لب در تدوین ریلز، یوتیوب شورتس، موشن دیزاین و فیزیک انیمیشن.",
+      "descriptionEn": "In-depth guides, hook breakdowns, and practical creator workflows for short-form video editing and motion design by HesLab.",
+      "pageType": "resources-index",
+      "searchIntent": "informational-hub",
+      "contentCluster": "Creator Resources",
+      "priority": "0.85",
+      "changefreq": "weekly",
+      "indexable": true
+    },
+    {
+      "route": "/blog",
+      "canonical": "https://heslab.studio/blog",
+      "title": "بلاگ تخصصی حس‌لب | مقالات تدوین شورتس و موشن",
+      "titleEn": "HesLab Blog | Video Editing & Motion Insights",
       "description": "راهنماها، کالبدشکافی هوک‌ها و تجربیات عملی استودیو حس‌لب در تدوین ریلز، یوتیوب شورتس، موشن دیزاین و فیزیک انیمیشن.",
       "descriptionEn": "In-depth guides, hook breakdowns, and practical creator workflows for short-form video editing and motion design by HesLab.",
       "pageType": "resources-index",

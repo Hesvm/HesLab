@@ -417,7 +417,7 @@ export const translations = {
       links: {
         work: 'نمونه‌کارها',
         services: 'خدمات',
-        pricing: 'قیمت‌گذاری',
+        blog: 'بلاگ',
         about: 'درباره ما',
         faq: 'سوالات متداول',
         contact: 'تماس با ما',
@@ -842,7 +842,7 @@ export const translations = {
       links: {
         work: 'Work',
         services: 'Services',
-        pricing: 'Pricing',
+        blog: 'Blog',
         about: 'About',
         faq: 'FAQ',
         contact: 'Contact',
