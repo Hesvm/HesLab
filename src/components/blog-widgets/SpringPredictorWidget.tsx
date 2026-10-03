@@ -1,10 +1,10 @@
-"use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { playBenchoSound } from "@/content/soundData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function SpringPredictorWidget() {
+  const { lang, isRtl } = useLanguage();
   const [guess, setGuess] = useState(0.5);
   const [revealed, setRevealed] = useState(false);
 
@@ -60,24 +60,31 @@ export function SpringPredictorWidget() {
   const isAccurate = Math.abs(guess - 1.0) < 0.12;
 
   return (
-    <div className="my-6 flex flex-col gap-4 rounded-3xl border border-indigo-500/20 bg-indigo-500/[0.03] p-5 backdrop-blur-md shadow-xs select-none" dir="rtl">
+    <div
+      className="my-6 flex flex-col gap-4 rounded-3xl border border-indigo-500/20 bg-indigo-500/[0.03] p-5 backdrop-blur-md shadow-xs select-none"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       {/* Question Header */}
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <span className="rounded-md bg-indigo-500/10 px-2 py-0.5 text-[10px] font-bold text-indigo-700 dark:text-indigo-400 font-mono">
-            آزمایشگاه پیش‌بینی
+            {lang === 'fa' ? 'آزمایشگاه پیش‌بینی' : 'Prediction Lab'}
           </span>
-          <span className="text-[12px] font-semibold text-muted-foreground">چالش میرایی بحرانی</span>
+          <span className="text-[12px] font-semibold text-muted-foreground">
+            {lang === 'fa' ? 'چالش میرایی بحرانی' : 'Critical Damping Challenge'}
+          </span>
         </div>
         <p className="text-[14px] font-bold text-foreground leading-snug mt-1">
-          حدس بزنید: نسبت میرایی (Damping Ratio ζ) چقدر باشد تا دکمه بدون نوسان رفت‌وبرگشتی (Overshoot) در سریع‌ترین زمان بایستد؟
+          {lang === 'fa'
+            ? 'حدس بزنید: نسبت میرایی (Damping Ratio ζ) چقدر باشد تا دکمه بدون نوسان رفت‌وبرگشتی (Overshoot) در سریع‌ترین زمان بایستد؟'
+            : 'Predict: What damping ratio (ζ) brings the button to rest the fastest with zero overshoot?'}
         </p>
       </div>
 
       {/* Slider Guess Input */}
       <div className="flex flex-col gap-2 rounded-2xl border border-black/[0.06] dark:border-white/[0.06] bg-white dark:bg-zinc-950 p-4">
         <div className="flex items-center justify-between text-[12.5px]">
-          <span className="text-muted-foreground">حدس شما (مقدار ζ):</span>
+          <span className="text-muted-foreground">{lang === 'fa' ? 'حدس شما (مقدار ζ):' : 'Your Guess (ζ value):'}</span>
           <span className="font-mono font-black text-indigo-600 dark:text-indigo-400 text-[15px]">
             {guess.toFixed(2)}
           </span>
@@ -95,9 +102,9 @@ export function SpringPredictorWidget() {
         />
 
         <div className="flex items-center justify-between text-[10.5px] text-muted-foreground font-mono">
-          <span>0.1 (پرنوسان / Underdamped)</span>
-          <span>1.0 (بحرانی)</span>
-          <span>2.0 (کند و سنگین / Overdamped)</span>
+          <span>{lang === 'fa' ? '0.1 (پرنوسان / Underdamped)' : '0.1 (Underdamped)'}</span>
+          <span>{lang === 'fa' ? '1.0 (بحرانی)' : '1.0 (Critical)'}</span>
+          <span>{lang === 'fa' ? '2.0 (کند و سنگین / Overdamped)' : '2.0 (Overdamped)'}</span>
         </div>
       </div>
 
@@ -109,7 +116,7 @@ export function SpringPredictorWidget() {
             onClick={handleCheck}
             className="w-full rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] py-2.5 text-center text-[13px] font-bold text-white transition-all cursor-pointer shadow-md shadow-indigo-600/20"
           >
-            بررسی حدس من و مشاهده فرمول
+            {lang === 'fa' ? 'بررسی حدس من و مشاهده فرمول' : 'Check Guess & See Formula'}
           </button>
         ) : (
           <button
@@ -117,7 +124,7 @@ export function SpringPredictorWidget() {
             onClick={handleReset}
             className="w-full rounded-2xl border border-border bg-background hover:bg-muted py-2 text-center text-[12px] font-semibold text-foreground transition-all cursor-pointer"
           >
-            تغییر حدس و آزمایش مجدد
+            {lang === 'fa' ? 'تغییر حدس و آزمایش مجدد' : 'Adjust Guess & Retry'}
           </button>
         )}
       </div>
@@ -136,11 +143,11 @@ export function SpringPredictorWidget() {
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1 text-indigo-600 dark:text-indigo-400">
                     <span className="size-2 rounded-full bg-indigo-600" />
-                    حدس شما ({guess.toFixed(2)})
+                    {lang === 'fa' ? `حدس شما (${guess.toFixed(2)})` : `Your Guess (${guess.toFixed(2)})`}
                   </span>
                   <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
                     <span className="size-2 rounded-full bg-emerald-600" />
-                    مقدار ایده‌آل بحرانی (ζ = 1.0)
+                    {lang === 'fa' ? 'مقدار ایده‌آل بحرانی (ζ = 1.0)' : 'Ideal Critical (ζ = 1.0)'}
                   </span>
                 </div>
               </div>
@@ -169,15 +176,27 @@ export function SpringPredictorWidget() {
               <div className="mt-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 p-3 text-[12.5px] leading-relaxed">
                 {isAccurate ? (
                   <p className="text-emerald-700 dark:text-emerald-400 font-medium">
-                    🎯 <strong>عالی حدس زدید!</strong> در نسبت میرایی بحرانی (ζ = 1.0)، سیستم به سریع‌ترین شکل ممکن و بدون هیچ برگشت اضافی به حالت سکون می‌رسد.
+                    {lang === 'fa' ? (
+                      <>🎯 <strong>عالی حدس زدید!</strong> در نسبت میرایی بحرانی (ζ = 1.0)، سیستم به سریع‌ترین شکل ممکن و بدون هیچ برگشت اضافی به حالت سکون می‌رسد.</>
+                    ) : (
+                      <>🎯 <strong>Spot on!</strong> At critical damping (ζ = 1.0), the system settles as quickly as possible without any oscillatory overshoot.</>
+                    )}
                   </p>
                 ) : guess < 1.0 ? (
                   <p className="text-amber-700 dark:text-amber-400 font-medium">
-                    ⚡ <strong>کمتر از حد بحرانی (Underdamped):</strong> دکمه از مقصد عبور کرده و چند بار نوسان می‌کند (Overshoot).
+                    {lang === 'fa' ? (
+                      <>⚡ <strong>کمتر از حد بحرانی (Underdamped):</strong> دکمه از مقصد عبور کرده و چند بار نوسان می‌کند (Overshoot).</>
+                    ) : (
+                      <>⚡ <strong>Underdamped:</strong> The button overshoots the target and bounces back and forth before coming to rest.</>
+                    )}
                   </p>
                 ) : (
                   <p className="text-indigo-700 dark:text-indigo-400 font-medium">
-                    🐢 <strong>بیشتر از حد بحرانی (Overdamped):</strong> دکمه کندتر از حد معمول به مقصد می‌رسد و حس سنگینی می‌دهد.
+                    {lang === 'fa' ? (
+                      <>🐢 <strong>بیشتر از حد بحرانی (Overdamped):</strong> دکمه کندتر از حد معمول به مقصد می‌رسد و حس سنگینی می‌دهد.</>
+                    ) : (
+                      <>🐢 <strong>Overdamped:</strong> The button approaches the target too sluggishly, feeling heavy and unresponsive.</>
+                    )}
                   </p>
                 )}
               </div>

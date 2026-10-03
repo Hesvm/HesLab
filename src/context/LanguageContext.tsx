@@ -15,11 +15,13 @@ const getInitialLang = (): Language => {
   if (typeof window !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
     const paramLang = params.get('lang');
-    if (paramLang === 'en' || paramLang === 'fa') return paramLang as Language;
-    const saved = localStorage.getItem('heslab_lang');
-    if (saved === 'en' || saved === 'fa') return saved as Language;
+    if (paramLang === 'fa') return 'fa';
+    if (paramLang === 'en') return 'en';
+    try {
+      localStorage.setItem('heslab_lang', 'en');
+    } catch (_) {}
   }
-  return 'en'; // Default to English as requested
+  return 'en'; // Always default to English
 };
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

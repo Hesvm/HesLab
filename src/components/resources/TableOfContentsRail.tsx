@@ -1,5 +1,6 @@
 import { useState, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 const PERSIAN_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
 function toPersianDigits(value: number | string): string {
@@ -19,16 +20,17 @@ export const TableOfContentsRail: FC<TableOfContentsRailProps> = ({
   onSelectSection,
   progress,
 }) => {
+  const { lang, isRtl } = useLanguage();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const activeOrHoveredIdx = hoveredIdx !== null ? hoveredIdx : null;
   const activeOrHoveredItem = activeOrHoveredIdx !== null ? sections[activeOrHoveredIdx] : null;
 
   return (
-    <div className="relative flex items-center justify-center select-none" dir="rtl">
+    <div className="relative flex items-center justify-center select-none" dir={isRtl ? 'rtl' : 'ltr'}>
       {/* Vertical Navigation Rail */}
       <nav
-        aria-label="فهرست مطالب مقاله"
+        aria-label={lang === 'fa' ? 'فهرست مطالب مقاله' : 'Table of Contents'}
         onPointerLeave={() => setHoveredIdx(null)}
         className="relative flex flex-col items-center gap-1 py-1 px-1"
       >
@@ -73,20 +75,30 @@ export const TableOfContentsRail: FC<TableOfContentsRailProps> = ({
           );
         })}
 
-        {/* Floating Preview Card on Left of Rail */}
+        {/* Floating Preview Card */}
         <AnimatePresence>
           {activeOrHoveredItem && activeOrHoveredIdx !== null && (
             <motion.div
               key={activeOrHoveredItem.id}
-              initial={{ opacity: 0, x: 8, filter: 'blur(6px)' }}
+              initial={{ opacity: 0, x: isRtl ? 8 : -8, filter: 'blur(6px)' }}
               animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, x: 6, filter: 'blur(4px)' }}
+              exit={{ opacity: 0, x: isRtl ? 6 : -6, filter: 'blur(4px)' }}
               transition={{ duration: 0.16, ease: 'easeOut' }}
-              className="pointer-events-none absolute right-[calc(100%+12px)] top-1/2 -translate-y-1/2 w-56 rounded-2xl border border-black/[0.08] bg-white/95 p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.12)] backdrop-blur-md text-start z-50"
+              className={`pointer-events-none absolute top-1/2 -translate-y-1/2 w-56 rounded-2xl border border-black/[0.08] bg-white/95 p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.12)] backdrop-blur-md text-start z-50 ${
+                isRtl ? 'right-[calc(100%+12px)]' : 'left-[calc(100%+12px)]'
+              }`}
             >
               <div className="flex items-center justify-between text-[11px] text-zinc-400 font-medium mb-1">
-                <span>بخش {toPersianDigits(activeOrHoveredIdx + 1)}</span>
-                <span>{toPersianDigits(Math.round(progress))}٪ مطالعه شده</span>
+                <span>
+                  {isRtl
+                    ? `بخش ${toPersianDigits(activeOrHoveredIdx + 1)}`
+                    : `Section ${activeOrHoveredIdx + 1}`}
+                </span>
+                <span>
+                  {isRtl
+                    ? `${toPersianDigits(Math.round(progress * 100))}٪ مطالعه شده`
+                    : `${Math.round(progress * 100)}% read`}
+                </span>
               </div>
               <p className="text-[13px] font-bold text-zinc-950 leading-snug">
                 {activeOrHoveredItem.title}

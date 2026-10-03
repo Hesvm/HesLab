@@ -1,20 +1,29 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from 'framer-motion';
 import { playBenchoSound } from "@/content/soundData";
 import { TickCircle, CloseCircle } from "iconsax-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function MicroQuizWidget() {
+  const { lang, isRtl } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const correctOption = 2; // option 3: transform & opacity
 
-  const options = [
+  const optionsFa = [
     { id: 0, text: "تغییر مستقیم ویژگی‌های width و margin با ترنزیشن CSS" },
     { id: 1, text: "استفاده از setInterval با بازه زمانی ۱۰ میلی‌ثانیه" },
     { id: 2, text: "استفاده از GPU Compositing با مقادیر transform و opacity" },
     { id: 3, text: "اجرای محاسبات سنگین ریاضی در ترد اصلی جاوااسکریپت" },
   ];
+
+  const optionsEn = [
+    { id: 0, text: "Directly animating width and margin with CSS transitions" },
+    { id: 1, text: "Using setInterval with a 10ms polling interval" },
+    { id: 2, text: "GPU Compositing via transform and opacity properties" },
+    { id: 3, text: "Executing heavy frame calculations synchronously on main JS thread" },
+  ];
+
+  const options = lang === 'fa' ? optionsFa : optionsEn;
 
   const handleSelect = (idx: number) => {
     setSelectedOption(idx);
@@ -26,20 +35,27 @@ export function MicroQuizWidget() {
   };
 
   return (
-    <div className="my-6 flex flex-col gap-3.5 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/90 dark:bg-zinc-900/90 p-5 backdrop-blur-md shadow-xs select-none" dir="rtl">
+    <div
+      className="my-6 flex flex-col gap-3.5 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/90 dark:bg-zinc-900/90 p-5 backdrop-blur-md shadow-xs select-none"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.06] pb-2.5">
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 font-mono">
-            میکروکوییز فوری
+            {lang === 'fa' ? 'میکروکوییز فوری' : 'Micro-Quiz'}
           </span>
-          <h4 className="text-[13.5px] font-bold text-foreground">تست سنجش درک فیزیک انیمیشن</h4>
+          <h4 className="text-[13.5px] font-bold text-foreground">
+            {lang === 'fa' ? 'تست سنجش درک فیزیک انیمیشن' : 'Animation Physics Knowledge Check'}
+          </h4>
         </div>
       </div>
 
       {/* Question */}
       <p className="text-[14px] font-bold text-foreground leading-snug">
-        کدام روش تضمین می‌کند که انیمیشن فنری شما روی تمام دستگاه‌ها با نرخ ۶۰ یا ۱۲۰ فریم در ثانیه (بدون افت فریم) اجرا شود؟
+        {lang === 'fa'
+          ? 'کدام روش تضمین می‌کند که انیمیشن فنری شما روی تمام دستگاه‌ها با نرخ ۶۰ یا ۱۲۰ فریم در ثانیه (بدون افت فریم) اجرا شود؟'
+          : 'Which technique guarantees 60 to 120 FPS spring animations across devices without dropped frames?'}
       </p>
 
       {/* Options */}
@@ -66,7 +82,9 @@ export function MicroQuizWidget() {
               type="button"
               whileTap={{ scale: 0.99 }}
               onClick={() => handleSelect(opt.id)}
-              className={`flex items-center justify-between rounded-2xl border p-3.5 text-right text-[13px] transition-all cursor-pointer ${btnStyles}`}
+              className={`flex items-center justify-between rounded-2xl border p-3.5 text-[13px] transition-all cursor-pointer ${
+                isRtl ? 'text-right' : 'text-left'
+              } ${btnStyles}`}
             >
               <span>{opt.text}</span>
               {showState && isCorrect && (
@@ -89,11 +107,19 @@ export function MicroQuizWidget() {
         >
           {selectedOption === correctOption ? (
             <p className="text-emerald-700 dark:text-emerald-400 font-medium">
-              ✅ <strong>دقیقاً درست است!</strong> با استفاده از `transform` (نظیر scale و translate3d) و `opacity`، مرورگر انیمیشن را مستقیماً به کارت گرافیک (GPU Compositing Layer) می‌سپارد و از Reflowهای سنگین در CPU جلوگیری می‌کند.
+              {lang === 'fa' ? (
+                <>✅ <strong>دقیقاً درست است!</strong> با استفاده از `transform` (نظیر scale و translate3d) و `opacity`، مرورگر انیمیشن را مستقیماً به کارت گرافیک (GPU Compositing Layer) می‌سپارد و از Reflowهای سنگین در CPU جلوگیری می‌کند.</>
+              ) : (
+                <>✅ <strong>Spot on!</strong> Animating through `transform` and `opacity` promotes the element to a dedicated GPU compositing layer, avoiding heavy CPU reflows and repaints.</>
+              )}
             </p>
           ) : (
             <p className="text-rose-700 dark:text-rose-400 font-medium">
-              ❌ <strong>پاسخ اشتباه بود!</strong> تغییر ویژگی‌های ابعادی مانند width یا margin باعث Trigger شدن فرآیند Layout و Paint در CPU می‌شود که عامل اصلی افت فریم است.
+              {lang === 'fa' ? (
+                <>❌ <strong>پاسخ اشتباه بود!</strong> تغییر ویژگی‌های ابعادی مانند width یا margin باعث Trigger شدن فرآیند Layout و Paint در CPU می‌شود که عامل اصلی افت فریم است.</>
+              ) : (
+                <>❌ <strong>Incorrect.</strong> Mutating geometric properties like width or margin forces layout reflows and CPU repaints on every frame.</>
+              )}
             </p>
           )}
         </motion.div>

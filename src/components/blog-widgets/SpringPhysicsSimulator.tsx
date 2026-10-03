@@ -1,11 +1,11 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from 'framer-motion';
 import NumberFlow from "@number-flow/react";
 import { playBenchoSound } from "@/content/soundData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function SpringPhysicsSimulator() {
+  const { lang, isRtl } = useLanguage();
   const [stiffness, setStiffness] = useState(250);
   const [damping, setDamping] = useState(20);
   const [mass, setMass] = useState(1);
@@ -44,19 +44,24 @@ export function SpringPhysicsSimulator() {
   const pathD = generateCurvePath();
 
   return (
-    <div className="my-6 flex flex-col gap-4 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/80 p-5 backdrop-blur-md shadow-xs select-none" dir="rtl">
+    <div
+      className="my-6 flex flex-col gap-4 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/80 p-5 backdrop-blur-md shadow-xs select-none"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
         <div className="flex items-center gap-2">
           <span className="flex size-2 rounded-full bg-orange-500 animate-pulse" />
-          <h4 className="text-[13.5px] font-bold text-foreground">شبیه‌ساز زنده فیزیک فنر (Spring Simulator)</h4>
+          <h4 className="text-[13.5px] font-bold text-foreground">
+            {lang === 'fa' ? 'شبیه‌ساز زنده فیزیک فنر (Spring Simulator)' : 'Live Spring Physics Simulator'}
+          </h4>
         </div>
         <button
           type="button"
           onClick={handleTest}
           className="rounded-full bg-zinc-900 dark:bg-zinc-100 px-3.5 py-1 text-[11.5px] font-medium text-white dark:text-zinc-950 transition-transform active:scale-95 hover:opacity-90 cursor-pointer shadow-xs"
         >
-          شبیه‌سازی رهاسازی
+          {lang === 'fa' ? 'شبیه‌سازی رهاسازی' : 'Simulate Release'}
         </button>
       </div>
 
@@ -89,7 +94,7 @@ export function SpringPhysicsSimulator() {
         {/* Oscillation Curve Visualizer */}
         <div className="flex flex-col gap-1.5 rounded-2xl border border-black/[0.06] dark:border-white/[0.06] bg-white dark:bg-zinc-950 p-3.5">
           <div className="flex items-center justify-between text-[11px] text-muted-foreground font-mono">
-            <span>منحنی نوسان (Harmonic Decay)</span>
+            <span>{lang === 'fa' ? 'منحنی نوسان (Harmonic Decay)' : 'Oscillation Curve (Harmonic Decay)'}</span>
             <span className="text-orange-500 font-semibold">x(t)</span>
           </div>
           <div className="h-[90px] w-full overflow-hidden" dir="ltr">
@@ -121,7 +126,7 @@ export function SpringPhysicsSimulator() {
         {/* Stiffness */}
         <div className="flex flex-col gap-1.5 rounded-xl bg-white/70 dark:bg-zinc-950/70 p-2.5 border border-black/[0.04] dark:border-white/[0.04]">
           <div className="flex items-center justify-between text-[11.5px]">
-            <span className="text-muted-foreground font-medium">سختی (Stiffness)</span>
+            <span className="text-muted-foreground font-medium">{lang === 'fa' ? 'سختی (Stiffness)' : 'Stiffness'}</span>
             <span className="font-mono font-bold text-foreground">
               <NumberFlow value={stiffness} />
             </span>
@@ -140,7 +145,7 @@ export function SpringPhysicsSimulator() {
         {/* Damping */}
         <div className="flex flex-col gap-1.5 rounded-xl bg-white/70 dark:bg-zinc-950/70 p-2.5 border border-black/[0.04] dark:border-white/[0.04]">
           <div className="flex items-center justify-between text-[11.5px]">
-            <span className="text-muted-foreground font-medium">میرایی (Damping)</span>
+            <span className="text-muted-foreground font-medium">{lang === 'fa' ? 'میرایی (Damping)' : 'Damping'}</span>
             <span className="font-mono font-bold text-foreground">
               <NumberFlow value={damping} />
             </span>
@@ -159,7 +164,7 @@ export function SpringPhysicsSimulator() {
         {/* Mass */}
         <div className="flex flex-col gap-1.5 rounded-xl bg-white/70 dark:bg-zinc-950/70 p-2.5 border border-black/[0.04] dark:border-white/[0.04]">
           <div className="flex items-center justify-between text-[11.5px]">
-            <span className="text-muted-foreground font-medium">جرم (Mass)</span>
+            <span className="text-muted-foreground font-medium">{lang === 'fa' ? 'جرم (Mass)' : 'Mass'}</span>
             <span className="font-mono font-bold text-foreground">
               <NumberFlow value={mass} />
             </span>

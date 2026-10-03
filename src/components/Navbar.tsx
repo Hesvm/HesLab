@@ -107,7 +107,7 @@ export const Navbar: FC = () => {
       }`}
     >
       <nav
-        className={`relative pointer-events-auto w-full max-w-[650px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
+        className={`relative pointer-events-auto w-full max-w-[510px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
           scrolled
             ? 'bg-[#1E1E1F]/95 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.5)] scale-[0.94]'
             : 'bg-[#1E1E1F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] scale-100'

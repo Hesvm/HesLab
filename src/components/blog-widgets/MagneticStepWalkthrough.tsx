@@ -1,16 +1,16 @@
-"use client";
-
 import { useState, useRef } from "react";
 import { motion } from 'framer-motion';
 import { playBenchoSound } from "@/content/soundData";
 import { ArrowLeft, ArrowRight } from "iconsax-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function MagneticStepWalkthrough() {
+  const { lang, isRtl } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [coords, setCoords] = useState({ x: 0, y: 0, dist: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const steps = [
+  const stepsFa = [
     {
       title: "گام اول: موقعیت‌سنجی برداری موس (Pointer Tracking)",
       desc: "مرکز دکمه به عنوان مبدا مختصات (0, 0) در نظر گرفته می‌شود و فاصله افقی (Δx) و عمودی (Δy) موس نسبت به مرکز محاسبه می‌گردد.",
@@ -30,6 +30,29 @@ export function MagneticStepWalkthrough() {
       color: "from-emerald-500 to-teal-500",
     },
   ];
+
+  const stepsEn = [
+    {
+      title: "Step 1: Pointer Vector Tracking",
+      desc: "The button center is treated as origin (0, 0). The horizontal (Δx) and vertical (Δy) deltas between mouse and center are continuously measured.",
+      formula: "Δx = MouseX - CenterX  |  Δy = MouseY - CenterY",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "Step 2: Euclidean Distance Calculation",
+      desc: "The true Euclidean distance is calculated via Pythagoras to verify whether the pointer is within the active magnetic radius (R).",
+      formula: "d = √(Δx² + Δy²)",
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      title: "Step 3: Magnetic Attraction & Damping",
+      desc: "When inside the magnetic field radius, a proportional pull is applied so the button travels only a fraction of the distance with spring physics.",
+      formula: "ShiftX = Δx × (1 - d/R) × 0.4",
+      color: "from-emerald-500 to-teal-500",
+    },
+  ];
+
+  const steps = lang === 'fa' ? stepsFa : stepsEn;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -68,14 +91,19 @@ export function MagneticStepWalkthrough() {
   const buttonY = coords.y * pullFactor;
 
   return (
-    <div className="my-6 flex flex-col gap-4 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/80 p-5 backdrop-blur-md shadow-xs select-none" dir="rtl">
+    <div
+      className="my-6 flex flex-col gap-4 rounded-3xl border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/80 p-5 backdrop-blur-md shadow-xs select-none"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       {/* Header & Step Dots */}
       <div className="flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.06] pb-3">
         <div className="flex items-center gap-2">
           <span className="rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 px-2 py-0.5 text-[10px] font-bold font-mono">
-            گام {currentStep + 1} از {steps.length}
+            {lang === 'fa' ? `گام ${currentStep + 1} از ${steps.length}` : `Step ${currentStep + 1} of ${steps.length}`}
           </span>
-          <h4 className="text-[13.5px] font-bold text-foreground">الگوریتم گام‌به‌گام دکمه مغناطیسی</h4>
+          <h4 className="text-[13.5px] font-bold text-foreground">
+            {lang === 'fa' ? 'الگوریتم گام‌به‌گام دکمه مغناطیسی' : 'Step-by-Step Magnetic Button Algorithm'}
+          </h4>
         </div>
 
         {/* Stepper Buttons */}
@@ -143,7 +171,9 @@ export function MagneticStepWalkthrough() {
           transition={{ type: "spring", stiffness: 350, damping: 25 }}
           className="relative z-10 flex h-12 px-6 items-center justify-center rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 font-bold text-xs shadow-lg shadow-black/10"
         >
-          {isInside ? "در میدان جاذبه 🧲" : "موس را نزدیک کنید"}
+          {isInside
+            ? (lang === 'fa' ? 'در میدان جاذبه 🧲' : 'In Field 🧲')
+            : (lang === 'fa' ? 'موس را نزدیک کنید' : 'Hover near button')}
         </motion.div>
 
         {/* Live Coordinate Badge */}

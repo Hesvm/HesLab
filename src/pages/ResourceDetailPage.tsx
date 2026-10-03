@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState, type FC } from 'react';
+import { useEffect, useState, useRef, type FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowRight, Clock, Share, ArrowLeft } from 'iconsax-react';
 import { getResourceBySlug } from '../data/resources';
-import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
 import { TableOfContentsRail } from '../components/resources/TableOfContentsRail';
+import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateArticleSchema } from '../utils/schema';
@@ -11,6 +10,9 @@ import { playBenchoSound } from '../content/soundData';
 import { toast } from '../lib/toast';
 import { trackEvent } from '../lib/analytics';
 import { useLanguage } from '../context/LanguageContext';
+import { ArrowLeft, ArrowRight, Clock, Share } from 'iconsax-react';
+
+// Dynamic Vibekit Interactive Widgets
 import {
   SpringPhysicsSimulator,
   SpringPredictorWidget,
@@ -24,46 +26,41 @@ export const ResourceDetailPage: FC = () => {
   const { lang, isRtl } = useLanguage();
   const article = slug ? getResourceBySlug(slug) : undefined;
 
-  const [activeSectionIdx, setActiveSectionIdx] = useState(0);
-  const [readProgress, setReadProgress] = useState(0);
+  const [activeSectionIdx, setActiveSectionIdx] = useState<number>(0);
+  const [readProgress, setReadProgress] = useState<number>(0);
   const articleContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!article) return;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    trackEvent('resource_view', { resourceSlug: article.slug, path: `/resources/${article.slug}` });
+    if (article) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      trackEvent('resource_view', {
+        resourceSlug: article.slug,
+        path: `/resources/${article.slug}`,
+      });
+    }
   }, [article]);
 
-  // Universal scroll engine tracking reading progress and active section
   useEffect(() => {
-    if (!article) return;
-
     const handleScroll = () => {
-      const doc = document.documentElement;
-      const scrollTop = window.scrollY || doc.scrollTop;
-      const scrollHeight = doc.scrollHeight - window.innerHeight;
+      if (!articleContainerRef.current) return;
+      const el = articleContainerRef.current;
+      const rect = el.getBoundingClientRect();
+      const totalHeight = el.scrollHeight - window.innerHeight;
+      const progress = Math.min(Math.max(-rect.top / Math.max(totalHeight, 1), 0), 1);
+      setReadProgress(progress);
 
-      if (scrollHeight > 0) {
-        const pct = Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100));
-        setReadProgress(pct);
-      }
-
-      // Track active TOC section
-      const headingElements = document.querySelectorAll('[data-toc-section]');
-      let currentIdx = 0;
-      headingElements.forEach((secEl, index) => {
-        const rect = secEl.getBoundingClientRect();
-        if (rect.top <= 240) {
-          currentIdx = index;
+      const sectionElements = document.querySelectorAll('[data-toc-section]');
+      sectionElements.forEach((sec, idx) => {
+        const secRect = sec.getBoundingClientRect();
+        if (secRect.top <= 160 && secRect.bottom >= 160) {
+          setActiveSectionIdx(idx);
         }
       });
-      setActiveSectionIdx(currentIdx);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [article]);
+  }, []);
 
   const handleSelectSection = (id: string, idx: number) => {
     playBenchoSound('select');
@@ -99,13 +96,25 @@ export const ResourceDetailPage: FC = () => {
     );
   }
 
+  const title = lang === 'en' && article.titleEn ? article.titleEn : article.title;
+  const description = lang === 'en' && article.descriptionEn ? article.descriptionEn : article.description;
+  const introduction = lang === 'en' && article.introductionEn ? article.introductionEn : article.introduction;
+  const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
+  const authorRole = lang === 'en' && article.author.roleEn ? article.author.roleEn : article.author.role;
+  const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
+  const tags = lang === 'en' && article.tagsEn ? article.tagsEn : article.tags;
+  const tocItems = article.tableOfContents.map((t) => ({
+    id: t.id,
+    title: lang === 'en' && t.titleEn ? t.titleEn : t.title,
+  }));
+
   const articleSchema = generateArticleSchema({
-    title: article.title,
-    description: article.description,
+    title: title,
+    description: description,
     slug: article.slug,
     publishDate: article.publishDate,
     updatedDate: article.updatedDate,
-    authorName: article.author.name,
+    authorName: authorName,
     imageUrl: article.featuredImage,
   });
 
@@ -117,21 +126,23 @@ export const ResourceDetailPage: FC = () => {
       }`}
     >
       <SEOHead
-        title={article.title}
-        description={article.description}
-        path={`/resources/${article.slug}`}
+        title={title}
+        description={description}
+        path={`/blog/${article.slug}`}
         ogType="article"
         structuredData={articleSchema}
       />
 
       {/* Floating TOC Rail on Desktop */}
-      {article.tableOfContents && article.tableOfContents.length > 0 && (
+      {tocItems.length > 0 && (
         <aside
-          aria-label="فهرست مطالب"
-          className="fixed top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-1.5 ltr:left-6 rtl:right-6 pointer-events-auto"
+          aria-label={lang === 'fa' ? 'فهرست مطالب' : 'Table of Contents'}
+          className={`fixed top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-1.5 pointer-events-auto ${
+            isRtl ? 'right-6' : 'left-6'
+          }`}
         >
           <TableOfContentsRail
-            sections={article.tableOfContents}
+            sections={tocItems}
             activeIdx={activeSectionIdx}
             onSelectSection={handleSelectSection}
             progress={readProgress}
@@ -144,7 +155,7 @@ export const ResourceDetailPage: FC = () => {
           items={[
             { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
             { name: lang === 'fa' ? 'بلاگ' : 'Blog', path: '/blog' },
-            { name: article.title, path: `/resources/${article.slug}` },
+            { name: title, path: `/blog/${article.slug}` },
           ]}
         />
 
@@ -156,7 +167,7 @@ export const ResourceDetailPage: FC = () => {
               className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-950 transition-colors"
             >
               {isRtl ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
-              <span>{lang === 'fa' ? 'بازگشت به مقالات' : 'Back to Resources'}</span>
+              <span>{lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}</span>
             </Link>
 
             <button
@@ -171,7 +182,7 @@ export const ResourceDetailPage: FC = () => {
 
           {/* Primary H1 Heading */}
           <h1 className="text-2xl sm:text-3xl md:text-[34px] font-black tracking-tight text-slate-950 leading-[1.3] mb-6">
-            {article.title}
+            {title}
           </h1>
 
           {/* Author & Publication Meta Bar */}
@@ -179,22 +190,22 @@ export const ResourceDetailPage: FC = () => {
             <div className="flex items-center gap-3">
               <img
                 src={article.author.avatar}
-                alt={article.author.name}
+                alt={authorName}
                 width={38}
                 height={38}
                 className="size-9 rounded-full object-cover border border-slate-200"
                 loading="eager"
               />
               <div className="flex flex-col">
-                <span className="font-bold text-slate-900 text-[13px] leading-tight">{article.author.name}</span>
-                <span className="text-[11px] text-slate-500 leading-tight mt-0.5">{article.author.role}</span>
+                <span className="font-bold text-slate-900 text-[13px] leading-tight">{authorName}</span>
+                <span className="text-[11px] text-slate-500 leading-tight mt-0.5">{authorRole}</span>
               </div>
             </div>
 
             <div className="flex items-center gap-2.5 text-[11.5px] font-medium text-slate-500">
               <div className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1">
                 <Clock size={12} variant="Linear" color="currentColor" />
-                <span>{article.readingTime}</span>
+                <span>{readingTime}</span>
               </div>
               <div className="flex items-center rounded-full bg-slate-100 px-3 py-1">
                 <span>{article.publishDate}</span>
@@ -206,105 +217,112 @@ export const ResourceDetailPage: FC = () => {
           <div className="mb-10 overflow-hidden rounded-[22px] shadow-sm">
             <BlogIllustrationCover
               gradient={article.coverGradient}
-              title={article.title}
-              tag={article.tags[0]}
+              title={title}
+              tag={tags[0]}
             />
           </div>
 
           {/* Lead Paragraph / Introduction */}
           <div id="sec-intro" data-toc-section className="scroll-mt-28 mb-9">
             <p className="text-[15px] sm:text-[16px] font-normal leading-[2.1] text-slate-700">
-              {article.introduction}
+              {introduction}
             </p>
           </div>
 
           {/* Body Sections */}
           <div className="flex flex-col gap-11">
-            {article.sections.map((section, idx) => (
-              <section
-                key={section.id || idx}
-                id={section.id}
-                data-toc-section
-                className="scroll-mt-28 flex flex-col gap-4"
-              >
-                <h2 className="text-[20px] sm:text-[22px] font-black text-slate-950 tracking-tight leading-snug pt-1">
-                  {section.heading}
-                </h2>
+            {article.sections.map((section, idx) => {
+              const heading = lang === 'en' && section.headingEn ? section.headingEn : section.heading;
+              const paragraphs = lang === 'en' && section.paragraphsEn ? section.paragraphsEn : section.paragraphs;
+              const callout = lang === 'en' && section.calloutEn ? section.calloutEn : section.callout;
+              const pullQuote = lang === 'en' && section.pullQuoteEn ? section.pullQuoteEn : section.pullQuote;
 
-                <div className="flex flex-col gap-3.5">
-                  {section.paragraphs.map((p, pIdx) => (
-                    <p key={pIdx} className="text-[14.5px] sm:text-[15px] font-normal leading-[2.15] text-slate-700">
-                      {p}
-                    </p>
-                  ))}
-                </div>
+              return (
+                <section
+                  key={section.id || idx}
+                  id={section.id}
+                  data-toc-section
+                  className="scroll-mt-28 flex flex-col gap-4"
+                >
+                  <h2 className="text-[20px] sm:text-[22px] font-black text-slate-950 tracking-tight leading-snug pt-1">
+                    {heading}
+                  </h2>
 
-                {/* Callout Box */}
-                {section.callout && (
-                  <div className="my-2 rounded-2xl border border-sky-500/20 bg-sky-50/70 p-4 text-[13.5px] font-medium text-sky-950 leading-relaxed">
-                    {section.callout}
-                  </div>
-                )}
-
-                {/* Pull Quote */}
-                {section.pullQuote && (
-                  <blockquote className="my-3 border-s-4 border-slate-950 ps-4 py-1 italic font-medium text-[15px] text-slate-900 leading-relaxed bg-slate-50/80 rounded-e-xl">
-                    {section.pullQuote}
-                  </blockquote>
-                )}
-
-                {/* Numbered Steps */}
-                {section.numberedSteps && (
-                  <div className="grid grid-cols-1 gap-3 my-2">
-                    {section.numberedSteps.map((step, sIdx) => (
-                      <div
-                        key={sIdx}
-                        className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200/80 bg-slate-50/50"
-                      >
-                        <span className="font-mono text-xs font-bold text-sky-600 bg-sky-100 px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
-                          {step.step}
-                        </span>
-                        <div>
-                          <h3 className="text-[14px] font-bold text-slate-900 mb-1">{step.title}</h3>
-                          <p className="text-[13px] text-slate-600 leading-relaxed">{step.text}</p>
-                        </div>
-                      </div>
+                  <div className="flex flex-col gap-3.5">
+                    {paragraphs.map((p, pIdx) => (
+                      <p key={pIdx} className="text-[14.5px] sm:text-[15px] font-normal leading-[2.15] text-slate-700">
+                        {p}
+                      </p>
                     ))}
                   </div>
-                )}
 
-                {/* Comparison Table */}
-                {section.table && (
-                  <div className="my-3 overflow-x-auto rounded-2xl border border-slate-200">
-                    <table className="w-full text-start text-[13px]">
-                      <thead className="bg-slate-100/80 text-slate-900 font-bold border-b border-slate-200">
-                        <tr>
-                          {section.table.headers.map((h, hIdx) => (
-                            <th key={hIdx} className="p-3 text-start">{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {section.table.rows.map((row, rIdx) => (
-                          <tr key={rIdx} className="hover:bg-slate-50/60">
-                            {row.map((cell, cIdx) => (
-                              <td key={cIdx} className="p-3 text-slate-700 leading-relaxed">{cell}</td>
+                  {/* Callout Box */}
+                  {callout && (
+                    <div className="my-2 rounded-2xl border border-sky-500/20 bg-sky-50/70 p-4 text-[13.5px] font-medium text-sky-950 leading-relaxed">
+                      {callout}
+                    </div>
+                  )}
+
+                  {/* Pull Quote */}
+                  {pullQuote && (
+                    <blockquote className="my-3 border-s-4 border-slate-950 ps-4 py-1 italic font-medium text-[15px] text-slate-900 leading-relaxed bg-slate-50/80 rounded-e-xl">
+                      {pullQuote}
+                    </blockquote>
+                  )}
+
+                  {/* Numbered Steps */}
+                  {section.numberedSteps && (
+                    <div className="grid grid-cols-1 gap-3 my-2">
+                      {section.numberedSteps.map((step, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200/80 bg-slate-50/50"
+                        >
+                          <span className="font-mono text-xs font-bold text-sky-600 bg-sky-100 px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
+                            {step.step}
+                          </span>
+                          <div>
+                            <h3 className="text-[14px] font-bold text-slate-900 mb-1">{step.title}</h3>
+                            <p className="text-[13px] text-slate-600 leading-relaxed">{step.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Comparison Table */}
+                  {section.table && (
+                    <div className="my-3 overflow-x-auto rounded-2xl border border-slate-200">
+                      <table className="w-full text-start text-[13px]">
+                        <thead className="bg-slate-100/80 text-slate-900 font-bold border-b border-slate-200">
+                          <tr>
+                            {section.table.headers.map((h, hIdx) => (
+                              <th key={hIdx} className="p-3 text-start">{h}</th>
                             ))}
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                          {section.table.rows.map((row, rIdx) => (
+                            <tr key={rIdx} className="hover:bg-slate-50/60">
+                              {row.map((cell, cIdx) => (
+                                <td key={cIdx} className="p-3 text-slate-700 leading-relaxed">{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
 
-                {/* Interactive Widgets from Vibekit */}
-                {section.widget === 'spring-simulator' && <SpringPhysicsSimulator />}
-                {section.widget === 'spring-predictor' && <SpringPredictorWidget />}
-                {section.widget === 'magnetic-walkthrough' && <MagneticStepWalkthrough />}
-                {section.widget === 'live-artifact' && <LiveArtifactPlayground />}
-                {section.widget === 'micro-quiz' && <MicroQuizWidget />}
-              </section>
-            ))}
+                  {/* Interactive Widgets from Vibekit */}
+                  {section.widget === 'spring-simulator' && <SpringPhysicsSimulator />}
+                  {section.widget === 'spring-predictor' && <SpringPredictorWidget />}
+                  {section.widget === 'magnetic-walkthrough' && <MagneticStepWalkthrough />}
+                  {section.widget === 'live-artifact' && <LiveArtifactPlayground />}
+                  {section.widget === 'micro-quiz' && <MicroQuizWidget />}
+                </section>
+              );
+            })}
           </div>
 
           {/* Semantic FAQ Section */}
@@ -314,12 +332,16 @@ export const ResourceDetailPage: FC = () => {
                 {lang === 'fa' ? 'پرسش‌های متداول این مبحث' : 'Frequently Asked Questions'}
               </h2>
               <div className="flex flex-col gap-3.5">
-                {article.faq.map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl border border-slate-200 bg-slate-50/70">
-                    <h3 className="text-[14.5px] font-bold text-slate-900 mb-2">{item.question}</h3>
-                    <p className="text-[13.5px] text-slate-600 leading-relaxed">{item.answer}</p>
-                  </div>
-                ))}
+                {article.faq.map((item, idx) => {
+                  const q = lang === 'en' && item.questionEn ? item.questionEn : item.question;
+                  const a = lang === 'en' && item.answerEn ? item.answerEn : item.answer;
+                  return (
+                    <div key={idx} className="p-4 rounded-2xl border border-slate-200 bg-slate-50/70">
+                      <h3 className="text-[14.5px] font-bold text-slate-900 mb-2">{q}</h3>
+                      <p className="text-[13.5px] text-slate-600 leading-relaxed">{a}</p>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           )}
@@ -347,14 +369,18 @@ export const ResourceDetailPage: FC = () => {
           {/* Conversion CTA Block */}
           {article.cta && (
             <div className="mt-12 p-7 sm:p-9 rounded-3xl bg-slate-950 text-white flex flex-col items-center text-center shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-black mb-2 text-white">{article.cta.title}</h3>
-              <p className="text-sm text-slate-300 max-w-lg mb-6 leading-relaxed">{article.cta.subtitle}</p>
+              <h3 className="text-xl sm:text-2xl font-black mb-2 text-white">
+                {lang === 'en' && article.cta.titleEn ? article.cta.titleEn : article.cta.title}
+              </h3>
+              <p className="text-sm text-slate-300 max-w-lg mb-6 leading-relaxed">
+                {lang === 'en' && article.cta.subtitleEn ? article.cta.subtitleEn : article.cta.subtitle}
+              </p>
               <Link
                 to={article.cta.link}
                 onClick={() => trackEvent('primary_cta_click', { source: 'resource_detail_cta' })}
                 className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[14.5px] font-medium px-7 py-3 rounded-full shadow-lg transition-transform active:scale-95 cursor-pointer"
               >
-                {article.cta.buttonText}
+                {lang === 'en' && article.cta.buttonTextEn ? article.cta.buttonTextEn : article.cta.buttonText}
               </Link>
             </div>
           )}

@@ -86,58 +86,66 @@ export const ResourcesPage: FC = () => {
 
         {/* 2-Column Responsive Grid */}
         <main className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
-          {filteredArticles.map((article) => (
-            <article
-              key={article.id}
-              className="group flex flex-col gap-3.5 text-start transition-all"
-            >
-              <Link
-                to={`/resources/${article.slug}`}
-                onClick={() => handleCardClick(article)}
-                className="block cursor-pointer focus:outline-hidden"
+          {filteredArticles.map((article) => {
+            const title = lang === 'en' && article.titleEn ? article.titleEn : article.title;
+            const excerpt = lang === 'en' && article.excerptEn ? article.excerptEn : article.excerpt;
+            const tags = lang === 'en' && article.tagsEn ? article.tagsEn : article.tags;
+            const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
+            const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
+
+            return (
+              <article
+                key={article.id}
+                className="group flex flex-col gap-3.5 text-start transition-all"
               >
-                <BlogIllustrationCover
-                  gradient={article.coverGradient}
-                  title={article.title}
-                  readTime={article.readingTime}
-                  tag={article.tags[0]}
-                />
-              </Link>
+                <Link
+                  to={`/resources/${article.slug}`}
+                  onClick={() => handleCardClick(article)}
+                  className="block cursor-pointer focus:outline-hidden"
+                >
+                  <BlogIllustrationCover
+                    gradient={article.coverGradient}
+                    title={title}
+                    readTime={readingTime}
+                    tag={tags[0]}
+                  />
+                </Link>
 
-              <div className="flex flex-col gap-1.5 px-0.5">
-                <div className="flex items-center gap-2 text-[11.5px] text-slate-500">
-                  <span className="font-semibold text-slate-800">{article.author.name}</span>
-                  <span>•</span>
-                  <span>{article.publishDate}</span>
-                </div>
+                <div className="flex flex-col gap-1.5 px-0.5">
+                  <div className="flex items-center gap-2 text-[11.5px] text-slate-500">
+                    <span className="font-semibold text-slate-800">{authorName}</span>
+                    <span>•</span>
+                    <span>{article.publishDate}</span>
+                  </div>
 
-                <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug">
-                  <Link
-                    to={`/resources/${article.slug}`}
-                    onClick={() => handleCardClick(article)}
-                    className="focus:outline-hidden"
-                  >
-                    {article.title}
-                  </Link>
-                </h2>
-
-                <p className="text-[13px] sm:text-[13.5px] text-slate-600 leading-relaxed line-clamp-2">
-                  {article.excerpt}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mt-1">
-                  {article.tags.slice(0, 3).map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"
+                  <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug">
+                    <Link
+                      to={`/resources/${article.slug}`}
+                      onClick={() => handleCardClick(article)}
+                      className="focus:outline-hidden"
                     >
-                      #{tag}
-                    </span>
-                  ))}
+                      {title}
+                    </Link>
+                  </h2>
+
+                  <p className="text-[13px] sm:text-[13.5px] text-slate-600 leading-relaxed line-clamp-2">
+                    {excerpt}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mt-1">
+                    {tags.slice(0, 3).map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </main>
       </div>
     </div>
