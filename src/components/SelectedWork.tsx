@@ -62,7 +62,7 @@ const VideoCard: FC<VideoCardProps> = ({
       onClick={handleToggle}
       onMouseEnter={() => onHover(item.id)}
       onMouseLeave={() => onHover(null)}
-      className={`rounded-[14px] bg-slate-950 text-white overflow-hidden group relative aspect-[9/16] flex flex-col justify-end p-2.5 sm:p-3 cursor-pointer transition-all duration-300 ${
+      className={`rounded-[28px] sm:rounded-[32px] bg-slate-950 text-white overflow-hidden isolate transform-gpu group relative aspect-[9/16] flex flex-col justify-end p-2.5 sm:p-3 cursor-pointer transition-all duration-300 ${
         isRtl ? 'text-right' : 'text-left'
       } ${
         isFocused
@@ -81,13 +81,13 @@ const VideoCard: FC<VideoCardProps> = ({
         loop
         muted={!isUnmuted}
         playsInline
-        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none rounded-[28px] sm:rounded-[32px]"
       />
 
       {/* Top-Left Floating Sound Control Button */}
       <button
         onClick={handleToggle}
-        className={`absolute top-2.5 left-2.5 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md backdrop-blur-md transition-all duration-200 cursor-pointer select-none ${
+        className={`absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md backdrop-blur-md transition-all duration-200 cursor-pointer select-none ${
           isUnmuted
             ? 'bg-sky-500 text-white ring-2 ring-white shadow-sky-500/30 scale-105'
             : 'bg-white/90 hover:bg-white text-slate-800 hover:text-slate-950'
@@ -167,7 +167,7 @@ export const SelectedWork: FC = () => {
     <section
       ref={sectionRef}
       id="work"
-      className="py-14 sm:py-20 px-4 max-w-[840px] mx-auto border-t border-slate-900/10"
+      className="py-14 sm:py-20 px-4 max-w-[840px] mx-auto"
     >
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto">
@@ -181,7 +181,7 @@ export const SelectedWork: FC = () => {
 
       {/* Category Filter Tabs / Pills */}
       <div className="w-full overflow-x-auto no-scrollbar pb-1 mb-5 sm:mb-7 select-none">
-        <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-center w-max md:w-full min-w-full md:min-w-0 mx-auto gap-1.5 sm:gap-2 px-2">
+        <div className="flex flex-nowrap items-center justify-start sm:justify-center w-max sm:w-full mx-auto gap-1.5 sm:gap-2 px-2">
           {t.categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             const IconComp = categoryIcons[cat.id] || Grid5;
@@ -189,7 +189,7 @@ export const SelectedWork: FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-[10.5px] sm:text-[11.5px] font-bold transition-all duration-200 shrink-0 cursor-pointer border ${
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-[12px] font-bold transition-all duration-200 shrink-0 cursor-pointer border whitespace-nowrap ${
                   isActive
                     ? 'bg-slate-950 text-white border-slate-950'
                     : 'bg-white text-slate-600 hover:text-slate-950 hover:bg-slate-50 border-slate-200'

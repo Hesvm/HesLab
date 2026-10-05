@@ -6,6 +6,7 @@ import { SelectedWork } from '../components/SelectedWork';
 import { TargetAudience } from '../components/TargetAudience';
 import { HowItWorks } from '../components/HowItWorks';
 import { Pricing } from '../components/Pricing';
+import { KeepInTouch } from '../components/KeepInTouch';
 import { FAQ } from '../components/FAQ';
 import { FinalCTA } from '../components/FinalCTA';
 import { SEOHead } from '../components/seo/SEOHead';
@@ -34,31 +35,41 @@ export const HomePage: FC = () => {
         structuredData={[webSiteSchema, orgSchema]}
       />
 
-      {/* 2. Hero Section: SHORT-FORM CONTENT STUDIO + SHOWREEL */}
-      <Hero />
+      {/* 1. Top White Section (Hero, Stats) */}
+      <div className="relative w-full bg-[#0B0B0E]">
+        <div className="w-full bg-white rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-x-clip">
+          <Hero />
+          <StatsBar />
+        </div>
+      </div>
 
-      {/* 3. Stats Bar: 50+ videos | 2M+ views | 24-48h turnaround */}
-      <StatsBar />
-
-      {/* 4. Manifesto Scroll: Interactive illuminated editorial text */}
+      {/* 2. Manifesto: Full-width Dark Container #0B0B0E */}
       <ManifestoScroll />
 
-      {/* 5. Portfolio: SELECTED WORK */}
-      <SelectedWork />
+      {/* 3. Work & Target Audience (White Section) */}
+      <div className="relative w-full bg-[#0B0B0E]">
+        <div className="w-full bg-white rounded-t-[22px] sm:rounded-t-[28px] md:rounded-t-[34px] rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-hidden">
+          <SelectedWork />
+          <TargetAudience />
+        </div>
+      </div>
 
-      {/* 6. Target Audience: MADE FOR PEOPLE WHO HAVE SOMETHING TO SAY */}
-      <TargetAudience />
-
-      {/* 8. Process: HOW IT WORKS (01 Send, 02 Edit, 03 Review, 04 Deliver) */}
+      {/* 4. Process: HOW IT WORKS (Full-width Dark #0B0B0E) */}
       <HowItWorks />
 
-      {/* 9. Pricing: Starter (4/mo), Growth (12/mo), Studio (20+/mo) */}
-      <Pricing />
+      {/* 5. Middle White Section (Pricing, FAQ) */}
+      <div className="relative w-full bg-[#000000]">
+        {/* Seamless backdrop for top rounded corners matching HowItWorks dark tone #0B0B0E */}
+        <div className="absolute top-0 left-0 right-0 h-48 bg-[#0B0B0E] pointer-events-none" />
 
-      {/* 12. FAQ Section */}
-      <FAQ />
+        <div className="relative w-full bg-white rounded-t-[22px] sm:rounded-t-[28px] md:rounded-t-[34px] rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-hidden">
+          <Pricing />
+          <KeepInTouch />
+          <FAQ />
+        </div>
+      </div>
 
-      {/* 13. Final Action Callout & Footer */}
+      {/* 6. Final Action Callout & Footer (Full-width Black #000000) */}
       <FinalCTA />
     </>
   );

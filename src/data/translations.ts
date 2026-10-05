@@ -43,8 +43,8 @@ export const translations = {
     },
     hero: {
       tag: '۲ جایگاه پروژه جدید',
-      titleLine1: 'ادیتی که ویدیوت رو',
-      titleLine2: 'به اوج می‌رسونه.',
+      titleLine1: 'Good ideas',
+      titleLine2: 'deserve great edits',
       subLine1: 'ادیت ریلز و ویدیوهای کوتاه برای کریتورها و برندها،',
       subLine2: 'با استراتژی و طراحی اختصاصی.',
       subtitle: 'ادیت ریلز و ویدیوهای کوتاه برای کریتورها و برندها، با استراتژی و طراحی اختصاصی.',
@@ -87,11 +87,11 @@ export const translations = {
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
         { id: 'all', name: 'همه' },
-        { id: 'vlog', name: 'Vlog و لایف‌استایل' },
-        { id: 'documentary', name: 'داکیومنتری (Documentary)' },
-        { id: 'podcast', name: 'پادکست و گفتگو' },
-        { id: 'commercial', name: 'تبلیغاتی و محصول' },
-        { id: 'educational', name: 'آموزشی و بیزینس' },
+        { id: 'vlog', name: 'ولاگ' },
+        { id: 'documentary', name: 'مستند' },
+        { id: 'podcast', name: 'پادکست' },
+        { id: 'commercial', name: 'تبلیغاتی' },
+        { id: 'educational', name: 'آموزشی' },
       ],
       items: [
         {
@@ -296,8 +296,8 @@ export const translations = {
       ],
     },
     howItWorks: {
-      tag: 'فرآیند همکاری',
-      title: 'مراحل انجام کار',
+      tag: 'Process',
+      title: 'How we do it',
       desc: 'بدون جلسات خسته‌کننده. کاملاً منظم. از فایل دوربین تا انتشار در شبکه‌های اجتماعی.',
       steps: [
         {
@@ -332,11 +332,12 @@ export const translations = {
         {
           name: 'استاندارد',
           image: '/mock/pricing_lighthouse.png',
-          price: '۷,۰۰۰,۰۰۰ تومان',
+          price: '$۳۰۰',
+          priceSubtext: 'برای ۱۰ ادیت ویدیو',
           popular: true,
           features: [
             'انتخاب ۳ استایل آماده',
-            'تحویل ۸ صفحه اصلی',
+            'تحویل ۱۰ ریلز ادیت‌شده',
             '۳ بار بازبینی و ادیت',
             'تحویل کامل دیزاین تا ۷ روز',
           ],
@@ -345,11 +346,12 @@ export const translations = {
         {
           name: 'بیسیک',
           image: '/mock/pricing_binoculars.png',
-          price: '۴,۰۰۰,۰۰۰ تومان',
+          price: '$۴۰',
+          priceSubtext: 'برای ۱ ادیت ویدیو',
           popular: false,
           features: [
             'انتخاب ۱ استایل آماده',
-            'تحویل ۴ صفحه اصلی',
+            'تحویل ۱ ریل ادیت‌شده',
             '۱ بار بازبینی و ادیت',
             'تحویل کامل دیزاین تا ۳ روز',
           ],
@@ -412,6 +414,31 @@ export const translations = {
       desc: 'همین امروز کلیپ‌هایتان را بفرستید تا اولین ادیت حرفه‌ای را ظرف ۲۴ ساعت تحویل بگیرید.',
       buttonText: 'ثبت درخواست و شروع پروژه',
     },
+    quoteModal: {
+      badge: 'برآورد و شروع پروژه',
+      title: 'بیا یه چیز خفن بسازیم',
+      subtitle: 'مشخصات ایده‌ت رو بنویس؛ در کمتر از ۴ ساعت باهات هماهنگ می‌شیم.',
+      nameLabel: 'نام شما',
+      namePlaceholder: 'مثلاً حسام موسوی',
+      nameError: 'لطفاً نام خود را وارد کنید (حداقل ۲ حرف)',
+      emailLabel: 'ایمیل یا آیدی تلگرام',
+      emailPlaceholder: 'name@company.com یا id@',
+      emailError: 'لطفاً ایمیل معتبر یا آیدی تلگرام وارد کنید',
+      planLabel: 'انتخاب پلن همکاری',
+      plans: {
+        starter: { name: 'Starter', price: '$400' },
+        standard: { name: 'Standard', price: '$700', badge: 'محبوب' },
+        custom: { name: 'Custom', price: 'سفارشی' },
+      },
+      descLabel: 'توضیحات و اهداف پروژه',
+      descPlaceholder: 'درباره برند، نوع فوتیج، تعداد ویدیوها یا انتظاراتت برامون بگو...',
+      sendButton: 'ارسال درخواست همکاری',
+      sendingButton: 'در حال ارسال...',
+      responseTime: 'معمولاً پاسخگویی در کمتر از ۴ ساعت',
+      successTitle: 'درخواستت با موفقیت ثبت شد! 🎉',
+      successDesc: 'اطلاعات پروژه‌ات دریافت شد. به زودی در کمتر از ۴ ساعت آینده بررسی کرده و باهات در ارتباط خواهیم بود.',
+      closeButton: 'بستن',
+    },
     footer: {
       rights: 'تمامی حقوق متعلق به HESLAB است.',
       links: {
@@ -468,8 +495,8 @@ export const translations = {
     },
     hero: {
       tag: '2 Project Spots Available',
-      titleLine1: 'Short-Form',
-      titleLine2: 'Content Studio.',
+      titleLine1: 'Good ideas',
+      titleLine2: 'deserve great edits',
       subLine1: 'You bring the footage.',
       subLine2: 'We make it worth watching.',
       subtitle: 'Short-form video editing for creators and brands, powered by custom strategy and design.',
@@ -512,11 +539,11 @@ export const translations = {
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
         { id: 'all', name: 'All' },
-        { id: 'vlog', name: 'Vlog & Lifestyle' },
+        { id: 'vlog', name: 'Vlog' },
         { id: 'documentary', name: 'Documentary' },
-        { id: 'podcast', name: 'Podcast & Talk' },
-        { id: 'commercial', name: 'Commercial & Brand' },
-        { id: 'educational', name: 'Educational & SaaS' },
+        { id: 'podcast', name: 'Podcast' },
+        { id: 'commercial', name: 'Commercial' },
+        { id: 'educational', name: 'Educational' },
       ],
       items: [
         {
@@ -672,49 +699,49 @@ export const translations = {
       audiences: [
         {
           title: 'Content Creators',
-          desc: 'YouTubers and educators who need their long-form videos distilled into viral vertical snippets.',
+          desc: 'Turn long-form videos into viral, high-retention vertical clips.',
           stat: '5x Audience Growth',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Clapper%20Board.png',
         },
         {
           title: 'Founders & Execs',
-          desc: 'Busy CEOs and tech founders building a personal brand without spending 10 hours a week editing.',
+          desc: 'Build a powerful personal brand without spending hours editing.',
           stat: 'Authority & Inbound Leads',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Briefcase.png',
         },
         {
           title: 'Startups & SaaS',
-          desc: 'High-growth tech companies that need punchy product demos and ongoing organic social presence.',
+          desc: 'Punchy product demos that turn passive scrollers into users.',
           stat: 'Accelerated Product Adoption',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Travel%20and%20places/Rocket.png',
         },
         {
           title: 'Podcasts & Shows',
-          desc: 'Studio interview shows that need punchy, controversial and insight-packed clips for TikTok & Reels.',
+          desc: 'Hook-driven golden moments extracted for viral social reach.',
           stat: 'Multi-Platform Distribution',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Studio%20Microphone.png',
         },
         {
           title: 'Educators & Coaches',
-          desc: 'Online instructors and course creators converting complex insights into bite-sized actionable hooks.',
+          desc: 'Transform complex lessons into bite-sized, high-converting hooks.',
           stat: 'Higher Course Enrollments',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Graduation%20Cap.png',
         },
         {
           title: 'Finance & Analysts',
-          desc: 'Market analysts and crypto experts breaking down dense information into visually stunning motion clips.',
+          desc: 'Complex data simplified with sleek motion design and pacing.',
           stat: 'Maximum Market Authority',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Chart%20Increasing.png',
         },
         {
           title: 'E-commerce & D2C',
-          desc: 'D2C and retail brands needing high-converting organic video ads and scroll-stopping product showcases.',
+          desc: 'Scroll-stopping product showcases crafted to drive direct sales.',
           stat: 'Lower CAC & Higher Sales',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Shopping%20Bags.png',
         },
         {
           title: 'Agencies & Studios',
-          desc: 'Creative agencies looking for scalable, dependable post-production bandwidth without overhead.',
+          desc: 'Scalable post-production bandwidth with zero hiring overhead.',
           stat: 'Seamless Production Scale',
           emoji: 'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Travel%20and%20places/Glowing%20Star.png',
         },
@@ -722,7 +749,7 @@ export const translations = {
     },
     howItWorks: {
       tag: 'Process',
-      title: 'How It Works',
+      title: 'How we do it',
       desc: 'Zero meetings. 100% async. From raw camera files to viral posts.',
       steps: [
         {
@@ -757,11 +784,12 @@ export const translations = {
         {
           name: 'Standard',
           image: '/mock/pricing_lighthouse.png',
-          price: '7,000,000 Tomans',
+          price: '$300',
+          priceSubtext: 'for 10 video edits',
           popular: true,
           features: [
             'Choose 3 ready styles',
-            'Delivery of 8 main pages',
+            'Delivery of 10 edited reels',
             '3 rounds of revisions & edits',
             'Full design delivery within 7 days',
           ],
@@ -770,11 +798,12 @@ export const translations = {
         {
           name: 'Basic',
           image: '/mock/pricing_binoculars.png',
-          price: '4,000,000 Tomans',
+          price: '$40',
+          priceSubtext: 'for 1 video edit',
           popular: false,
           features: [
             'Choose 1 ready style',
-            'Delivery of 4 main pages',
+            'Delivery of 1 edited reel',
             '1 round of revisions & edits',
             'Full design delivery within 3 days',
           ],
@@ -836,6 +865,31 @@ export const translations = {
       title3: 'out of it.',
       desc: 'Send us your clips today. We’ll deliver your first high-retention edit in 24 hours.',
       buttonText: 'Start a project',
+    },
+    quoteModal: {
+      badge: 'Start a Project',
+      title: "Let's build something epic",
+      subtitle: 'Tell us about your vision. We typically reply in 2-4 hours.',
+      nameLabel: 'Name',
+      namePlaceholder: 'e.g. Alex Morgan',
+      nameError: 'Please enter your name (at least 2 characters)',
+      emailLabel: 'Email or Telegram',
+      emailPlaceholder: 'name@company.com or @username',
+      emailError: 'Please enter a valid email or @telegram handle',
+      planLabel: 'Choice Plan',
+      plans: {
+        starter: { name: 'Starter', price: '$400' },
+        standard: { name: 'Standard', price: '$700', badge: 'Popular' },
+        custom: { name: 'Custom', price: 'Custom' },
+      },
+      descLabel: 'Description',
+      descPlaceholder: 'What are you building? Tell us about your channels, volume, or specific vision...',
+      sendButton: 'Send Request',
+      sendingButton: 'Sending...',
+      responseTime: 'Typically answer in 4 hours',
+      successTitle: 'Request Received! 🎉',
+      successDesc: "Thanks! We've received your project details. Our creative director will review your brief and get back to you within 2-4 hours.",
+      closeButton: 'Done',
     },
     footer: {
       rights: 'HesLab. All rights reserved.',

@@ -1,50 +1,30 @@
 import { useState, useEffect, useRef, type FC } from 'react';
-import { useLanguage } from '../context/LanguageContext';
 
-const FA_TO_COUNTER_FRAMES = [
-  'اوج',
-  'او۸',
-  'اوK',
-  'ا۵K',
-  'ا0K',
-  '۹0K',
-  '100K',
+const GREAT_TO_COUNTER_FRAMES = [
+  'great',
+  'grea8',
+  'gre8K',
+  'gr08K',
+  'g508K',
+  '5508K',
+  '550K',
 ];
 
-const FA_TO_PEAK_FRAMES = [
-  '100K',
-  '10۰K',
-  '10ج',
-  '1۴ج',
-  '1وج',
-  '۷وج',
-  'اوج',
-];
-
-const EN_TO_COUNTER_FRAMES = [
-  'Peak',
-  'Pea8',
-  'PeaK',
-  'Pe0K',
-  'P00K',
-  '800K',
-  '100K',
-];
-
-const EN_TO_PEAK_FRAMES = [
-  '100K',
-  '100k',
-  '10ak',
-  '1eak',
-  '8eak',
-  'Peak',
+const COUNTER_TO_GREAT_FRAMES = [
+  '550K',
+  '5508K',
+  'g508K',
+  'gr08K',
+  'gre8K',
+  'grea8',
+  'great',
 ];
 
 function formatViewCount(n: number) {
   if (n < 1000) {
     return { value: n.toLocaleString(), suffix: 'K' };
   }
-  return { value: (n / 1000).toFixed(3), suffix: 'M' };
+  return { value: (n / 1000).toFixed(1), suffix: 'M' };
 }
 
 interface CountUpProps {
@@ -84,7 +64,7 @@ const CountUp: FC<CountUpProps> = ({ target, duration = 1400 }) => {
   const { value, suffix } = formatViewCount(n);
 
   return (
-    <span className="tabular-nums font-black inline-flex items-baseline gap-1">
+    <span className="tabular-nums font-black inline-flex items-baseline gap-0.5">
       <span>{value}</span>
       <span className="font-black text-slate-950">{suffix}</span>
     </span>
@@ -114,10 +94,9 @@ const InstagramEyeIcon: FC<{ className?: string }> = ({ className = '' }) => (
 );
 
 export const RollingViewCounter: FC = () => {
-  const { lang } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
-  const [phase, setPhase] = useState<'peak' | 'morphing' | 'counter'>('peak');
-  const [morphText, setMorphText] = useState('اوج');
+  const [phase, setPhase] = useState<'great' | 'morphing' | 'counter'>('great');
+  const [morphText, setMorphText] = useState('great');
 
   const prevScrolledRef = useRef(false);
   const isMountedRef = useRef(false);
@@ -148,7 +127,7 @@ export const RollingViewCounter: FC = () => {
   const START_THRESHOLD = 35;
   const isScrolled = scrollY >= START_THRESHOLD;
 
-  // Dynamic count target (base 550K, scaling with scroll up to 2550 -> 2.550 M)
+  // Dynamic count target (base 550K, scaling with scroll up to 2550 -> 2.6 M)
   const scrollRange = 600;
   const progress = Math.min(Math.max((scrollY - START_THRESHOLD) / scrollRange, 0), 1);
   const targetNumber = Math.round(550 + Math.pow(progress, 1.25) * 2000);
@@ -166,9 +145,7 @@ export const RollingViewCounter: FC = () => {
 
       if (timerRef.current) clearInterval(timerRef.current);
 
-      const frames = isScrolled
-        ? (lang === 'fa' ? FA_TO_COUNTER_FRAMES : EN_TO_COUNTER_FRAMES)
-        : (lang === 'fa' ? FA_TO_PEAK_FRAMES : EN_TO_PEAK_FRAMES);
+      const frames = isScrolled ? GREAT_TO_COUNTER_FRAMES : COUNTER_TO_GREAT_FRAMES;
 
       setPhase('morphing');
       let currentFrameIndex = 0;
@@ -179,81 +156,42 @@ export const RollingViewCounter: FC = () => {
           setMorphText(frames[currentFrameIndex]);
         } else {
           if (timerRef.current) clearInterval(timerRef.current);
-          setPhase(isScrolled ? 'counter' : 'peak');
+          setPhase(isScrolled ? 'counter' : 'great');
         }
       }, 35); // ~35ms per step = ~245ms smooth progressive resolve
     }
-  }, [isScrolled, lang]);
+  }, [isScrolled]);
 
-  // 1. Initial / Top of page ("به اوج می‌رسونه")
-  if (phase === 'peak') {
-    if (lang === 'fa') {
-      return (
-        <span className="inline-flex items-center gap-1.5 align-baseline font-black text-slate-950 select-none">
-          <span>به</span>
-          <span className="text-slate-950 font-black">اوج</span>
-          <span>می‌رسونه</span>
-        </span>
-      );
-    }
+  // 1. Initial / Top of page ("great edits")
+  if (phase === 'great') {
     return (
-      <span className="inline-flex items-center gap-1.5 align-baseline font-black text-slate-950 select-none">
-        <span>To The</span>
-        <span className="text-slate-950 font-black">Peak</span>
+      <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none">
+        <span className="text-slate-950 font-black">great</span>
+        <span>edits</span>
       </span>
     );
   }
 
-  // 2. Progressive Character-by-Character Morph Transition
+  // 2. Progressive Character-by-Character Morph Transition ("gre8K edits")
   if (phase === 'morphing') {
-    if (lang === 'fa') {
-      return (
-        <span className="inline-flex items-center gap-1.5 align-baseline font-black text-slate-950 select-none">
-          <span>به</span>
-          <span className="inline-block font-black text-slate-950 tracking-tight transition-all">
-            {morphText}
-          </span>
-          <span>می‌رسونه</span>
-        </span>
-      );
-    }
     return (
-      <span className="inline-flex items-center gap-1.5 align-baseline font-black text-slate-950 select-none">
-        <span>To</span>
+      <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none">
         <span className="inline-block font-black text-slate-950 tracking-tight transition-all">
           {morphText}
         </span>
+        <span>edits</span>
       </span>
     );
   }
 
-  // 3. Active Scroll Counter with requestAnimationFrame Ease-Out Cubic CountUp
-  if (lang === 'fa') {
-    return (
-      <span className="inline-flex items-center gap-2 align-baseline font-black text-slate-950 select-none animate-in fade-in duration-150">
-        <span>به</span>
-        
-        <span dir="ltr" className="inline-flex items-center gap-1.5 font-en tracking-tight text-slate-950">
-          <InstagramEyeIcon className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 -translate-y-0.5" />
-          <CountUp target={targetNumber} duration={1400} />
-        </span>
-
-        <span>می‌رسونه</span>
-      </span>
-    );
-  }
-
+  // 3. Active Scroll Counter with Eye Icon and CountUp (" [Eye] 550K edits ")
   return (
-    <span className="inline-flex items-center gap-2 align-baseline font-black text-slate-950 select-none animate-in fade-in duration-150">
-      <span>To</span>
-      
-      <span dir="ltr" className="inline-flex items-center gap-1.5 font-en tracking-tight text-slate-950">
-        <InstagramEyeIcon className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 -translate-y-0.5" />
+    <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none animate-in fade-in duration-150">
+      <span dir="ltr" className="inline-flex items-center gap-1.5 sm:gap-2 font-en tracking-tight text-slate-950">
+        <InstagramEyeIcon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 -translate-y-0.5" />
         <CountUp target={targetNumber} duration={1400} />
       </span>
-
-      <span>Views</span>
+      <span>edits</span>
     </span>
   );
 };
-

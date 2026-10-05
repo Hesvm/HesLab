@@ -1,18 +1,20 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useQuoteModal } from '../context/QuoteModalContext';
 import { trackEvent } from '../lib/analytics';
 
 export const FinalCTA: FC = () => {
   const { lang, isRtl } = useLanguage();
+  const { openModal } = useQuoteModal();
 
   return (
-    <section id="contact" className="px-4 sm:px-6 md:px-12 pb-8 sm:pb-12 w-full mx-auto bg-white select-none">
-      {/* Pure Black Rounded Frame */}
-      <div className="bg-[#000000] text-white rounded-[32px] sm:rounded-[44px] overflow-hidden relative shadow-2xl flex flex-col justify-between pt-16 sm:pt-24 pb-8 sm:pb-10 px-6 sm:px-12 border border-slate-900 w-full">
-        
-        {/* Background Subtle Gradient Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] bg-gradient-to-r from-sky-500/15 via-indigo-600/15 to-purple-600/15 blur-[140px] pointer-events-none" />
+    <section id="contact" className="w-full bg-[#000000] text-white pt-16 sm:pt-24 pb-10 sm:pb-14 px-6 sm:px-12 select-none relative overflow-hidden">
+      {/* Background Subtle Gradient Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] bg-gradient-to-r from-sky-500/15 via-indigo-600/15 to-purple-600/15 blur-[140px] pointer-events-none" />
+
+      {/* Main Inner Container */}
+      <div className="max-w-6xl mx-auto flex flex-col justify-between relative z-10 w-full">
 
         {/* Center Content */}
         <div className="max-w-3xl mx-auto relative z-10 text-center">
@@ -44,10 +46,8 @@ export const FinalCTA: FC = () => {
 
           {/* CTA Action Button */}
           <div className="mt-8 sm:mt-10 flex items-center justify-center">
-            <a
-              href="https://t.me/heslab"
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
               data-analytics="primary-cta"
               data-analytics-name="start_a_project"
               data-analytics-location="home_final_cta"
@@ -57,8 +57,9 @@ export const FinalCTA: FC = () => {
                   cta_location: 'home_final_cta',
                   page_path: '/',
                 });
+                openModal();
               }}
-              className="px-7 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-black text-xs sm:text-sm hover:scale-105 transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer"
+              className="px-7 py-3.5 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-black text-xs sm:text-sm hover:scale-105 transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer shadow-lg"
             >
               <span>{lang === 'fa' ? 'ثبت درخواست و شروع پروژه' : 'Get Started Now'}</span>
               <svg
@@ -74,7 +75,7 @@ export const FinalCTA: FC = () => {
                   fill="none"
                 />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
 

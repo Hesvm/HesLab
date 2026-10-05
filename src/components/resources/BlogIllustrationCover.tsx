@@ -6,16 +6,24 @@ interface BlogIllustrationCoverProps {
   title: string;
   readTime?: string;
   tag?: string;
+  aspectRatio?: 'square' | '4/3' | '16/9';
 }
 
 export const BlogIllustrationCover: FC<BlogIllustrationCoverProps> = ({
   gradient,
   readTime,
-  tag,
+  aspectRatio = 'square',
 }) => {
+  const aspectClass =
+    aspectRatio === 'square'
+      ? 'aspect-square'
+      : aspectRatio === '16/9'
+      ? 'aspect-[16/9]'
+      : 'aspect-[4/3]';
+
   return (
     <div
-      className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-[20px] p-5 text-zinc-800 shadow-xs select-none transition-transform duration-300 group-hover:scale-[1.015]"
+      className={`relative flex ${aspectClass} w-full items-center justify-center overflow-hidden rounded-[22px] p-5 text-zinc-800 shadow-xs select-none transition-transform duration-300 group-hover:scale-[1.015]`}
       style={{ background: gradient }}
     >
       {/* Read Time Tag on Top-Left */}
@@ -26,15 +34,8 @@ export const BlogIllustrationCover: FC<BlogIllustrationCoverProps> = ({
         </div>
       )}
 
-      {/* Category Tag on Top-Right */}
-      {tag && (
-        <div className="absolute top-3.5 right-3.5 z-10 flex items-center rounded-full bg-black/80 px-2.5 py-0.5 text-[10px] font-medium text-white backdrop-blur-md select-none">
-          <span>{tag}</span>
-        </div>
-      )}
-
       {/* Decorative Mockup Floating Card */}
-      <div className="relative flex w-full max-w-[270px] sm:max-w-[290px] flex-col gap-2 rounded-2xl border border-black/[0.08] bg-white/95 p-3.5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+      <div className="relative flex w-full max-w-[230px] sm:max-w-[250px] flex-col gap-2 rounded-2xl border border-black/[0.08] bg-white/95 p-3.5 backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
         <div className="flex items-center justify-between border-b border-black/[0.06] pb-2">
           <div className="flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-sky-500 animate-pulse" />

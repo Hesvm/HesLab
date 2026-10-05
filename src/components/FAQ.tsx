@@ -1,12 +1,12 @@
 import { useState, type FC } from 'react';
-import { Add, Minus } from 'iconsax-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 
 export const FAQ: FC = () => {
   const { lang, isRtl } = useLanguage();
   const t = translations[lang].faq;
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(3); // Set item 3 (4th item) open initially or null, like the reference
 
   return (
     <section className="py-16 sm:py-22 px-4 max-w-3xl mx-auto border-t border-slate-900/10">
@@ -18,35 +18,56 @@ export const FAQ: FC = () => {
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-3">
+      <div className="space-y-3 sm:space-y-3.5">
         {t.items.map((faq, idx) => {
           const isOpen = openIndex === idx;
           return (
             <div
               key={idx}
-              className={`rounded-[14px] border transition-all duration-200 overflow-hidden ${
-                isOpen
-                  ? 'border-slate-900/20 bg-white shadow-md'
-                  : 'border-slate-900/10 bg-white/70 hover:bg-white hover:border-slate-900/20'
-              }`}
+              className="bg-[#F4F4F6] hover:bg-[#EFEFF2] rounded-[20px] sm:rounded-[22px] px-6 py-5 sm:px-7 sm:py-5.5 transition-colors duration-200"
             >
               <button
+                type="button"
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
-                className={`w-full p-4 sm:p-4.5 ${isRtl ? 'text-right' : 'text-left'} flex items-center justify-between gap-3.5 cursor-pointer select-none`}
+                className={`w-full flex items-center justify-between gap-4 cursor-pointer select-none ${isRtl ? 'text-right' : 'text-left'}`}
+                aria-expanded={isOpen}
               >
-                <span className="font-black text-sm sm:text-base text-slate-950 tracking-tight">
+                <span className="font-bold text-[15.5px] sm:text-[17.5px] text-slate-900 tracking-tight leading-snug">
                   {faq.q}
                 </span>
-                <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-800 shrink-0">
-                  {isOpen ? <Minus size={14} variant="Linear" /> : <Add size={14} variant="Linear" />}
-                </div>
+                <motion.div
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="shrink-0 text-slate-400"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.4}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </motion.div>
               </button>
 
-              {isOpen && (
-                <div className={`px-4 sm:px-4.5 pb-4 sm:pb-4.5 pt-1 text-slate-600 text-xs sm:text-[13.5px] leading-relaxed font-normal border-t border-slate-100 ${isRtl ? 'text-right' : 'text-left'}`}>
-                  {faq.a}
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className={`pt-2.5 sm:pt-3 text-[#5A5A62] text-[14.5px] sm:text-[15px] leading-relaxed font-normal ${isRtl ? 'text-right' : 'text-left'}`}>
+                      {faq.a}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}

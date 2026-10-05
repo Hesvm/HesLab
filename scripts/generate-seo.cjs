@@ -293,22 +293,116 @@ const projectRoutes = projectSlugs.map((p) => ({
   indexable: true,
 }));
 
-// Resource Routes
+// Blog / Resource Routes
 const resourceSlugs = [
-  { slug: 'short-form-video-hooks-retention', titleFa: 'چگونه در ۳ ثانیه اول ویدیوهای کوتاه نگاه مخاطب را قفل کنیم؟', date: '2026-03-15', cluster: 'Short-Form Video', service: 'short-form-video-editing' },
-  { slug: 'podcast-to-shorts-workflow', titleFa: 'راهنمای گام‌به‌گام تبدیل پادکست به شورتس و ریلزهای پربازدید', date: '2026-03-20', cluster: 'Creator Workflow', service: 'short-form-video-editing' },
-  { slug: 'kinetic-typography-motion-design', titleFa: 'کالبدشکافی موشن دیزاین و فیزیک انیمیشن در ویدیوهای کوتاه', date: '2026-03-25', cluster: 'Motion Design', service: 'motion-design' },
-  { slug: 'short-form-video-editing-cost-guide', titleFa: 'هزینه ادیت ویدیوهای کوتاه چقدر است؟ راهنمای انتخاب پکیج مناسب', date: '2026-03-28', cluster: 'Buying Intent', service: 'ongoing-content' },
+  {
+    "slug": "short-form-video-hooks-retention",
+    "titleFa": "چگونه در ۳ ثانیه اول نگاه مخاطب را قفل کنیم؟",
+    "date": "2026-03-15",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "podcast-to-shorts-workflow",
+    "titleFa": "تبدیل پادکست طولانی به شورتس و ریلزهای پربازدید",
+    "date": "2026-03-20",
+    "cluster": "Creator Workflow",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "kinetic-typography-motion-design",
+    "titleFa": "موشن دیزاین و فیزیک انیمیشن در ویدیوهای کوتاه",
+    "date": "2026-03-25",
+    "cluster": "Motion Design",
+    "service": "motion-design"
+  },
+  {
+    "slug": "short-form-video-editing-cost-guide",
+    "titleFa": "راهنمای شفاف قیمت‌گذاری و هزینه تدوین ویدیو",
+    "date": "2026-03-28",
+    "cluster": "Buying Intent",
+    "service": "ongoing-content"
+  },
+  {
+    "slug": "how-many-short-form-videos-per-month",
+    "titleFa": "چند ویدیوی کوتاه در ماه برای رشد لازم است؟",
+    "date": "2026-03-29",
+    "cluster": "Creator Workflow",
+    "service": "ongoing-video-content"
+  },
+  {
+    "slug": "creative-production-system-retainers",
+    "titleFa": "سیستم تولید ویدیو با ظرفیت منظم ماهانه",
+    "date": "2026-03-29",
+    "cluster": "Buying Intent",
+    "service": "ongoing-video-content"
+  },
+  {
+    "slug": "three-second-hook-visual-mechanics",
+    "titleFa": "معماری هوک ۳ ثانیه‌ای: تریگرهای بصری و صوتی",
+    "date": "2026-03-30",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "podcast-repurposing-pipeline-playbook",
+    "titleFa": "پایپ‌لاین بازآفرینی پادکست: تبدیل ۱ به ۱۲ شورتس",
+    "date": "2026-03-30",
+    "cluster": "Creator Workflow",
+    "service": "content-repurposing"
+  },
+  {
+    "slug": "dark-posting-short-form-testing",
+    "titleFa": "تست محتوای دارک‌پستینگ و واریانت‌های هوک",
+    "date": "2026-03-31",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "in-house-vs-outsourced-video-editing",
+    "titleFa": "ادیتور تمام‌وقت داخلی یا ریتینر استودیو",
+    "date": "2026-03-31",
+    "cluster": "Buying Intent",
+    "service": "ongoing-video-content"
+  },
+  {
+    "slug": "tiktok-spark-ads-vs-organic-reels",
+    "titleFa": "اسپارک ادز تیک‌تاک در برابر ریلز ارگانیک",
+    "date": "2026-04-01",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "kinetic-typography-animation-physics",
+    "titleFa": "چرا پریست‌های آماده زیرنویس اعتبار برند را کم می‌کنند؟",
+    "date": "2026-04-01",
+    "cluster": "Motion Design",
+    "service": "motion-design"
+  },
+  {
+    "slug": "vertical-video-safe-zones-cheat-sheet",
+    "titleFa": "چیت‌شیت نواحی امن (Safe Zones) ویدیوهای عمودی",
+    "date": "2026-04-02",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "b-roll-pacing-sound-design-mastery",
+    "titleFa": "سلسله‌مراتب بی-رول و طراحی صدای لمسی",
+    "date": "2026-04-02",
+    "cluster": "Short-Form Video",
+    "service": "short-form-video-editing"
+  }
 ];
 
 const resourceRoutes = resourceSlugs.map((r) => ({
-  path: `/resources/${r.slug}`,
+  path: `/blog/${r.slug}`,
   pageType: 'resource-article',
   priority: '0.85',
   changefreq: 'monthly',
   lastmod: r.date,
-  titleFa: `${r.titleFa} | ژورنال حس‌لب`,
-  titleEn: `${r.titleFa} | HesLab Journal`,
+  titleFa: `${r.titleFa} | بلاگ حس‌لب`,
+  titleEn: `${r.titleFa} | HesLab Blog`,
   descriptionFa: `مقاله تخصصی استودیو حس‌لب درباره ${r.titleFa}.`,
   descriptionEn: `Educational guide and breakdown on ${r.titleFa} by HesLab.`,
   searchIntent: 'informational',

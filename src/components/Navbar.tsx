@@ -12,6 +12,7 @@ import {
   BagTick,
 } from 'iconsax-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useQuoteModal } from '../context/QuoteModalContext';
 import { translations } from '../data/translations';
 import { trackEvent } from '../lib/analytics';
 
@@ -62,6 +63,7 @@ const serviceCardMeta = [
 
 export const Navbar: FC = () => {
   const { lang, isRtl } = useLanguage();
+  const { openModal } = useQuoteModal();
   const location = useLocation();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -107,7 +109,7 @@ export const Navbar: FC = () => {
       }`}
     >
       <nav
-        className={`relative pointer-events-auto w-full max-w-[510px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
+        className={`relative pointer-events-auto w-full max-w-[530px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
           scrolled
             ? 'bg-[#1E1E1F]/95 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.5)] scale-[0.94]'
             : 'bg-[#1E1E1F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] scale-100'
@@ -133,7 +135,7 @@ export const Navbar: FC = () => {
         </Link>
 
         {/* Navigation Items */}
-        <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-normal text-[#A5A5A6]">
+        <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6]">
           {location.pathname === '/' ? (
             <a
               href="#work"
@@ -186,22 +188,23 @@ export const Navbar: FC = () => {
 
         {/* CTA Button */}
         <div className="flex items-center gap-2">
-          <Link
-            to="/contact"
+          <button
+            type="button"
             data-analytics="primary-cta"
             data-analytics-name="start_a_project"
             data-analytics-location="navigation"
-            onClick={() =>
+            onClick={() => {
               trackEvent('primary_cta_click', {
                 cta_name: 'start_a_project',
                 cta_location: 'navigation',
                 page_path: window.location.pathname,
-              })
-            }
-            className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[14.5px] font-normal px-5 sm:px-6 h-[44px] rounded-[14px] border border-sky-400/20 shadow-[0_4px_16px_rgba(0,167,245,0.35)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
+              });
+              openModal();
+            }}
+            className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-5 sm:px-6 h-[44px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
           >
             {t.cta}
-          </Link>
+          </button>
 
           {/* Mobile Hamburger */}
           <button
@@ -221,7 +224,7 @@ export const Navbar: FC = () => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className={`absolute top-[calc(100%+6px)] -inset-x-2 bg-[#1E1E1F]/98 backdrop-blur-2xl border border-white/10 rounded-[16px] p-3.5 shadow-[0_20px_45px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-200 ease-out z-50 ${
+          className={`absolute top-[calc(100%+8px)] inset-x-0 w-full bg-[#1E1E1F]/98 backdrop-blur-2xl border border-white/10 rounded-[20px] p-3.5 shadow-[0_20px_45px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-200 ease-out z-50 ${
             servicesDropdownOpen
               ? 'opacity-100 translate-y-0 pointer-events-auto visible'
               : 'opacity-0 -translate-y-1 pointer-events-none invisible'
@@ -271,14 +274,14 @@ export const Navbar: FC = () => {
           <Link
             to="/work"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
           >
             {t.work}
           </Link>
           <Link
             to="/services"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10 flex items-center justify-center gap-1.5"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10 flex items-center justify-center gap-1.5"
           >
             <span>{t.services}</span>
             <ArrowDown2 size={13} color="currentColor" variant="Linear" />
@@ -286,13 +289,13 @@ export const Navbar: FC = () => {
           <Link
             to="/about"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-zinc-300 hover:text-white py-2 text-[15px] font-normal border-b border-white/10"
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
           >
             {t.about}
           </Link>
           <div className="pt-2 border-t border-white/10 mt-1">
-            <Link
-              to="/contact"
+            <button
+              type="button"
               data-analytics="primary-cta"
               data-analytics-name="start_a_project"
               data-analytics-location="navigation_mobile"
@@ -303,11 +306,12 @@ export const Navbar: FC = () => {
                   cta_location: 'navigation_mobile',
                   page_path: window.location.pathname,
                 });
+                openModal();
               }}
-              className="w-full bg-[#00A7F5] hover:bg-[#0096DC] text-white py-3 rounded-full text-[15px] font-normal flex items-center justify-center cursor-pointer shadow-md"
+              className="w-full bg-[#5566FF] hover:bg-[#4859F5] text-white py-3 rounded-full text-[15px] font-semibold flex items-center justify-center cursor-pointer border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)]"
             >
               {t.cta}
-            </Link>
+            </button>
           </div>
         </div>
       )}

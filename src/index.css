@@ -8,6 +8,7 @@
   --color-border: var(--color-border);
   --color-primary: var(--color-primary);
   --color-primary-foreground: var(--color-primary-foreground);
+  --font-serif: 'KansasNew', Georgia, serif;
 }
 
 @font-face {
@@ -84,6 +85,22 @@
 }
 
 @font-face {
+  font-family: 'KansasNew';
+  src: url('./assets/fonts/kansasnew-medium.otf') format('opentype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KansasNew';
+  src: url('./assets/fonts/kansasnew-medium.otf') format('opentype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Instrument Serif';
   src: url('./assets/fonts/InstrumentSerif-Italic.ttf') format('truetype');
   font-weight: 400;
@@ -135,12 +152,30 @@
 }
 
 .font-serif-italic {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'KansasNew', Georgia, serif;
   font-style: italic;
   font-size: 28px;
   line-height: 1.25;
   color: #64748b;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
+}
+
+.manifesto-serif {
+  font-family: 'KansasNew', Georgia, serif !important;
+  font-style: italic;
+  letter-spacing: -0.04em;
+}
+
+.emoji-sticker-stroke {
+  filter: 
+    drop-shadow(1.75px 0 0 #ffffff)
+    drop-shadow(-1.75px 0 0 #ffffff)
+    drop-shadow(0 1.75px 0 #ffffff)
+    drop-shadow(0 -1.75px 0 #ffffff)
+    drop-shadow(1.25px 1.25px 0 #ffffff)
+    drop-shadow(-1.25px -1.25px 0 #ffffff)
+    drop-shadow(1.25px -1.25px 0 #ffffff)
+    drop-shadow(-1.25px 1.25px 0 #ffffff);
 }
 
 @keyframes float-slow {

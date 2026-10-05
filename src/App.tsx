@@ -18,6 +18,9 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+import { QuoteModalProvider } from './context/QuoteModalContext';
+import { QuoteModal } from './components/QuoteModal';
+
 const AppShell: FC = () => {
   const { lang, isRtl } = useLanguage();
   const location = useLocation();
@@ -25,7 +28,7 @@ const AppShell: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`relative min-h-screen bg-white text-slate-900 overflow-x-hidden selection:bg-slate-900 selection:text-white ${
+      className={`relative min-h-screen bg-white text-slate-900 overflow-x-clip selection:bg-slate-900 selection:text-white ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
@@ -51,6 +54,7 @@ const AppShell: FC = () => {
       {location.pathname !== '/' && <Footer />}
 
       <Toaster />
+      <QuoteModal />
     </div>
   );
 };
@@ -59,7 +63,9 @@ export const App: FC = () => {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <AppShell />
+        <QuoteModalProvider>
+          <AppShell />
+        </QuoteModalProvider>
       </LanguageProvider>
     </BrowserRouter>
   );

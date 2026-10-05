@@ -13,12 +13,12 @@ export const WorkPage: FC = () => {
   const [unmutedId, setUnmutedId] = useState<number | null>(null);
 
   const categories = [
-    { id: 'all', labelFa: 'همه پروژه‌ها', labelEn: 'All Projects' },
-    { id: 'vlog', labelFa: 'ولاگ و سفر', labelEn: 'Vlog & Travel' },
-    { id: 'documentary', labelFa: 'مستند و داستانی', labelEn: 'Documentary' },
-    { id: 'podcast', labelFa: 'پادکست و گفتگو', labelEn: 'Podcast' },
-    { id: 'commercial', labelFa: 'تبلیغاتی و محصول', labelEn: 'Commercial' },
-    { id: 'educational', labelFa: 'آموزشی و بیزینس', labelEn: 'Educational' },
+    { id: 'all', labelFa: 'همه', labelEn: 'All' },
+    { id: 'vlog', labelFa: 'ولاگ', labelEn: 'Vlog' },
+    { id: 'documentary', labelFa: 'مستند', labelEn: 'Documentary' },
+    { id: 'podcast', labelFa: 'پادکست', labelEn: 'Podcast' },
+    { id: 'commercial', labelFa: 'تبلیغاتی', labelEn: 'Commercial' },
+    { id: 'educational', labelFa: 'آموزشی', labelEn: 'Educational' },
   ];
 
   const filteredProjects = selectedCategory === 'all'

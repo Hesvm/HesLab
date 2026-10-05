@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, type FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getResourceBySlug } from '../data/resources';
+import { getProjectBySlug } from '../data/projects';
 import { TableOfContentsRail } from '../components/resources/TableOfContentsRail';
 import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
@@ -108,7 +109,7 @@ export const ResourceDetailPage: FC = () => {
   const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
   const authorRole = lang === 'en' && article.author.roleEn ? article.author.roleEn : article.author.role;
   const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
-  const tags = lang === 'en' && article.tagsEn ? article.tagsEn : article.tags;
+  const featuredProject = article.featuredProjectSlug ? getProjectBySlug(article.featuredProjectSlug) : undefined;
   const tocItems = article.tableOfContents.map((t) => ({
     id: t.id,
     title: lang === 'en' && t.titleEn ? t.titleEn : t.title,
@@ -224,9 +225,31 @@ export const ResourceDetailPage: FC = () => {
             <BlogIllustrationCover
               gradient={article.coverGradient}
               title={title}
-              tag={tags[0]}
+              aspectRatio="16/9"
             />
           </div>
+
+          {/* Key Takeaways Box (inBeat-style Executive Summary) */}
+          {article.keyTakeaways && article.keyTakeaways.length > 0 && (
+            <div className="mb-9 p-5 sm:p-6 rounded-2xl border border-sky-200/80 bg-gradient-to-br from-sky-50/70 via-slate-50/80 to-white shadow-sm">
+              <div className="flex items-center gap-2 mb-3.5">
+                <div className="size-6 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center font-bold text-xs">
+                  ✦
+                </div>
+                <h2 className="text-sm font-black tracking-wide uppercase text-slate-900">
+                  {lang === 'fa' ? 'نکات کلیدی این راهنما (Key Takeaways)' : 'Key Takeaways & Executive Summary'}
+                </h2>
+              </div>
+              <ul className="space-y-2.5">
+                {(lang === 'en' && article.keyTakeawaysEn ? article.keyTakeawaysEn : article.keyTakeaways).map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-[13.5px] sm:text-[14px] leading-relaxed text-slate-700">
+                    <span className="size-1.5 rounded-full bg-sky-500 mt-2 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Lead Paragraph / Introduction */}
           <div id="sec-intro" data-toc-section className="scroll-mt-28 mb-9">
@@ -350,6 +373,46 @@ export const ResourceDetailPage: FC = () => {
                 })}
               </div>
             </section>
+          )}
+
+          {/* Featured Case Study Embed Card (inBeat-style Portfolio Proof) */}
+          {featuredProject && (
+            <div className="mt-11 p-6 sm:p-7 rounded-2xl border border-slate-200/90 bg-slate-950 text-white shadow-lg overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div className="flex-1">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-400 text-[11px] font-bold tracking-wider uppercase mb-3">
+                    <span>{lang === 'fa' ? 'کالبدشکافی نمونه‌کار مرتبط' : 'Featured Case Study'}</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
+                    {lang === 'fa' ? featuredProject.titleFa : featuredProject.titleEn}
+                  </h3>
+                  <p className="text-xs sm:text-[13px] text-slate-400 leading-relaxed line-clamp-2 mb-3">
+                    {lang === 'fa' ? featuredProject.descriptionFa : featuredProject.descriptionEn}
+                  </p>
+                  <div className="flex flex-wrap gap-2 text-[11px] text-slate-300">
+                    {(lang === 'fa' ? featuredProject.featuresFa : featuredProject.featuresEn).slice(0, 3).map((feat, fIdx) => (
+                      <span key={fIdx} className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/10">
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="shrink-0 flex sm:flex-col items-center sm:items-end justify-between gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
+                  <div className="text-right">
+                    <span className="text-[11px] text-slate-400 block">{lang === 'fa' ? 'فرمت و کیفیت' : 'Format & Quality'}</span>
+                    <span className="text-xs font-semibold text-white">{featuredProject.durationSeconds}s • {featuredProject.resolution}</span>
+                  </div>
+                  <Link
+                    to={`/work/${featuredProject.slug}`}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-slate-950 font-bold text-xs hover:bg-sky-400 transition-colors"
+                  >
+                    <span>{lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View Edit Breakdown'}</span>
+                    {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
+                  </Link>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Related Services Links */}

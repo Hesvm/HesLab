@@ -7,7 +7,7 @@ export const StatsBar: FC = () => {
   const t = translations[lang].stats;
 
   return (
-    <section className="py-7 sm:py-10 px-4 max-w-[820px] mx-auto">
+    <section className="pt-16 sm:pt-24 md:pt-32 pb-20 sm:pb-28 md:pb-36 px-4 max-w-[820px] mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4.5">
         {t.items.map((stat, idx) => (
           <div key={idx} className="flex flex-col items-center">

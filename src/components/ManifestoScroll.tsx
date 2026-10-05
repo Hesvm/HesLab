@@ -51,361 +51,339 @@ export const ManifestoScroll: FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-12 sm:py-16 px-4 max-w-4xl mx-auto bg-white select-none border-t border-slate-100"
+      className="w-full bg-[#0B0B0E] text-white py-28 sm:py-36 md:py-44 px-4 sm:px-8 select-none relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center"
     >
-      {/* Small Clean Tag */}
-      <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8 text-[11px] font-bold tracking-widest text-slate-400">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span>{lang === 'fa' ? 'مانیفست حس‌لب' : 'The HesLab Manifesto'}</span>
-      </div>
+      {/* Ambient Subtle Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-gradient-to-r from-indigo-950/25 via-purple-950/20 to-slate-900/35 blur-[140px] pointer-events-none" />
 
-      {/* Dynamic Compact Sentence on Pure White Background */}
+      {/* Inner Centered Content Container */}
+      <div className="max-w-3xl mx-auto relative z-10 w-full">
+      {/* Dynamic Compact Sentence on Pure Dark Background */}
       {lang === 'fa' ? (
         <div
           dir="rtl"
-          className="text-xl sm:text-2xl md:text-[28px] lg:text-[30px] font-black tracking-tight leading-[2.1] sm:leading-[2.2] md:leading-[2.3] text-slate-950 text-center"
+          className="font-normal text-lg sm:text-xl md:text-2xl lg:text-[25px] tracking-[-0.03em] text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0.5 sm:gap-1 md:gap-1.5"
         >
-          {/* Token 1: حس‌لب */}
-          <span
-            style={{ opacity: getProgress(0, 16).opacity }}
-            className="inline-block transition-opacity duration-150 ml-1 text-slate-950"
-          >
-            حس‌لب
-          </span>
-
-          {/* Widget 1: Orange Studio Pill */}
-          <span
-            style={{
-              opacity: getProgress(1, 16).opacity,
-              transform: `scale(${getProgress(1, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#E85D35] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Travel%20and%20places/High%20Voltage.png"
-              alt="Studio"
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
-            />
-            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Studio</span>
-            <span className="text-[11px] sm:text-xs font-black text-white">تیم شورت‌فرم</span>
-          </span>
-
-          {/* Token 2: یه تیم کوچیک */}
-          <span
-            style={{ opacity: getProgress(2, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            یه تیم کوچیک
-          </span>
-
-          {/* Token 3: تولید محتوای */}
-          <span
-            style={{ opacity: getProgress(3, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            تولید محتوای
-          </span>
-
-          {/* Token 4: شورت‌فرم */}
-          <span
-            style={{ opacity: getProgress(4, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            شورت‌فرم
-          </span>
-
-          {/* Widget 2: Red Dial 60 FPS Pill */}
-          <span
-            style={{
-              opacity: getProgress(5, 16).opacity,
-              transform: `scale(${getProgress(5, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#D9383A] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <div className="w-2 h-2 rounded-xs bg-white animate-spin" />
-            <span className="font-mono text-[10.5px] sm:text-[11.5px] font-black tracking-wider" dir="ltr">
-              60 FPS
+          {/* Line 1 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(0, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              من
             </span>
-          </span>
 
-          {/* Token 5: برای یوتیوب، */}
-          <span
-            style={{ opacity: getProgress(6, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            برای یوتیوب،
-          </span>
+            {/* Emoji 1: Film Frames (-4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(1, 18).opacity,
+                transform: `scale(${getProgress(1, 18).scale}) rotate(-4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Film%20Frames.png"
+                alt="Film"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Token 6: اینستاگرام */}
-          <span
-            style={{ opacity: getProgress(7, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            اینستاگرام
-          </span>
+            <span style={{ opacity: getProgress(2, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              راش‌های خام رو به داستان‌هایی
+            </span>
+          </div>
 
-          {/* Widget 3: Clapper icon */}
-          <span
-            style={{
-              opacity: getProgress(8, 16).opacity,
-              transform: `scale(${getProgress(8, 16).scale})`,
-            }}
-            className="inline-flex items-center align-middle mx-1 p-1 rounded-lg bg-slate-100 border border-slate-200/80 transition-all duration-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Clapper%20Board.png"
-              alt="Clapper"
-              className="w-4 h-4 sm:w-5 sm:h-5 object-contain pointer-events-none"
-            />
-          </span>
+          {/* Line 2 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(3, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              تبدیل می‌کنم که
+            </span>
 
-          {/* Token 7: و تیک‌تاکه. */}
-          <span
-            style={{ opacity: getProgress(9, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            و تیک‌تاکه.
-          </span>
+            {/* Emoji 2: Eyes (+4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(4, 18).opacity,
+                transform: `scale(${getProgress(4, 18).scale}) rotate(4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Hand%20gestures/Eyes.png"
+                alt="Eyes"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Token 8: ما تمرکزمون */}
-          <span
-            style={{ opacity: getProgress(10, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            ما تمرکزمون
-          </span>
+            <span style={{ opacity: getProgress(5, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              ارزش دیده شدن دارن.
+            </span>
+          </div>
 
-          {/* Token 9: روی اینه که */}
-          <span
-            style={{ opacity: getProgress(11, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            روی اینه که
-          </span>
+          {/* Line 3 (Meaningful Stanza Gap) */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2] mt-8 sm:mt-10 md:mt-12">
+            <span style={{ opacity: getProgress(6, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              حس‌لب
+            </span>
 
-          {/* Token 10: چیزی رو بسازیم */}
-          <span
-            style={{ opacity: getProgress(12, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            چیزی رو بسازیم
-          </span>
+            {/* Emoji 3: Potted Plant (-3.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(7, 18).opacity,
+                transform: `scale(${getProgress(7, 18).scale}) rotate(-3.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Animals/Potted%20Plant.png"
+                alt="Plant"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Token 11: که ارزش */}
-          <span
-            style={{ opacity: getProgress(13, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            که ارزش
-          </span>
+            <span style={{ opacity: getProgress(8, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              گوشه امن ادیت منه؛
+            </span>
+          </div>
 
-          {/* Widget 4: Attention Eye Pill */}
-          <span
-            style={{
-              opacity: getProgress(14, 16).opacity,
-              transform: `scale(${getProgress(14, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#9E5A38] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <span className="text-xs">👁️</span>
-            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Retention</span>
-            <span className="text-[11px] sm:text-xs font-black text-white">چشم مخاطب</span>
-          </span>
+          {/* Line 4 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(9, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              ساخته‌شده با
+            </span>
 
-          {/* Token 12: رو داشته باشه */}
-          <span
-            style={{ opacity: getProgress(14, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            رو داشته باشه
-          </span>
+            {/* Emoji 4: Red Heart (+5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(10, 18).opacity,
+                transform: `scale(${getProgress(10, 18).scale}) rotate(5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Smilies/Red%20Heart.png"
+                alt="Heart"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Token 13: و مخاطب */}
-          <span
-            style={{ opacity: getProgress(15, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            و مخاطب
-          </span>
+            <span style={{ opacity: getProgress(11, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              عشق و
+            </span>
 
-          {/* Widget 5: Brand Value Pill */}
-          <span
-            style={{
-              opacity: getProgress(15, 16).opacity,
-              transform: `scale(${getProgress(15, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#4A5D44] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Gem%20Stone.png"
-              alt="Gem"
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
-            />
-            <span className="text-[9px] text-white/80 font-bold tracking-wider hidden sm:inline">Brand Value</span>
-            <span className="text-[11px] sm:text-xs font-black text-white">ارزش برند</span>
-          </span>
+            {/* Emoji 5: Hesam / Man Beard (-4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(12, 18).opacity,
+                transform: `scale(${getProgress(12, 18).scale}) rotate(-4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/People%20with%20professions/Man%20Beard.png"
+                alt="Hesam"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Token 14: رو درک کنه */}
-          <span
-            style={{ opacity: getProgress(16, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            رو درک کنه.
-          </span>
+            <span style={{ opacity: getProgress(13, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              حسام،
+            </span>
+          </div>
 
-          {/* Widget 6: Square Arrow Icon */}
-          <span
-            style={{
-              opacity: getProgress(16, 16).opacity,
-              transform: `scale(${getProgress(16, 16).scale})`,
-            }}
-            className="inline-flex items-center justify-center align-middle mx-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-900 text-white shadow-xs"
-          >
-            <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </span>
+          {/* Line 5 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(14, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              همراه با یه
+            </span>
+
+            {/* Emoji 6: Laptop (+4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(15, 18).opacity,
+                transform: `scale(${getProgress(15, 18).scale}) rotate(4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Laptop.png"
+                alt="Laptop"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
+
+            <span style={{ opacity: getProgress(16, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              دید دیزاینر
+            </span>
+          </div>
+
+          {/* Line 6 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(17, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              که داستان‌ها رو به حرکت درمیاره.
+            </span>
+          </div>
         </div>
       ) : (
         /* English Version */
         <div
           dir="ltr"
-          className="text-xl sm:text-2xl md:text-[28px] lg:text-[30px] font-black tracking-tight leading-[2.1] sm:leading-[2.2] md:leading-[2.3] text-slate-950 text-center"
+          className="manifesto-serif text-xl sm:text-2xl md:text-[27px] lg:text-[29px] font-normal text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0.5 sm:gap-1 md:gap-1.5 tracking-[-0.04em]"
         >
-          <span
-            style={{ opacity: getProgress(0, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mr-1 text-slate-950"
-          >
-            HesLab
-          </span>
+          {/* Line 1 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(0, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              I turn
+            </span>
 
-          {/* Studio Badge */}
-          <span
-            style={{
-              opacity: getProgress(1, 16).opacity,
-              transform: `scale(${getProgress(1, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#E85D35] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Travel%20and%20places/High%20Voltage.png"
-              alt="Studio"
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
-            />
-            <span className="text-[11px] sm:text-xs font-black text-white">Short-form Studio</span>
-          </span>
+            {/* Emoji 1: Film Frames (-4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(1, 18).opacity,
+                transform: `scale(${getProgress(1, 18).scale}) rotate(-4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Film%20Frames.png"
+                alt="Film"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          <span
-            style={{ opacity: getProgress(2, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            is a dedicated short-form team
-          </span>
+            <span style={{ opacity: getProgress(2, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              raw footages
+            </span>
+          </div>
 
-          {/* Red FPS Dial */}
-          <span
-            style={{
-              opacity: getProgress(4, 16).opacity,
-              transform: `scale(${getProgress(4, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#D9383A] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <div className="w-2 h-2 rounded-xs bg-white animate-spin" />
-            <span className="font-mono text-[10.5px] sm:text-[11.5px] font-black tracking-wider">60 FPS</span>
-          </span>
+          {/* Line 2 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(3, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              into stories
+            </span>
 
-          <span
-            style={{ opacity: getProgress(5, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            for YouTube, Instagram,
-          </span>
+            {/* Emoji 2: Eyes (+4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(4, 18).opacity,
+                transform: `scale(${getProgress(4, 18).scale}) rotate(4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Hand%20gestures/Eyes.png"
+                alt="Eyes"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Clapper icon */}
-          <span
-            style={{
-              opacity: getProgress(7, 16).opacity,
-              transform: `scale(${getProgress(7, 16).scale})`,
-            }}
-            className="inline-flex items-center align-middle mx-1 p-1 rounded-lg bg-slate-100 border border-slate-200/80 transition-all duration-200"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Clapper%20Board.png"
-              alt="Clapper"
-              className="w-4 h-4 sm:w-5 sm:h-5 object-contain pointer-events-none"
-            />
-          </span>
+            <span style={{ opacity: getProgress(5, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              worth watching.
+            </span>
+          </div>
 
-          <span
-            style={{ opacity: getProgress(8, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            and TikTok.
-          </span>
+          {/* Line 3 (Meaningful Stanza Gap) */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2] mt-8 sm:mt-10 md:mt-12">
+            <span style={{ opacity: getProgress(6, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              Heslab is
+            </span>
 
-          <span
-            style={{ opacity: getProgress(9, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            Our focus is to build content that truly deserves
-          </span>
+            {/* Emoji 3: Potted Plant (-3.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(7, 18).opacity,
+                transform: `scale(${getProgress(7, 18).scale}) rotate(-3.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Animals/Potted%20Plant.png"
+                alt="Plant"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          {/* Attention Badge */}
-          <span
-            style={{
-              opacity: getProgress(12, 16).opacity,
-              transform: `scale(${getProgress(12, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#9E5A38] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <span className="text-xs">👁️</span>
-            <span className="text-[11px] sm:text-xs font-black text-white">Audience Retention</span>
-          </span>
+            <span style={{ opacity: getProgress(8, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              my corner of editing,
+            </span>
+          </div>
 
-          <span
-            style={{ opacity: getProgress(13, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            the viewer’s time, so they discover
-          </span>
+          {/* Line 4 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(9, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              powered by
+            </span>
 
-          {/* Brand Value Badge */}
-          <span
-            style={{
-              opacity: getProgress(15, 16).opacity,
-              transform: `scale(${getProgress(15, 16).scale})`,
-            }}
-            className="inline-flex items-center gap-1.5 align-middle mx-1.5 px-2.5 py-1 rounded-full bg-[#4A5D44] text-white text-[11px] sm:text-xs font-bold select-none transition-all duration-200 shadow-xs"
-          >
-            <img
-              src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Gem%20Stone.png"
-              alt="Gem"
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain pointer-events-none"
-            />
-            <span className="text-[11px] sm:text-xs font-black text-white">Brand Value</span>
-          </span>
+            {/* Emoji 4: Red Heart (+5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(10, 18).opacity,
+                transform: `scale(${getProgress(10, 18).scale}) rotate(5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Smilies/Red%20Heart.png"
+                alt="Heart"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
 
-          <span
-            style={{ opacity: getProgress(16, 16).opacity }}
-            className="inline-block transition-opacity duration-150 mx-1 text-slate-950"
-          >
-            of your brand.
-          </span>
+            <span style={{ opacity: getProgress(11, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              love &
+            </span>
 
-          {/* Arrow Button */}
-          <span
-            style={{
-              opacity: getProgress(16, 16).opacity,
-              transform: `scale(${getProgress(16, 16).scale})`,
-            }}
-            className="inline-flex items-center justify-center align-middle mx-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-900 text-white shadow-xs"
-          >
-            <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </span>
+            {/* Emoji 5: Hesam / Man Beard (-4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(12, 18).opacity,
+                transform: `scale(${getProgress(12, 18).scale}) rotate(-4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/People%20with%20professions/Man%20Beard.png"
+                alt="Hesam"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
+
+            <span style={{ opacity: getProgress(13, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              Hesam,
+            </span>
+          </div>
+
+          {/* Line 5 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(14, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              with a
+            </span>
+
+            {/* Emoji 6: Laptop (+4.5 deg tilt) */}
+            <span
+              style={{
+                opacity: getProgress(15, 18).opacity,
+                transform: `scale(${getProgress(15, 18).scale}) rotate(4.5deg)`,
+              }}
+              className="inline-block align-middle mx-1 sm:mx-1.5 select-none transition-transform duration-200"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis/Emojis/Objects/Laptop.png"
+                alt="Laptop"
+                className="emoji-sticker-stroke w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 object-contain inline-block align-middle pointer-events-none"
+              />
+            </span>
+
+            <span style={{ opacity: getProgress(16, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              designer's eye
+            </span>
+          </div>
+
+          {/* Line 6 */}
+          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+            <span style={{ opacity: getProgress(17, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
+              cutting stories into motion.
+            </span>
+          </div>
         </div>
       )}
+      </div>
     </section>
   );
 };

@@ -43,7 +43,7 @@ export const ResourcesPage: FC = () => {
         path="/blog"
       />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-[780px] mx-auto px-4 sm:px-6">
         {/* Clean Page Header */}
         <header className="mb-10 text-center pt-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight font-en">
@@ -74,19 +74,17 @@ export const ResourcesPage: FC = () => {
           </div>
         </header>
 
-        {/* 2-Column Responsive Grid */}
-        <main className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
+        {/* 2-Column Responsive Grid with Square Cards */}
+        <main className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-9">
           {filteredArticles.map((article) => {
             const title = lang === 'en' && article.titleEn ? article.titleEn : article.title;
             const excerpt = lang === 'en' && article.excerptEn ? article.excerptEn : article.excerpt;
-            const tags = lang === 'en' && article.tagsEn ? article.tagsEn : article.tags;
             const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
-            const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
 
             return (
               <article
                 key={article.id}
-                className="group flex flex-col gap-3.5 text-start transition-all"
+                className="group flex flex-col gap-3 text-start transition-all max-w-[370px] mx-auto w-full md:max-w-none"
               >
                 <Link
                   to={`/blog/${article.slug}`}
@@ -97,18 +95,12 @@ export const ResourcesPage: FC = () => {
                     gradient={article.coverGradient}
                     title={title}
                     readTime={readingTime}
-                    tag={tags[0]}
+                    aspectRatio="square"
                   />
                 </Link>
 
                 <div className="flex flex-col gap-1.5 px-0.5">
-                  <div className="flex items-center gap-2 text-[11.5px] text-slate-500">
-                    <span className="font-semibold text-slate-800">{authorName}</span>
-                    <span>•</span>
-                    <span>{article.publishDate}</span>
-                  </div>
-
-                  <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug">
+                  <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug line-clamp-2">
                     <Link
                       to={`/blog/${article.slug}`}
                       onClick={() => handleCardClick(article)}
@@ -118,20 +110,9 @@ export const ResourcesPage: FC = () => {
                     </Link>
                   </h2>
 
-                  <p className="text-[13px] sm:text-[13.5px] text-slate-600 leading-relaxed line-clamp-2">
+                  <p className="text-[13px] text-slate-500 leading-relaxed line-clamp-2">
                     {excerpt}
                   </p>
-
-                  <div className="flex flex-wrap gap-1.5 mt-1">
-                    {tags.slice(0, 3).map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </article>
             );
