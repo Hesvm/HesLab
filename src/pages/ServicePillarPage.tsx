@@ -2,6 +2,7 @@ import { useEffect, type FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getServiceBySlug } from '../data/services';
 import { getProjectBySlug } from '../data/projects';
+import { getResourceBySlug } from '../data/resources';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateServiceSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';

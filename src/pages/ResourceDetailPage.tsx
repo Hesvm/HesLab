@@ -112,7 +112,6 @@ export const ResourceDetailPage: FC = () => {
   const description = lang === 'en' && article.descriptionEn ? article.descriptionEn : article.description;
   const introduction = lang === 'en' && article.introductionEn ? article.introductionEn : article.introduction;
   const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
-  const authorRole = lang === 'en' && article.author.roleEn ? article.author.roleEn : article.author.role;
   const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
   const featuredProject = article.featuredProjectSlug ? getProjectBySlug(article.featuredProjectSlug) : undefined;
   const tocItems = article.tableOfContents.map((t) => ({

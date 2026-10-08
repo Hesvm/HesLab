@@ -1,4 +1,4 @@
-import { Fragment, type FC, type ReactNode } from 'react';
+import { Fragment, useRef, useEffect, type FC, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowDown2, ArrowRight, TickCircle } from 'iconsax-react';
 import { useQuoteModal } from '../../context/QuoteModalContext';

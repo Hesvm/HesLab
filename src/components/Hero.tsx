@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, type FC } from 'react';
+import { useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
