@@ -102,13 +102,23 @@ export const RollingViewCounter: FC = () => {
   const isMountedRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const START_THRESHOLD = 35;
+
   useEffect(() => {
     let ticking = false;
 
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
+          const sy = window.scrollY;
+          const wasScrolled = prevScrolledRef.current;
+          const isScrolledNow = sy >= START_THRESHOLD;
+
+          if (wasScrolled !== isScrolledNow) {
+            setScrollY(sy);
+          } else if (isScrolledNow && sy < 800) {
+            setScrollY((prev) => (Math.abs(prev - sy) > 40 ? sy : prev));
+          }
           ticking = false;
         });
         ticking = true;
@@ -124,7 +134,6 @@ export const RollingViewCounter: FC = () => {
     };
   }, []);
 
-  const START_THRESHOLD = 35;
   const isScrolled = scrollY >= START_THRESHOLD;
 
   // Dynamic count target (base 550K, scaling with scroll up to 2550 -> 2.6 M)

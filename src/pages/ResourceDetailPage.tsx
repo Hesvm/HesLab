@@ -4,14 +4,27 @@ import { getResourceBySlug } from '../data/resources';
 import { getProjectBySlug } from '../data/projects';
 import { TableOfContentsRail } from '../components/resources/TableOfContentsRail';
 import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
-import { Breadcrumbs } from '../components/seo/Breadcrumbs';
+import { CompareBlock, FAQBlock } from '../components/service-article/ServiceArticleBlocks';
+import {
+  ArticleFigure,
+  ArticleMetaBar,
+  Callout,
+  CodeBlock,
+  CTACard,
+  DataTable,
+  FeaturedProjectCard,
+  KeyTakeaways,
+  PullQuote,
+  ReferenceList,
+  RelatedLinks,
+  StepList,
+} from '../components/service-article/ArticleBlocks';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generateArticleSchema } from '../utils/schema';
 import { playBenchoSound } from '../content/soundData';
-import { toast } from '../lib/toast';
 import { analytics } from '../lib/analytics';
 import { useLanguage } from '../context/LanguageContext';
-import { ArrowLeft, ArrowRight, Clock, Share } from 'iconsax-react';
+import { ArrowLeft, ArrowRight, Clock } from 'iconsax-react';
 
 // Dynamic Vibekit Interactive Widgets
 import {
@@ -52,7 +65,7 @@ export const ResourceDetailPage: FC = () => {
       if (!articleContainerRef.current) return;
       const el = articleContainerRef.current;
       const rect = el.getBoundingClientRect();
-      const totalHeight = el.scrollHeight - window.innerHeight;
+      const totalHeight = rect.height - window.innerHeight;
       const progress = Math.min(Math.max(-rect.top / Math.max(totalHeight, 1), 0), 1);
       setReadProgress(progress);
 
@@ -75,14 +88,6 @@ export const ResourceDetailPage: FC = () => {
     const targetEl = document.getElementById(id);
     if (targetEl) {
       targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const handleShare = () => {
-    playBenchoSound('pop');
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      toast(lang === 'fa' ? 'لینک مقاله با موفقیت کپی شد' : 'Article link copied to clipboard');
     }
   };
 
@@ -125,10 +130,13 @@ export const ResourceDetailPage: FC = () => {
     imageUrl: article.featuredImage,
   });
 
+  const bodyLeading = lang === 'fa' ? 'leading-[2]' : 'leading-[1.8]';
+  const h2Class = 'text-2xl sm:text-[32px] font-black tracking-tight text-slate-950 leading-tight';
+
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-24 pb-20 ${
+      className={`min-h-screen bg-white text-slate-900 pt-28 pb-20 ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
@@ -157,322 +165,188 @@ export const ResourceDetailPage: FC = () => {
         </aside>
       )}
 
-      <div ref={articleContainerRef} className="max-w-[760px] mx-auto px-4 sm:px-6">
-        <Breadcrumbs
-          items={[
-            { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: lang === 'fa' ? 'بلاگ' : 'Blog', path: '/blog' },
-            { name: title, path: `/blog/${article.slug}` },
-          ]}
-        />
-
+      <div ref={articleContainerRef} className="mx-auto max-w-5xl px-4 sm:px-6 page-article-zoom">
         <article className="pt-3">
-          {/* Header Action Row */}
-          <div className="flex items-center justify-between gap-4 mb-6">
+          {/* Back */}
+          <div className="mb-6">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-950 transition-colors"
+              className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-950"
             >
               {isRtl ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
               <span>{lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}</span>
             </Link>
-
-            <button
-              onClick={handleShare}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
-              title={lang === 'fa' ? 'اشتراک‌گذاری' : 'Share'}
-            >
-              <Share size={13} />
-              <span>{lang === 'fa' ? 'اشتراک‌گذاری' : 'Share'}</span>
-            </button>
           </div>
 
-          {/* Primary H1 Heading */}
-          <h1 className="text-2xl sm:text-3xl md:text-[34px] font-black tracking-tight text-slate-950 leading-[1.3] mb-6">
-            {title}
-          </h1>
+          <h1 className="max-w-3xl text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">{title}</h1>
 
-          {/* Author & Publication Meta Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-5 mb-8 text-[12.5px] text-slate-500">
-            <div className="flex items-center gap-3">
-              <img
-                src={article.author.avatar}
-                alt={authorName}
-                width={38}
-                height={38}
-                className="size-9 rounded-full object-cover border border-slate-200"
-                loading="eager"
-              />
-              <div className="flex flex-col">
-                <span className="font-bold text-slate-900 text-[13px] leading-tight">{authorName}</span>
-                <span className="text-[11px] text-slate-500 leading-tight mt-0.5">{authorRole}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 text-[11.5px] font-medium text-slate-500">
-              <div className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1">
-                <Clock size={12} variant="Linear" color="currentColor" />
-                <span>{readingTime}</span>
-              </div>
-              <div className="flex items-center rounded-full bg-slate-100 px-3 py-1">
-                <span>{article.publishDate}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Cover Graphic */}
-          <div className="mb-10 overflow-hidden rounded-[22px] shadow-sm">
-            <BlogIllustrationCover
-              gradient={article.coverGradient}
-              title={title}
-              aspectRatio="16/9"
+          <div className="mt-6">
+            <ArticleMetaBar
+              readingTime={readingTime}
+              date={article.publishDate}
+              readingIcon={<Clock size={13} variant="Linear" color="currentColor" />}
             />
           </div>
 
-          {/* Key Takeaways Box (inBeat-style Executive Summary) */}
+          {/* Cover */}
+          <div className="mt-8 overflow-hidden rounded-[26px] sm:rounded-[32px]">
+            <BlogIllustrationCover gradient={article.coverGradient} title={title} aspectRatio="16/9" />
+          </div>
+
+          {/* Key takeaways */}
           {article.keyTakeaways && article.keyTakeaways.length > 0 && (
-            <div className="mb-9 p-5 sm:p-6 rounded-2xl border border-sky-200/80 bg-gradient-to-br from-sky-50/70 via-slate-50/80 to-white shadow-sm">
-              <div className="flex items-center gap-2 mb-3.5">
-                <div className="size-6 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center font-bold text-xs">
-                  ✦
-                </div>
-                <h2 className="text-sm font-black tracking-wide uppercase text-slate-900">
-                  {lang === 'fa' ? 'نکات کلیدی این راهنما (Key Takeaways)' : 'Key Takeaways & Executive Summary'}
-                </h2>
-              </div>
-              <ul className="space-y-2.5">
-                {(lang === 'en' && article.keyTakeawaysEn ? article.keyTakeawaysEn : article.keyTakeaways).map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-[13.5px] sm:text-[14px] leading-relaxed text-slate-700">
-                    <span className="size-1.5 rounded-full bg-sky-500 mt-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-10 max-w-3xl">
+              <KeyTakeaways
+                title={lang === 'fa' ? 'نکات کلیدی این راهنما' : 'Key takeaways'}
+                items={lang === 'en' && article.keyTakeawaysEn ? article.keyTakeawaysEn : article.keyTakeaways}
+              />
             </div>
           )}
 
-          {/* Lead Paragraph / Introduction */}
-          <div id="sec-intro" data-toc-section className="scroll-mt-28 mb-9">
-            <p className="text-[15px] sm:text-[16px] font-normal leading-[2.1] text-slate-700">
+          {/* Introduction */}
+          <div id="sec-intro" data-toc-section className="mt-10 max-w-3xl scroll-mt-28">
+            <p className={`text-[18px] ${lang === 'fa' ? 'leading-[2]' : 'leading-[1.75]'} text-slate-800 sm:text-[19px]`}>
               {introduction}
             </p>
           </div>
 
-          {/* Body Sections */}
-          <div className="flex flex-col gap-11">
-            {article.sections.map((section, idx) => {
-              const heading = lang === 'en' && section.headingEn ? section.headingEn : section.heading;
-              const paragraphs = lang === 'en' && section.paragraphsEn ? section.paragraphsEn : section.paragraphs;
-              const callout = lang === 'en' && section.calloutEn ? section.calloutEn : section.callout;
-              const pullQuote = lang === 'en' && section.pullQuoteEn ? section.pullQuoteEn : section.pullQuote;
+          {/* Body sections */}
+          {article.sections.map((section, idx) => {
+            const heading = lang === 'en' && section.headingEn ? section.headingEn : section.heading;
+            const paragraphs = lang === 'en' && section.paragraphsEn ? section.paragraphsEn : section.paragraphs;
+            const callout = lang === 'en' && section.calloutEn ? section.calloutEn : section.callout;
+            const pullQuote = lang === 'en' && section.pullQuoteEn ? section.pullQuoteEn : section.pullQuote;
 
-              return (
-                <section
-                  key={section.id || idx}
-                  id={section.id}
-                  data-toc-section
-                  className="scroll-mt-28 flex flex-col gap-4"
-                >
-                  <h2 className="text-[20px] sm:text-[22px] font-black text-slate-950 tracking-tight leading-snug pt-1">
-                    {heading}
-                  </h2>
+            return (
+              <section
+                key={section.id || idx}
+                id={section.id}
+                data-toc-section
+                className="mt-14 scroll-mt-28 sm:mt-20"
+              >
+                <h2 className={h2Class}>{heading}</h2>
 
-                  <div className="flex flex-col gap-3.5">
+                <div className="mt-6 space-y-6">
+                  <div className="max-w-3xl space-y-5">
                     {paragraphs.map((p, pIdx) => (
-                      <p key={pIdx} className="text-[14.5px] sm:text-[15px] font-normal leading-[2.15] text-slate-700">
+                      <p key={pIdx} className={`text-[16.5px] sm:text-[17px] ${bodyLeading} text-slate-600`}>
                         {p}
                       </p>
                     ))}
                   </div>
 
-                  {/* Callout Box */}
                   {callout && (
-                    <div className="my-2 rounded-2xl border border-sky-500/20 bg-sky-50/70 p-4 text-[13.5px] font-medium text-sky-950 leading-relaxed">
-                      {callout}
+                    <div className="max-w-3xl">
+                      <Callout text={callout} />
                     </div>
                   )}
 
-                  {/* Pull Quote */}
-                  {pullQuote && (
-                    <blockquote className="my-3 border-s-4 border-slate-950 ps-4 py-1 italic font-medium text-[15px] text-slate-900 leading-relaxed bg-slate-50/80 rounded-e-xl">
-                      {pullQuote}
-                    </blockquote>
+                  {pullQuote && <PullQuote text={pullQuote} />}
+
+                  {section.numberedSteps && <StepList steps={section.numberedSteps} />}
+
+                  {section.comparison && (
+                    <CompareBlock
+                      beforeLabel={section.comparison.beforeLabel}
+                      beforeItems={[section.comparison.beforeText]}
+                      afterLabel={section.comparison.afterLabel}
+                      afterItems={[section.comparison.afterText]}
+                    />
                   )}
 
-                  {/* Numbered Steps */}
-                  {section.numberedSteps && (
-                    <div className="grid grid-cols-1 gap-3 my-2">
-                      {section.numberedSteps.map((step, sIdx) => (
-                        <div
-                          key={sIdx}
-                          className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200/80 bg-slate-50/50"
-                        >
-                          <span className="font-mono text-xs font-bold text-sky-600 bg-sky-100 px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
-                            {step.step}
-                          </span>
-                          <div>
-                            <h3 className="text-[14px] font-bold text-slate-900 mb-1">{step.title}</h3>
-                            <p className="text-[13px] text-slate-600 leading-relaxed">{step.text}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  {section.table && <DataTable headers={section.table.headers} rows={section.table.rows} />}
+
+                  {section.code && <CodeBlock code={section.code.code} language={section.code.language} />}
+
+                  {section.image && (
+                    <ArticleFigure src={section.image.src} alt={section.image.alt} caption={section.image.caption} />
                   )}
 
-                  {/* Comparison Table */}
-                  {section.table && (
-                    <div className="my-3 overflow-x-auto rounded-2xl border border-slate-200">
-                      <table className="w-full text-start text-[13px]">
-                        <thead className="bg-slate-100/80 text-slate-900 font-bold border-b border-slate-200">
-                          <tr>
-                            {section.table.headers.map((h, hIdx) => (
-                              <th key={hIdx} className="p-3 text-start">{h}</th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100">
-                          {section.table.rows.map((row, rIdx) => (
-                            <tr key={rIdx} className="hover:bg-slate-50/60">
-                              {row.map((cell, cIdx) => (
-                                <td key={cIdx} className="p-3 text-slate-700 leading-relaxed">{cell}</td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-
-                  {/* Interactive Widgets from Vibekit */}
+                  {/* Interactive widgets */}
                   {section.widget === 'spring-simulator' && <SpringPhysicsSimulator />}
                   {section.widget === 'spring-predictor' && <SpringPredictorWidget />}
                   {section.widget === 'magnetic-walkthrough' && <MagneticStepWalkthrough />}
                   {section.widget === 'live-artifact' && <LiveArtifactPlayground />}
                   {section.widget === 'micro-quiz' && <MicroQuizWidget />}
-                </section>
-              );
-            })}
-          </div>
+                </div>
+              </section>
+            );
+          })}
 
-          {/* Semantic FAQ Section */}
+          {/* FAQ */}
           {article.faq && article.faq.length > 0 && (
-            <section className="mt-14 pt-8 border-t border-slate-200">
-              <h2 className="text-[20px] font-black text-slate-950 mb-5">
-                {lang === 'fa' ? 'پرسش‌های متداول این مبحث' : 'Frequently Asked Questions'}
-              </h2>
-              <div className="flex flex-col gap-3.5">
-                {article.faq.map((item, idx) => {
-                  const q = lang === 'en' && item.questionEn ? item.questionEn : item.question;
-                  const a = lang === 'en' && item.answerEn ? item.answerEn : item.answer;
-                  return (
-                    <div key={idx} className="p-4 rounded-2xl border border-slate-200 bg-slate-50/70">
-                      <h3 className="text-[14.5px] font-bold text-slate-900 mb-2">{q}</h3>
-                      <p className="text-[13.5px] text-slate-600 leading-relaxed">{a}</p>
-                    </div>
-                  );
-                })}
+            <section className="mt-14 sm:mt-20">
+              <h2 className={h2Class}>{lang === 'fa' ? 'پرسش‌های متداول این مبحث' : 'Frequently asked questions'}</h2>
+              <div className="mt-6">
+                <FAQBlock
+                  items={article.faq.map((item) => ({
+                    q: lang === 'en' && item.questionEn ? item.questionEn : item.question,
+                    a: lang === 'en' && item.answerEn ? item.answerEn : item.answer,
+                  }))}
+                />
               </div>
             </section>
           )}
 
-          {/* Featured Case Study Embed Card (inBeat-style Portfolio Proof) */}
+          {/* Featured case study */}
           {featuredProject && (
-            <div className="mt-11 p-6 sm:p-7 rounded-2xl border border-slate-200/90 bg-slate-950 text-white shadow-lg overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="flex-1">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-400 text-[11px] font-bold tracking-wider uppercase mb-3">
-                    <span>{lang === 'fa' ? 'کالبدشکافی نمونه‌کار مرتبط' : 'Featured Case Study'}</span>
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
-                    {lang === 'fa' ? featuredProject.titleFa : featuredProject.titleEn}
-                  </h3>
-                  <p className="text-xs sm:text-[13px] text-slate-400 leading-relaxed line-clamp-2 mb-3">
-                    {lang === 'fa' ? featuredProject.descriptionFa : featuredProject.descriptionEn}
-                  </p>
-                  <div className="flex flex-wrap gap-2 text-[11px] text-slate-300">
-                    {(lang === 'fa' ? featuredProject.featuresFa : featuredProject.featuresEn).slice(0, 3).map((feat, fIdx) => (
-                      <span key={fIdx} className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/10">
-                        {feat}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="shrink-0 flex sm:flex-col items-center sm:items-end justify-between gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
-                  <div className="text-right">
-                    <span className="text-[11px] text-slate-400 block">{lang === 'fa' ? 'فرمت و کیفیت' : 'Format & Quality'}</span>
-                    <span className="text-xs font-semibold text-white">{featuredProject.durationSeconds}s • {featuredProject.resolution}</span>
-                  </div>
-                  <Link
-                    to={`/work/${featuredProject.slug}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-slate-950 font-bold text-xs hover:bg-sky-400 transition-colors"
-                  >
-                    <span>{lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View Edit Breakdown'}</span>
-                    {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
-                  </Link>
-                </div>
-              </div>
+            <div className="mt-14 sm:mt-20">
+              <FeaturedProjectCard
+                label={lang === 'fa' ? 'کالبدشکافی نمونه‌کار مرتبط' : 'Featured case study'}
+                title={lang === 'fa' ? featuredProject.titleFa : featuredProject.titleEn}
+                desc={lang === 'fa' ? featuredProject.descriptionFa : featuredProject.descriptionEn}
+                tags={(lang === 'fa' ? featuredProject.featuresFa : featuredProject.featuresEn).slice(0, 3)}
+                meta={`${featuredProject.durationSeconds}s • ${featuredProject.resolution}`}
+                cta={lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View edit breakdown'}
+                to={`/work/${featuredProject.slug}`}
+              />
             </div>
           )}
 
-          {/* Related Services Links */}
+          {/* Related services */}
           {article.relatedServices && article.relatedServices.length > 0 && (
-            <div className="mt-10 p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col gap-3">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                {lang === 'fa' ? 'خدمات مرتبط حس‌لب' : 'Related HesLab Services'}
-              </span>
-              <div className="flex flex-wrap gap-2.5">
-                {article.relatedServices.map((srv, idx) => (
-                  <Link
-                    key={idx}
-                    to={srv.path}
-                    onClick={() => {
-                      analytics.trackContentNavigation({
-                        discovery_type: 'resource_to_service',
-                        from_type: 'resource',
-                        from_slug: article.slug,
-                        to_type: 'service',
-                        to_slug: srv.path.replace('/services/', ''),
-                        page_path: `/resources/${article.slug}`,
-                      });
-                    }}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-800 hover:text-sky-600 bg-white border border-slate-200 px-3.5 py-1.5 rounded-full transition-colors"
-                  >
-                    <span>{srv.title}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Conversion CTA Block */}
-          {article.cta && (
-            <div className="mt-12 p-7 sm:p-9 rounded-3xl bg-slate-950 text-white flex flex-col items-center text-center shadow-xl">
-              <h3 className="text-xl sm:text-2xl font-black mb-2 text-white">
-                {lang === 'en' && article.cta.titleEn ? article.cta.titleEn : article.cta.title}
-              </h3>
-              <p className="text-sm text-slate-300 max-w-lg mb-6 leading-relaxed">
-                {lang === 'en' && article.cta.subtitleEn ? article.cta.subtitleEn : article.cta.subtitle}
-              </p>
-              <Link
-                to={article.cta.link}
-                data-analytics="primary-cta"
-                data-analytics-name="start_a_project"
-                data-analytics-location="resource"
-                onClick={() =>
-                  analytics.trackPrimaryCta({
-                    cta_name: 'start_a_project',
-                    cta_location: 'resource',
-                    resource_slug: article.slug,
+            <div className="mt-14 sm:mt-20">
+              <RelatedLinks
+                title={lang === 'fa' ? 'خدمات مرتبط حس‌لب' : 'Related HesLab services'}
+                items={article.relatedServices}
+                onNavigate={(path) =>
+                  analytics.trackContentNavigation({
+                    discovery_type: 'resource_to_service',
+                    from_type: 'resource',
+                    from_slug: article.slug,
+                    to_type: 'service',
+                    to_slug: path.replace('/services/', ''),
                     page_path: `/resources/${article.slug}`,
-                    page_type: 'resource_detail',
                   })
                 }
-                className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-[14.5px] font-medium px-7 py-3 rounded-full shadow-lg transition-transform active:scale-95 cursor-pointer"
-              >
-                {lang === 'en' && article.cta.buttonTextEn ? article.cta.buttonTextEn : article.cta.buttonText}
-              </Link>
+              />
             </div>
+          )}
+
+          {/* Sources */}
+          {article.references && article.references.length > 0 && (
+            <div className="mt-14 sm:mt-20 max-w-3xl">
+              <ReferenceList title={lang === 'fa' ? 'منابع' : 'Sources'} items={article.references} />
+            </div>
+          )}
+
+          {/* CTA */}
+          {article.cta && (
+            <CTACard
+              title={lang === 'en' && article.cta.titleEn ? article.cta.titleEn : article.cta.title}
+              text={lang === 'en' && article.cta.subtitleEn ? article.cta.subtitleEn : article.cta.subtitle}
+              buttonText={lang === 'en' && article.cta.buttonTextEn ? article.cta.buttonTextEn : article.cta.buttonText}
+              to={article.cta.link}
+              onClick={() =>
+                analytics.trackPrimaryCta({
+                  cta_name: 'start_a_project',
+                  cta_location: 'resource',
+                  resource_slug: article.slug,
+                  page_path: `/resources/${article.slug}`,
+                  page_type: 'resource_detail',
+                })
+              }
+            />
           )}
         </article>
       </div>

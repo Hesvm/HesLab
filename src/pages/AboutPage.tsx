@@ -1,165 +1,218 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generatePersonSchema, generateOrganizationSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../lib/analytics';
+import { ServiceSection } from '../components/service-article/ServiceArticleBlocks';
+import { Callout, CTACard, PullQuote } from '../components/service-article/ArticleBlocks';
+
+type Chapter = { emoji: string; title: string; text: string };
+
+type Tool = {
+  name: string;
+  note?: { en: string; fa: string };
+  /** Official full-color logo file. */
+  image?: string;
+  /** Official single-color glyph, drawn in its brand color. */
+  glyph?: string;
+  color?: string;
+};
+
+const TOOLS: Tool[] = [
+  { name: 'HesLab Studio', image: '/emojis/camel.png' },
+  { name: 'Claude', image: '/tools/claude-color.svg' },
+  { name: 'After Effects', image: '/stats-icons/after-effects.svg' },
+  { name: 'Figma', image: '/tools/figma-color.svg' },
+  { name: 'Apple Music', glyph: '/tools/applemusic.svg', color: '#FA243C' },
+  { name: 'Savee', note: { en: 'inspiration', fa: 'الهام' }, image: '/tools/savee.ico' },
+  { name: 'YouTube', glyph: '/tools/youtube.svg', color: '#FF0000' },
+];
+
+const ToolIcon: FC<{ tool: Tool }> = ({ tool }) => {
+  if (tool.image) return <img src={tool.image} alt="" className="h-5 w-5 rounded-[5px] object-contain" />;
+  return (
+    <span
+      className="h-5 w-5"
+      style={{
+        background: tool.color,
+        WebkitMaskImage: `url(${tool.glyph})`,
+        maskImage: `url(${tool.glyph})`,
+        WebkitMaskSize: 'contain',
+        maskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+        maskPosition: 'center',
+      }}
+    />
+  );
+};
+
+const COPY = {
+  en: {
+    seoTitle: 'About HesLab | Independent Video Editing & Motion Studio',
+    seoDesc:
+      'Learn about HesLab: an independent video editing and motion design studio founded by Hesam, dedicated to high-retention creator workflows.',
+    h1: "Hi, I'm Hesam. I turn footage into stories.",
+    intro:
+      "HesLab is my independent video studio, crafting short videos that respect the viewer's time and attention.",
+    photoAlt: 'Hesam, founder and lead editor of HesLab',
+    cards: [
+      { emoji: 'clapper_board', title: 'Why HesLab exists', text: "Short videos shouldn't look like cheap templates. Editing should mirror each creator's voice." },
+      { emoji: 'eyes', title: 'Attention is borrowed', text: 'Viewers lend you a few seconds. Everything on screen has to earn them.' },
+      { emoji: 'speaker', title: 'Sound is half the film', text: 'Layered sound is what makes a rushed edit feel finished.' },
+      { emoji: 'calendar', title: 'A calm way to work', text: 'No endless meetings. A clear timeline and notes right on the video.' },
+    ] as Chapter[],
+    quote: 'Every creator has a voice. Editing should make it louder, not different.',
+    howTitle: 'How a project goes',
+    steps: [
+      { title: 'Send', text: 'You share footage, references and ideas in a shared folder.' },
+      { title: 'Edit', text: 'I cut, pace, caption and add motion and sound.' },
+      { title: 'Review', text: 'You leave notes on the video and I refine the details.' },
+      { title: 'Deliver', text: 'You get final vertical exports, ready to post.' },
+    ],
+    toolsTitle: 'What I work with',
+    remote: 'HesLab works 100% remotely with creators and digital brands across time zones.',
+    ctaTitle: "Let's talk about your next video",
+    ctaText: 'A single video or an ongoing monthly pack: send a message and we will look at samples and pricing together.',
+    ctaButton: 'Get in touch',
+  },
+  fa: {
+    seoTitle: 'درباره حس‌لب | استودیو تخصصی تدوین ویدیوی کوتاه',
+    seoDesc: 'آشنایی با حس‌لب، فلسفه تدوین ویدیوی کوتاه، رویکرد ما در نگه‌داشت نگاه مخاطب و بنیان‌گذار استودیو.',
+    h1: 'سلام، من حسام‌ام؛ فوتیج خام را به داستان تبدیل می‌کنم.',
+    intro:
+      'حس‌لب استودیوی مستقل تدوین من است؛ متمرکز بر ویدیوهای کوتاهی که به زمان و توجه مخاطب احترام می‌گذارند.',
+    photoAlt: 'حسام، بنیان‌گذار و تدوین‌گر ارشد حس‌لب',
+    cards: [
+      { emoji: 'clapper_board', title: 'چرا حس‌لب ساخته شد', text: 'ویدیوی کوتاه نباید شبیه قالب‌های ارزان باشد. تدوین باید آیینهٔ صدای هر کریتور باشد.' },
+      { emoji: 'eyes', title: 'توجه مخاطب امانت است', text: 'مخاطب چند ثانیه به شما قرض می‌دهد. هر چیزی در کادر باید این زمان را کسب کند.' },
+      { emoji: 'speaker', title: 'صدا نیمی از تصویر است', text: 'صدای لایه‌ای است که یک ادیت عجله‌ای را تمام‌شده نشان می‌دهد.' },
+      { emoji: 'calendar', title: 'یک روش کار آرام', text: 'بدون جلسهٔ بی‌پایان. زمان‌بندی روشن و بازخورد مستقیم روی ویدیو.' },
+    ] as Chapter[],
+    quote: 'هر کریتور صدای خودش را دارد. تدوین باید آن را بلندتر کند، نه متفاوت.',
+    howTitle: 'یک پروژه چطور پیش می‌رود',
+    steps: [
+      { title: 'ارسال', text: 'فوتیج، رفرنس و ایده‌هایتان را در یک پوشهٔ مشترک می‌فرستید.' },
+      { title: 'ادیت', text: 'من برش، ریتم، زیرنویس، موشن و صدا را انجام می‌دهم.' },
+      { title: 'بازبینی', text: 'روی ویدیو بازخورد می‌گذارید و جزئیات را اصلاح می‌کنم.' },
+      { title: 'تحویل', text: 'خروجی نهایی عمودی و آمادهٔ انتشار را تحویل می‌گیرید.' },
+    ],
+    toolsTitle: 'با چه ابزارهایی کار می‌کنم',
+    remote: 'استودیو حس‌لب به‌صورت کاملاً ریموت با تولیدکنندگان محتوا و برندها در مناطق زمانی مختلف همکاری می‌کند.',
+    ctaTitle: 'بیایید دربارهٔ ویدیوی بعدی‌تان حرف بزنیم',
+    ctaText: 'پروژهٔ تکی یا پکیج ماهانه: پیام بدهید تا نمونه‌ها و قیمت‌ها را با هم بررسی کنیم.',
+    ctaButton: 'ارتباط با حسام',
+  },
+};
 
 export const AboutPage: FC = () => {
   const { lang, isRtl } = useLanguage();
-
-  const personSchema = generatePersonSchema();
-  const orgSchema = generateOrganizationSchema();
+  const fa = lang === 'fa';
+  const t = COPY[fa ? 'fa' : 'en'];
 
   return (
-    <div
-      dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-20 ${
-        lang === 'fa' ? 'font-fa' : 'font-en'
-      }`}
-    >
+    <div dir={isRtl ? 'rtl' : 'ltr'} className={`min-h-screen bg-white pb-20 pt-28 text-slate-900 ${fa ? 'font-fa' : 'font-en'}`}>
       <SEOHead
-        title={lang === 'fa' ? 'درباره حس‌لب | استودیو تخصصی تدوین ویدیوی کوتاه' : 'About HesLab | Independent Video Editing & Motion Studio'}
-        description={
-          lang === 'fa'
-            ? 'آشنایی با حس‌لب، فلسفه تدوین ویدیوی کوتاه، رویکرد ما در نگه‌داشت نگاه مخاطب و بنیان‌گذار استودیو.'
-            : 'Learn about HesLab: an independent video editing and motion design studio founded by Hesam, dedicated to high-retention creator workflows.'
-        }
+        title={t.seoTitle}
+        description={t.seoDesc}
         path="/about"
-        structuredData={[orgSchema, personSchema]}
+        structuredData={[generateOrganizationSchema(), generatePersonSchema()]}
       />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <Breadcrumbs
           items={[
-            { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: lang === 'fa' ? 'درباره ما' : 'About', path: '/about' },
+            { name: fa ? 'صفحه اصلی' : 'Home', path: '/' },
+            { name: fa ? 'درباره ما' : 'About', path: '/about' },
           ]}
         />
 
-        {/* Header */}
-        <header className="pt-4 pb-8 border-b border-slate-200 mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold mb-3">
-            <span>{lang === 'fa' ? 'داستان حس‌لب' : 'The HesLab Story'}</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight mb-4">
-            {lang === 'fa' ? 'تدوین متعهد، ریتم هوشمند و طراحی برای اثرگذاری' : 'Crafting High-Retention Stories for Forward-Thinking Creators'}
+        {/* Opening */}
+        <header className="flex flex-col items-center text-center">
+          <img
+            src="/emojis/hesam_avatar.jpg"
+            alt={t.photoAlt}
+            width={112}
+            height={112}
+            loading="eager"
+            className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
+          />
+          <h1 className="mt-5 max-w-2xl text-2xl font-black leading-[1.2] tracking-tight text-slate-950 sm:text-4xl">
+            {t.h1}
           </h1>
-
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-            {lang === 'fa'
-              ? 'حس‌لب یک استودیوی مستقل تدوین ویدیو و دیزاین بصری است که توسط حسام اداره می‌شود. تمرکز ما روی ویدیوهای کوتاهی است که احترام به زمان مخاطب و استراتژی بصری را در اولویت قرار می‌دهند.'
-              : 'HesLab is an independent creative studio founded by Hesam. We specialize in high-retention short-form video editing, kinetic motion, and repeatable content pipelines.'}
+          <p className={`mt-3.5 max-w-xl text-[15px] text-slate-600 sm:text-[16.5px] ${fa ? 'leading-[1.9]' : 'leading-[1.65]'}`}>
+            {t.intro}
           </p>
         </header>
 
-        {/* Founder Story Block */}
-        <div className="flex flex-col sm:flex-row items-start gap-6 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 mb-12">
-          <img
-            src="/mock/founder_hes.webp"
-            alt="حسام - بنیان‌گذار حس‌لب"
-            width={120}
-            height={120}
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover shrink-0 border border-slate-300 shadow-md"
-            loading="eager"
-          />
-          <div>
-            <h2 className="text-lg font-bold text-slate-950 mb-1">
-              {lang === 'fa' ? 'حسام — تدوین‌گر و دیزاینر بصری' : 'Hesam — Video Editor & Visual Designer'}
-            </h2>
-            <span className="text-xs text-sky-600 font-mono font-semibold block mb-3">
-              FOUNDER & LEAD EDITOR
-            </span>
-            <p className="text-[14px] text-slate-600 leading-relaxed">
-              {lang === 'fa'
-                ? 'من حس‌لب را ساختم چون معتقدم ویدیوهای کوتاه نباید شبیه قالب‌های ارزان اینستاگرامی با فونت‌های تکراری و انیمیشن‌های شلخته باشند. هر کریتور لحن و هویت منحصربه‌فردی دارد و تدوین باید آیینه دقت و پیام اصلی او باشد.'
-                : 'I built HesLab because vertical video should not be a rushed race to template-heavy chaos. Every creator carries a distinct voice; editing must amplify that message with intentional pacing, surgical cuts, and tactile sound design.'}
-            </p>
+        {/* Four principles */}
+        <ul className="mt-14 grid gap-4 sm:mt-20 sm:grid-cols-2 sm:gap-5">
+          {t.cards.map((c, i) => (
+            <motion.li
+              key={c.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[26px] bg-[#F4F4F5] p-7 sm:p-8"
+            >
+              <img src={`/emojis/${c.emoji}.png`} alt="" className="h-12 w-12 object-contain" loading="lazy" />
+              <h2 className="mt-5 text-[22px] font-black leading-tight tracking-tight text-slate-950">{c.title}</h2>
+              <p className={`mt-2 text-[16px] text-slate-600 ${fa ? 'leading-[1.9]' : 'leading-[1.65]'}`}>{c.text}</p>
+            </motion.li>
+          ))}
+        </ul>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 sm:mt-20 text-center"
+        >
+          <div className="mx-auto max-w-3xl">
+            <PullQuote text={t.quote} />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Philosophy */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-slate-950 tracking-tight mb-4">
-            {lang === 'fa' ? 'اصول کاری ما در حس‌لب' : 'Our Guiding Principles'}
-          </h2>
 
-          <div className="flex flex-col gap-5 text-[14.5px] text-slate-700 leading-[2.1]">
-            <p>
-              {lang === 'fa'
-                ? '۱. توجه مخاطب امانت است: ما از کلیک‌بیت‌های گمراه‌کننده یا شلوغ‌کاری بی‌دلیل دوری می‌کنیم. اگر المانی در کادر می‌آید، باید درک مطلب را افزایش دهد یا انرژی ویدیو را حفظ کند.'
-                : '1. Viewer attention is a sacred asset: We avoid cheap clickbait or visual noise. Every on-screen element must elevate retention or deliver authentic clarity.'}
-            </p>
-            <p>
-              {lang === 'fa'
-                ? '۲. صدا نیمی از تصویر است: بسیاری از کاربران ویدیو را با هدفون گوش می‌دهند. طراحی صدای لایه‌ای، وووش‌ها و افکت‌های ضربه‌ای دقیق، تفاوت یک ادیت آماتور با یک اثر حرفه‌ای را می‌سازند.'
-                : '2. Audio is 50% of the film: Layered sound effects, spatial risers, and vocal clarity create the tactile feeling that makes an edit memorable.'}
-            </p>
-            <p>
-              {lang === 'fa'
-                ? '۳. سادگی در فرآیند: ما با سیستم‌های ابری شفاف، تحویل ۲۴ تا ۴۸ ساعته و بازخورد بدون جلسه کار می‌کنیم تا شما بتوانید تمام تمرکزتان را روی ضبط محتوا بگذارید.'
-                : '3. Frictionless collaboration: Zero endless meetings. Asynchronous cloud folders, clear turnaround timelines, and reliable execution.'}
-            </p>
+        <ServiceSection id="tools" heading={t.toolsTitle}>
+          <div className="flex flex-wrap gap-2.5">
+            {TOOLS.map((tool) => (
+              <span
+                key={tool.name}
+                className="inline-flex items-center gap-2 rounded-full bg-[#F4F4F5] py-2 pl-3.5 pr-4 text-[14.5px] font-semibold text-slate-900"
+              >
+                <ToolIcon tool={tool} />
+                {tool.name}
+                {tool.note && (
+                  <span className="text-[12.5px] font-medium text-slate-500">{fa ? tool.note.fa : tool.note.en}</span>
+                )}
+              </span>
+            ))}
           </div>
-        </section>
-
-        {/* Tools & Tech Stack */}
-        <section className="p-6 sm:p-7 rounded-3xl border border-slate-200 bg-white shadow-xs mb-12">
-          <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">
-            {lang === 'fa' ? 'ابزارها و پایپ‌لاین تولید' : 'Our Creative Tech Stack'}
-          </h3>
-          <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Adobe Premiere Pro</span>
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">After Effects</span>
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">DaVinci Resolve (Color Grading)</span>
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Spring Physics & Framer Motion</span>
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">Web Audio API Sound Design</span>
-            <span className="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">4K 60FPS Render Pipeline</span>
+          <div className="mt-6 max-w-3xl">
+            <Callout text={t.remote} emoji="glowing_star" />
           </div>
-        </section>
+        </ServiceSection>
 
-        {/* Remote / International Note */}
-        <div className="p-6 rounded-2xl bg-sky-50/70 border border-sky-200 text-sky-950 text-xs sm:text-sm leading-relaxed mb-12">
-          <span className="font-bold block mb-1">
-            {lang === 'fa' ? 'همکاری ریموت و بین‌المللی' : 'Remote & International Studio'}
-          </span>
-          <span>
-            {lang === 'fa'
-              ? 'استودیو حس‌لب به صورت کاملاً ریموت فعالیت می‌کند و با تولیدکنندگان محتوا و برندها در سراسر جهان با مناطق زمانی مختلف همکاری دارد.'
-              : 'HesLab operates 100% remotely, collaborating smoothly with creators and digital brands across multiple timezones.'}
-          </span>
-        </div>
-
-        {/* Contact CTA */}
-        <div className="p-8 rounded-3xl bg-slate-950 text-white text-center flex flex-col items-center shadow-xl">
-          <h2 className="text-2xl font-black mb-2 text-white">
-            {lang === 'fa' ? 'بیایید درباره پروژه ویدیویی شما گفتگو کنیم' : "Let's Discuss Your Next Video Project"}
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-md mb-6 leading-relaxed">
-            {lang === 'fa'
-              ? 'پروژه تکی دارید یا به دنبال ادیتور منظم ماهانه هستید؟ پیام دهید تا نمونه‌ها و قیمت‌ها را بررسی کنیم.'
-              : 'Looking for a single video polish or an ongoing monthly retainer? Reach out directly.'}
-          </p>
-          <Link
-            to="/contact"
-            data-analytics="primary-cta"
-            data-analytics-name="start_a_project"
-            data-analytics-location="about"
-            onClick={() =>
-              trackEvent('primary_cta_click', {
-                cta_name: 'start_a_project',
-                cta_location: 'about',
-                page_path: '/about',
-                page_type: 'about',
-              })
-            }
-            className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-semibold px-7 py-3 rounded-full transition-transform active:scale-95 cursor-pointer shadow-md"
-          >
-            {lang === 'fa' ? 'ارتباط با حسام' : 'Get in Touch'}
-          </Link>
-        </div>
+        <CTACard
+          title={t.ctaTitle}
+          text={t.ctaText}
+          buttonText={t.ctaButton}
+          to="/contact"
+          onClick={() =>
+            trackEvent('primary_cta_click', {
+              cta_name: 'start_a_project',
+              cta_location: 'about',
+              page_path: '/about',
+              page_type: 'about',
+            })
+          }
+        />
       </div>
     </div>
   );

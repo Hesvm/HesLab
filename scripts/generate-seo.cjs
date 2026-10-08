@@ -392,6 +392,48 @@ const resourceSlugs = [
     "date": "2026-04-02",
     "cluster": "Short-Form Video",
     "service": "short-form-video-editing"
+  },
+  {
+    "slug": "short-form-video-editing",
+    "titleFa": "تدوین ویدیوی کوتاه برای ریلز، تیک‌تاک و شورتس",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "video-brand-style",
+    "titleFa": "استایل بصری برند در ویدیو",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "motion-design-short-videos",
+    "titleFa": "موشن دیزاین برای ویدیوهای کوتاه",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "motion-design"
+  },
+  {
+    "slug": "sound-design-video-editing",
+    "titleFa": "طراحی صدا در تدوین ویدیو",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "cinematic-video-editing",
+    "titleFa": "تدوین سینمایی برای ویدیوهای کوتاه",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "short-form-video-editing"
+  },
+  {
+    "slug": "content-packs-video-editing",
+    "titleFa": "پکیج محتوای ماهانه ویدیو",
+    "date": "2026-10-07",
+    "cluster": "Services",
+    "service": "ongoing-content"
   }
 ];
 

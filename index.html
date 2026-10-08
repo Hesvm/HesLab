@@ -7,9 +7,25 @@
     <title>Hēs lab | Short Video Editing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
   </head>
   <body class="bg-white text-slate-800 min-h-screen antialiased selection:bg-sky-500 selection:text-white">
+    <!-- Sticker outline filter: one clean, rounded white edge around emoji (merges sparkles into one shape) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <filter id="emoji-sticker" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="grow" />
+        <feGaussianBlur in="grow" stdDeviation="1.6" result="soft" />
+        <feComponentTransfer in="soft" result="edge">
+          <feFuncA type="linear" slope="12" intercept="-3.5" />
+        </feComponentTransfer>
+        <feFlood flood-color="#ffffff" result="white" />
+        <feComposite in="white" in2="edge" operator="in" result="outline" />
+        <feMerge>
+          <feMergeNode in="outline" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </svg>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

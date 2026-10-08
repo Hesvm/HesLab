@@ -1,0 +1,42 @@
+<svg viewBox="27.44 23.75 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    
+
+
+
+<radialGradient id="paint0_radial_9897_242" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(153.744 116.008) rotate(164.25) scale(43.5925 31.4064)">
+<stop stop-color="#FF005F"/>
+<stop offset="1" stop-color="#FC01D8"/>
+</radialGradient>
+<radialGradient id="paint1_radial_9897_242" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(105.843 157.512) rotate(-90) scale(54.4594 57.7802)">
+<stop stop-color="#FFCC00"/>
+<stop offset="0.124" stop-color="#FFCC00"/>
+<stop offset="0.567" stop-color="#FE4A05"/>
+<stop offset="0.694" stop-color="#FF0F3F"/>
+<stop offset="1" stop-color="#FE0657" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_9897_242" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(123.559 151.295) rotate(-59.87) scale(22.5193 29.3175)">
+<stop stop-color="#FFCC00"/>
+<stop offset="1" stop-color="#FFCC00" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint3_radial_9897_242" cx="0" cy="0" r="1" gradientTransform="matrix(-41.495 11.6843 -3.97981 -14.1376 96.9776 86.8092)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#780CFF"/>
+<stop offset="1" stop-color="#820BFF" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="clip0_9897_242">
+<rect width="36.9338" height="41.8391" fill="white" transform="translate(143.456 53.9028) rotate(5.09364)"/>
+</clipPath>
+<clipPath id="clip1_9897_242">
+<rect x="88.2334" y="84.5444" width="67.712" height="67.712" rx="25.8537" fill="white"/>
+</clipPath>
+<clipPath id="clip2_9897_242">
+<rect width="68.2254" height="68.2254" fill="white" transform="translate(87.7207 84.0312)"/>
+</clipPath>
+
+  </defs>
+  <g>
+    <rect x="42.6826" y="45.0625" width="67.712" height="67.712" rx="25.8537" transform="rotate(-5.14338 42.6826 45.0625)" fill="#FF0000"/>
+<rect x="37.1442" y="40.4388" width="77.9152" height="77.9152" rx="30.9553" transform="rotate(-5.14338 37.1442 40.4388)" stroke="white" stroke-width="10.2032"/>
+<path d="M71.518 86.0702C71.7098 88.2006 74.1335 89.3271 75.8857 88.1001L91.6328 77.0728C93.3924 75.8406 93.1515 73.1639 91.2001 72.2657L73.7369 64.2278C71.7938 63.3334 69.6102 64.8745 69.802 67.005L71.518 86.0702Z" fill="white"/>
+  </g>
+</svg>

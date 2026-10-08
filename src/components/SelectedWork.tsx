@@ -1,25 +1,9 @@
 import { useState, useEffect, useRef, type FC } from 'react';
-import { 
-  VolumeHigh, 
-  VolumeCross, 
-  Grid5, 
-  VideoPlay, 
-  VideoSquare, 
-  Microphone2, 
-  Bag2, 
-  Briefcase 
-} from 'iconsax-react';
+import { motion } from 'framer-motion';
+import { VolumeHigh, VolumeCross } from 'iconsax-react';
+import { CategoryPills } from './CategoryPills';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
-
-const categoryIcons: Record<string, typeof Grid5> = {
-  all: Grid5,
-  vlog: VideoPlay,
-  documentary: VideoSquare,
-  podcast: Microphone2,
-  commercial: Bag2,
-  educational: Briefcase,
-};
 
 interface VideoCardProps {
   item: {
@@ -38,7 +22,7 @@ interface VideoCardProps {
   onHover: (id: number | null) => void;
 }
 
-const VideoCard: FC<VideoCardProps> = ({
+export const VideoCard: FC<VideoCardProps> = ({
   item,
   isRtl,
   isUnmuted,
@@ -49,12 +33,34 @@ const VideoCard: FC<VideoCardProps> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1, rootMargin: '120px' }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isUnmuted;
+    }
+  }, [isUnmuted]);
+
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     onToggleSound(item.id);
-    if (videoRef.current) {
-      videoRef.current.muted = isUnmuted; // toggle
-    }
   };
 
   return (
@@ -72,15 +78,15 @@ const VideoCard: FC<VideoCardProps> = ({
           : 'opacity-100 hover:scale-[1.015] shadow-sm'
       }`}
     >
-      {/* Autoplaying HTML5 Video */}
+      {/* HTML5 Video with IntersectionObserver playback */}
       <video
         ref={videoRef}
         src={item.video}
         poster={item.image}
-        autoPlay
         loop
         muted={!isUnmuted}
         playsInline
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none rounded-[28px] sm:rounded-[32px]"
       />
 
@@ -89,7 +95,7 @@ const VideoCard: FC<VideoCardProps> = ({
         onClick={handleToggle}
         className={`absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md backdrop-blur-md transition-all duration-200 cursor-pointer select-none ${
           isUnmuted
-            ? 'bg-sky-500 text-white ring-2 ring-white shadow-sky-500/30 scale-105'
+            ? 'bg-[#5566FF] text-white ring-2 ring-white shadow-[#5566FF]/30 scale-105'
             : 'bg-white/90 hover:bg-white text-slate-800 hover:text-slate-950'
         }`}
         title={isUnmuted ? 'قطع صدا' : 'وصل صدا'}
@@ -129,7 +135,7 @@ export const SelectedWork: FC = () => {
             const current = startOffset - rect.top;
             const total = startOffset - endOffset;
             const progress = Math.min(Math.max(current / total, 0), 1);
-            setScrollProgress(progress);
+            setScrollProgress((prev) => (Math.abs(prev - progress) > 0.005 ? progress : prev));
           }
           ticking = false;
         });
@@ -170,46 +176,38 @@ export const SelectedWork: FC = () => {
       className="py-14 sm:py-20 px-4 max-w-[840px] mx-auto"
     >
       {/* Section Header */}
-      <div className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 28, filter: 'blur(5px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto"
+      >
         <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title}
         </h2>
         <p className="mt-2 text-slate-500 text-xs sm:text-[13px] font-medium">
           {t.desc}
         </p>
-      </div>
+      </motion.div>
 
       {/* Category Filter Tabs / Pills */}
-      <div className="w-full overflow-x-auto no-scrollbar pb-1 mb-5 sm:mb-7 select-none">
-        <div className="flex flex-nowrap items-center justify-start sm:justify-center w-max sm:w-full mx-auto gap-1.5 sm:gap-2 px-2">
-          {t.categories.map((cat) => {
-            const isActive = activeCategory === cat.id;
-            const IconComp = categoryIcons[cat.id] || Grid5;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-[12px] font-bold transition-all duration-200 shrink-0 cursor-pointer border whitespace-nowrap ${
-                  isActive
-                    ? 'bg-slate-950 text-white border-slate-950'
-                    : 'bg-white text-slate-600 hover:text-slate-950 hover:bg-slate-50 border-slate-200'
-                }`}
-              >
-                <IconComp
-                  size={13}
-                  variant="Bold"
-                  color="currentColor"
-                  className={`shrink-0 ${isActive ? 'text-white' : 'text-slate-500'}`}
-                />
-                <span>{cat.name}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-5 sm:mb-7"
+      >
+        <CategoryPills categories={t.categories} active={activeCategory} onChange={setActiveCategory} />
+      </motion.div>
 
       {/* 2-Row x 3-Column Grid with Smooth Scroll-Scale (Savee.com style) */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         style={{
           transform: `scale(${gridScale})`,
           opacity: gridOpacity,
@@ -218,27 +216,44 @@ export const SelectedWork: FC = () => {
         }}
         className="w-full will-change-transform"
       >
+        {filteredItems.length === 0 && (
+          <p className="py-16 text-center text-[14px] font-medium text-slate-500">
+            {lang === 'fa' ? 'به‌زودی نمونه‌کار جدید در این حوزه اضافه می‌شود.' : 'Work in this niche is coming soon.'}
+          </p>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4.5">
-          {filteredItems.map((item) => {
+          {filteredItems.map((item, index) => {
             const isFocused = hasActiveFocus && activeFocusedId === item.id;
             const isDimmed = hasActiveFocus && activeFocusedId !== item.id;
             const isUnmuted = unmutedVideoId === item.id;
 
             return (
-              <VideoCard
+              <motion.div
                 key={item.id}
-                item={item}
-                isRtl={isRtl}
-                isUnmuted={isUnmuted}
-                isFocused={isFocused}
-                isDimmed={isDimmed}
-                onToggleSound={handleToggleSound}
-                onHover={setHoveredVideoId}
-              />
+                initial={{ opacity: 0, y: 24, scale: 0.96, filter: 'blur(4px)' }}
+                whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{
+                  duration: 0.6,
+                  delay: Math.min(index * 0.08, 0.35),
+                  ease: [0.19, 1, 0.22, 1],
+                }}
+                className="w-full h-full"
+              >
+                <VideoCard
+                  item={item}
+                  isRtl={isRtl}
+                  isUnmuted={isUnmuted}
+                  isFocused={isFocused}
+                  isDimmed={isDimmed}
+                  onToggleSound={handleToggleSound}
+                  onHover={setHoveredVideoId}
+                />
+              </motion.div>
             );
           })}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

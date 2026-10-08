@@ -1,309 +1,530 @@
-import { useState, type FC, type FormEvent } from 'react';
-import { Breadcrumbs } from '../components/seo/Breadcrumbs';
+import { useState, type FC, type FormEvent, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  User,
+  Sms,
+  Diamonds,
+  DocumentText,
+  Send2,
+  TickCircle,
+  Copy,
+} from 'iconsax-react';
 import { SEOHead } from '../components/seo/SEOHead';
 import { useLanguage } from '../context/LanguageContext';
-import { analytics } from '../lib/analytics';
-import { SITE_CONFIG } from '../config/site';
+import { translations } from '../data/translations';
+import { trackEvent } from '../lib/analytics';
 import { playBenchoSound } from '../content/soundData';
 import { toast } from '../lib/toast';
-import { Sms, TickCircle } from 'iconsax-react';
+import type { PlanType } from '../context/QuoteModalContext';
+
+const SINGLE_VIDEO_EMOJI = '/emojis/single_video.png';
+const PACKAGE_EMOJI = '/emojis/package.png';
+const MEMO_EMOJI = '/emojis/memo.png';
+const PARTY_POPPER_EMOJI =
+  'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Activities/Party%20Popper.png';
 
 export const ContactPage: FC = () => {
   const { lang, isRtl } = useLanguage();
+  const isFa = lang === 'fa';
+  const t = translations[lang].quoteModal;
 
+  // Contact cards state
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  // Form states matching QuoteModal
   const [name, setName] = useState('');
-  const [contactInfo, setContactInfo] = useState('');
-  const [projectType, setProjectType] = useState('short-form');
-  const [videoCount, setVideoCount] = useState('4-12');
-  const [footageLink, setFootageLink] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState<PlanType>('standard');
+  const [description, setDescription] = useState('');
+  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleStartTyping = () => {
-    if (!isStarted) {
-      setIsStarted(true);
-      analytics.trackContactStart({
-        form_type: 'project_inquiry',
-        page_path: '/contact',
-      });
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-expand description textarea height
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      const scrollH = textareaRef.current.scrollHeight;
+      const nextHeight = Math.min(Math.max(90, scrollH), 400);
+      textareaRef.current.style.height = `${nextHeight}px`;
+      textareaRef.current.style.overflowY = scrollH > 400 ? 'auto' : 'hidden';
     }
+  }, [description]);
+
+  const handleCopyEmail = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText('heslabwork@gmail.com');
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = 'heslabwork@gmail.com';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopiedEmail(true);
+      toast(isFa ? 'آدرس ایمیل کپی شد' : 'Email address copied');
+      setTimeout(() => setCopiedEmail(false), 2500);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
+  };
+
+  const validate = () => {
+    const newErrors: { name?: string; email?: string } = {};
+    const trimmedName = name.trim();
+    if (!trimmedName || trimmedName.length < 2) {
+      newErrors.name = t.nameError;
+    }
+
+    const trimmedEmail = email.trim();
+    const isEmailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail);
+    const isTelegramFormat = /^@?[a-zA-Z0-9_]{4,32}$/.test(trimmedEmail);
+
+    if (!trimmedEmail || (!isEmailFormat && !isTelegramFormat)) {
+      newErrors.email = t.emailError;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!validate() || isSubmitting) return;
+
+    setIsSubmitting(true);
     playBenchoSound('success');
 
-    // 1. Technical successful form submission event (Zero PII)
-    analytics.trackContactSubmit({
-      form_type: 'project_inquiry',
-      service_interest: projectType,
-      video_count: videoCount,
-      has_footage_link: Boolean(footageLink.trim()),
-      page_path: '/contact',
-    });
-
-    // 2. Business conversion event
-    analytics.trackQuoteRequest({
-      service_interest: projectType,
-      video_count: videoCount,
+    trackEvent('quote_request', {
+      plan: selectedPlan,
+      name: name.trim(),
+      email: email.trim(),
       inquiry_source: 'contact_page',
-      page_path: '/contact',
     });
 
-    setSubmitted(true);
-    toast(lang === 'fa' ? 'درخواست شما با موفقیت ثبت شد' : 'Your request was successfully submitted');
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      toast(isFa ? 'درخواست شما با موفقیت ثبت شد' : 'Your request was successfully submitted');
+    }, 700);
   };
 
-  const handleEmailClick = () => {
-    analytics.trackOutboundEmail({
-      destination_type: 'direct_email',
-      cta_location: 'contact_page_direct_email',
-      page_path: '/contact',
-    });
+  const handleResetForm = () => {
+    setName('');
+    setEmail('');
+    setDescription('');
+    setSelectedPlan('standard');
+    setIsSubmitted(false);
+    setErrors({});
   };
+
+  const plansConfig: {
+    id: PlanType;
+    name: string;
+    price: string;
+    videos: string;
+    emoji: string;
+    popular?: boolean;
+  }[] = [
+    {
+      id: 'starter',
+      name: t.plans.starter.name,
+      price: t.plans.starter.price,
+      videos: t.plans.starter.videos,
+      emoji: SINGLE_VIDEO_EMOJI,
+    },
+    {
+      id: 'standard',
+      name: t.plans.standard.name,
+      price: t.plans.standard.price,
+      videos: t.plans.standard.videos,
+      emoji: PACKAGE_EMOJI,
+      popular: true,
+    },
+    {
+      id: 'custom',
+      name: t.plans.custom.name,
+      price: t.plans.custom.price,
+      videos: t.plans.custom.videos,
+      emoji: MEMO_EMOJI,
+    },
+  ];
+
+  const socials = [
+    {
+      id: 'youtube',
+      name: 'YouTube',
+      handle: '@heslab',
+      url: 'https://youtube.com/@heslab',
+      gradient: 'bg-[#D4001F]',
+      desc: isFa ? 'ادیت‌ها، آموزش‌ها و پروسهٔ کار' : 'Edits, tutorials and process',
+      icon: (
+        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] bg-white flex items-center justify-center shadow-xs shrink-0">
+          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E60000] fill-current" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        </div>
+      ),
+    },
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      handle: '@heslab',
+      url: 'https://instagram.com/heslab',
+      gradient: 'bg-[#430030]',
+      desc: isFa ? 'استایل خودمون و ویدیوهای شیرشده' : 'Our style and shared reels',
+      icon: (
+        <img
+          src="/stats-icons/badge-instagram-clean.svg"
+          alt="Instagram"
+          className="w-10 h-10 sm:w-11 sm:h-11 object-contain shrink-0 pointer-events-none select-none drop-shadow-xs"
+          draggable={false}
+        />
+      ),
+    },
+    {
+      id: 'twitter',
+      name: 'X',
+      handle: '@heslab',
+      url: 'https://x.com/heslab',
+      gradient: 'bg-[#1E1E1F]',
+      desc: isFa ? 'اخبار و آپدیت‌های کارم' : 'News and updates on my work',
+      icon: (
+        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] bg-black flex items-center justify-center shadow-xs shrink-0 border border-white/10">
+          <svg className="w-[18px] h-[18px] sm:w-[19px] sm:h-[19px] text-white fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </div>
+      ),
+    },
+    {
+      id: 'email',
+      name: 'Email',
+      handle: 'heslabwork@gmail.com',
+      gradient: 'bg-[#F4F4F5]',
+      desc: isFa ? 'ارتباط مستقیم و ارسال پروپوزال' : 'Direct inquiries and project briefs',
+      icon: (
+        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] bg-[#5566FF] flex items-center justify-center shadow-xs shrink-0">
+          <Sms size={22} variant="Bold" color="#ffffff" />
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-20 ${
-        lang === 'fa' ? 'font-fa' : 'font-en'
+      className={`min-h-screen bg-white text-slate-900 pt-28 pb-24 ${
+        isFa ? 'font-fa' : 'font-en'
       }`}
     >
       <SEOHead
-        title={lang === 'fa' ? 'دریافت برآورد هزینه و ثبت سفارش تدوین ویدیو' : 'Get a Project Quote & Contact | HesLab'}
+        title={isFa ? 'تماس با حس‌لب | ثبت سفارش تدوین ویدیو' : 'Contact HesLab | Start a Video Project'}
         description={
-          lang === 'fa'
-            ? 'ارسال اطلاعات پروژه، فوتیج‌های خام یا درخواست پکیج ماهانه تدوین ریلز و شورتس به استودیو حس‌لب.'
-            : 'Request a project quote, discuss monthly video editing retainers, or send raw footage to HesLab.'
+          isFa
+            ? 'ارسال پیام و ثبت سفارش تدوین ریلز و شورتس به استودیو حس‌لب یا ارتباط از طریق شبکه‌های اجتماعی.'
+            : 'Get in touch with HesLab. Send a message, discuss short-form video editing, or connect on social media.'
         }
         path="/contact"
       />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <Breadcrumbs
-          items={[
-            { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: lang === 'fa' ? 'تماس و ثبت پروژه' : 'Contact', path: '/contact' },
-          ]}
-        />
-
-        <header className="pt-4 pb-8 mb-8 text-center max-w-xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-bold mb-3 border border-sky-200">
-            <span>{lang === 'fa' ? 'پاسخ‌گویی در کمتر از ۱۲ ساعت' : 'Fast Response Within 12 Hours'}</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight mb-4">
-            {lang === 'fa' ? 'شروع همکاری و برآورد هزینه' : 'Start a Project with HesLab'}
+        {/* ===================================================== */}
+        {/* 0. PAGE TITLE                                         */}
+        {/* ===================================================== */}
+        <header className="mb-8 sm:mb-11 text-center">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+            {isFa ? 'تماس با ما' : 'Contact Us'}
           </h1>
-
-          <p className="text-[14.5px] sm:text-base text-slate-600 leading-relaxed">
-            {lang === 'fa'
-              ? 'اطلاعات ویدیوی خود یا لینک درایو فوتیج‌ها را وارد کنید تا بهترین پیشنهاد و نمونه را برایتان ارسال کنیم.'
-              : 'Share your channel goals, footage link, or package preference to receive a tailored proposal.'}
-          </p>
         </header>
 
-        {submitted ? (
-          <div className="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200 text-center flex flex-col items-center animate-in fade-in zoom-in-95 duration-200">
-            <div className="size-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
-              <TickCircle size={36} color="currentColor" variant="Bold" />
-            </div>
+        {/* ===================================================== */}
+        {/* 1. TOP SECTION: 4 CONTACT / SOCIAL CARDS              */}
+        {/* ===================================================== */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4 w-full">
+          {socials.map((social) => {
+            if (social.id === 'email') {
+              return (
+                <button
+                  key={social.id}
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title={isFa ? 'برای کپی آدرس ایمیل کلیک کنید' : 'Click to copy email address'}
+                  className={`relative aspect-square ${social.gradient} rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-[1.025] group cursor-pointer select-none w-full border border-slate-200/60 shadow-xs`}
+                >
+                  {/* Copy indicator */}
+                  <div className="absolute top-3.5 right-3.5">
+                    {copiedEmail ? (
+                      <TickCircle size={16} variant="Bold" className="text-emerald-500 animate-in zoom-in-75 duration-200" />
+                    ) : (
+                      <Copy size={14} variant="Linear" className="text-slate-400 group-hover:text-[#5566FF] transition-colors" />
+                    )}
+                  </div>
 
-            <h2 className="text-2xl font-black text-slate-950 mb-2">
-              {lang === 'fa' ? 'درخواست شما دریافت شد!' : 'Request Received!'}
-            </h2>
+                  {/* Icon */}
+                  <div className="mb-2.5 sm:mb-3">{social.icon}</div>
 
-            <p className="text-[14px] text-slate-600 max-w-md leading-relaxed mb-6">
-              {lang === 'fa'
-                ? `از اعتماد شما متشکریم، ${name || 'دوست عزیز'}. جزییات پروژه بررسی شده و در کمتر از ۱۲ ساعت از طریق ایمیل یا پیام‌رسان با شما تماس خواهیم گرفت.`
-                : `Thank you for reaching out. We are reviewing your submission and will respond via email within 12 hours.`}
-            </p>
+                  {/* Email Address */}
+                  <h4
+                    dir="ltr"
+                    className="text-slate-950 font-bold text-xs sm:text-[13.5px] tracking-tight text-center select-all group-hover:text-[#5566FF] transition-colors mb-1 leading-tight break-all sm:break-normal"
+                  >
+                    heslabwork<span className="block sm:inline text-slate-950 group-hover:text-[#5566FF]">@gmail.com</span>
+                  </h4>
 
-            <button
-              type="button"
-              onClick={() => {
-                setSubmitted(false);
-                setName('');
-                setContactInfo('');
-                setMessage('');
-                setFootageLink('');
-              }}
-              className="text-xs font-semibold text-sky-600 hover:text-sky-700 underline"
-            >
-              {lang === 'fa' ? 'ارسال یک درخواست دیگر' : 'Submit Another Inquiry'}
-            </button>
-          </div>
-        ) : (
-          <div className="p-6 sm:p-10 rounded-3xl border border-slate-200 bg-white shadow-xs">
-            <form onSubmit={handleSubmit} onFocus={handleStartTyping} className="flex flex-col gap-6">
-              {/* Row 1: Name and Contact info */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-2">
-                    {lang === 'fa' ? 'نام و نام‌خانوادگی / نام برند' : 'Your Name / Brand Name'} *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={lang === 'fa' ? 'مثال: علی رضایی' : 'e.g. Alex Morgan'}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:outline-hidden text-sm bg-slate-50/50"
-                  />
-                </div>
+                  {/* Description */}
+                  <p className="text-slate-500 text-[10px] sm:text-[11px] leading-tight font-normal text-center max-w-[150px] min-h-[2.4em]">
+                    {copiedEmail
+                      ? (isFa ? 'آدرس در حافظه کپی شد ✓' : 'Copied to clipboard ✓')
+                      : social.desc}
+                  </p>
+                </button>
+              );
+            }
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-2">
-                    {lang === 'fa' ? 'ایمیل یا آیدی تلگرام / اینستاگرام' : 'Email or Social Handle'} *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={contactInfo}
-                    onChange={(e) => setContactInfo(e.target.value)}
-                    placeholder={lang === 'fa' ? 'email@example.com یا @username' : 'you@example.com or @handle'}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:outline-hidden text-sm bg-slate-50/50"
-                  />
-                </div>
-              </div>
-
-              {/* Row 2: Service Type */}
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-2">
-                  {lang === 'fa' ? 'نوع سرویس مد نظر شما چیست؟' : 'Primary Service Needed'}
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[
-                    { id: 'short-form', labelFa: 'تدوین شورتس و ریلز', labelEn: 'Short-Form Editing' },
-                    { id: 'motion-design', labelFa: 'موشن دیزاین اختصاصی', labelEn: 'Custom Motion' },
-                    { id: 'ongoing-retainer', labelFa: 'پکیج ماهانه محتوا', labelEn: 'Monthly Retainer' },
-                  ].map((srv) => (
-                    <label
-                      key={srv.id}
-                      className={`p-3.5 rounded-xl border cursor-pointer text-xs font-semibold flex items-center justify-between transition-all ${
-                        projectType === srv.id
-                          ? 'border-slate-950 bg-slate-950 text-white shadow-xs'
-                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="projectType"
-                        value={srv.id}
-                        checked={projectType === srv.id}
-                        onChange={() => setProjectType(srv.id)}
-                        className="sr-only"
-                      />
-                      <span>{lang === 'fa' ? srv.labelFa : srv.labelEn}</span>
-                      {projectType === srv.id && <span className="text-sky-400">●</span>}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Row 3: Video Volume */}
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-2">
-                  {lang === 'fa' ? 'حجم حدودی ویدیوهای مد نظر' : 'Approximate Video Volume'}
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { id: 'single', labelFa: '۱ تا ۳ ویدیو (تستی)', labelEn: '1-3 Videos (Ad-hoc)' },
-                    { id: '4-12', labelFa: '۴ تا ۱۲ ویدیو در ماه', labelEn: '4-12 / month' },
-                    { id: '20+', labelFa: '۲۰+ ویدیو در ماه', labelEn: '20+ / month' },
-                  ].map((vol) => (
-                    <label
-                      key={vol.id}
-                      className={`p-3 rounded-xl border cursor-pointer text-center text-xs font-semibold transition-all ${
-                        videoCount === vol.id
-                          ? 'border-sky-600 bg-sky-50 text-sky-950 font-bold'
-                          : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="videoCount"
-                        value={vol.id}
-                        checked={videoCount === vol.id}
-                        onChange={() => setVideoCount(vol.id)}
-                        className="sr-only"
-                      />
-                      <span>{lang === 'fa' ? vol.labelFa : vol.labelEn}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Row 4: Footage link */}
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1.5">
-                  {lang === 'fa' ? 'لینک پوشه فوتیج خام (اختیاری)' : 'Raw Footage Link (Optional)'}
-                </label>
-                <p className="text-[11.5px] text-slate-400 mb-2">
-                  {lang === 'fa' ? 'لینک گوگل درایو، دراپ‌باکس یا نمونه ویدیو برای بررسی اولیه' : 'Google Drive, Dropbox, or reference link'}
-                </p>
-                <input
-                  type="url"
-                  value={footageLink}
-                  onChange={(e) => setFootageLink(e.target.value)}
-                  placeholder="https://drive.google.com/..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:outline-hidden text-sm bg-slate-50/50 font-mono text-xs"
-                />
-              </div>
-
-              {/* Row 5: Message */}
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-2">
-                  {lang === 'fa' ? 'توضیحات یا نیازمندی‌های خاص پروژه' : 'Project Details & Goals'}
-                </label>
-                <textarea
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder={
-                    lang === 'fa'
-                      ? 'درباره سبک مد نظر، زبان، لحن یا هر جزییاتی که برایتان مهم است بنویسید...'
-                      : 'Tell us about your target audience, pacing style, turnaround expectations...'
-                  }
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-slate-900 focus:outline-hidden text-sm bg-slate-50/50 leading-relaxed"
-                />
-              </div>
-
-              {/* Submit CTA */}
-              <button
-                type="submit"
-                data-analytics="primary-cta"
-                data-analytics-name="submit_quote_request"
-                data-analytics-location="contact_form"
-                className="w-full bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-bold py-3.5 rounded-xl shadow-lg transition-transform active:scale-[0.99] cursor-pointer"
+            return (
+              <a
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`aspect-square ${social.gradient} rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-[1.025] group cursor-pointer select-none w-full shadow-xs`}
               >
-                {lang === 'fa' ? 'ارسال درخواست برآورد هزینه' : 'Submit Quote Request'}
-              </button>
-            </form>
-          </div>
-        )}
+                {/* Icon */}
+                <div className="mb-2.5 sm:mb-3">{social.icon}</div>
 
-        {/* Direct Contact Option */}
-        <div className="mt-10 p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
-          <div>
-            <span className="text-xs font-bold text-slate-500 block mb-0.5">
-              {lang === 'fa' ? 'ترجیح می‌دهید مستقیماً ایمیل بزنید؟' : 'Prefer direct email?'}
-            </span>
-            <span className="text-sm font-semibold text-slate-900 font-mono">{SITE_CONFIG.email}</span>
-          </div>
+                {/* Handle */}
+                <h4
+                  dir="ltr"
+                  className="text-white font-bold text-sm sm:text-base tracking-tight text-center transition-colors mb-1 leading-tight"
+                >
+                  {social.handle}
+                </h4>
 
-          <a
-            href={`mailto:${SITE_CONFIG.email}`}
-            data-analytics="outbound-email"
-            data-analytics-name="direct_email_contact"
-            data-analytics-location="contact_page"
-            onClick={handleEmailClick}
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-sky-600 bg-white border border-slate-200 px-4 py-2 rounded-xl transition-colors"
-          >
-            <Sms size={16} />
-            <span>{lang === 'fa' ? 'ارسال ایمیل مستقیم' : 'Open Email'}</span>
-          </a>
+                {/* Description */}
+                <p className="text-white/65 text-[10px] sm:text-[11px] leading-tight font-normal line-clamp-2 text-center max-w-[150px] min-h-[2.4em]">
+                  {social.desc}
+                </p>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* ===================================================== */}
+        {/* 2. BOTTOM SECTION: SEND MESSAGE FORM (MODAL STYLE)   */}
+        {/* ===================================================== */}
+        <div className="mt-8 sm:mt-12 w-full rounded-[30px] sm:rounded-[34px] bg-[#F8F9FA] border border-slate-200/90 p-6 sm:p-9 shadow-xs">
+          <AnimatePresence mode="wait">
+            {isSubmitted ? (
+              /* Success Screen */
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="py-8 px-2 flex flex-col items-center text-center"
+              >
+                <div className="w-20 h-20 mb-4 select-none pointer-events-none flex items-center justify-center">
+                  <img
+                    src={PARTY_POPPER_EMOJI}
+                    alt="Celebration"
+                    className="w-full h-full object-contain drop-shadow-md"
+                  />
+                </div>
+
+                <h3 className="text-2xl font-black text-slate-950 tracking-tight mb-2">
+                  {t.successTitle}
+                </h3>
+
+                <p className="text-slate-600 text-[14px] leading-relaxed max-w-sm mb-7">
+                  {t.successDesc}
+                </p>
+
+                <div className="w-full max-w-xs space-y-3">
+                  <div className="p-3.5 bg-white border border-slate-200/90 rounded-[18px] text-[13px] text-slate-700 flex items-center justify-center gap-2 shadow-2xs">
+                    <TickCircle size={18} variant="Bold" className="text-emerald-500 shrink-0" />
+                    <span>
+                      {selectedPlan.toUpperCase()} — {name}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={handleResetForm}
+                    className="w-full h-[46px] rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-[14px] transition-all cursor-pointer shadow-md active:scale-98"
+                  >
+                    {isFa ? 'ارسال یک پیام دیگر' : 'Send Another Message'}
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              /* Form Screen */
+              <motion.div
+                key="form"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-full"
+              >
+                {/* Header */}
+                <div className="mb-6 text-center">
+                  <h2 className="text-2xl sm:text-[26px] font-black text-slate-950 tracking-tight leading-tight">
+                    {isFa ? 'یا پیام بگذارید' : "Or Let's talk"}
+                  </h2>
+                  <p className="text-slate-500 text-[13.5px] mt-1.5 leading-snug max-w-sm mx-auto">
+                    {t.subtitle}
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                  {/* Name Input */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[12.5px] font-bold text-slate-700 mb-1.5">
+                      <User size={15} variant="Linear" color="currentColor" className="text-slate-700 shrink-0" />
+                      <span>{t.nameLabel}</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                      }}
+                      placeholder={t.namePlaceholder}
+                      className={`w-full h-[44px] px-3.5 rounded-[14px] bg-white hover:bg-slate-50 focus:bg-white text-slate-900 text-[14px] border transition-all outline-none ${
+                        errors.name
+                          ? 'border-rose-400 ring-2 ring-rose-100 bg-rose-50/20'
+                          : 'border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10'
+                      }`}
+                    />
+                    {errors.name && (
+                      <p className="text-rose-500 text-[11.5px] mt-1 font-medium">{errors.name}</p>
+                    )}
+                  </div>
+
+                  {/* Email / Contact Input */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[12.5px] font-bold text-slate-700 mb-1.5">
+                      <Sms size={15} variant="Linear" color="currentColor" className="text-slate-700 shrink-0" />
+                      <span>{t.emailLabel}</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                      }}
+                      placeholder={t.emailPlaceholder}
+                      className={`w-full h-[44px] px-3.5 rounded-[14px] bg-white hover:bg-slate-50 focus:bg-white text-slate-900 text-[14px] border transition-all outline-none ${
+                        errors.email
+                          ? 'border-rose-400 ring-2 ring-rose-100 bg-rose-50/20'
+                          : 'border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10'
+                      }`}
+                    />
+                    {errors.email && (
+                      <p className="text-rose-500 text-[11.5px] mt-1 font-medium">{errors.email}</p>
+                    )}
+                  </div>
+
+                  {/* Choice Plan Selection */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[12.5px] font-bold text-slate-700 mb-2">
+                      <Diamonds size={15} variant="Linear" color="currentColor" className="text-slate-700 shrink-0" />
+                      <span>{t.planLabel}</span>
+                    </label>
+
+                    <div className="grid grid-cols-3 gap-2.5 pt-1">
+                      {plansConfig.map((p) => {
+                        const isSelected = selectedPlan === p.id;
+                        return (
+                          <button
+                            key={p.id}
+                            type="button"
+                            onClick={() => setSelectedPlan(p.id)}
+                            className={`relative p-2.5 sm:p-3 rounded-[20px] border text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center gap-1.5 sm:gap-2 aspect-square ${
+                              isSelected
+                                ? 'border-[#5566FF] bg-[#5566FF]/5 shadow-[0_0_0_2px_#5566FF,0_4px_16px_rgba(85,102,255,0.16)]'
+                                : 'border-slate-200/90 bg-white hover:border-slate-300 hover:bg-slate-50/60'
+                            }`}
+                          >
+                            {/* Popular Mini Tag */}
+                            {p.popular && (
+                              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#5566FF] text-white text-[9.5px] font-bold shadow-xs whitespace-nowrap">
+                                {isFa ? 'محبوب' : 'Popular'}
+                              </span>
+                            )}
+
+                            {/* 3D Plan Emoji */}
+                            <img
+                              src={p.emoji}
+                              alt={p.name}
+                              className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-xs pointer-events-none select-none"
+                            />
+
+                            <div>
+                              <div className="text-[13px] sm:text-[13.5px] font-bold text-slate-950 leading-tight">
+                                {p.name}
+                              </div>
+                              {p.id !== 'custom' && (
+                                <div className="text-[11.5px] sm:text-[12px] font-semibold text-slate-800 mt-0.5">
+                                  {p.price}
+                                </div>
+                              )}
+                              <div className="text-[10px] sm:text-[10.5px] font-medium text-slate-400 mt-0.5">
+                                {p.videos}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Description / Brief Textarea */}
+                  <div>
+                    <label className="flex items-center gap-1.5 text-[12.5px] font-bold text-slate-700 mb-1.5">
+                      <DocumentText size={15} variant="Linear" color="currentColor" className="text-slate-700 shrink-0" />
+                      <span>{t.descLabel}</span>
+                    </label>
+                    <textarea
+                      ref={textareaRef}
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder={t.descPlaceholder}
+                      style={{ minHeight: '90px', maxHeight: '400px' }}
+                      className="w-full p-3.5 rounded-[16px] bg-white hover:bg-slate-50 focus:bg-white text-slate-900 text-[13.5px] border border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10 outline-none resize-none leading-relaxed transition-[border-color,background-color,box-shadow] duration-150 overflow-hidden"
+                    />
+                  </div>
+
+                  {/* Submit CTA Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full h-[48px] rounded-full bg-slate-950 hover:bg-slate-800 disabled:bg-slate-400 text-white font-bold text-[14.5px] flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-[0.98] transition-all cursor-pointer select-none"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span>{t.sendingButton}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>{t.sendButton}</span>
+                          <Send2 size={16} variant="Linear" className={isRtl ? 'rotate-180' : ''} />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

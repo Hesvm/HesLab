@@ -1,15 +1,10 @@
 import { useState, useEffect, useRef, type FC } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowDown2,
   Category,
   CloseSquare,
-  VideoPlay,
-  Flash,
-  TextalignCenter,
-  Music,
-  Magicpen,
-  BagTick,
 } from 'iconsax-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useQuoteModal } from '../context/QuoteModalContext';
@@ -18,53 +13,52 @@ import { trackEvent } from '../lib/analytics';
 
 const serviceCardMeta = [
   {
-    icon: VideoPlay,
+    emoji: '/emojis/clapper_board.png',
     badgeBg: 'bg-[#0284C7]',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-sky-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#0284C7]/25',
+    cardBorder: '',
   },
   {
-    icon: Flash,
+    emoji: '/emojis/artist_palette.png',
     badgeBg: 'bg-[#EA580C]',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-orange-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#EA580C]/25',
+    cardBorder: '',
   },
   {
-    icon: TextalignCenter,
+    emoji: '/emojis/sparkles.png',
     badgeBg: 'bg-[#16A34A]',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-emerald-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#16A34A]/25',
+    cardBorder: '',
   },
   {
-    icon: Music,
+    emoji: '/emojis/headphone.png',
     badgeBg: 'bg-[#9333EA]',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-purple-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#9333EA]/25',
+    cardBorder: '',
   },
   {
-    icon: Magicpen,
+    emoji: '/emojis/movie_camera.png',
     badgeBg: 'bg-[#E11D48]',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-rose-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#E11D48]/25',
+    cardBorder: '',
   },
   {
-    icon: BagTick,
+    emoji: '/emojis/package.png',
     badgeBg: 'bg-sky-600',
     badgeText: 'text-white',
-    cardBg: 'bg-zinc-900/90 hover:bg-zinc-800/90',
-    cardBorder: 'border-zinc-800 hover:border-sky-500/50',
+    cardBg: 'bg-zinc-900/90 hover:bg-[#0284C7]/25',
+    cardBorder: '',
   },
 ];
 
 export const Navbar: FC = () => {
   const { lang, isRtl } = useLanguage();
   const { openModal } = useQuoteModal();
-  const location = useLocation();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -79,7 +73,7 @@ export const Navbar: FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleMouseEnter = () => {
+  const openServices = () => {
     if (leaveTimerRef.current) {
       clearTimeout(leaveTimerRef.current);
       leaveTimerRef.current = null;
@@ -87,19 +81,21 @@ export const Navbar: FC = () => {
     setServicesDropdownOpen(true);
   };
 
-  const handleMouseLeave = () => {
+  const closeServicesWithDelay = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+    }
     leaveTimerRef.current = setTimeout(() => {
       setServicesDropdownOpen(false);
     }, 180);
   };
 
-  const scrollToHash = (hash: string) => {
-    if (location.pathname === '/') {
-      const el = document.querySelector(hash);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+  const closeServicesImmediately = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+      leaveTimerRef.current = null;
     }
+    setServicesDropdownOpen(false);
   };
 
   return (
@@ -109,168 +105,179 @@ export const Navbar: FC = () => {
       }`}
     >
       <nav
-        className={`relative pointer-events-auto w-full max-w-[530px] h-[58px] rounded-[21px] transition-all duration-300 ease-out origin-top flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] ${
-          scrolled
-            ? 'bg-[#1E1E1F]/95 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.5)] scale-[0.94]'
-            : 'bg-[#1E1E1F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] scale-100'
+        onMouseEnter={() => {
+          if (leaveTimerRef.current) {
+            clearTimeout(leaveTimerRef.current);
+            leaveTimerRef.current = null;
+          }
+        }}
+        onMouseLeave={closeServicesWithDelay}
+        className={`relative pointer-events-auto w-full max-w-[530px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
+          servicesDropdownOpen
+            ? 'rounded-[26px] shadow-[0_24px_50px_rgba(0,0,0,0.55)]'
+            : 'rounded-[21px] shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
+        } ${
+          scrolled && !servicesDropdownOpen
+            ? 'bg-black backdrop-blur-2xl scale-[0.94]'
+            : 'bg-black backdrop-blur-2xl scale-100'
         }`}
         aria-label="Main Navigation"
       >
-        {/* Brand Logo & Logotype */}
-        <Link
-          to="/"
-          className="flex items-center gap-2 group shrink-0"
-          aria-label="HESLAB"
-        >
-          <img
-            src="/brand/logo_icon.png"
-            alt="HesLab Icon"
-            className="h-[21px] w-auto object-contain shrink-0 select-none group-hover:scale-105 transition-transform duration-200"
-          />
-          <img
-            src="/brand/logo_type.svg"
-            alt="Hēs lab"
-            className="h-[28px] w-auto object-contain select-none group-hover:opacity-90 transition-opacity duration-200 brightness-0 invert"
-          />
-        </Link>
+        {/* Top Navbar Row */}
+        <div className="h-[58px] w-full flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] shrink-0">
+          {/* Brand Logo & Logotype */}
+          <Link
+            to="/"
+            onClick={closeServicesImmediately}
+            className="flex items-center gap-2 group shrink-0"
+            aria-label="HESLAB"
+          >
+            <img
+              src="/brand/logo_icon.png"
+              alt="HesLab Icon"
+              className="h-[21px] w-auto object-contain shrink-0 select-none group-hover:scale-105 transition-transform duration-200"
+            />
+            <img
+              src="/brand/logo_type.svg"
+              alt="Hēs lab"
+              className="h-[28px] w-auto object-contain select-none group-hover:opacity-90 transition-opacity duration-200 brightness-0 invert"
+            />
+          </Link>
 
-        {/* Navigation Items */}
-        <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6]">
-          {location.pathname === '/' ? (
-            <a
-              href="#work"
-              onClick={() => scrollToHash('#work')}
-              className="hover:text-white transition-colors duration-200 select-none"
-            >
-              {t.work}
-            </a>
-          ) : (
+          {/* Navigation Items */}
+          <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6]">
             <Link
               to="/work"
+              onMouseEnter={closeServicesImmediately}
+              onClick={closeServicesImmediately}
               className="hover:text-white transition-colors duration-200 select-none"
             >
               {t.work}
             </Link>
-          )}
 
-          {/* Services Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            <Link
-              to="/services"
-              onClick={() => setServicesDropdownOpen(false)}
-              className={`flex items-center gap-1 transition-colors duration-200 select-none py-2 cursor-pointer ${
-                servicesDropdownOpen ? 'text-white' : 'hover:text-white'
-              }`}
+            {/* Services Dropdown Trigger */}
+            <div
+              className="relative"
+              onMouseEnter={openServices}
             >
-              <span>{t.services}</span>
-              <ArrowDown2
-                size={12}
-                color="currentColor"
-                variant="Linear"
-                className={`shrink-0 stroke-[2.5px] mt-0.5 transition-transform duration-200 ${
-                  servicesDropdownOpen ? 'rotate-180 text-white' : ''
+              <Link
+                to="/services"
+                onClick={closeServicesImmediately}
+                className={`flex items-center gap-1 transition-colors duration-200 select-none py-2 cursor-pointer ${
+                  servicesDropdownOpen ? 'text-white' : 'hover:text-white'
                 }`}
-              />
+              >
+                <span>{t.services}</span>
+                <ArrowDown2
+                  size={12}
+                  color="currentColor"
+                  variant="Linear"
+                  className={`shrink-0 stroke-[2.5px] mt-0.5 transition-transform duration-200 ${
+                    servicesDropdownOpen ? 'rotate-180 text-white' : ''
+                  }`}
+                />
+              </Link>
+            </div>
+
+            <Link
+              to="/about"
+              onMouseEnter={closeServicesImmediately}
+              onClick={closeServicesImmediately}
+              className="hover:text-white transition-colors duration-200 select-none"
+            >
+              {t.about}
             </Link>
           </div>
 
-          <Link
-            to="/about"
-            className="hover:text-white transition-colors duration-200 select-none"
-          >
-            {t.about}
-          </Link>
-        </div>
+          {/* CTA Button */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              data-analytics="primary-cta"
+              data-analytics-name="start_a_project"
+              data-analytics-location="navigation"
+              onClick={() => {
+                closeServicesImmediately();
+                trackEvent('primary_cta_click', {
+                  cta_name: 'start_a_project',
+                  cta_location: 'navigation',
+                  page_path: window.location.pathname,
+                });
+                openModal();
+              }}
+              className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-5 sm:px-6 h-[44px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
+            >
+              {t.cta}
+            </button>
 
-        {/* CTA Button */}
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            data-analytics="primary-cta"
-            data-analytics-name="start_a_project"
-            data-analytics-location="navigation"
-            onClick={() => {
-              trackEvent('primary_cta_click', {
-                cta_name: 'start_a_project',
-                cta_location: 'navigation',
-                page_path: window.location.pathname,
-              });
-              openModal();
-            }}
-            className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-5 sm:px-6 h-[44px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
-          >
-            {t.cta}
-          </button>
-
-          {/* Mobile Hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-[#A5A5A6] hover:text-white p-1.5 rounded-[10px] transition-colors cursor-pointer"
-            aria-label="Open menu"
-          >
-            {mobileMenuOpen ? (
-              <CloseSquare size={22} color="currentColor" variant="Linear" />
-            ) : (
-              <Category size={22} color="currentColor" variant="Linear" />
-            )}
-          </button>
-        </div>
-
-        {/* Mega Menu / Services Dropdown */}
-        <div
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          className={`absolute top-[calc(100%+8px)] inset-x-0 w-full bg-[#1E1E1F]/98 backdrop-blur-2xl border border-white/10 rounded-[20px] p-3.5 shadow-[0_20px_45px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-200 ease-out z-50 ${
-            servicesDropdownOpen
-              ? 'opacity-100 translate-y-0 pointer-events-auto visible'
-              : 'opacity-0 -translate-y-1 pointer-events-none invisible'
-          }`}
-        >
-          <div className="absolute -top-2 inset-x-0 h-2" />
-
-          <div className="grid grid-cols-2 gap-3">
-            {t.servicesList.map((item, idx) => {
-              const meta = serviceCardMeta[idx] || serviceCardMeta[0];
-              const IconComp = meta.icon;
-              return (
-                <Link
-                  key={idx}
-                  to={item.href}
-                  onClick={() => setServicesDropdownOpen(false)}
-                  className={`group/card p-4 rounded-[14px] border ${meta.cardBg} ${meta.cardBorder} transition-all duration-200 hover:scale-[1.015] hover:shadow-sm flex flex-col justify-between select-none ${
-                    isRtl ? 'text-right' : 'text-left'
-                  } cursor-pointer min-h-[114px]`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <div
-                      className={`w-9 h-9 rounded-[10px] ${meta.badgeBg} ${meta.badgeText} flex items-center justify-center shrink-0 shadow-xs group-hover/card:scale-105 transition-transform duration-200`}
-                    >
-                      <IconComp size={19} color="currentColor" variant="Linear" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-white text-[14px] font-bold tracking-tight mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-zinc-400 text-[11.5px] leading-relaxed line-clamp-2">
-                      {item.desc}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-[#A5A5A6] hover:text-white p-1.5 rounded-[10px] transition-colors cursor-pointer"
+              aria-label="Open menu"
+            >
+              {mobileMenuOpen ? (
+                <CloseSquare size={22} color="currentColor" variant="Linear" />
+              ) : (
+                <Category size={22} color="currentColor" variant="Linear" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Integrated Expanding Services Menu */}
+        <AnimatePresence>
+          {servicesDropdownOpen && (
+            <motion.div
+              key="services-dropdown"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden w-full"
+            >
+              <div className="px-3.5 pb-3.5 pt-2">
+                <div className="grid grid-cols-2 gap-2.5">
+                  {t.servicesList.map((item, idx) => {
+                    const meta = serviceCardMeta[idx] || serviceCardMeta[0];
+                    return (
+                      <Link
+                        key={idx}
+                        to={item.href}
+                        onClick={closeServicesImmediately}
+                        className={`group/card p-3.5 rounded-[14px] ${meta.cardBg} ${meta.cardBorder} transition-all duration-300 hover:scale-[1.015] hover:shadow-sm flex flex-col justify-between select-none ${
+                          isRtl ? 'text-right' : 'text-left'
+                        } cursor-pointer min-h-[110px]`}
+                      >
+                        <div className="flex items-center justify-between mb-2.5">
+                          <img
+                            src={meta.emoji}
+                            alt=""
+                            className="w-9 h-9 object-contain shrink-0 transition-transform duration-300 group-hover/card:-translate-y-0.5 group-hover/card:scale-110 group-hover/card:rotate-[-6deg]"
+                          />
+                        </div>
+
+                        <div>
+                          <h4 className="text-white text-[13.5px] font-bold tracking-tight mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-zinc-400 text-[11px] leading-relaxed line-clamp-2">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-[#1E1E1F]/98 backdrop-blur-xl border border-white/10 rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
+        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-black backdrop-blur-xl rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
           <Link
             to="/work"
             onClick={() => setMobileMenuOpen(false)}

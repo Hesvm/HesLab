@@ -36,31 +36,34 @@ export const HomePage: FC = () => {
       />
 
       {/* 1. Top White Section (Hero, Stats) */}
-      <div className="relative w-full bg-[#0B0B0E]">
+      <div className="relative w-full bg-[#1E1E1F]">
         <div className="w-full bg-white rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-x-clip">
           <Hero />
           <StatsBar />
         </div>
       </div>
 
-      {/* 2. Manifesto: Full-width Dark Container #0B0B0E */}
+      {/* 2. Manifesto: Full-width Dark Container bg-[#1E1E1F] */}
       <ManifestoScroll />
 
       {/* 3. Work & Target Audience (White Section) */}
-      <div className="relative w-full bg-[#0B0B0E]">
-        <div className="w-full bg-white rounded-t-[22px] sm:rounded-t-[28px] md:rounded-t-[34px] rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-hidden">
+      <div className="relative w-full bg-[#1E1E1F]">
+        {/* Seamless backdrop for bottom rounded corners matching HowItWorks dark tone #1E1E1F */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-[#1E1E1F] pointer-events-none" />
+
+        <div className="relative w-full bg-white rounded-t-[22px] sm:rounded-t-[28px] md:rounded-t-[34px] rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-hidden">
           <SelectedWork />
           <TargetAudience />
         </div>
       </div>
 
-      {/* 4. Process: HOW IT WORKS (Full-width Dark #0B0B0E) */}
+      {/* 4. Process: HOW IT WORKS (Full-width Dark #1E1E1F) */}
       <HowItWorks />
 
       {/* 5. Middle White Section (Pricing, FAQ) */}
-      <div className="relative w-full bg-[#000000]">
-        {/* Seamless backdrop for top rounded corners matching HowItWorks dark tone #0B0B0E */}
-        <div className="absolute top-0 left-0 right-0 h-48 bg-[#0B0B0E] pointer-events-none" />
+      <div className="relative w-full bg-[#1E1E1F]">
+        {/* Seamless backdrop for top rounded corners matching HowItWorks dark tone #1E1E1F */}
+        <div className="absolute top-0 left-0 right-0 h-48 bg-[#1E1E1F] pointer-events-none" />
 
         <div className="relative w-full bg-white rounded-t-[22px] sm:rounded-t-[28px] md:rounded-t-[34px] rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-hidden">
           <Pricing />
@@ -69,7 +72,7 @@ export const HomePage: FC = () => {
         </div>
       </div>
 
-      {/* 6. Final Action Callout & Footer (Full-width Black #000000) */}
+      {/* 6. Final Action Callout & Footer (Full-width Dark #1E1E1F) */}
       <FinalCTA />
     </>
   );

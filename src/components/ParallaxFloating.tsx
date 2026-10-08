@@ -73,38 +73,66 @@ export const Floating: FC<FloatingProps> = ({
   >(new Map());
 
   const mousePosRef = useRef({ x: 0, y: 0 });
+  const isAnimatingRef = useRef(false);
+  const animationFrameIdRef = useRef<number | null>(null);
+
+  const startAnimation = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+
+    const animate = () => {
+      let isMoving = false;
+
+      elementsMap.current.forEach((item) => {
+        const targetStrength = (item.depth * sensitivity) / 20;
+        const targetX = mousePosRef.current.x * targetStrength;
+        const targetY = mousePosRef.current.y * targetStrength;
+
+        const dx = targetX - item.currentPosition.x;
+        const dy = targetY - item.currentPosition.y;
+
+        if (Math.abs(dx) > 0.08 || Math.abs(dy) > 0.08) {
+          isMoving = true;
+          item.currentPosition.x += dx * easingFactor;
+          item.currentPosition.y += dy * easingFactor;
+          item.element.style.transform = `translate3d(${item.currentPosition.x.toFixed(2)}px, ${item.currentPosition.y.toFixed(2)}px, 0)`;
+        }
+      });
+
+      if (isMoving) {
+        animationFrameIdRef.current = requestAnimationFrame(animate);
+      } else {
+        isAnimatingRef.current = false;
+        animationFrameIdRef.current = null;
+      }
+    };
+
+    animationFrameIdRef.current = requestAnimationFrame(animate);
+  }, [sensitivity, easingFactor]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        mousePosRef.current = {
-          x: e.clientX - (rect.left + rect.width / 2),
-          y: e.clientY - (rect.top + rect.height / 2),
-        };
-      } else {
-        mousePosRef.current = {
-          x: e.clientX - window.innerWidth / 2,
-          y: e.clientY - window.innerHeight / 2,
-        };
-      }
+      mousePosRef.current = {
+        x: e.clientX - window.innerWidth / 2,
+        y: e.clientY - window.innerHeight / 2,
+      };
+      startAnimation();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
-        if (containerRef.current) {
-          const rect = containerRef.current.getBoundingClientRect();
-          mousePosRef.current = {
-            x: touch.clientX - (rect.left + rect.width / 2),
-            y: touch.clientY - (rect.top + rect.height / 2),
-          };
-        }
+        mousePosRef.current = {
+          x: touch.clientX - window.innerWidth / 2,
+          y: touch.clientY - window.innerHeight / 2,
+        };
+        startAnimation();
       }
     };
 
     const handleMouseLeave = () => {
       mousePosRef.current = { x: 0, y: 0 };
+      startAnimation();
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -115,8 +143,11 @@ export const Floating: FC<FloatingProps> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+      }
     };
-  }, []);
+  }, [startAnimation]);
 
   const registerElement = useCallback((id: string, element: HTMLElement, depth: number) => {
     elementsMap.current.set(id, {
@@ -129,34 +160,6 @@ export const Floating: FC<FloatingProps> = ({
   const unregisterElement = useCallback((id: string) => {
     elementsMap.current.delete(id);
   }, []);
-
-  useEffect(() => {
-    let animationFrameId: number;
-
-    const animate = () => {
-      elementsMap.current.forEach((item) => {
-        const targetStrength = (item.depth * sensitivity) / 20;
-        const targetX = mousePosRef.current.x * targetStrength;
-        const targetY = mousePosRef.current.y * targetStrength;
-
-        const dx = targetX - item.currentPosition.x;
-        const dy = targetY - item.currentPosition.y;
-
-        item.currentPosition.x += dx * easingFactor;
-        item.currentPosition.y += dy * easingFactor;
-
-        item.element.style.transform = `translate3d(${item.currentPosition.x.toFixed(2)}px, ${item.currentPosition.y.toFixed(2)}px, 0)`;
-      });
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [sensitivity, easingFactor]);
 
   return (
     <FloatingContext.Provider value={{ registerElement, unregisterElement }}>

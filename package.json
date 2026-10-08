@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node ./node_modules/vite/bin/vite.js",
+    "dev": "node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js",
     "build": "node scripts/generate-seo.cjs && node ./node_modules/typescript/bin/tsc -b && node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js build && node scripts/validate-seo.cjs",
     "generate:seo": "node scripts/generate-seo.cjs",
     "validate:seo": "node scripts/validate-seo.cjs",

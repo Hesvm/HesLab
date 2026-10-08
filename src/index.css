@@ -151,6 +151,15 @@
   font-family: 'Plus Jakarta Display', sans-serif;
 }
 
+.font-kansas {
+  font-family: 'KansasNew', Georgia, serif;
+}
+
+.font-kansas-italic {
+  font-family: 'KansasNew', Georgia, serif;
+  font-style: italic;
+}
+
 .font-serif-italic {
   font-family: 'KansasNew', Georgia, serif;
   font-style: italic;
@@ -160,6 +169,11 @@
   letter-spacing: -0.02em;
 }
 
+.pricing-feature-icon path,
+.pricing-feature-icon svg path {
+  stroke-width: 2.5px !important;
+}
+
 .manifesto-serif {
   font-family: 'KansasNew', Georgia, serif !important;
   font-style: italic;
@@ -167,15 +181,7 @@
 }
 
 .emoji-sticker-stroke {
-  filter: 
-    drop-shadow(1.75px 0 0 #ffffff)
-    drop-shadow(-1.75px 0 0 #ffffff)
-    drop-shadow(0 1.75px 0 #ffffff)
-    drop-shadow(0 -1.75px 0 #ffffff)
-    drop-shadow(1.25px 1.25px 0 #ffffff)
-    drop-shadow(-1.25px -1.25px 0 #ffffff)
-    drop-shadow(1.25px -1.25px 0 #ffffff)
-    drop-shadow(-1.25px 1.25px 0 #ffffff);
+  filter: url(#emoji-sticker);
 }
 
 @keyframes float-slow {
@@ -224,5 +230,17 @@
   -ms-overflow-style: none !important;  /* IE and Edge */
   scrollbar-width: none !important;  /* Firefox */
 }
+
+/* Scaled content for longform blog article & service pages (~85% zoom) */
+.page-article-zoom {
+  zoom: 0.88;
+}
+
+@media (min-width: 640px) {
+  .page-article-zoom {
+    zoom: 0.85;
+  }
+}
+
 
 

@@ -6,19 +6,31 @@ import { translations } from '../data/translations';
 export const FAQ: FC = () => {
   const { lang, isRtl } = useLanguage();
   const t = translations[lang].faq;
-  const [openIndex, setOpenIndex] = useState<number | null>(3); // Set item 3 (4th item) open initially or null, like the reference
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-16 sm:py-22 px-4 max-w-3xl mx-auto border-t border-slate-900/10">
+    <section className="py-16 sm:py-22 px-4 max-w-3xl mx-auto">
       {/* Section Header */}
-      <div className="text-center mb-10 sm:mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 28, filter: 'blur(5px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center mb-10 sm:mb-12"
+      >
         <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
           {t.title}
         </h2>
-      </div>
+      </motion.div>
 
       {/* Accordion List */}
-      <div className="space-y-3 sm:space-y-3.5">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="space-y-3 sm:space-y-3.5"
+      >
         {t.items.map((faq, idx) => {
           const isOpen = openIndex === idx;
           return (
@@ -32,7 +44,7 @@ export const FAQ: FC = () => {
                 className={`w-full flex items-center justify-between gap-4 cursor-pointer select-none ${isRtl ? 'text-right' : 'text-left'}`}
                 aria-expanded={isOpen}
               >
-                <span className="font-bold text-[15.5px] sm:text-[17.5px] text-slate-900 tracking-tight leading-snug">
+                <span className="font-medium text-[15.5px] sm:text-[17.5px] text-slate-900 tracking-tight leading-snug">
                   {faq.q}
                 </span>
                 <motion.div
@@ -71,7 +83,7 @@ export const FAQ: FC = () => {
             </div>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 };

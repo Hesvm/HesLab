@@ -31,6 +31,24 @@ export const ProjectDetailPage: FC = () => {
     }
   }, [project, lang]);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && !video.paused) {
+          video.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   const toggleSound = () => {
     playBenchoSound('switch');
     if (videoRef.current) {
@@ -270,7 +288,7 @@ export const ProjectDetailPage: FC = () => {
                   page_type: 'work_detail',
                 })
               }
-              className="bg-[#00A7F5] hover:bg-[#0096DC] text-white text-sm font-semibold px-7 py-3 rounded-full shadow-lg transition-transform active:scale-95 cursor-pointer"
+              className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-7 h-[46px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center select-none"
             >
               {lang === 'fa' ? 'سفارش تدوین این سبک' : 'Request This Editing Style'}
             </Link>
@@ -286,7 +304,7 @@ export const ProjectDetailPage: FC = () => {
                   page_path: `/work/${project.slug}`,
                 });
               }}
-              className="bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors cursor-pointer"
+              className="bg-slate-950 hover:bg-slate-800 text-white text-sm font-semibold px-6 h-[46px] rounded-[14px] transition-all cursor-pointer inline-flex items-center justify-center"
             >
               {lang === 'fa' ? 'جزییات سرویس شورتس' : 'View Service Details'}
             </Link>

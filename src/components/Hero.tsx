@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, type FC } from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import { RollingViewCounter } from './RollingViewCounter';
@@ -83,10 +84,52 @@ export const Hero: FC = () => {
   const t = translations[lang].hero;
 
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const card4Ref = useRef<HTMLDivElement>(null);
+  const card5Ref = useRef<HTMLDivElement>(null);
+  const card6Ref = useRef<HTMLDivElement>(null);
+  const centerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ticking = false;
+
+    const updateTransforms = (progress: number) => {
+      const zoomEase = 1 - Math.pow(1 - progress, 1.8);
+      const exitProgress = Math.max(0, (progress - 0.35) / 0.65);
+      const exitEase = Math.pow(exitProgress, 1.6);
+      const exitY = exitEase * 170;
+
+      if (card1Ref.current) {
+        card1Ref.current.style.transform = `scale(${1 + zoomEase * 0.18}) translate3d(${-zoomEase * 70}px, ${-zoomEase * 40 - exitY * 1.1}px, 0)`;
+        card1Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 0.08 - exitEase * 0.6));
+      }
+      if (card2Ref.current) {
+        card2Ref.current.style.transform = `scale(${1 + zoomEase * 0.52}) translate3d(${zoomEase * 150}px, ${-zoomEase * 60 - exitY * 1.1}px, 0)`;
+        card2Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 0.35 - exitEase * 0.7));
+      }
+      if (card3Ref.current) {
+        card3Ref.current.style.transform = `scale(${1 + zoomEase * 1.35}) translate3d(${zoomEase * 280}px, ${-zoomEase * 20 - exitY * 0.8}px, 0)`;
+        card3Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 1.1 - exitEase));
+      }
+      if (card4Ref.current) {
+        card4Ref.current.style.transform = `scale(${1 + zoomEase * 0.25}) translate3d(${zoomEase * 80}px, ${-zoomEase * 25 - exitY * 0.9}px, 0)`;
+        card4Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 0.25 - exitEase * 0.75));
+      }
+      if (card5Ref.current) {
+        card5Ref.current.style.transform = `scale(${1 + zoomEase * 0.68}) translate3d(${-zoomEase * 170}px, ${-zoomEase * 25 - exitY * 0.9}px, 0)`;
+        card5Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 0.65 - exitEase * 0.8));
+      }
+      if (card6Ref.current) {
+        card6Ref.current.style.transform = `scale(${1 + zoomEase * 1.4}) translate3d(${-zoomEase * 290}px, ${-zoomEase * 20 - exitY * 0.8}px, 0)`;
+        card6Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 1.1 - exitEase));
+      }
+      if (centerRef.current) {
+        centerRef.current.style.transform = `translate3d(0, ${-exitY}px, 0) scale(${1 + zoomEase * 0.06})`;
+        centerRef.current.style.opacity = String(Math.max(0, 1 - exitEase * 0.92));
+      }
+    };
 
     const handleScroll = () => {
       if (!ticking) {
@@ -97,9 +140,9 @@ export const Hero: FC = () => {
             const maxScroll = rect.height - window.innerHeight;
             if (maxScroll > 0) {
               const progress = Math.min(Math.max(scrollDistance / maxScroll, 0), 1);
-              setScrollProgress(progress);
+              updateTransforms(progress);
             } else {
-              setScrollProgress(0);
+              updateTransforms(0);
             }
           }
           ticking = false;
@@ -109,75 +152,17 @@ export const Hero: FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    updateTransforms(0);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Zoom progression curve: reaches maximum effect around 82% of scroll track
-  const p = Math.min(scrollProgress / 0.82, 1);
-  const zoomEase = 1 - Math.pow(1 - p, 2.2);
-
-  // 1. BACKGROUND DEPTH PLANE (Deep in space: stays crisp and in focus, subtle 16% zoom)
-  const card1Style = {
-    transform: `scale(${1 + zoomEase * 0.16}) translate3d(${-zoomEase * 65}px, ${-zoomEase * 40}px, 0)`,
-    filter: zoomEase > 0.1 ? `blur(${(zoomEase * 0.8).toFixed(1)}px)` : 'none',
-    opacity: 1 - zoomEase * 0.08,
-    willChange: 'transform, filter, opacity',
-  };
-
-  // 2. MIDGROUND DEPTH PLANE (Upper right, medium zoom, moderate depth blur)
-  const card2Style = {
-    transform: `scale(${1 + zoomEase * 0.48}) translate3d(${zoomEase * 145}px, ${-zoomEase * 60}px, 0)`,
-    filter: zoomEase > 0.05 ? `blur(${(zoomEase * 3.8).toFixed(1)}px)` : 'none',
-    opacity: 1 - zoomEase * 0.35,
-    willChange: 'transform, filter, opacity',
-  };
-
-  // 3. FOREGROUND FLY-PAST PLANE (Right flank: rushes right past camera lens with huge 2.25x zoom & heavy bokeh blur)
-  const card3Style = {
-    transform: `scale(${1 + zoomEase * 1.25}) translate3d(${zoomEase * 270}px, ${-zoomEase * 20}px, 0)`,
-    filter: zoomEase > 0.03 ? `blur(${(zoomEase * 11.5).toFixed(1)}px)` : 'none',
-    opacity: Math.max(0, 1 - zoomEase * 1.15),
-    willChange: 'transform, filter, opacity',
-  };
-
-  // 4. BACKGROUND DEPTH PLANE (Lower right: anchors the bottom scene, sharp and clear)
-  const card4Style = {
-    transform: `scale(${1 + zoomEase * 0.22}) translate3d(${zoomEase * 75}px, ${-zoomEase * 25}px, 0)`,
-    filter: zoomEase > 0.1 ? `blur(${(zoomEase * 1.2).toFixed(1)}px)` : 'none',
-    opacity: Math.max(0, 1 - zoomEase * 0.25),
-    willChange: 'transform, filter, opacity',
-  };
-
-  // 5. MIDGROUND DEPTH PLANE (Lower left: dynamic angle, medium-high zoom and blur)
-  const card5Style = {
-    transform: `scale(${1 + zoomEase * 0.62}) translate3d(${-zoomEase * 165}px, ${-zoomEase * 25}px, 0)`,
-    filter: zoomEase > 0.05 ? `blur(${(zoomEase * 5.5).toFixed(1)}px)` : 'none',
-    opacity: Math.max(0, 1 - zoomEase * 0.7),
-    willChange: 'transform, filter, opacity',
-  };
-
-  // 6. FOREGROUND FLY-PAST PLANE (Left flank: rushes right past camera lens with huge 2.3x zoom & heavy bokeh blur)
-  const card6Style = {
-    transform: `scale(${1 + zoomEase * 1.3}) translate3d(${-zoomEase * 280}px, ${-zoomEase * 20}px, 0)`,
-    filter: zoomEase > 0.03 ? `blur(${(zoomEase * 12.0).toFixed(1)}px)` : 'none',
-    opacity: Math.max(0, 1 - zoomEase * 1.15),
-    willChange: 'transform, filter, opacity',
-  };
-
-  // Central headline camera depth (subtle 5% scale)
-  const centerStyle = {
-    transform: `scale(${1 + zoomEase * 0.05})`,
-    willChange: 'transform',
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[175vh] sm:h-[185vh] lg:h-[195vh] select-none bg-white"
+      className="relative w-full h-[155vh] sm:h-[165vh] lg:h-[175vh] select-none bg-white"
     >
       {/* Sticky Full-Viewport Hero Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center pt-16 sm:pt-20 pb-10 px-4 bg-white">
@@ -188,7 +173,7 @@ export const Hero: FC = () => {
           
           {/* 1. TOP-LEFT CARD (Inner Lane: Top) */}
           <FloatingElement depth={0.8} className="top-[3%] sm:top-[4%] lg:top-[5%] left-[8%] sm:left-[10%] lg:left-[12%] xl:left-[13.5%]">
-            <div style={card1Style}>
+            <div ref={card1Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-1">
                 <PerspectiveVideoCard
                   video="/videos/video_1.mp4"
@@ -204,7 +189,7 @@ export const Hero: FC = () => {
 
           {/* 2. TOP-RIGHT CARD (Inner Lane: Top) */}
           <FloatingElement depth={1.2} className="top-[3%] sm:top-[4%] lg:top-[5%] right-[7%] sm:right-[9%] lg:right-[11%] xl:right-[12.5%]">
-            <div style={card2Style}>
+            <div ref={card2Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-4">
                 <PerspectiveVideoCard
                   video="/videos/video_2.mp4"
@@ -220,7 +205,7 @@ export const Hero: FC = () => {
 
           {/* 3. FAR-RIGHT-MID CARD (Outer Lane: Mid Flank) */}
           <FloatingElement depth={0.6} className="top-[48%] -translate-y-1/2 right-[0%] lg:right-[0.5%] xl:right-[1%] hidden sm:block">
-            <div style={card3Style}>
+            <div ref={card3Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
                   video="/videos/video_3.mp4"
@@ -236,7 +221,7 @@ export const Hero: FC = () => {
 
           {/* 4. BOTTOM-RIGHT CARD (Inner Lane: Bottom) */}
           <FloatingElement depth={1.3} className="bottom-[2.5%] sm:bottom-[3%] lg:bottom-[4%] right-[7%] sm:right-[9%] lg:right-[11%] xl:right-[12.5%]">
-            <div style={card4Style}>
+            <div ref={card4Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-3">
                 <PerspectiveVideoCard
                   video="/videos/video_4.mp4"
@@ -252,7 +237,7 @@ export const Hero: FC = () => {
 
           {/* 5. BOTTOM-LEFT CARD (Inner Lane: Bottom) */}
           <FloatingElement depth={0.9} className="bottom-[2.5%] sm:bottom-[3%] lg:bottom-[4%] left-[8%] sm:left-[10%] lg:left-[12%] xl:left-[13.5%]">
-            <div style={card5Style}>
+            <div ref={card5Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
                   video="/videos/video_5.mp4"
@@ -268,7 +253,7 @@ export const Hero: FC = () => {
 
           {/* 6. FAR-LEFT-MID CARD (Outer Lane: Mid Flank) */}
           <FloatingElement depth={1.0} className="top-[48%] -translate-y-1/2 left-[0%] lg:left-[0.5%] xl:left-[1%] hidden sm:block">
-            <div style={card6Style}>
+            <div ref={card6Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-3">
                 <PerspectiveVideoCard
                   video="/videos/video_6.mp4"
@@ -288,11 +273,17 @@ export const Hero: FC = () => {
         {/* 2. THE CENTRAL HERO CONTENT                               */}
         {/* ========================================================= */}
         <div
-          style={centerStyle}
+          ref={centerRef}
+          style={{ willChange: 'transform, opacity' }}
           className="relative z-20 max-w-3xl lg:max-w-4xl mx-auto flex flex-col items-center text-center px-4 my-auto -translate-y-7 sm:-translate-y-9"
         >
           {/* Studio Status Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF8F2] text-xs font-bold text-emerald-950 mb-5 select-none transition-all">
+          <motion.div
+            initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF8F2] text-xs font-bold text-emerald-950 mb-5 select-none transition-all"
+          >
             <div className="flex items-center gap-[3.5px] shrink-0" dir="ltr">
               <span className="w-[5.5px] h-[5.5px] rounded-full bg-emerald-500" />
               <span className="w-[5.5px] h-[5.5px] rounded-full bg-emerald-500" />
@@ -300,10 +291,15 @@ export const Hero: FC = () => {
               <span className="w-[5.5px] h-[5.5px] rounded-full bg-emerald-500/25" />
             </div>
             <span>{t.tag}</span>
-          </div>
+          </motion.div>
 
           {/* Main Headline (STRICTLY 2 LINES ONLY) */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-black tracking-tight text-slate-950 leading-[1.25] sm:leading-[1.2] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-black tracking-tight text-slate-950 leading-[1.25] sm:leading-[1.2] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none"
+          >
             {/* LINE 1 */}
             <div className="flex items-center justify-center gap-2 whitespace-nowrap">
               <span>Good ideas</span>
@@ -314,23 +310,33 @@ export const Hero: FC = () => {
               <span>deserve</span>
               <RollingViewCounter />
             </div>
-          </h1>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p className="mt-4 text-slate-600 text-sm sm:text-base md:text-lg max-w-xl font-medium leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-4 text-slate-600 text-sm sm:text-base md:text-lg max-w-xl font-medium leading-relaxed"
+          >
             {t.subtitle || (
               <>
                 {t.subLine1} <br />
                 <span className="text-slate-950 font-bold">{t.subLine2}</span>
               </>
             )}
-          </p>
+          </motion.p>
 
           {/* Action Buttons: [ View our work ] [ Pricing ] */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-7 flex flex-wrap items-center justify-center gap-3"
+          >
             <a
               href="#work"
-              className="px-6 py-3 rounded-[12px] bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3 rounded-[12px] bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
             >
               <span>{t.viewWorkBtn}</span>
               <svg
@@ -342,11 +348,11 @@ export const Hero: FC = () => {
             </a>
             <a
               href="#pricing"
-              className="px-6 py-3 rounded-[12px] border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm transition-all duration-200 active:scale-95 cursor-pointer"
+              className="px-6 py-3 rounded-[12px] border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm transition-all duration-200 active:scale-95 cursor-pointer shadow-2xs hover:shadow-xs"
             >
               {t.pricingBtn}
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

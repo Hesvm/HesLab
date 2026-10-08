@@ -1,34 +1,24 @@
 import { useState, type FC } from 'react';
-import { Link } from 'react-router-dom';
-import { VolumeHigh, VolumeCross } from 'iconsax-react';
-import { PROJECTS } from '../data/projects';
-import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
+import { VideoCard } from '../components/SelectedWork';
+import { CategoryPills } from '../components/CategoryPills';
 import { useLanguage } from '../context/LanguageContext';
-import { playBenchoSound } from '../content/soundData';
+import { translations } from '../data/translations';
 
 export const WorkPage: FC = () => {
   const { lang, isRtl } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [unmutedId, setUnmutedId] = useState<number | null>(null);
+  const t = translations[lang].work;
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [unmutedVideoId, setUnmutedVideoId] = useState<number | null>(null);
+  const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
 
-  const categories = [
-    { id: 'all', labelFa: 'همه', labelEn: 'All' },
-    { id: 'vlog', labelFa: 'ولاگ', labelEn: 'Vlog' },
-    { id: 'documentary', labelFa: 'مستند', labelEn: 'Documentary' },
-    { id: 'podcast', labelFa: 'پادکست', labelEn: 'Podcast' },
-    { id: 'commercial', labelFa: 'تبلیغاتی', labelEn: 'Commercial' },
-    { id: 'educational', labelFa: 'آموزشی', labelEn: 'Educational' },
-  ];
+  const filteredItems =
+    activeCategory === 'all'
+      ? t.items
+      : t.items.filter((item) => item.category === activeCategory);
 
-  const filteredProjects = selectedCategory === 'all'
-    ? PROJECTS
-    : PROJECTS.filter((p) => p.category === selectedCategory);
-
-  const toggleSound = (id: number) => {
-    playBenchoSound('switch');
-    setUnmutedId((prev) => (prev === id ? null : id));
-  };
+  const activeFocusedId = hoveredVideoId ?? unmutedVideoId;
+  const hasActiveFocus = activeFocusedId !== null;
 
   return (
     <div
@@ -47,125 +37,37 @@ export const WorkPage: FC = () => {
         path="/work"
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <Breadcrumbs
-          items={[
-            { name: lang === 'fa' ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: lang === 'fa' ? 'نمونه‌کارها' : 'Work', path: '/work' },
-          ]}
-        />
+      <section className="px-4 max-w-[840px] mx-auto">
+        <h1 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight text-center mb-7 sm:mb-9">
+          {lang === 'fa' ? 'نمونه‌کارهای منتخب' : 'Selected Works'}
+        </h1>
 
-        <header className="mb-10 text-center">
-          <div className="max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold mb-3">
-              <span>{lang === 'fa' ? 'آرشیو کارهای حس‌لب' : 'HesLab Portfolio'}</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-              {lang === 'fa' ? 'پروژه‌های منتخب و ادیت‌های پربازدید' : 'Selected Work & Case Studies'}
-            </h1>
-            <p className="mt-3 text-[15px] sm:text-base text-slate-600 leading-relaxed">
-              {lang === 'fa'
-                ? 'ویدیوهای کوتاه با کیفیت 4K و ریتم مهندسی‌شده برای نگهداشت بالای ۷۵٪ نگاه مخاطب.'
-                : 'Vertical video edits engineered for high retention, viral reach, and commercial brand impact.'}
-            </p>
-          </div>
+        {/* Category Filter (same as home) */}
+        <div className="mb-5 sm:mb-7">
+          <CategoryPills categories={t.categories} active={activeCategory} onChange={setActiveCategory} />
+        </div>
 
-          {/* Category Filter (Strictly Single Line) */}
-          <div className="w-full flex items-center justify-start sm:justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden gap-2 mt-7 py-1 px-2">
-            {categories.map((cat) => {
-              const isActive = selectedCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => {
-                    setSelectedCategory(cat.id);
-                    playBenchoSound('select');
-                  }}
-                  className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-full text-[12.5px] font-medium transition-all duration-150 cursor-pointer ${
-                    isActive
-                      ? 'bg-slate-950 text-white shadow-sm'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {lang === 'fa' ? cat.labelFa : cat.labelEn}
-                </button>
-              );
-            })}
-          </div>
-        </header>
-
-        {/* Portfolio Grid */}
-        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="group rounded-3xl overflow-hidden border border-slate-200 bg-white hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              {/* Video Player Box */}
-              <div className="relative aspect-[9/16] bg-slate-950 overflow-hidden">
-                <video
-                  src={project.video}
-                  poster={project.image}
-                  muted={unmutedId !== project.id}
-                  autoPlay
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-full object-cover"
-                />
-
-                {/* View Badge */}
-                <div className="absolute top-4 start-4 bg-black/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                  {project.views} ویو
-                </div>
-
-                {/* Sound Toggle Button */}
-                <button
-                  type="button"
-                  onClick={() => toggleSound(project.id)}
-                  aria-label={unmutedId === project.id ? 'قطع صدا' : 'وصل صدا'}
-                  className="absolute bottom-4 end-4 size-9 rounded-full bg-black/70 backdrop-blur-md text-white flex items-center justify-center hover:scale-105 transition-transform z-10 cursor-pointer"
-                >
-                  {unmutedId === project.id ? (
-                    <VolumeHigh size={17} color="currentColor" />
-                  ) : (
-                    <VolumeCross size={17} color="currentColor" />
-                  )}
-                </button>
-              </div>
-
-              {/* Card Meta & Detail Link */}
-              <div className="p-5 flex flex-col justify-between grow">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-mono text-sky-600 font-bold uppercase tracking-wider">
-                      {project.tag} • {project.resolution}
-                    </span>
-                    <span className="text-[11px] text-slate-400">
-                      {project.durationSeconds} ثانیه
-                    </span>
-                  </div>
-
-                  <h2 className="text-[15px] font-bold text-slate-900 mb-2 leading-snug line-clamp-2">
-                    {lang === 'fa' ? project.titleFa : project.titleEn}
-                  </h2>
-
-                  <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-                    {lang === 'fa' ? project.descriptionFa : project.descriptionEn}
-                  </p>
-                </div>
-
-                <Link
-                  to={`/work/${project.slug}`}
-                  className="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-950 hover:text-white text-slate-900 text-xs font-semibold transition-colors duration-200"
-                >
-                  <span>{lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View Edit Breakdown'}</span>
-                </Link>
-              </div>
-            </div>
+        {/* Video grid: identical cards and sizing as the home page */}
+        {filteredItems.length === 0 && (
+          <p className="py-16 text-center text-[14px] font-medium text-slate-500">
+            {lang === 'fa' ? 'به‌زودی نمونه‌کار جدید در این حوزه اضافه می‌شود.' : 'Work in this niche is coming soon.'}
+          </p>
+        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4.5">
+          {filteredItems.map((item) => (
+            <VideoCard
+              key={item.id}
+              item={item}
+              isRtl={isRtl}
+              isUnmuted={unmutedVideoId === item.id}
+              isFocused={hasActiveFocus && activeFocusedId === item.id}
+              isDimmed={hasActiveFocus && activeFocusedId !== item.id}
+              onToggleSound={(id) => setUnmutedVideoId((prev) => (prev === id ? null : id))}
+              onHover={setHoveredVideoId}
+            />
           ))}
-        </main>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };

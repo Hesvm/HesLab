@@ -62,7 +62,7 @@ export const NotFoundPage: FC = () => {
           </Link>
           <Link
             to="/contact"
-            className="px-5 py-2.5 rounded-full bg-[#00A7F5] text-white text-xs font-semibold hover:bg-[#0096DC] transition-colors"
+            className="px-5 py-2.5 rounded-[12px] bg-[#5566FF] hover:bg-[#4859F5] text-white text-xs font-semibold border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all cursor-pointer inline-flex items-center justify-center select-none"
           >
             {lang === 'fa' ? 'تماس' : 'Contact'}
           </Link>

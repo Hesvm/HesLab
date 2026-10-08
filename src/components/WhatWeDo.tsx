@@ -31,7 +31,7 @@ export const WhatWeDo: FC = () => {
   const pillars = [t.pillar1, t.pillar2, t.pillar3];
 
   return (
-    <section id="services" className="py-24 sm:py-32 px-4 max-w-6xl mx-auto border-t border-slate-900/10">
+    <section id="services" className="py-24 sm:py-32 px-4 max-w-6xl mx-auto">
       {/* Header */}
       <div className="text-center mb-16 sm:mb-20">
         <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">

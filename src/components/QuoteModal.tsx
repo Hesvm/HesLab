@@ -6,8 +6,7 @@ import {
   Diamonds,
   DocumentText,
   Send2,
-  Clock,
-  CloseCircle,
+    CloseCircle,
   TickCircle,
 } from 'iconsax-react';
 import { useQuoteModal, type PlanType } from '../context/QuoteModalContext';
@@ -15,12 +14,9 @@ import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import { trackEvent } from '../lib/analytics';
 
-const ROCKET_EMOJI =
-  'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Travel%20and%20places/Rocket.png';
-const GEM_STONE_EMOJI =
-  'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Objects/Gem%20Stone.png';
-const CROWN_EMOJI =
-  'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Objects/Crown.png';
+const SINGLE_VIDEO_EMOJI = '/emojis/single_video.png';
+const PACKAGE_EMOJI = '/emojis/package.png';
+const MEMO_EMOJI = '/emojis/memo.png';
 const PARTY_POPPER_EMOJI =
   'https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Activities/Party%20Popper.png';
 
@@ -67,9 +63,9 @@ export const QuoteModal: FC = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       const scrollH = textareaRef.current.scrollHeight;
-      const nextHeight = Math.min(Math.max(82, scrollH), 240);
+      const nextHeight = Math.min(Math.max(82, scrollH), 400);
       textareaRef.current.style.height = `${nextHeight}px`;
-      textareaRef.current.style.overflowY = scrollH > 240 ? 'auto' : 'hidden';
+      textareaRef.current.style.overflowY = scrollH > 400 ? 'auto' : 'hidden';
     }
   }, [description, isOpen]);
 
@@ -137,6 +133,7 @@ export const QuoteModal: FC = () => {
     id: PlanType;
     name: string;
     price: string;
+    videos: string;
     emoji: string;
     popular?: boolean;
   }[] = [
@@ -144,20 +141,23 @@ export const QuoteModal: FC = () => {
       id: 'starter',
       name: t.plans.starter.name,
       price: t.plans.starter.price,
-      emoji: ROCKET_EMOJI,
+      videos: t.plans.starter.videos,
+      emoji: SINGLE_VIDEO_EMOJI,
     },
     {
       id: 'standard',
       name: t.plans.standard.name,
       price: t.plans.standard.price,
-      emoji: GEM_STONE_EMOJI,
+      videos: t.plans.standard.videos,
+      emoji: PACKAGE_EMOJI,
       popular: true,
     },
     {
       id: 'custom',
       name: t.plans.custom.name,
       price: t.plans.custom.price,
-      emoji: CROWN_EMOJI,
+      videos: t.plans.custom.videos,
+      emoji: MEMO_EMOJI,
     },
   ];
 
@@ -273,7 +273,7 @@ export const QuoteModal: FC = () => {
                       className={`w-full h-[44px] px-3.5 rounded-[14px] bg-slate-50/80 hover:bg-slate-100/60 focus:bg-white text-slate-900 text-[14px] border transition-all outline-none ${
                         errors.name
                           ? 'border-rose-400 ring-2 ring-rose-100 bg-rose-50/20'
-                          : 'border-slate-200/90 focus:border-[#00A7F5] focus:ring-3 focus:ring-[#00A7F5]/10'
+                          : 'border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10'
                       }`}
                     />
                     {errors.name && (
@@ -298,7 +298,7 @@ export const QuoteModal: FC = () => {
                       className={`w-full h-[44px] px-3.5 rounded-[14px] bg-slate-50/80 hover:bg-slate-100/60 focus:bg-white text-slate-900 text-[14px] border transition-all outline-none ${
                         errors.email
                           ? 'border-rose-400 ring-2 ring-rose-100 bg-rose-50/20'
-                          : 'border-slate-200/90 focus:border-[#00A7F5] focus:ring-3 focus:ring-[#00A7F5]/10'
+                          : 'border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10'
                       }`}
                     />
                     {errors.email && (
@@ -321,15 +321,15 @@ export const QuoteModal: FC = () => {
                             key={p.id}
                             type="button"
                             onClick={() => setSelectedPlan(p.id)}
-                            className={`relative p-3 rounded-[18px] border text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-between min-h-[96px] ${
+                            className={`relative p-2.5 sm:p-3 rounded-[20px] border text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center gap-1.5 sm:gap-2 aspect-square ${
                               isSelected
-                                ? 'border-[#00A7F5] bg-[#F0F9FF] shadow-[0_0_0_2px_#00A7F5,0_4px_16px_rgba(0,167,245,0.14)]'
+                                ? 'border-[#5566FF] bg-[#5566FF]/5 shadow-[0_0_0_2px_#5566FF,0_4px_16px_rgba(85,102,255,0.16)]'
                                 : 'border-slate-200/90 bg-white hover:border-slate-300 hover:bg-slate-50/50'
                             }`}
                           >
                             {/* Popular Mini Tag */}
                             {p.popular && (
-                              <span className="absolute -top-2 inset-x-auto px-2 py-0.5 rounded-full bg-[#00A7F5] text-white text-[9.5px] font-bold shadow-xs">
+                              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#5566FF] text-white text-[9.5px] font-bold shadow-xs whitespace-nowrap">
                                 {lang === 'fa' ? 'محبوب' : 'Popular'}
                               </span>
                             )}
@@ -338,15 +338,20 @@ export const QuoteModal: FC = () => {
                             <img
                               src={p.emoji}
                               alt={p.name}
-                              className="w-8 h-8 object-contain mb-1 drop-shadow-xs pointer-events-none select-none"
+                              className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-xs pointer-events-none select-none"
                             />
 
                             <div>
-                              <div className="text-[13px] font-bold text-slate-950 leading-tight">
+                              <div className="text-[13px] sm:text-[13.5px] font-bold text-slate-950 leading-tight">
                                 {p.name}
                               </div>
-                              <div className="text-[11.5px] font-medium text-slate-500 mt-0.5">
-                                {p.price}
+                              {p.id !== 'custom' && (
+                                <div className="text-[11.5px] sm:text-[12px] font-semibold text-slate-800 mt-0.5">
+                                  {p.price}
+                                </div>
+                              )}
+                              <div className="text-[10px] sm:text-[10.5px] font-medium text-slate-400 mt-0.5">
+                                {p.videos}
                               </div>
                             </div>
                           </button>
@@ -366,8 +371,8 @@ export const QuoteModal: FC = () => {
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       placeholder={t.descPlaceholder}
-                      style={{ minHeight: '82px', maxHeight: '240px' }}
-                      className="w-full p-3.5 rounded-[16px] bg-slate-50/80 hover:bg-slate-100/60 focus:bg-white text-slate-900 text-[13.5px] border border-slate-200/90 focus:border-[#00A7F5] focus:ring-3 focus:ring-[#00A7F5]/10 outline-none resize-none leading-relaxed transition-[border-color,background-color,box-shadow] duration-150 overflow-hidden"
+                      style={{ minHeight: '82px', maxHeight: '400px' }}
+                      className="w-full p-3.5 rounded-[16px] bg-slate-50/80 hover:bg-slate-100/60 focus:bg-white text-slate-900 text-[13.5px] border border-slate-200/90 focus:border-[#5566FF] focus:ring-3 focus:ring-[#5566FF]/10 outline-none resize-none leading-relaxed transition-[border-color,background-color,box-shadow] duration-150 overflow-hidden"
                     />
                   </div>
 
@@ -390,16 +395,6 @@ export const QuoteModal: FC = () => {
                         </>
                       )}
                     </button>
-
-                    {/* Trust SLA Badge: typically answer in 4 hours */}
-                    <div className="flex items-center justify-center gap-1.5 mt-2.5 text-[11.5px] text-slate-500 font-medium select-none">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <Clock size={13} variant="Linear" className="text-slate-400" />
-                      <span>{t.responseTime}</span>
-                    </div>
                   </div>
                 </form>
               </div>
