@@ -103,7 +103,7 @@ export const ServiceHero: FC<{ article: ServiceArticle }> = ({ article }) => {
       </h1>
 
       {/* Clean Service Description */}
-      <p className="mt-4 sm:mt-5 max-w-2xl text-[17px] sm:text-[19px] leading-[1.65] text-slate-600 font-medium">
+      <p className="mt-4 sm:mt-5 w-full text-[17px] sm:text-[19px] leading-[1.65] text-slate-600 font-medium">
         {article.cardDesc}
       </p>
 
@@ -131,7 +131,7 @@ export const ServiceSection: FC<{
       {heading}
     </h2>
     {intro && (
-      <p className="mt-4 max-w-2xl text-[16px] sm:text-[17px] leading-[1.75] text-slate-600">
+      <p className="mt-4 w-full text-[16px] sm:text-[17px] leading-[1.75] text-slate-600">
         <RichText text={intro} />
       </p>
     )}
@@ -230,7 +230,7 @@ export const CardGrid: FC<{
 );
 
 export const AnswerBlock: FC<{ answer: string; points?: string[] }> = ({ answer, points }) => (
-  <div className="max-w-3xl">
+  <div className="w-full">
     <p className="text-[18px] sm:text-[19px] leading-[1.75] text-slate-800">{answer}</p>
     {points && <p className="mt-4 text-[15px] font-semibold text-slate-500">{points.join('  ·  ')}</p>}
   </div>

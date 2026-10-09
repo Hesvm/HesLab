@@ -23,16 +23,24 @@ export interface ResourceSection {
   pullQuote?: string;
   pullQuoteEn?: string;
   numberedSteps?: { step: string; title: string; text: string }[];
+  numberedStepsEn?: { step: string; title: string; text: string }[];
   comparison?: {
     title: string;
+    titleEn?: string;
     beforeLabel: string;
+    beforeLabelEn?: string;
     beforeText: string;
+    beforeTextEn?: string;
     afterLabel: string;
+    afterLabelEn?: string;
     afterText: string;
+    afterTextEn?: string;
   };
   table?: {
     headers: string[];
+    headersEn?: string[];
     rows: string[][];
+    rowsEn?: string[][];
   };
   code?: {
     language: string;
@@ -224,11 +232,18 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
         ],
         table: {
           headers: ['شاخصه', 'هوک غیرحرفه‌ای (معمولی)', 'هوک مهندسی‌شده حس‌لب'],
+          headersEn: ['Metric', 'Generic Hook (Standard)', 'HesLab Engineered Hook'],
           rows: [
             ['جمله آغازین', '«سلام رفقا، امروز می‌خوام درباره ادیت صحبت کنم...»', '«این اشتباه در ادیت، نصف ویوهای ریلزت رو می‌کشه!»'],
             ['ریتم تصویر در ۳ ثانیه', 'یک کادر ثابت با نور ضعیف', '۳ تغییر کادر هوشمند همراه با زوم و بیست‌کات'],
             ['لایه صوتی', 'فقط صدای ضبط شده میکروفون گوشی', 'وووش سینمایی + رایزر + افکت فرکانسی سه‌بعدی'],
             ['نرخ ریزش مخاطب', 'بیش از ۶۰٪ در ثانیه اول', 'کمتر از ۱۸٪ در ثانیه اول'],
+          ],
+          rowsEn: [
+            ['Opening Line', '"Hey guys, today I want to talk about editing..."', '"This single editing mistake is killing half of your Reels views!"'],
+            ['Visual Pace (First 3s)', 'Static single framing with flat lighting', '3 dynamic reframes with punch-in zoom & beast cuts'],
+            ['Audio Layers', 'Raw phone microphone recording only', 'Cinematic whoosh + riser + spatial sub-bass transient'],
+            ['Viewer Drop-off', '> 60% within first second', '< 18% within first second'],
           ],
         },
       },
@@ -257,6 +272,23 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
             step: '03',
             title: 'پل ارتباطی به بدنه اصلی',
             text: 'ارائه پاسخ یا شروع توضیح سریع بلافاصله پس از ثانیه ۳ بدون اضافه گویی.',
+          },
+        ],
+        numberedStepsEn: [
+          {
+            step: '01',
+            title: 'Extract Tension or Contradiction',
+            text: "Identify the speaker's boldest statement and move it to second zero.",
+          },
+          {
+            step: '02',
+            title: 'Audio-Visual Synchrony',
+            text: 'Animate high-contrast keyword kinetic captions precisely locked to speech transients.',
+          },
+          {
+            step: '03',
+            title: 'Immediate Bridge to Core Body',
+            text: 'Deliver the direct answer or begin frictionless payoff right at second 3 without fluff.',
           },
         ],
       },
@@ -754,10 +786,16 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
         ],
         table: {
           headers: ['مرحله کانال / برند', 'تعداد ویدیو در ماه', 'تمرکز اصلی ادیت', 'نتیجه مورد انتظار'],
+          headersEn: ['Channel / Brand Stage', 'Monthly Video Volume', 'Primary Editing Focus', 'Expected Outcome'],
           rows: [
             ['شروع و اعتبارسازی اولیه', '۸ الی ۱۲ ویدیو', 'هوک‌های قوی و معرفی ارزش اصلی', 'شناسایی پرسونای مخاطب و تثبیت استایل'],
             ['رشد فعال و افزایش دنبال‌کننده', '۱۲ الی ۱۶ ویدیو', 'ریتم سرعتی، ساند افکت و تمپوی بالا', 'ورود منظم به فید اکسپلور و ریلز'],
             ['برند تثبیت‌شده و فروش مستقیم', '۱۶ الی ۲۴ ویدیو', 'روایت‌گری داستانی، موشن اختصاصی و CTA', 'تبدیل مخاطب به مشتری و درآمد پایدار'],
+          ],
+          rowsEn: [
+            ['Early Launch & Validation', '8 to 12 videos', 'High-impact hooks & core value proposition', 'Audience persona discovery & style foundation'],
+            ['Active Growth & Scaling', '12 to 16 videos', 'Fast pacing, kinetic sound effects & high tempo', 'Consistent algorithmic reach & Explore virality'],
+            ['Established Brand & Conversion', '16 to 24 videos', 'Narrative storytelling, bespoke motion & clear CTA', 'Audience-to-client pipeline & predictable revenue'],
           ],
         },
       },
@@ -1324,11 +1362,18 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
         ],
         table: {
           headers: ['شاخصه', 'ادیتور داخلی تمام‌وقت', 'ریتینر ماهانه استودیو حس‌لب'],
+          headersEn: ['Metric', 'Full-time In-House Editor', 'HesLab Monthly Retainer'],
           rows: [
             ['هزینه راه‌اندازی و سیستم', 'بالا (سیستم تدوین و مانیتور رنگی)', 'صفر (تمام زیرساخت بر عهده استودیو است)'],
             ['تعهد زمانی و قرارداد', 'قرارداد سالیانه و بیمه', 'ماهانه، لغو آسان بدون جریمه'],
             ['سرعت تحویل ویدیوها', 'وابسته به مشغله و مرخصی', 'تضمین ۲۴ تا ۴۸ ساعته پیوسته'],
             ['سطح موشن دیزاین و ساند', 'معمولا در حد متوسط', 'استاندارد استودیویی فریم‌به‌فریم'],
+          ],
+          rowsEn: [
+            ['Infrastructure & Hardware Cost', 'High (workstation, color grading monitor, storage)', 'Zero (all infrastructure and licenses covered by studio)'],
+            ['Contractual Commitment', 'Annual contract, benefits & overhead', 'Month-to-month, cancel anytime without penalty'],
+            ['Turnaround & Delivery Speed', 'Variable due to sickness, PTO & bottlenecks', 'Guaranteed 24-48h asynchronous turnaround'],
+            ['Motion Design & Audio Mastery', 'Often generalist / basic level', 'Bespoke frame-by-frame studio standard'],
           ],
         },
       },

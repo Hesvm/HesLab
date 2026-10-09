@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, type FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getResourceBySlug } from '../data/resources';
-import { getProjectBySlug } from '../data/projects';
 import { TableOfContentsRail } from '../components/resources/TableOfContentsRail';
 import { BlogIllustrationCover } from '../components/resources/BlogIllustrationCover';
 import { CompareBlock, FAQBlock } from '../components/service-article/ServiceArticleBlocks';
@@ -12,7 +11,6 @@ import {
   CodeBlock,
   CTACard,
   DataTable,
-  FeaturedProjectCard,
   KeyTakeaways,
   PullQuote,
   ReferenceList,
@@ -113,7 +111,6 @@ export const ResourceDetailPage: FC = () => {
   const introduction = lang === 'en' && article.introductionEn ? article.introductionEn : article.introduction;
   const authorName = lang === 'en' && article.author.nameEn ? article.author.nameEn : article.author.name;
   const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
-  const featuredProject = article.featuredProjectSlug ? getProjectBySlug(article.featuredProjectSlug) : undefined;
   const tocItems = article.tableOfContents.map((t) => ({
     id: t.id,
     title: lang === 'en' && t.titleEn ? t.titleEn : t.title,
@@ -164,7 +161,7 @@ export const ResourceDetailPage: FC = () => {
         </aside>
       )}
 
-      <div ref={articleContainerRef} className="mx-auto max-w-5xl px-4 sm:px-6 page-article-zoom">
+      <div ref={articleContainerRef} className="mx-auto max-w-4xl px-4 sm:px-6 page-article-zoom">
         <article className="pt-3">
           {/* Back */}
           <div className="mb-6">
@@ -177,7 +174,7 @@ export const ResourceDetailPage: FC = () => {
             </Link>
           </div>
 
-          <h1 className="max-w-3xl text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">{title}</h1>
+          <h1 className="w-full text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">{title}</h1>
 
           <div className="mt-6">
             <ArticleMetaBar
@@ -194,7 +191,7 @@ export const ResourceDetailPage: FC = () => {
 
           {/* Key takeaways */}
           {article.keyTakeaways && article.keyTakeaways.length > 0 && (
-            <div className="mt-10 max-w-3xl">
+            <div className="mt-10 w-full">
               <KeyTakeaways
                 title={lang === 'fa' ? 'نکات کلیدی این راهنما' : 'Key takeaways'}
                 items={lang === 'en' && article.keyTakeawaysEn ? article.keyTakeawaysEn : article.keyTakeaways}
@@ -203,7 +200,7 @@ export const ResourceDetailPage: FC = () => {
           )}
 
           {/* Introduction */}
-          <div id="sec-intro" data-toc-section className="mt-10 max-w-3xl scroll-mt-28">
+          <div id="sec-intro" data-toc-section className="mt-10 w-full scroll-mt-28">
             <p className={`text-[18px] ${lang === 'fa' ? 'leading-[2]' : 'leading-[1.75]'} text-slate-800 sm:text-[19px]`}>
               {introduction}
             </p>
@@ -216,6 +213,15 @@ export const ResourceDetailPage: FC = () => {
             const callout = lang === 'en' && section.calloutEn ? section.calloutEn : section.callout;
             const pullQuote = lang === 'en' && section.pullQuoteEn ? section.pullQuoteEn : section.pullQuote;
 
+            const tableHeaders = lang === 'en' && section.table?.headersEn ? section.table.headersEn : section.table?.headers;
+            const tableRows = lang === 'en' && section.table?.rowsEn ? section.table.rowsEn : section.table?.rows;
+            const stepItems = lang === 'en' && section.numberedStepsEn ? section.numberedStepsEn : section.numberedSteps;
+
+            const compBeforeLabel = lang === 'en' && section.comparison?.beforeLabelEn ? section.comparison.beforeLabelEn : section.comparison?.beforeLabel;
+            const compBeforeItems = [lang === 'en' && section.comparison?.beforeTextEn ? section.comparison.beforeTextEn : (section.comparison?.beforeText || '')];
+            const compAfterLabel = lang === 'en' && section.comparison?.afterLabelEn ? section.comparison.afterLabelEn : section.comparison?.afterLabel;
+            const compAfterItems = [lang === 'en' && section.comparison?.afterTextEn ? section.comparison.afterTextEn : (section.comparison?.afterText || '')];
+
             return (
               <section
                 key={section.id || idx}
@@ -226,7 +232,7 @@ export const ResourceDetailPage: FC = () => {
                 <h2 className={h2Class}>{heading}</h2>
 
                 <div className="mt-6 space-y-6">
-                  <div className="max-w-3xl space-y-5">
+                  <div className="w-full space-y-5">
                     {paragraphs.map((p, pIdx) => (
                       <p key={pIdx} className={`text-[16.5px] sm:text-[17px] ${bodyLeading} text-slate-600`}>
                         {p}
@@ -235,25 +241,25 @@ export const ResourceDetailPage: FC = () => {
                   </div>
 
                   {callout && (
-                    <div className="max-w-3xl">
+                    <div className="w-full">
                       <Callout text={callout} />
                     </div>
                   )}
 
                   {pullQuote && <PullQuote text={pullQuote} />}
 
-                  {section.numberedSteps && <StepList steps={section.numberedSteps} />}
+                  {stepItems && <StepList steps={stepItems} />}
 
                   {section.comparison && (
                     <CompareBlock
-                      beforeLabel={section.comparison.beforeLabel}
-                      beforeItems={[section.comparison.beforeText]}
-                      afterLabel={section.comparison.afterLabel}
-                      afterItems={[section.comparison.afterText]}
+                      beforeLabel={compBeforeLabel || ''}
+                      beforeItems={compBeforeItems}
+                      afterLabel={compAfterLabel || ''}
+                      afterItems={compAfterItems}
                     />
                   )}
 
-                  {section.table && <DataTable headers={section.table.headers} rows={section.table.rows} />}
+                  {tableHeaders && tableRows && <DataTable headers={tableHeaders} rows={tableRows} />}
 
                   {section.code && <CodeBlock code={section.code.code} language={section.code.language} />}
 
@@ -287,21 +293,6 @@ export const ResourceDetailPage: FC = () => {
             </section>
           )}
 
-          {/* Featured case study */}
-          {featuredProject && (
-            <div className="mt-14 sm:mt-20">
-              <FeaturedProjectCard
-                label={lang === 'fa' ? 'کالبدشکافی نمونه‌کار مرتبط' : 'Featured case study'}
-                title={lang === 'fa' ? featuredProject.titleFa : featuredProject.titleEn}
-                desc={lang === 'fa' ? featuredProject.descriptionFa : featuredProject.descriptionEn}
-                tags={(lang === 'fa' ? featuredProject.featuresFa : featuredProject.featuresEn).slice(0, 3)}
-                meta={`${featuredProject.durationSeconds}s • ${featuredProject.resolution}`}
-                cta={lang === 'fa' ? 'مشاهده کالبدشکافی ادیت' : 'View edit breakdown'}
-                to={`/work/${featuredProject.slug}`}
-              />
-            </div>
-          )}
-
           {/* Related services */}
           {article.relatedServices && article.relatedServices.length > 0 && (
             <div className="mt-14 sm:mt-20">
@@ -324,7 +315,7 @@ export const ResourceDetailPage: FC = () => {
 
           {/* Sources */}
           {article.references && article.references.length > 0 && (
-            <div className="mt-14 sm:mt-20 max-w-3xl">
+            <div className="mt-14 sm:mt-20 w-full">
               <ReferenceList title={lang === 'fa' ? 'منابع' : 'Sources'} items={article.references} />
             </div>
           )}

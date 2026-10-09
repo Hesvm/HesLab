@@ -65,7 +65,7 @@ export const ServiceArticlePage: FC<{ article: ServiceArticle }> = ({ article })
         ]}
       />
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 page-article-zoom">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 page-article-zoom">
         <ServiceHero article={article} />
 
         <article>

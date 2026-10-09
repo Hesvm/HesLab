@@ -120,7 +120,7 @@ export const ServicePillarPage: FC = () => {
         jsonLdId="service-pillar-schema"
       />
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 page-article-zoom">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 page-article-zoom">
         {/* Hero: centered clean title with emoji + name + description */}
         <header className="flex flex-col items-center text-center mx-auto max-w-3xl">
           <div className="mb-4 sm:mb-5">
@@ -133,7 +133,7 @@ export const ServicePillarPage: FC = () => {
           <h1 className="text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
             {name}
           </h1>
-          <p className={`mt-4 sm:mt-5 text-[17px] sm:text-[19px] text-slate-600 font-medium max-w-2xl ${fa ? 'leading-[2]' : 'leading-[1.7]'}`}>
+          <p className={`mt-4 sm:mt-5 text-[17px] sm:text-[19px] text-slate-600 font-medium w-full ${fa ? 'leading-[2]' : 'leading-[1.7]'}`}>
             {fa ? service.metaDescriptionFa : service.metaDescriptionEn}
           </p>
         </header>
@@ -148,7 +148,7 @@ export const ServicePillarPage: FC = () => {
           id="included"
           heading={fa ? 'در هر پروژه چه چیزی تحویل داده می‌شود؟' : "What's included in every project"}
         >
-          <div className="max-w-3xl">
+          <div className="w-full">
             <KeyTakeaways
               title={fa ? 'شامل' : 'Included'}
               items={fa ? service.whatsIncludedFa : service.whatsIncludedEn}
@@ -167,7 +167,7 @@ export const ServicePillarPage: FC = () => {
         )}
 
         <ServiceSection id="philosophy" heading={philosophy.heading}>
-          <p className={`max-w-3xl text-[17px] text-slate-600 ${fa ? 'leading-[2]' : 'leading-[1.8]'}`}>{philosophy.body}</p>
+          <p className={`w-full text-[17px] text-slate-600 ${fa ? 'leading-[2]' : 'leading-[1.8]'}`}>{philosophy.body}</p>
         </ServiceSection>
 
         <ServiceSection
