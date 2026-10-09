@@ -208,7 +208,7 @@ const ProcessVisualStage: FC<{ state: number }> = ({ state }) => {
   };
 
   const frameVariants = [
-    { y: -6, scale: 1, rotate: -1.2 },
+    { y: -6, scale: 1, rotate: 0 },
     { y: -38, scale: 0.97, rotate: 0 },
     { y: -26, scale: 0.95, rotate: 0 },
   ];
