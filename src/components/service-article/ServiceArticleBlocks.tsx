@@ -376,7 +376,7 @@ export const CTASection: FC<{ article: ServiceArticle }> = ({ article }) => {
   return (
     <section
       aria-labelledby="cta-h"
-      className="mt-16 sm:mt-24 rounded-[28px] sm:rounded-[34px] bg-[#1E1E1F] px-6 py-12 text-center text-white sm:px-10 sm:py-16"
+      className="mt-16 sm:mt-24 rounded-[28px] sm:rounded-[34px] bg-[#0B0B0C] px-6 py-12 text-center text-white sm:px-10 sm:py-16"
     >
       <h2 id="cta-h" className="mx-auto max-w-xl text-2xl sm:text-4xl font-black tracking-tight leading-tight">
         {article.cta.title}

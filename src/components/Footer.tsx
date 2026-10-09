@@ -43,7 +43,7 @@ export const Footer: FC = () => {
   const cta = translations[lang].nav.cta;
 
   return (
-    <footer className="bg-[#1E1E1F] text-white pt-16 sm:pt-24 pb-7 sm:pb-8 px-4 select-none">
+    <footer className="bg-[#0B0B0C] text-white pt-16 sm:pt-24 pb-7 sm:pb-8 px-4 select-none">
       <div className="max-w-5xl mx-auto">
         {/* Closing headline + CTA */}
         <div className="flex flex-col items-center text-center mb-14 sm:mb-20">

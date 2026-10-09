@@ -192,7 +192,7 @@ export const ContactPage: FC = () => {
       name: 'X',
       handle: '@heslab',
       url: 'https://x.com/heslab',
-      gradient: 'bg-[#1E1E1F]',
+      gradient: 'bg-[#0B0B0C]',
       desc: isFa ? 'اخبار و آپدیت‌های کارم' : 'News and updates on my work',
       icon: (
         <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] bg-black flex items-center justify-center shadow-xs shrink-0 border border-white/10">

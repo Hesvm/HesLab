@@ -150,10 +150,10 @@ export const Pricing: FC = () => {
                   </div>
                 </div>
 
-                {/* Main Dark Card (#1E1E1F) */}
+                {/* Main Dark Card (#0B0B0C) */}
                 <div
                   dir={lang === 'fa' ? 'rtl' : 'ltr'}
-                  className="bg-[#1E1E1F] rounded-[25px] sm:rounded-[28px] border border-white/15 overflow-hidden flex flex-col justify-between flex-1 shadow-2xl relative z-10 transition-all duration-300"
+                  className="bg-[#0B0B0C] rounded-[25px] sm:rounded-[28px] border border-white/15 overflow-hidden flex flex-col justify-between flex-1 shadow-2xl relative z-10 transition-all duration-300"
                 >
                   <div>
                     {/* Real Image Mock Banner with 6px padding and rounded corners */}

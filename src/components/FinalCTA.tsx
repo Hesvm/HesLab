@@ -11,7 +11,7 @@ export const FinalCTA: FC = () => {
   const { openModal } = useQuoteModal();
 
   return (
-    <section id="contact" className="w-full bg-[#1E1E1F] text-white pt-16 sm:pt-24 pb-10 sm:pb-14 px-6 sm:px-12 select-none relative overflow-hidden">
+    <section id="contact" className="w-full bg-[#0B0B0C] text-white pt-16 sm:pt-24 pb-10 sm:pb-14 px-6 sm:px-12 select-none relative overflow-hidden">
 
       {/* Main Inner Container */}
       <div className="max-w-6xl mx-auto flex flex-col justify-between relative z-10 w-full">

@@ -72,7 +72,7 @@ export const KeepInTouch: FC = () => {
       name: 'X',
       handle: '@heslab',
       url: 'https://x.com/heslab',
-      gradient: 'bg-[#1E1E1F]',
+      gradient: 'bg-[#0B0B0C]',
       border: 'border-transparent',
       hoverText: '',
       desc: isFa ? 'اخبار و آپدیت‌های کارم' : 'News and updates on my work',

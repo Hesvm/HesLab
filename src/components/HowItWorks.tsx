@@ -881,7 +881,7 @@ export const HowItWorks: FC = () => {
   return (
     <section
       id="process"
-      className="w-full bg-[#1E1E1F] text-white pt-16 sm:pt-24 pb-20 sm:pb-28 px-4 sm:px-8 select-none relative overflow-clip"
+      className="w-full bg-[#0B0B0C] text-white pt-16 sm:pt-24 pb-20 sm:pb-28 px-4 sm:px-8 select-none relative overflow-clip"
     >
 
       {/* Section Header */}

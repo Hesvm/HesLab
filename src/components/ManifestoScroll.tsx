@@ -56,7 +56,7 @@ export const ManifestoScroll: FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#1E1E1F] text-white py-28 sm:py-36 md:py-44 px-4 sm:px-8 select-none relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center"
+      className="w-full bg-[#0B0B0C] text-white py-28 sm:py-36 md:py-44 px-4 sm:px-8 select-none relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center"
     >
       {/* Inner Centered Content Container */}
       <div className="max-w-3xl mx-auto relative z-10 w-full">

@@ -109,7 +109,7 @@ export const DataTable: FC<{ headers: string[]; rows: string[][] }> = ({ headers
 );
 
 export const CodeBlock: FC<{ code: string; language?: string }> = ({ code, language }) => (
-  <div className="overflow-hidden rounded-[22px] bg-[#1E1E1F]">
+  <div className="overflow-hidden rounded-[22px] bg-[#0B0B0C]">
     {language && <div className="px-5 pt-4 text-[11.5px] font-bold uppercase tracking-wider text-white/40">{language}</div>}
     <pre dir="ltr" className="overflow-x-auto px-5 py-4 text-[13px] leading-relaxed text-white/90">
       <code>{code}</code>
@@ -151,7 +151,7 @@ export const CTACard: FC<{
   to: string;
   onClick?: () => void;
 }> = ({ title, text, buttonText, to, onClick }) => (
-  <section className="mt-16 rounded-[28px] bg-[#1E1E1F] px-6 py-12 text-center text-white sm:mt-24 sm:rounded-[34px] sm:px-10 sm:py-16">
+  <section className="mt-16 rounded-[28px] bg-[#0B0B0C] px-6 py-12 text-center text-white sm:mt-24 sm:rounded-[34px] sm:px-10 sm:py-16">
     <h2 className="mx-auto max-w-xl text-2xl font-black leading-tight tracking-tight sm:text-4xl">{title}</h2>
     <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/70 sm:text-[16px]">{text}</p>
     <Link to={to} onClick={onClick} className={`${PRIMARY_BTN} mt-8`}>
@@ -169,7 +169,7 @@ export const FeaturedProjectCard: FC<{
   cta: string;
   to: string;
 }> = ({ label, title, desc, tags, meta, cta, to }) => (
-  <div className="rounded-[26px] bg-[#1E1E1F] p-6 text-white sm:p-8">
+  <div className="rounded-[26px] bg-[#0B0B0C] p-6 text-white sm:p-8">
     <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
       <div className="flex-1">
         <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-[12px] font-semibold text-white/80">{label}</span>
