@@ -244,7 +244,7 @@ export const CompareBlock: FC<{
 }> = ({ beforeLabel, beforeItems, afterLabel, afterItems }) => (
   <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
     <div className="rounded-[24px] bg-[#FDEBEC] p-6 sm:p-7">
-      <h3 className="text-[15px] font-bold uppercase tracking-wide text-rose-700/80">{beforeLabel}</h3>
+      <h3 className="text-[15px] font-bold tracking-tight text-rose-700/80">{beforeLabel}</h3>
       <ul className="mt-4 space-y-3">
         {beforeItems.map((t) => (
           <li key={t} className="flex gap-3 text-[14.5px] leading-snug text-slate-600">
@@ -255,7 +255,7 @@ export const CompareBlock: FC<{
       </ul>
     </div>
     <div className="rounded-[24px] bg-[#E6F5EB] p-6 sm:p-7">
-      <h3 className="text-[15px] font-bold uppercase tracking-wide text-emerald-800/80">{afterLabel}</h3>
+      <h3 className="text-[15px] font-bold tracking-tight text-emerald-800/80">{afterLabel}</h3>
       <ul className="mt-4 space-y-3">
         {afterItems.map((t) => (
           <li key={t} className="flex gap-3 text-[14.5px] leading-snug text-slate-900">

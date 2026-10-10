@@ -194,19 +194,19 @@ export const ServicePillarPage: FC = () => {
           >
             <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
               <div className="rounded-[24px] bg-[#FDEBEC] p-6">
-                <h3 className="text-[15px] font-bold uppercase tracking-wide text-rose-700/80">
+                <h3 className="text-[15px] font-bold tracking-tight text-rose-700/80">
                   {fa ? 'قبل: فوتیج خام' : 'Before: raw footage'}
                 </h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-slate-700">{beforeAfter.beforeState}</p>
               </div>
               <div className="rounded-[24px] bg-[#FFF4D8] p-6">
-                <h3 className="text-[15px] font-bold uppercase tracking-wide text-amber-800/80">
+                <h3 className="text-[15px] font-bold tracking-tight text-amber-800/80">
                   {fa ? 'تصمیم‌های ادیت' : 'What we change'}
                 </h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-slate-700">{beforeAfter.editingDecisions}</p>
               </div>
               <div className="rounded-[24px] bg-[#E6F5EB] p-6">
-                <h3 className="text-[15px] font-bold uppercase tracking-wide text-emerald-800/80">
+                <h3 className="text-[15px] font-bold tracking-tight text-emerald-800/80">
                   {fa ? 'بعد: خروجی نهایی' : 'After: final result'}
                 </h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-slate-700">{beforeAfter.finalOutcome}</p>
