@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import { Breadcrumbs } from '../components/seo/Breadcrumbs';
 import { SEOHead } from '../components/seo/SEOHead';
 import { generatePersonSchema, generateOrganizationSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
@@ -123,13 +122,6 @@ export const AboutPage: FC = () => {
       />
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <Breadcrumbs
-          items={[
-            { name: fa ? 'صفحه اصلی' : 'Home', path: '/' },
-            { name: fa ? 'درباره ما' : 'About', path: '/about' },
-          ]}
-        />
-
         {/* Opening */}
         <header className="flex flex-col items-center text-center">
           <img
