@@ -298,7 +298,7 @@ export const Hero: FC = () => {
             initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-black tracking-tight text-slate-950 leading-[0.95] sm:leading-[0.92] md:leading-[0.90] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none -space-y-1 sm:-space-y-1.5 md:-space-y-2"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-black tracking-tight text-slate-950 leading-[1.08] sm:leading-[1.05] md:leading-[1.02] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none space-y-0.5 sm:space-y-1"
           >
             {/* LINE 1 */}
             <div className="flex items-center justify-center gap-2 whitespace-nowrap">
