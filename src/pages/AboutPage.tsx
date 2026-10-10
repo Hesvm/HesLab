@@ -4,7 +4,6 @@ import { SEOHead } from '../components/seo/SEOHead';
 import { generatePersonSchema, generateOrganizationSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../lib/analytics';
-import { ServiceSection } from '../components/service-article/ServiceArticleBlocks';
 import { CTACard } from '../components/service-article/ArticleBlocks';
 
 type Chapter = { emoji: string; title: string; text: string };
@@ -161,8 +160,11 @@ export const AboutPage: FC = () => {
 
 
 
-        <ServiceSection id="tools" heading={t.toolsTitle}>
-          <div className="flex flex-wrap gap-2.5">
+        <section id="tools" aria-labelledby="tools-h" className="mt-14 sm:mt-20 text-center">
+          <h2 id="tools-h" className="text-2xl sm:text-[32px] font-black tracking-tight text-slate-950 leading-tight">
+            {t.toolsTitle}
+          </h2>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 max-w-2xl mx-auto">
             {TOOLS.map((tool) => (
               <span
                 key={tool.name}
@@ -176,7 +178,7 @@ export const AboutPage: FC = () => {
               </span>
             ))}
           </div>
-        </ServiceSection>
+        </section>
 
         <CTACard
           title={t.ctaTitle}
