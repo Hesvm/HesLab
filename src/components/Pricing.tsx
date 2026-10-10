@@ -73,19 +73,19 @@ export const Pricing: FC = () => {
         <h2 className="tracking-tight text-slate-950 max-w-2xl mx-auto">
           {lang === 'fa' ? (
             <>
-              <span className="font-serif-italic font-normal block mb-1">
+              <span className="font-serif-italic font-normal block text-slate-600 text-xl sm:text-2xl md:text-[28px] leading-none mb-0">
                 {t.tag}
               </span>
-              <span className="font-sans text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block leading-tight">
+              <span className="font-sans text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 leading-tight">
                 {t.title}
               </span>
             </>
           ) : (
             <>
-              <span className="font-serif-italic font-normal block mb-1">
+              <span className="font-serif-italic font-normal block text-slate-600 text-xl sm:text-2xl md:text-[28px] leading-none mb-0">
                 {t.tag}
               </span>
-              <span className="font-['Plus_Jakarta_Display'] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block tracking-tight leading-tight">
+              <span className="font-['Plus_Jakarta_Display'] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">
                 {t.title}
               </span>
             </>

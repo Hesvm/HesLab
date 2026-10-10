@@ -710,7 +710,7 @@ export const translations = {
     target: {
       tag: 'Who We Work With',
       title1: 'Made for niches',
-      title2: 'that have something to say.',
+      title2: 'That have something to say.',
       audiences: [
         {
           title: 'Educators & Coaches',

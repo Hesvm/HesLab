@@ -893,10 +893,10 @@ export const HowItWorks: FC = () => {
         className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto relative z-10"
       >
         <h2 className="tracking-tight text-white">
-          <span className="font-serif-italic font-normal block mb-1 text-slate-400 text-xl sm:text-2xl md:text-[28px]">
+          <span className="font-serif-italic font-normal block text-slate-400 text-xl sm:text-2xl md:text-[28px] leading-none mb-0">
             {t.tag}
           </span>
-          <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-white block mt-1 tracking-tight leading-tight">
+          <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-white block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">
             {t.title}
           </span>
         </h2>
