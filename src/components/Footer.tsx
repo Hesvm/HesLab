@@ -49,7 +49,7 @@ export const Footer: FC = () => {
         <div className="flex flex-col items-center text-center mb-14 sm:mb-20">
           <h2
             dir="ltr"
-            className="text-3xl sm:text-4xl md:text-[48px] font-black tracking-tight leading-[1.05] text-white font-en"
+            className="text-3xl sm:text-4xl md:text-[48px] font-black tracking-tight leading-[0.94] text-white font-en"
           >
             {hero.titleLine1}
             <br />

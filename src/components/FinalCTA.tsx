@@ -27,7 +27,7 @@ export const FinalCTA: FC = () => {
           {/* Main Headline (same as hero) */}
           <h2
             dir="ltr"
-            className="text-3xl sm:text-4xl md:text-[48px] font-black tracking-tight leading-[1.05] text-white font-en"
+            className="text-3xl sm:text-4xl md:text-[48px] font-black tracking-tight leading-[0.94] text-white font-en"
           >
             {translations[lang].hero.titleLine1}
             <br />
