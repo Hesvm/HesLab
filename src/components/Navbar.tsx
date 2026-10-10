@@ -57,7 +57,7 @@ const serviceCardMeta = [
 ];
 
 export const Navbar: FC = () => {
-  const { lang, isRtl, toggleLang } = useLanguage();
+  const { lang, isRtl } = useLanguage();
   const { openModal } = useQuoteModal();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -196,20 +196,8 @@ export const Navbar: FC = () => {
             </Link>
           </div>
 
-          {/* CTA & Language Switcher */}
+          {/* CTA */}
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                closeServicesImmediately();
-                toggleLang();
-              }}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#A5A5A6] hover:text-white hover:bg-white/10 transition-colors cursor-pointer select-none"
-              title={lang === 'fa' ? 'Switch to English' : 'تغییر به زبان فارسی'}
-            >
-              {lang === 'fa' ? 'EN' : 'فا'}
-            </button>
-
             <button
               type="button"
               data-analytics="primary-cta"
@@ -320,16 +308,6 @@ export const Navbar: FC = () => {
             {t.about}
           </Link>
           <div className="pt-2 border-t border-white/10 mt-1 flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                toggleLang();
-              }}
-              className="w-full py-2.5 rounded-xl text-xs font-semibold text-[#A5A5A6] bg-white/5 hover:bg-white/10"
-            >
-              {lang === 'fa' ? 'Switch to English' : 'تغییر به زبان فارسی'}
-            </button>
             <button
               type="button"
               data-analytics="primary-cta"
