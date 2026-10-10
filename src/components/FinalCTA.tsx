@@ -60,7 +60,7 @@ export const FinalCTA: FC = () => {
         <div className="mt-14 sm:mt-20 pt-6 sm:pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-5 relative z-10">
           
           {/* Logo (same as header) */}
-          <Link to="/" className="flex items-center gap-2 group shrink-0" aria-label="HESLAB">
+          <Link to={lang === 'fa' ? '/fa' : '/'} className="flex items-center gap-2 group shrink-0" aria-label="HESLAB">
             <img
               src="/brand/logo_icon.png"
               alt="HesLab Icon"
@@ -75,11 +75,11 @@ export const FinalCTA: FC = () => {
 
           {/* Navigation Links */}
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-[12.5px] font-medium text-slate-400">
-            <Link to="/work" className="hover:text-white transition-colors">{lang === 'fa' ? 'نمونه‌کارها' : 'Work'}</Link>
-            <Link to="/services" className="hover:text-white transition-colors">{lang === 'fa' ? 'خدمات' : 'Services'}</Link>
-            <Link to="/blog" className="hover:text-white transition-colors">{lang === 'fa' ? 'بلاگ' : 'Blog'}</Link>
-            <Link to="/about" className="hover:text-white transition-colors">{lang === 'fa' ? 'درباره ما' : 'About'}</Link>
-            <Link to="/contact" className="hover:text-white transition-colors">{lang === 'fa' ? 'تماس' : 'Contact'}</Link>
+            <Link to={lang === 'fa' ? '/fa/work' : '/work'} className="hover:text-white transition-colors">{lang === 'fa' ? 'نمونه‌کارها' : 'Work'}</Link>
+            <Link to={lang === 'fa' ? '/fa/services' : '/services'} className="hover:text-white transition-colors">{lang === 'fa' ? 'خدمات' : 'Services'}</Link>
+            <Link to={lang === 'fa' ? '/fa/blog' : '/blog'} className="hover:text-white transition-colors">{lang === 'fa' ? 'بلاگ' : 'Blog'}</Link>
+            <Link to={lang === 'fa' ? '/fa/about' : '/about'} className="hover:text-white transition-colors">{lang === 'fa' ? 'درباره ما' : 'About'}</Link>
+            <Link to={lang === 'fa' ? '/fa/contact' : '/contact'} className="hover:text-white transition-colors">{lang === 'fa' ? 'تماس' : 'Contact'}</Link>
           </div>
 
           {/* Social Media Links (Replacing copyright text) */}

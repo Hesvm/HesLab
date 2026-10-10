@@ -57,13 +57,20 @@ const serviceCardMeta = [
 ];
 
 export const Navbar: FC = () => {
-  const { lang, isRtl } = useLanguage();
+  const { lang, isRtl, toggleLang } = useLanguage();
   const { openModal } = useQuoteModal();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const getHref = (path: string) => {
+    if (lang === 'fa') {
+      return path === '/' ? '/fa' : `/fa${path}`;
+    }
+    return path;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,7 +134,7 @@ export const Navbar: FC = () => {
         <div className="h-[58px] w-full flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] shrink-0">
           {/* Brand Logo & Logotype */}
           <Link
-            to="/"
+            to={getHref('/')}
             onClick={closeServicesImmediately}
             className="flex items-center gap-2 group shrink-0"
             aria-label="HESLAB"
@@ -147,7 +154,7 @@ export const Navbar: FC = () => {
           {/* Navigation Items */}
           <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6]">
             <Link
-              to="/work"
+              to={getHref('/work')}
               onMouseEnter={closeServicesImmediately}
               onClick={closeServicesImmediately}
               className="hover:text-white transition-colors duration-200 select-none"
@@ -161,7 +168,7 @@ export const Navbar: FC = () => {
               onMouseEnter={openServices}
             >
               <Link
-                to="/services"
+                to={getHref('/services')}
                 onClick={closeServicesImmediately}
                 className={`flex items-center gap-1 transition-colors duration-200 select-none py-2 cursor-pointer ${
                   servicesDropdownOpen ? 'text-white' : 'hover:text-white'
@@ -180,7 +187,7 @@ export const Navbar: FC = () => {
             </div>
 
             <Link
-              to="/about"
+              to={getHref('/about')}
               onMouseEnter={closeServicesImmediately}
               onClick={closeServicesImmediately}
               className="hover:text-white transition-colors duration-200 select-none"
@@ -189,8 +196,20 @@ export const Navbar: FC = () => {
             </Link>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA & Language Switcher */}
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                closeServicesImmediately();
+                toggleLang();
+              }}
+              className="px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#A5A5A6] hover:text-white hover:bg-white/10 transition-colors cursor-pointer select-none"
+              title={lang === 'fa' ? 'Switch to English' : 'تغییر به زبان فارسی'}
+            >
+              {lang === 'fa' ? 'EN' : 'فا'}
+            </button>
+
             <button
               type="button"
               data-analytics="primary-cta"
@@ -243,7 +262,7 @@ export const Navbar: FC = () => {
                     return (
                       <Link
                         key={idx}
-                        to={item.href}
+                        to={getHref(item.href)}
                         onClick={closeServicesImmediately}
                         className={`group/card p-3.5 rounded-[14px] ${meta.cardBg} ${meta.cardBorder} transition-all duration-300 hover:scale-[1.015] hover:shadow-sm flex flex-col justify-between select-none ${
                           isRtl ? 'text-right' : 'text-left'
@@ -279,14 +298,14 @@ export const Navbar: FC = () => {
       {mobileMenuOpen && (
         <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-black backdrop-blur-xl rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
           <Link
-            to="/work"
+            to={getHref('/work')}
             onClick={() => setMobileMenuOpen(false)}
             className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
           >
             {t.work}
           </Link>
           <Link
-            to="/services"
+            to={getHref('/services')}
             onClick={() => setMobileMenuOpen(false)}
             className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10 flex items-center justify-center gap-1.5"
           >
@@ -294,13 +313,23 @@ export const Navbar: FC = () => {
             <ArrowDown2 size={13} color="currentColor" variant="Linear" />
           </Link>
           <Link
-            to="/about"
+            to={getHref('/about')}
             onClick={() => setMobileMenuOpen(false)}
             className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
           >
             {t.about}
           </Link>
-          <div className="pt-2 border-t border-white/10 mt-1">
+          <div className="pt-2 border-t border-white/10 mt-1 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                toggleLang();
+              }}
+              className="w-full py-2.5 rounded-xl text-xs font-semibold text-[#A5A5A6] bg-white/5 hover:bg-white/10"
+            >
+              {lang === 'fa' ? 'Switch to English' : 'تغییر به زبان فارسی'}
+            </button>
             <button
               type="button"
               data-analytics="primary-cta"

@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type Language = 'fa' | 'en';
 
@@ -11,33 +12,50 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const getInitialLang = (): Language => {
-  if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    const paramLang = params.get('lang');
-    if (paramLang === 'fa') return 'fa';
-    if (paramLang === 'en') return 'en';
-    try {
-      localStorage.setItem('heslab_lang', 'en');
-    } catch (_) {}
-  }
-  return 'en'; // Always default to English
-};
-
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [lang, setLang] = useState<Language>(getInitialLang);
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  // Determine language directly from current URL pathname
+  const isFaPath = location.pathname === '/fa' || location.pathname.startsWith('/fa/');
+  const currentLang: Language = isFaPath ? 'fa' : 'en';
+
+  const [lang, setLangState] = useState<Language>(currentLang);
+
+  // Sync state whenever URL pathname changes
   useEffect(() => {
-    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
+    setLangState(currentLang);
+    document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+    document.documentElement.lang = currentLang;
     try {
-      localStorage.setItem('heslab_lang', lang);
+      localStorage.setItem('heslab_lang', currentLang);
     } catch (_) {}
-  }, [lang]);
+  }, [currentLang, location.pathname]);
 
-  const toggleLang = () => {
-    setLang((prev) => (prev === 'fa' ? 'en' : 'fa'));
-  };
+  const setLang = useCallback(
+    (targetLang: Language) => {
+      if (targetLang === currentLang) return;
+      
+      const currentPath = location.pathname;
+      let targetPath = '/';
+
+      if (targetLang === 'fa') {
+        // EN -> FA
+        targetPath = currentPath === '/' ? '/fa' : `/fa${currentPath}`;
+      } else {
+        // FA -> EN
+        targetPath = currentPath === '/fa' ? '/' : currentPath.replace(/^\/fa/, '');
+        if (!targetPath.startsWith('/')) targetPath = `/${targetPath}`;
+      }
+
+      navigate(`${targetPath}${location.search}${location.hash}`);
+    },
+    [currentLang, location.pathname, location.search, location.hash, navigate]
+  );
+
+  const toggleLang = useCallback(() => {
+    setLang(currentLang === 'fa' ? 'en' : 'fa');
+  }, [currentLang, setLang]);
 
   const isRtl = lang === 'fa';
 
@@ -55,3 +73,4 @@ export const useLanguage = () => {
   }
   return context;
 };
+

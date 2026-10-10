@@ -87,11 +87,11 @@ export const Footer: FC = () => {
 
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs sm:text-[12.5px] font-medium text-slate-400">
-            <Link to="/work" className="hover:text-white transition-colors">{t.links.work}</Link>
-            <Link to="/services" className="hover:text-white transition-colors">{t.links.services}</Link>
-            <Link to="/blog" className="hover:text-white transition-colors">{t.links.blog}</Link>
-            <Link to="/about" className="hover:text-white transition-colors">{t.links.about}</Link>
-            <Link to="/contact" className="hover:text-white transition-colors">{t.links.contact}</Link>
+            <Link to={lang === 'fa' ? '/fa/work' : '/work'} className="hover:text-white transition-colors">{t.links.work}</Link>
+            <Link to={lang === 'fa' ? '/fa/services' : '/services'} className="hover:text-white transition-colors">{t.links.services}</Link>
+            <Link to={lang === 'fa' ? '/fa/blog' : '/blog'} className="hover:text-white transition-colors">{t.links.blog}</Link>
+            <Link to={lang === 'fa' ? '/fa/about' : '/about'} className="hover:text-white transition-colors">{t.links.about}</Link>
+            <Link to={lang === 'fa' ? '/fa/contact' : '/contact'} className="hover:text-white transition-colors">{t.links.contact}</Link>
           </div>
 
           {/* Social icons */}
