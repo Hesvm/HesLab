@@ -5,7 +5,7 @@ import { generatePersonSchema, generateOrganizationSchema } from '../utils/schem
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../lib/analytics';
 import { ServiceSection } from '../components/service-article/ServiceArticleBlocks';
-import { Callout, CTACard, PullQuote } from '../components/service-article/ArticleBlocks';
+import { Callout, CTACard } from '../components/service-article/ArticleBlocks';
 
 type Chapter = { emoji: string; title: string; text: string };
 
@@ -158,17 +158,7 @@ export const AboutPage: FC = () => {
           ))}
         </ul>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 sm:mt-20 text-center"
-        >
-          <div className="mx-auto max-w-3xl">
-            <PullQuote text={t.quote} />
-          </div>
-        </motion.div>
+
 
 
         <ServiceSection id="tools" heading={t.toolsTitle}>
