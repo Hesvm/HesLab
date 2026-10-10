@@ -191,9 +191,20 @@ export const ManifestoScroll: FC = () => {
                 href="https://hesvm.space/?utm_source=heslab&utm_medium=referral&utm_campaign=manifesto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative inline-block transition-all duration-300 px-1 py-0.5 -mx-1 rounded-md text-white hover:text-white hover:bg-[#8B5CF6]/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] hover:ring-1 hover:ring-[#A78BFA] active:scale-95 cursor-pointer underline-offset-4 hover:underline decoration-[#A78BFA]"
+                className="group/marker relative inline-block px-1.5 -mx-1 text-white cursor-pointer no-underline select-none"
               >
-                حسام،
+                {/* Marker-pen swipe in RTL: draws right to left behind the text on scroll & hover */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-[-4px] right-[-3px] top-[14%] bottom-[2%] bg-[#8B5CF6]/75 origin-right transition-transform duration-500 ease-out pointer-events-none shadow-[0_0_15px_rgba(139,92,246,0.35)] ${
+                    getProgress(13, 18).opacity > 0.25 ? 'scale-x-100' : 'scale-x-0'
+                  } group-hover/marker:scale-x-100 group-hover/marker:bg-[#8B5CF6]/90`}
+                  style={{
+                    borderRadius: '9px 3px 11px 5px / 4px 7px 5px 9px',
+                    rotate: '1.2deg',
+                  }}
+                />
+                <span className="relative z-10 font-medium">حسام،</span>
               </a>
             </span>
           </div>
@@ -362,18 +373,20 @@ export const ManifestoScroll: FC = () => {
                 href="https://hesvm.space/?utm_source=heslab&utm_medium=referral&utm_campaign=manifesto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/marker relative inline-block px-1 -mx-1 text-white cursor-pointer no-underline"
+                className="group/marker relative inline-block px-1.5 -mx-1 text-white cursor-pointer no-underline select-none"
               >
-                {/* Marker-pen swipe: draws left to right behind the text on hover */}
+                {/* Marker-pen swipe: draws left to right behind the text on scroll & hover */}
                 <span
                   aria-hidden="true"
-                  className="absolute left-[-2px] right-[-3px] top-[16%] bottom-[2%] bg-[#8B5CF6]/70 origin-left scale-x-0 group-hover/marker:scale-x-100 transition-transform duration-500 ease-out pointer-events-none"
+                  className={`absolute left-[-3px] right-[-4px] top-[14%] bottom-[2%] bg-[#8B5CF6]/75 origin-left transition-transform duration-500 ease-out pointer-events-none shadow-[0_0_15px_rgba(139,92,246,0.35)] ${
+                    getProgress(13, 18).opacity > 0.25 ? 'scale-x-100' : 'scale-x-0'
+                  } group-hover/marker:scale-x-100 group-hover/marker:bg-[#8B5CF6]/90`}
                   style={{
                     borderRadius: '3px 9px 5px 11px / 7px 4px 9px 5px',
                     rotate: '-1.2deg',
                   }}
                 />
-                <span className="relative z-10">Hesam,</span>
+                <span className="relative z-10 font-medium">Hesam,</span>
               </a>
             </span>
           </div>
