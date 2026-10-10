@@ -256,7 +256,7 @@ export const StatsBar: FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 -mt-[22vh] sm:-mt-[26vh] pt-6 sm:pt-10 md:pt-14 pb-16 sm:pb-24 md:pb-28 px-4 max-w-[840px] mx-auto"
+      className="relative z-10 -mt-[32vh] sm:-mt-[38vh] md:-mt-[42vh] pt-2 sm:pt-4 md:pt-6 pb-16 sm:pb-24 md:pb-28 px-4 max-w-[840px] mx-auto"
     >
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4.5">
         {/* CARD 1: Short-Form Focused */}
