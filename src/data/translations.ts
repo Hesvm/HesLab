@@ -82,7 +82,7 @@ export const translations = {
       finalPercent: '۸۸٪ (۴۲.۶ ثانیه)',
     },
     work: {
-      tag: 'نمونه‌کارها',
+      tag: 'آنچه تحویل مشتریان می‌دهیم',
       title: 'پروژه‌های منتخب',
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
@@ -558,7 +558,7 @@ export const translations = {
       finalPercent: '88% (42.6s)',
     },
     work: {
-      tag: 'Portfolio',
+      tag: 'What our clients receive',
       title: 'Selected Work',
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [

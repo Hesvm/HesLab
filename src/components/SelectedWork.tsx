@@ -183,12 +183,19 @@ export const SelectedWork: FC = () => {
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto"
       >
-        <h2 className="text-2xl sm:text-4xl md:text-[48px] font-black tracking-tight text-slate-950 leading-tight">
-          {t.title}
+        <h2 className="tracking-tight text-slate-950">
+          <span className="font-serif-italic font-normal block mb-1 text-slate-600 text-xl sm:text-2xl md:text-[28px]">
+            {t.tag}
+          </span>
+          <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block mt-1 tracking-tight leading-tight">
+            {t.title}
+          </span>
         </h2>
-        <p className="mt-2 text-slate-500 text-xs sm:text-[13px] font-medium">
-          {t.desc}
-        </p>
+        {t.desc && (
+          <p className="mt-2 text-slate-500 text-xs sm:text-[13px] font-medium">
+            {t.desc}
+          </p>
+        )}
       </motion.div>
 
       {/* Category Filter Tabs / Pills */}
