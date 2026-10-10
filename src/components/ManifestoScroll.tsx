@@ -64,10 +64,10 @@ export const ManifestoScroll: FC = () => {
       {lang === 'fa' ? (
         <div
           dir="rtl"
-          className="font-normal text-lg sm:text-xl md:text-2xl lg:text-[25px] tracking-[-0.03em] text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0.5 sm:gap-1 md:gap-1.5"
+          className="font-normal text-lg sm:text-xl md:text-2xl lg:text-[25px] tracking-[-0.03em] text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0 sm:gap-0.5"
         >
           {/* Line 1 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08]">
             <span style={{ opacity: getProgress(0, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               من
             </span>
@@ -93,7 +93,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 2 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08]">
             <span style={{ opacity: getProgress(3, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               تبدیل می‌کنم که
             </span>
@@ -119,7 +119,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 3 (Meaningful Stanza Gap) */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2] mt-8 sm:mt-10 md:mt-12">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08] mt-4 sm:mt-5 md:mt-6">
             <span style={{ opacity: getProgress(6, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               حس‌لب
             </span>
@@ -145,7 +145,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 4 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08]">
             <span style={{ opacity: getProgress(9, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               ساخته‌شده با
             </span>
@@ -199,7 +199,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 5 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08]">
             <span style={{ opacity: getProgress(14, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               همراه با یه
             </span>
@@ -225,7 +225,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 6 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.04] sm:leading-[1.06] md:leading-[1.08]">
             <span style={{ opacity: getProgress(17, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               که داستان‌ها رو به حرکت درمیاره.
             </span>
@@ -235,10 +235,10 @@ export const ManifestoScroll: FC = () => {
         /* English Version */
         <div
           dir="ltr"
-          className="manifesto-serif text-xl sm:text-2xl md:text-[27px] lg:text-[29px] font-normal text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0.5 sm:gap-1 md:gap-1.5 tracking-[-0.04em]"
+          className="manifesto-serif text-xl sm:text-2xl md:text-[27px] lg:text-[29px] font-normal text-white text-center relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-0 sm:gap-0.5 tracking-[-0.04em]"
         >
           {/* Line 1 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06]">
             <span style={{ opacity: getProgress(0, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               I turn
             </span>
@@ -264,7 +264,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 2 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06]">
             <span style={{ opacity: getProgress(3, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               into stories
             </span>
@@ -290,7 +290,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 3 (Meaningful Stanza Gap) */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2] mt-8 sm:mt-10 md:mt-12">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06] mt-4 sm:mt-5 md:mt-6">
             <span style={{ opacity: getProgress(6, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               Heslab is
             </span>
@@ -316,7 +316,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 4 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06]">
             <span style={{ opacity: getProgress(9, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               powered by
             </span>
@@ -379,7 +379,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 5 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06]">
             <span style={{ opacity: getProgress(14, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               with a
             </span>
@@ -405,7 +405,7 @@ export const ManifestoScroll: FC = () => {
           </div>
 
           {/* Line 6 */}
-          <div className="flex flex-wrap items-center justify-center leading-[1.15] sm:leading-[1.18] md:leading-[1.2]">
+          <div className="flex flex-wrap items-center justify-center leading-[1.02] sm:leading-[1.04] md:leading-[1.06]">
             <span style={{ opacity: getProgress(17, 18).opacity }} className="inline-block transition-opacity duration-150 mx-1 text-white">
               cutting stories into motion.
             </span>
