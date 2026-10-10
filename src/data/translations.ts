@@ -397,14 +397,6 @@ export const translations = {
           a: 'حس‌لب روی محتوای کوتاه برای اینستاگرام ریلز، تیک‌تاک و یوتیوب شورتس تخصص دارد. این شامل محتوای کریتورها، پادکست‌ها، ویدیوهای آموزشی، ویدیوهای محصول، محتوای بنیان‌گذاران و کلیپ‌های شبکه‌های اجتماعی برندها می‌شود.',
         },
         {
-          q: 'باید اسکریپت یا ایدهٔ نهایی داشته باشم؟',
-          a: 'نه. می‌توانید فوتیج خام، یک ایدهٔ کلی یا حتی فقط یک موضوع بفرستید. من کمک می‌کنم لحظه‌های قوی را پیدا کنیم، ریتم را بهتر کنیم و ادیت را بر اساس مخاطب و هدفتان شکل بدهیم.',
-        },
-        {
-          q: 'در هوک و نگه‌داشت مخاطب کمک می‌کنید؟',
-          a: 'بله. ادیت ویدیوی کوتاه فقط چسباندن کلیپ‌ها نیست. من کمک می‌کنم شروع قوی‌تری پیدا کنیم، ریتم را بهتر کنیم و چند ثانیهٔ اول را طوری بچینیم که ویدیو جذاب‌تر شود.',
-        },
-        {
           q: 'ادیت یک ویدیو چقدر طول می‌کشد؟',
           a: 'بیشتر ادیت‌های کوتاه ظرف ۳ روز تحویل داده می‌شوند. زمان بسته به پیچیدگی ادیت، حجم فوتیج و تعداد دورهای بازبینی می‌تواند تغییر کند.',
         },
@@ -423,10 +415,6 @@ export const translations = {
         {
           q: 'قبل از شروع پروژه چه چیزهایی لازم است؟',
           a: 'بهترین حالت این است که فوتیج خام، رفرنس‌های برند، نمونه‌هایی که دوست دارید، مخاطب هدف و اهداف مشخص محتوا را بدهید. اگر همه‌چیز آماده نیست، با هم جمعش می‌کنیم.',
-        },
-        {
-          q: 'پکیج ماهانهٔ ادیت دارید؟',
-          a: 'بله. پکیج‌های محتوا برای کریتورها و برندهایی طراحی شده‌اند که محتوای کوتاه منظم می‌خواهند. شامل چند ویدیو با استایل ادیت یکپارچه و یک روند کاری تکرارپذیر هستند.',
         },
       ],
     },
@@ -873,14 +861,6 @@ export const translations = {
           a: 'HesLab specializes in short-form content for Instagram Reels, TikTok, and YouTube Shorts. This includes creator content, podcasts, educational videos, product videos, founder content, and brand-focused social clips.',
         },
         {
-          q: 'Do I need to provide a finished script or idea?',
-          a: 'No. You can send raw footage, a rough idea, or even just a topic. I can help identify strong moments, improve pacing, and shape the edit around your audience and goals.',
-        },
-        {
-          q: 'Can you help with hooks and retention?',
-          a: 'Yes. Short-form editing is not only about cutting clips together. I help identify stronger openings, improve pacing, and structure the first few seconds to make the video more engaging.',
-        },
-        {
           q: 'How long does a video edit take?',
           a: 'Most short-form edits are delivered within 3 days. Timeline can vary depending on the complexity of the edit, amount of footage, and revision rounds.',
         },
@@ -899,10 +879,6 @@ export const translations = {
         {
           q: 'What do I need before starting a project?',
           a: 'Ideally, you\'ll provide your raw footage, brand references, examples you like, your target audience, and any specific goals for the content. If you don\'t have everything prepared, we can figure it out together.',
-        },
-        {
-          q: 'Do you offer monthly editing packages?',
-          a: 'Yes. Content Packs are designed for creators and brands who need consistent short-form content. They include multiple videos with a unified editing style and a repeatable workflow.',
         },
       ],
     },
