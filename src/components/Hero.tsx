@@ -80,7 +80,7 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
 };
 
 export const Hero: FC = () => {
-  const { lang, isRtl } = useLanguage();
+  const { lang } = useLanguage();
   const t = translations[lang].hero;
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -336,15 +336,9 @@ export const Hero: FC = () => {
           >
             <a
               href="#work"
-              className="px-6 py-3 rounded-[12px] bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm transition-all duration-200 active:scale-95 inline-flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
+              className="px-6 py-3 rounded-[12px] bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm transition-all duration-200 active:scale-95 inline-flex items-center justify-center cursor-pointer shadow-sm hover:shadow-md"
             >
               <span>{t.viewWorkBtn}</span>
-              <svg
-                className={`w-3.5 h-3.5 fill-current ${isRtl ? 'rotate-180' : ''}`}
-                viewBox="0 0 24 24"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
             </a>
             <a
               href="#pricing"
