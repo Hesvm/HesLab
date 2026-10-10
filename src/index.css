@@ -137,6 +137,13 @@
     font-family: 'Plus Jakarta Display', 'IRANYekanX', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   html, body {
     background-color: #ffffff;
     font-family: 'IRANYekanX', 'Plus Jakarta Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

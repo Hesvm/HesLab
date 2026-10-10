@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 
@@ -9,7 +10,13 @@ export const TargetAudience: FC = () => {
   return (
     <section id="services" className="pt-14 sm:pt-20 pb-24 sm:pb-32 md:pb-36 px-4 max-w-5xl mx-auto">
       {/* Section Header */}
-      <div className="text-center mb-10 sm:mb-14">
+      <motion.div
+        initial={{ opacity: 0, y: 28, filter: 'blur(5px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center mb-10 sm:mb-14"
+      >
         <h2 className="text-2xl sm:text-4xl md:text-[48px] tracking-tight text-slate-950 max-w-3xl mx-auto leading-[1.25] sm:leading-[1.18]">
           {lang === 'fa' ? (
             <>
@@ -27,13 +34,21 @@ export const TargetAudience: FC = () => {
             </>
           )}
         </h2>
-      </div>
+      </motion.div>
 
       {/* 8 Square Cards Bento Grid (2 rows x 4 columns) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
         {t.audiences.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, y: 20, scale: 0.96, filter: 'blur(3px)' }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{
+              duration: 0.55,
+              delay: (idx % 4) * 0.08 + Math.floor(idx / 4) * 0.1,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="aspect-square p-4 sm:p-5 rounded-[24px] sm:rounded-[28px] bg-white shadow-[0_12px_36px_rgba(0,0,0,0.035),0_2px_8px_rgba(0,0,0,0.015)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.065)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-center group select-none border border-slate-100/80"
           >
             {/* Centered Emoji Icon Box */}
@@ -55,7 +70,7 @@ export const TargetAudience: FC = () => {
             <p className="text-slate-500 text-[11px] sm:text-[12px] leading-[1.5] font-medium text-center line-clamp-2 max-w-[190px] mx-auto">
               {item.desc}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

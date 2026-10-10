@@ -260,17 +260,29 @@ export const StatsBar: FC = () => {
     >
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4.5">
         {/* CARD 1: Short-Form Focused */}
-        <div className="flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 22, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.55, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
+        >
           <div className="w-full h-24 sm:h-28 md:h-32 rounded-[20px] sm:rounded-[22px] border border-slate-200/90 bg-white flex items-center justify-center p-2.5 sm:p-3 shadow-2xs hover:border-slate-300 transition-all duration-300 relative group">
             <SocialBadgesStack />
           </div>
           <p className="mt-3 text-[14.5px] sm:text-[15.5px] md:text-[16.5px] font-extrabold text-slate-900 text-center tracking-tight leading-snug">
             {t.items[0]?.label ?? 'Short-form focused'}
           </p>
-        </div>
+        </motion.div>
 
         {/* CARD 2: 3 Days Turnaround */}
-        <div className="flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 22, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.55, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
+        >
           <div
             onClick={() => setCalendarDay((prev) => (prev % 3) + 1)}
             className="w-full h-24 sm:h-28 md:h-32 rounded-[20px] sm:rounded-[22px] border border-slate-200/90 bg-white flex items-center justify-center p-2.5 sm:p-3 shadow-2xs hover:border-slate-300 transition-all duration-300 relative group cursor-pointer"
@@ -280,10 +292,16 @@ export const StatsBar: FC = () => {
           <p className="mt-3 text-[14.5px] sm:text-[15.5px] md:text-[16.5px] font-extrabold text-slate-900 text-center tracking-tight leading-snug">
             {t.items[1]?.label ?? '3 days turnaround'}
           </p>
-        </div>
+        </motion.div>
 
         {/* CARD 3: Custom Edit Style */}
-        <div className="flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 22, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center"
+        >
           <div
             onMouseEnter={() => setClapperHovered(true)}
             onMouseLeave={() => setClapperHovered(false)}
@@ -294,7 +312,7 @@ export const StatsBar: FC = () => {
           <p className="mt-3 text-[14.5px] sm:text-[15.5px] md:text-[16.5px] font-extrabold text-slate-900 text-center tracking-tight leading-snug">
             {t.items[2]?.label ?? 'Custom edit style'}
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
