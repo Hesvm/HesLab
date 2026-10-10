@@ -5,7 +5,7 @@ import { generatePersonSchema, generateOrganizationSchema } from '../utils/schem
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../lib/analytics';
 import { ServiceSection } from '../components/service-article/ServiceArticleBlocks';
-import { Callout, CTACard } from '../components/service-article/ArticleBlocks';
+import { CTACard } from '../components/service-article/ArticleBlocks';
 
 type Chapter = { emoji: string; title: string; text: string };
 
@@ -175,9 +175,6 @@ export const AboutPage: FC = () => {
                 )}
               </span>
             ))}
-          </div>
-          <div className="mt-6 max-w-3xl">
-            <Callout text={t.remote} emoji="glowing_star" />
           </div>
         </ServiceSection>
 
