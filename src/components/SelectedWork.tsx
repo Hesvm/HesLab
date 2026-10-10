@@ -191,11 +191,6 @@ export const SelectedWork: FC = () => {
             {t.title}
           </span>
         </h2>
-        {t.desc && (
-          <p className="mt-2 text-slate-500 text-xs sm:text-[13px] font-medium">
-            {t.desc}
-          </p>
-        )}
       </motion.div>
 
       {/* Category Filter Tabs / Pills */}

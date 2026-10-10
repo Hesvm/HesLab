@@ -900,11 +900,6 @@ export const HowItWorks: FC = () => {
             {t.title}
           </span>
         </h2>
-        {t.desc && (
-          <p className="mt-3 text-white/60 text-xs sm:text-[14px] font-normal max-w-lg mx-auto">
-            {t.desc}
-          </p>
-        )}
       </motion.div>
 
       {/* Steps (left) + one sticky visual stage (right on desktop) */}
