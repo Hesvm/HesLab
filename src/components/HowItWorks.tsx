@@ -801,6 +801,60 @@ export const HowItWorks: FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Balanced magnetic assist: gently snaps and aligns steps when pausing near center without hijacking standard scroll
+  const reduceMotion = useReducedMotion();
+  useEffect(() => {
+    if (reduceMotion) return;
+    let isAssisting = false;
+    let settleTimer: ReturnType<typeof setTimeout> | null = null;
+    let lastScrollTime = 0;
+
+    const handleScrollSnapAssist = () => {
+      if (window.innerWidth < 768 || isAssisting) return;
+      lastScrollTime = performance.now();
+
+      if (settleTimer) clearTimeout(settleTimer);
+
+      settleTimer = setTimeout(() => {
+        const now = performance.now();
+        if (now - lastScrollTime < 140) return;
+
+        const vh = window.innerHeight;
+        let closestDist = Infinity;
+        let targetScroll: number | null = null;
+
+        for (const el of rowRefs.current) {
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          if (rect.bottom > 0 && rect.top < vh) {
+            const distFromCenter = rect.top + rect.height / 2 - vh / 2;
+            if (Math.abs(distFromCenter) < 170 && Math.abs(distFromCenter) > 10 && Math.abs(distFromCenter) < Math.abs(closestDist)) {
+              closestDist = distFromCenter;
+              targetScroll = window.scrollY + distFromCenter;
+            }
+          }
+        }
+
+        if (targetScroll !== null && Math.abs(closestDist) < 170) {
+          isAssisting = true;
+          window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth',
+          });
+          setTimeout(() => {
+            isAssisting = false;
+          }, 450);
+        }
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScrollSnapAssist, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScrollSnapAssist);
+      if (settleTimer) clearTimeout(settleTimer);
+    };
+  }, [reduceMotion]);
+
   return (
     <section
       id="process"
@@ -816,7 +870,7 @@ export const HowItWorks: FC = () => {
         className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto relative z-10"
       >
         <h2 className="tracking-tight text-white">
-          <span className="font-serif-italic font-normal block text-slate-400 text-xl sm:text-2xl md:text-[28px] leading-none mb-0">
+          <span className="font-serif-italic font-normal block text-slate-400 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
             {t.tag}
           </span>
           <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-white block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">

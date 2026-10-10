@@ -184,7 +184,7 @@ export const SelectedWork: FC = () => {
         className="flex flex-col items-center text-center mb-7 sm:mb-9 max-w-lg mx-auto"
       >
         <h2 className="tracking-tight text-slate-950">
-          <span className="font-serif-italic font-normal block text-slate-600 text-xl sm:text-2xl md:text-[28px] leading-none mb-0">
+          <span className="font-serif-italic font-normal block text-slate-600 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
             {t.tag}
           </span>
           <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">
