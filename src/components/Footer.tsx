@@ -64,7 +64,7 @@ export const Footer: FC = () => {
               });
               openModal();
             }}
-            className="mt-8 bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-7 h-[48px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center select-none"
+            className="mt-8 push-btn-blue text-white text-[14.5px] font-semibold px-7 h-[48px] rounded-[14px] cursor-pointer inline-flex items-center justify-center select-none"
           >
             {cta}
           </button>

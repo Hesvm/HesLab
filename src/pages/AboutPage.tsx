@@ -112,7 +112,7 @@ export const AboutPage: FC = () => {
   const t = COPY[fa ? 'fa' : 'en'];
 
   return (
-    <div dir={isRtl ? 'rtl' : 'ltr'} className={`min-h-screen bg-white pb-20 pt-28 text-slate-900 ${fa ? 'font-fa' : 'font-en'}`}>
+    <div dir={isRtl ? 'rtl' : 'ltr'} className={`min-h-screen bg-white pb-20 pt-32 sm:pt-36 text-slate-900 ${fa ? 'font-fa' : 'font-en'}`}>
       <SEOHead
         title={t.seoTitle}
         description={t.seoDesc}

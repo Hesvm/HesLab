@@ -52,7 +52,7 @@ export const RichText: FC<{ text: string; className?: string }> = ({ text, class
 // Buttons
 // -------------------------------------------------------------------------
 export const PRIMARY_BTN =
-  'bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-6 h-[46px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center select-none';
+  'push-btn-blue text-white text-[14.5px] font-semibold px-6 h-[46px] rounded-[14px] cursor-pointer inline-flex items-center justify-center select-none';
 
 const useStartProject = (slug: string, location: string) => {
   const { openModal } = useQuoteModal();
@@ -98,7 +98,9 @@ export const ServiceHero: FC<{ article: ServiceArticle }> = ({ article }) => {
       </div>
 
       {/* Clean Service Name */}
-      <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.12] text-slate-950 font-['Plus_Jakarta_Display',sans-serif]">
+      <h1
+        className="text-[28px] sm:text-[38px] md:text-[44px] tracking-tight leading-[1.15] text-slate-950 font-post-title"
+      >
         {article.name}
       </h1>
 

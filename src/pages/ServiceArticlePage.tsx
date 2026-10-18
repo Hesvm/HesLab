@@ -46,7 +46,7 @@ export const ServiceArticlePage: FC<{ article: ServiceArticle }> = ({ article })
   };
 
   return (
-    <div dir="ltr" className="min-h-screen bg-white font-en text-slate-900 pt-28 pb-20">
+    <div dir="ltr" className="min-h-screen bg-white font-en text-slate-900 pt-32 sm:pt-36 pb-20">
       <SEOHead
         title={article.metaTitle}
         description={article.metaDescription}

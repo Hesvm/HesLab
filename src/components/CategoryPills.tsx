@@ -68,7 +68,7 @@ export const CategoryPills: FC<CategoryPillsProps> = ({ categories, active, onCh
         onScroll={update}
         className="w-full overflow-x-auto no-scrollbar py-1"
       >
-        <div className="flex w-max min-w-full flex-nowrap items-center justify-center gap-1.5 px-2 sm:gap-2">
+        <div className="flex w-max min-w-full flex-nowrap items-center justify-start md:justify-center gap-2 px-4 sm:gap-2 sm:px-2">
           {categories.map((cat) => {
             const isActive = active === cat.id;
             const Icon = categoryIcons[cat.id] || Grid5;
@@ -80,14 +80,14 @@ export const CategoryPills: FC<CategoryPillsProps> = ({ categories, active, onCh
                   onChange(cat.id);
                   e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
                 }}
-                className={`inline-flex shrink-0 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-bold transition-all duration-200 sm:px-3.5 sm:text-[12px] ${
+                className={`inline-flex shrink-0 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-[12px] font-bold transition-all duration-200 sm:px-3.5 sm:py-1.5 sm:text-[12px] active:scale-95 ${
                   isActive
                     ? 'border-slate-950 bg-slate-950 text-white'
                     : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-950'
                 }`}
               >
                 <Icon
-                  size={13}
+                  size={14}
                   variant="Bold"
                   color="currentColor"
                   className={`shrink-0 ${isActive ? 'text-white' : 'text-slate-500'}`}
@@ -100,7 +100,7 @@ export const CategoryPills: FC<CategoryPillsProps> = ({ categories, active, onCh
       </div>
 
       {canLeft && (
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex w-16 items-center bg-gradient-to-r from-white via-white/90 to-transparent">
+        <div className="pointer-events-none absolute inset-y-0 left-0 hidden md:flex w-16 items-center bg-gradient-to-r from-white via-white/90 to-transparent">
           <button
             type="button"
             aria-label="Scroll categories left"
@@ -112,7 +112,7 @@ export const CategoryPills: FC<CategoryPillsProps> = ({ categories, active, onCh
         </div>
       )}
       {canRight && (
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex w-16 items-center justify-end bg-gradient-to-l from-white via-white/90 to-transparent">
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden md:flex w-16 items-center justify-end bg-gradient-to-l from-white via-white/90 to-transparent">
           <button
             type="button"
             aria-label="Scroll categories right"

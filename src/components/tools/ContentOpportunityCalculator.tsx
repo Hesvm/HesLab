@@ -241,7 +241,7 @@ export const ContentOpportunityCalculator: FC<{ className?: string }> = ({ class
                 });
                 playBenchoSound('open');
               }}
-              className="w-full block text-center bg-[#00A7F5] hover:bg-[#0096DC] text-white text-xs font-bold py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-98 cursor-pointer"
+              className="w-full block text-center push-btn-blue text-white text-[13.5px] font-bold py-3 px-4 rounded-[14px] cursor-pointer select-none"
             >
               {lang === 'fa' ? 'دریافت برآورد هزینه برای این حجم' : 'Get a Custom Repurposing Quote'}
             </Link>

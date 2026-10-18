@@ -187,7 +187,7 @@ export const FeaturedProjectCard: FC<{
         <span className="text-[12.5px] font-semibold text-white/70">{meta}</span>
         <Link
           to={to}
-          className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-[13px] font-bold text-slate-950 transition-colors hover:bg-slate-200"
+          className="inline-flex items-center gap-1.5 rounded-[14px] push-btn-secondary px-5 py-2.5 text-[13px] font-bold text-slate-950 cursor-pointer select-none"
         >
           {cta}
           <ArrowRight size={14} color="currentColor" />

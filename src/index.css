@@ -93,8 +93,8 @@
 }
 
 @font-face {
-  font-family: 'KansasNew';
-  src: url('./assets/fonts/kansasnew-medium.otf') format('opentype');
+  font-family: 'Instrument Serif';
+  src: url('./assets/fonts/InstrumentSerif-Italic.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -102,16 +102,8 @@
 
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('./assets/fonts/InstrumentSerif-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
   src: url('./assets/fonts/InstrumentSerif-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -158,21 +150,48 @@
   font-family: 'Plus Jakarta Display', sans-serif;
 }
 
+/*
+ * Serif Typography Rules (KansasNew Medium)
+ * Warm, rounded editorial serif used across headers, manifesto, and blog.
+ */
+.font-serif {
+  font-family: 'KansasNew', Georgia, serif !important;
+}
+
 .font-kansas {
-  font-family: 'KansasNew', Georgia, serif;
+  font-family: 'KansasNew', Georgia, serif !important;
 }
 
 .font-kansas-italic {
-  font-family: 'KansasNew', Georgia, serif;
-  font-style: italic;
+  font-family: 'KansasNew', Georgia, serif !important;
+  font-style: normal;
 }
 
 .font-serif-italic {
   font-family: 'KansasNew', Georgia, serif;
-  font-style: italic;
-  font-size: 28px;
+  font-style: normal;
+  font-size: 26px;
   line-height: 1.25;
   color: #64748b;
+  letter-spacing: -0.02em;
+}
+
+/*
+ * Editorial Serif Post & Heading Typography (KansasNew Regular/Medium)
+ * Used for post titles, cards, and service headers.
+ */
+.font-post-title {
+  font-family: 'KansasNew', Georgia, serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.025em !important;
+}
+
+[dir="rtl"] .font-post-title,
+.font-fa .font-post-title {
+  font-family: 'IRANYekanX', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 800 !important;
   letter-spacing: -0.02em;
 }
 
@@ -184,11 +203,96 @@
 .manifesto-serif {
   font-family: 'KansasNew', Georgia, serif !important;
   font-style: italic;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
 }
 
 .emoji-sticker-stroke {
-  filter: url(#emoji-sticker);
+  filter: none;
+}
+
+.hero-line-gradient {
+  background: linear-gradient(180deg, #020617 0%, #020617 50%, rgba(2, 6, 23, 0.60) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding-bottom: 0.35em;
+  margin-bottom: -0.35em;
+  overflow: visible;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Tactile 3D Push Button System */
+.push-btn-primary {
+  background-color: #3c3c3c;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 3.5px 0 0 #000000, 0 5px 12px rgba(0, 0, 0, 0.22);
+  transition: transform 0.06s ease-out, box-shadow 0.06s ease-out, background-color 0.15s ease;
+  user-select: none;
+}
+
+.push-btn-primary:hover {
+  background-color: #4c4c4c;
+  box-shadow: 0 3.5px 0 0 #000000, 0 6px 14px rgba(0, 0, 0, 0.26);
+}
+
+.push-btn-primary:active {
+  transform: translateY(3.5px);
+  box-shadow: 0 0px 0 0 #000000, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.push-btn-blue {
+  background-color: #5566FF;
+  color: #ffffff;
+  border: none;
+  box-shadow: 
+    0 3.5px 0 0 #2e3eb6,
+    0 4px 14px rgba(46, 62, 182, 0.31),
+    inset 0 0 14px 1px rgba(195, 208, 255, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.7);
+  transition: transform 0.06s ease-out, box-shadow 0.06s ease-out, background-color 0.15s ease;
+  user-select: none;
+}
+
+.push-btn-blue:hover {
+  background-color: #4859F5;
+  box-shadow: 
+    0 3.5px 0 0 #23329e,
+    0 6px 16px rgba(35, 50, 158, 0.4),
+    inset 0 0 14px 1px rgba(195, 208, 255, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.push-btn-blue:active {
+  transform: translateY(3.5px);
+  box-shadow: 
+    0 0px 0 0 #2e3eb6,
+    0 1px 3px rgba(46, 62, 182, 0.2),
+    inset 0 0 14px 1px rgba(195, 208, 255, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.7);
+}
+
+.push-btn-secondary {
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 3.5px 0 0 #cbd5e1, 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.06s ease-out, box-shadow 0.06s ease-out, background-color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.push-btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  box-shadow: 0 3.5px 0 0 #94a3b8, 0 5px 12px rgba(0, 0, 0, 0.07);
+}
+
+.push-btn-secondary:active {
+  transform: translateY(3.5px);
+  box-shadow: 0 0px 0 0 #cbd5e1, 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 @keyframes float-slow {

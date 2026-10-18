@@ -78,7 +78,7 @@ export const ProjectDetailPage: FC = () => {
         </p>
         <Link
           to="/work"
-          className="bg-slate-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors"
+          className="push-btn-primary text-white px-6 py-2.5 rounded-[14px] text-sm font-semibold cursor-pointer select-none"
         >
           {lang === 'fa' ? 'مشاهده همه نمونه‌کارها' : 'All Work'}
         </Link>
@@ -98,7 +98,7 @@ export const ProjectDetailPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-24 pb-20 ${
+      className={`min-h-screen bg-white text-slate-900 pt-32 sm:pt-36 pb-20 ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
@@ -288,7 +288,7 @@ export const ProjectDetailPage: FC = () => {
                   page_type: 'work_detail',
                 })
               }
-              className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-7 h-[46px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center select-none"
+              className="push-btn-blue text-white text-[14.5px] font-semibold px-7 h-[46px] rounded-[14px] cursor-pointer inline-flex items-center justify-center select-none"
             >
               {lang === 'fa' ? 'سفارش تدوین این سبک' : 'Request This Editing Style'}
             </Link>
@@ -304,7 +304,7 @@ export const ProjectDetailPage: FC = () => {
                   page_path: `/work/${project.slug}`,
                 });
               }}
-              className="bg-slate-950 hover:bg-slate-800 text-white text-sm font-semibold px-6 h-[46px] rounded-[14px] transition-all cursor-pointer inline-flex items-center justify-center"
+              className="push-btn-primary text-white text-sm font-semibold px-6 h-[46px] rounded-[14px] cursor-pointer inline-flex items-center justify-center select-none"
             >
               {lang === 'fa' ? 'جزییات سرویس شورتس' : 'View Service Details'}
             </Link>

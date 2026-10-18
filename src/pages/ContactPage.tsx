@@ -219,7 +219,7 @@ export const ContactPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-24 ${
+      className={`min-h-screen bg-white text-slate-900 pt-32 sm:pt-36 pb-24 ${
         isFa ? 'font-fa' : 'font-en'
       }`}
     >
@@ -355,7 +355,7 @@ export const ContactPage: FC = () => {
 
                   <button
                     onClick={handleResetForm}
-                    className="w-full h-[46px] rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-[14px] transition-all cursor-pointer shadow-md active:scale-98"
+                    className="w-full h-[46px] rounded-[14px] push-btn-primary text-white font-bold text-[14px] flex items-center justify-center cursor-pointer select-none"
                   >
                     {isFa ? 'ارسال یک پیام دیگر' : 'Send Another Message'}
                   </button>
@@ -506,7 +506,7 @@ export const ContactPage: FC = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full h-[48px] rounded-full bg-slate-950 hover:bg-slate-800 disabled:bg-slate-400 text-white font-bold text-[14.5px] flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-[0.98] transition-all cursor-pointer select-none"
+                      className="w-full h-[48px] rounded-[14px] push-btn-primary disabled:opacity-50 text-white font-bold text-[14.5px] flex items-center justify-center gap-2 cursor-pointer select-none"
                     >
                       {isSubmitting ? (
                         <>

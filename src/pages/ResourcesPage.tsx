@@ -29,7 +29,7 @@ export const ResourcesPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-24 ${
+      className={`min-h-screen bg-white text-slate-900 pt-32 sm:pt-36 pb-24 ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
@@ -79,7 +79,6 @@ export const ResourcesPage: FC = () => {
           {filteredArticles.map((article) => {
             const title = lang === 'en' && article.titleEn ? article.titleEn : article.title;
             const excerpt = lang === 'en' && article.excerptEn ? article.excerptEn : article.excerpt;
-            const readingTime = lang === 'en' && article.readingTimeEn ? article.readingTimeEn : article.readingTime;
 
             return (
               <article
@@ -94,13 +93,17 @@ export const ResourcesPage: FC = () => {
                   <BlogIllustrationCover
                     gradient={article.coverGradient}
                     title={title}
-                    readTime={readingTime}
+                    slug={article.slug}
+                    category={article.category}
+                    featuredImage={article.featuredImage}
                     aspectRatio="square"
                   />
                 </Link>
 
                 <div className="flex flex-col gap-1.5 px-0.5">
-                  <h2 className="text-[17px] sm:text-[18px] font-bold tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug line-clamp-2">
+                  <h2
+                    className="text-[19px] sm:text-[20.5px] tracking-tight text-slate-950 transition-colors group-hover:text-sky-600 leading-snug line-clamp-2 font-post-title"
+                  >
                     <Link
                       to={`/blog/${article.slug}`}
                       onClick={() => handleCardClick(article)}

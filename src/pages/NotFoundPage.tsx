@@ -38,31 +38,31 @@ export const NotFoundPage: FC = () => {
         <div className="flex flex-wrap items-center justify-center gap-2.5">
           <Link
             to="/"
-            className="px-5 py-2.5 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+            className="push-btn-primary px-5 py-2.5 rounded-[14px] text-white text-xs font-semibold cursor-pointer select-none inline-flex items-center justify-center"
           >
             {lang === 'fa' ? 'صفحه اصلی' : 'Home'}
           </Link>
           <Link
             to="/work"
-            className="px-5 py-2.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold hover:bg-slate-200 transition-colors"
+            className="push-btn-secondary px-5 py-2.5 rounded-[14px] text-slate-900 text-xs font-semibold cursor-pointer select-none inline-flex items-center justify-center"
           >
             {lang === 'fa' ? 'نمونه‌کارها' : 'Work'}
           </Link>
           <Link
             to="/services"
-            className="px-5 py-2.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold hover:bg-slate-200 transition-colors"
+            className="push-btn-secondary px-5 py-2.5 rounded-[14px] text-slate-900 text-xs font-semibold cursor-pointer select-none inline-flex items-center justify-center"
           >
             {lang === 'fa' ? 'خدمات' : 'Services'}
           </Link>
           <Link
             to="/resources"
-            className="px-5 py-2.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold hover:bg-slate-200 transition-colors"
+            className="push-btn-secondary px-5 py-2.5 rounded-[14px] text-slate-900 text-xs font-semibold cursor-pointer select-none inline-flex items-center justify-center"
           >
             {lang === 'fa' ? 'منابع و مقالات' : 'Resources'}
           </Link>
           <Link
             to="/contact"
-            className="px-5 py-2.5 rounded-[12px] bg-[#5566FF] hover:bg-[#4859F5] text-white text-xs font-semibold border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all cursor-pointer inline-flex items-center justify-center select-none"
+            className="push-btn-blue px-5 py-2.5 rounded-[14px] text-white text-xs font-semibold cursor-pointer select-none inline-flex items-center justify-center"
           >
             {lang === 'fa' ? 'تماس' : 'Contact'}
           </Link>

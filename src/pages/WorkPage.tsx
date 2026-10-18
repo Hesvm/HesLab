@@ -23,7 +23,7 @@ export const WorkPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-20 ${
+      className={`min-h-screen bg-white text-slate-900 pt-32 sm:pt-36 pb-20 ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >

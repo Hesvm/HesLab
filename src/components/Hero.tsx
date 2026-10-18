@@ -126,7 +126,7 @@ export const Hero: FC = () => {
         card6Ref.current.style.opacity = String(Math.max(0, 1 - zoomEase * 1.1 - exitEase));
       }
       if (centerRef.current) {
-        centerRef.current.style.transform = `translate3d(0, ${-exitY}px, 0) scale(${1 + zoomEase * 0.06})`;
+        centerRef.current.style.transform = `translate3d(0, ${-exitY}px, 0)`;
         centerRef.current.style.opacity = String(Math.max(0, 1 - exitEase * 0.92));
       }
     };
@@ -275,14 +275,14 @@ export const Hero: FC = () => {
         <div
           ref={centerRef}
           style={{ willChange: 'transform, opacity' }}
-          className="relative z-20 max-w-3xl lg:max-w-4xl mx-auto flex flex-col items-center text-center px-4 my-auto -translate-y-7 sm:-translate-y-9"
+          className="relative top-[14px] z-20 max-w-4xl lg:max-w-5xl mx-auto flex flex-col items-center text-center px-4 my-auto"
         >
           {/* Studio Status Tag */}
           <motion.div
             initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF8F2] text-xs font-bold text-emerald-950 mb-5 select-none transition-all"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF8F2] text-xs font-bold text-emerald-950 mb-[34px] select-none transition-all"
           >
             <div className="flex items-center gap-[3.5px] shrink-0" dir="ltr">
               <span className="w-[5.5px] h-[5.5px] rounded-full bg-emerald-500" />
@@ -295,19 +295,20 @@ export const Hero: FC = () => {
 
           {/* Main Headline (STRICTLY 2 LINES ONLY) */}
           <motion.h1
+            dir="ltr"
             initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.65, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-black tracking-tight text-slate-950 leading-[1.08] sm:leading-[1.05] md:leading-[1.02] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none space-y-0.5 sm:space-y-1"
+            className="text-[37px] sm:text-[48.5px] md:text-[60px] lg:text-[68px] font-black tracking-tight text-slate-950 leading-[1.06] sm:leading-[1.04] md:leading-[1.02] flex flex-col items-center justify-center font-['Plus_Jakarta_Display',sans-serif] select-none space-y-0 sm:space-y-0.5"
           >
             {/* LINE 1 */}
-            <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-              <span>Good ideas</span>
+            <div dir="ltr" className="flex items-center justify-center gap-2 whitespace-nowrap">
+              <span className="hero-line-gradient">Good ideas</span>
             </div>
 
             {/* LINE 2 (Rolling View Counter Inline: 'deserve great edits' -> 'deserve [Eye] 550K edits') */}
-            <div className="flex items-center justify-center gap-2 sm:gap-2.5 whitespace-nowrap">
-              <span>deserve</span>
+            <div dir="ltr" className="flex items-center justify-center gap-2 sm:gap-2.5 whitespace-nowrap">
+              <span className="hero-line-gradient">deserve</span>
               <RollingViewCounter />
             </div>
           </motion.h1>
@@ -317,34 +318,31 @@ export const Hero: FC = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 text-slate-600 text-sm sm:text-base md:text-lg max-w-xl font-medium leading-relaxed"
+            className="mt-[48px] sm:mt-[52px] text-slate-600 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed"
           >
-            {t.subtitle || (
-              <>
-                {t.subLine1} <br />
-                <span className="text-slate-950 font-bold">{t.subLine2}</span>
-              </>
-            )}
+            <span>{t.subLine1}</span>
+            <br />
+            <span>{t.subLine2}</span>
           </motion.p>
 
-          {/* Action Buttons: [ View our work ] [ Pricing ] */}
+          {/* Action Buttons: [ View our work ] [ Pricing ] (Tactile 3D Push Button System) */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-7 flex flex-wrap items-center justify-center gap-3"
+            className="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3.5"
           >
             <a
               href="#work"
-              className="px-6 py-3 rounded-[12px] bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm transition-all duration-200 active:scale-95 inline-flex items-center justify-center cursor-pointer shadow-sm hover:shadow-md"
+              className="push-btn-primary px-6 py-3 rounded-[14px] font-bold text-sm inline-flex items-center justify-center cursor-pointer"
             >
               <span>{t.viewWorkBtn}</span>
             </a>
             <a
               href="#pricing"
-              className="px-6 py-3 rounded-[12px] border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm transition-all duration-200 active:scale-95 cursor-pointer shadow-2xs hover:shadow-xs"
+              className="push-btn-secondary px-6 py-3 rounded-[14px] font-bold text-sm inline-flex items-center justify-center cursor-pointer"
             >
-              {t.pricingBtn}
+              <span>{t.pricingBtn}</span>
             </a>
           </motion.div>
         </div>

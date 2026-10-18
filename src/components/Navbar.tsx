@@ -57,7 +57,7 @@ const serviceCardMeta = [
 ];
 
 export const Navbar: FC = () => {
-  const { lang, isRtl } = useLanguage();
+  const { lang, isRtl, toggleLang } = useLanguage();
   const { openModal } = useQuoteModal();
   const t = translations[lang].nav;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -196,8 +196,18 @@ export const Navbar: FC = () => {
             </Link>
           </div>
 
-          {/* CTA */}
+          {/* CTA & Language Switcher */}
           <div className="flex items-center gap-2">
+            {/* Desktop Language Switcher */}
+            <button
+              type="button"
+              onClick={toggleLang}
+              className="hidden md:inline-flex items-center justify-center text-xs font-bold text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-white/10 hover:border-white/25 transition-colors cursor-pointer select-none"
+              aria-label="Switch language"
+            >
+              {lang === 'fa' ? 'EN' : 'فا'}
+            </button>
+
             <button
               type="button"
               data-analytics="primary-cta"
@@ -212,7 +222,7 @@ export const Navbar: FC = () => {
                 });
                 openModal();
               }}
-              className="bg-[#5566FF] hover:bg-[#4859F5] text-white text-[14.5px] font-semibold px-5 sm:px-6 h-[44px] rounded-[14px] border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
+              className="push-btn-blue text-white text-[14px] sm:text-[14.5px] font-semibold px-4 sm:px-6 h-[42px] sm:h-[44px] rounded-[14px] cursor-pointer inline-flex items-center justify-center shrink-0 select-none"
             >
               {t.cta}
             </button>
@@ -220,13 +230,13 @@ export const Navbar: FC = () => {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-[#A5A5A6] hover:text-white p-1.5 rounded-[10px] transition-colors cursor-pointer"
+              className="md:hidden text-[#A5A5A6] hover:text-white p-2 rounded-[12px] hover:bg-white/10 transition-colors cursor-pointer flex items-center justify-center"
               aria-label="Open menu"
             >
               {mobileMenuOpen ? (
-                <CloseSquare size={22} color="currentColor" variant="Linear" />
+                <CloseSquare size={24} color="currentColor" variant="Linear" />
               ) : (
-                <Category size={22} color="currentColor" variant="Linear" />
+                <Category size={24} color="currentColor" variant="Linear" />
               )}
             </button>
           </div>
@@ -284,7 +294,7 @@ export const Navbar: FC = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-black backdrop-blur-xl rounded-[16px] p-5 shadow-2xl md:hidden flex flex-col gap-3 text-center">
+        <div className="pointer-events-auto absolute top-[76px] inset-x-4 max-w-sm mx-auto bg-black backdrop-blur-xl rounded-[20px] p-5 shadow-2xl md:hidden flex flex-col gap-2.5 text-center border border-white/10 animate-in fade-in zoom-in-95 duration-200">
           <Link
             to={getHref('/work')}
             onClick={() => setMobileMenuOpen(false)}
@@ -301,13 +311,36 @@ export const Navbar: FC = () => {
             <ArrowDown2 size={13} color="currentColor" variant="Linear" />
           </Link>
           <Link
+            to={getHref('/blog')}
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
+          >
+            {lang === 'fa' ? 'بلاگ و مقالات' : 'Blog'}
+          </Link>
+          <Link
             to={getHref('/about')}
             onClick={() => setMobileMenuOpen(false)}
             className="text-zinc-300 hover:text-white py-2 text-[15px] font-medium border-b border-white/10"
           >
             {t.about}
           </Link>
-          <div className="pt-2 border-t border-white/10 mt-1 flex flex-col gap-2">
+
+          {/* Language Switch Row */}
+          <div className="flex items-center justify-between py-2.5 px-1 border-b border-white/10 text-xs">
+            <span className="text-zinc-400 font-medium">{lang === 'fa' ? 'تغییر زبان' : 'Language'}</span>
+            <button
+              type="button"
+              onClick={() => {
+                toggleLang();
+                setMobileMenuOpen(false);
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold transition-all border border-white/15 cursor-pointer active:scale-95"
+            >
+              <span>{lang === 'fa' ? 'English (EN)' : 'فارسی (FA)'}</span>
+            </button>
+          </div>
+
+          <div className="pt-2 mt-1 flex flex-col gap-2">
             <button
               type="button"
               data-analytics="primary-cta"
@@ -322,7 +355,7 @@ export const Navbar: FC = () => {
                 });
                 openModal();
               }}
-              className="w-full bg-[#5566FF] hover:bg-[#4859F5] text-white py-3 rounded-full text-[15px] font-semibold flex items-center justify-center cursor-pointer border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)]"
+              className="w-full push-btn-blue text-white py-3 rounded-[14px] text-[15px] font-semibold flex items-center justify-center cursor-pointer mb-1"
             >
               {t.cta}
             </button>

@@ -157,7 +157,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
       'Sound design transients must align precisely with frame zero to eliminate sensory latency.',
       'The 3-phase HesLab framework: isolate narrative tension, sync bold typography, and transition directly into payoff.'
     ],
-    coverGradient: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #bae6fd 100%)',
+    coverGradient: '#EEF5FD',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     searchIntent: {
@@ -356,7 +356,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
       'Dynamic 9:16 re-framing and speaker-tracking cuts maintain broadcast pacing on mobile viewports.',
       'A single 60-minute interview routinely yields 6 to 12 standalone high-retention vertical assets.'
     ],
-    coverGradient: 'linear-gradient(135deg, #10b981 0%, #34d399 50%, #a7f3d0 100%)',
+    coverGradient: '#EEF8F1',
     readingTime: '۴ دقیقه مطالعه',
     readingTimeEn: '4 min read',
     searchIntent: {
@@ -483,7 +483,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
       'Near-critical damping prevents excessive overshoot while keeping kinetic captions razor-sharp on mobile screens.',
       'Custom motion physics establish recognizable visual authority that generic app presets cannot replicate.'
     ],
-    coverGradient: 'linear-gradient(135deg, #fed7aa 0%, #f472b6 50%, #c084fc 100%)',
+    coverGradient: '#F5EEFD',
     readingTime: '۴ دقیقه مطالعه و آزمایش',
     readingTimeEn: '4 min read & test',
     searchIntent: {
@@ -601,7 +601,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
       'The true cost of bargain freelancers is erratic quality and missed deadlines; a dedicated studio provides brand consistency.',
       'Video editing ROI stems from algorithmic reach expansion, qualified inbound leads, and saving 20+ creator hours weekly.'
     ],
-    coverGradient: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fef3c7 100%)',
+    coverGradient: '#FEF7E5',
     readingTime: '۴ دقیقه مطالعه',
     readingTimeEn: '4 min read',
     searchIntent: {
@@ -716,7 +716,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['تعداد ویدیو', 'رشد الگوریتم', 'پکیج ماهانه', 'استراتژی محتوا', 'فرکانس انتشار'],
     tagsEn: ['Video Frequency', 'Algorithm Growth', 'Monthly Volume', 'Content Cadence', 'Creator Strategy'],
     featuredProjectSlug: 'creator-growth-story',
-    coverGradient: 'linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%)',
+    coverGradient: '#EEF5FD',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -856,7 +856,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['ریتینر ادیت', 'سیستم تولید ویدیو', 'برون‌سپاری محتوا', 'آسنکرون', 'مقیاس محتوا'],
     tagsEn: ['Video Retainers', 'Production Pipeline', 'Asynchronous Workflow', 'Content Scale', 'Creator Systems'],
     featuredProjectSlug: 'founder-routine-podcast',
-    coverGradient: 'linear-gradient(135deg, #6366f1 0%, #818cf8 50%, #c7d2fe 100%)',
+    coverGradient: '#EEF2FD',
     readingTime: '۶ دقیقه مطالعه',
     readingTimeEn: '6 min read',
     keyTakeaways: [
@@ -969,7 +969,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['معماری هوک', 'نگه‌داشت مخاطب', 'کراش زوم', 'طراحی صدا', 'ریلز و شورتس'],
     tagsEn: ['Hook Architecture', 'Audience Retention', 'Pattern Interrupts', 'Sound Triggers', 'Shorts Dynamics'],
     featuredProjectSlug: 'tokyo-24h-vlog',
-    coverGradient: 'linear-gradient(135deg, #f43f5e 0%, #fb7185 50%, #fecdd3 100%)',
+    coverGradient: '#FEECF0',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -1082,7 +1082,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['بازآفرینی پادکست', 'کادربندی ۹:۱۶', 'لحظات طلایی', 'استخراج شورتس', 'پادکست ویدیویی'],
     tagsEn: ['Podcast Repurposing', '9:16 Re-framing', 'Golden Micro-Moments', 'Shorts Extraction', 'Video Podcasts'],
     featuredProjectSlug: 'founder-routine-podcast',
-    coverGradient: 'linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%)',
+    coverGradient: '#EEF8F1',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -1195,7 +1195,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['دارک پستینگ', 'تست هوک', 'تبلیغات تیک‌تاک', 'خلاقیت پرفورمنس', 'بهینه‌سازی نرخ تبدیل'],
     tagsEn: ['Dark Posting', 'Hook Testing', 'TikTok Ads', 'Performance Creative', 'Conversion Optimization'],
     featuredProjectSlug: 'wireless-headphone-commercial',
-    coverGradient: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #ddd6fe 100%)',
+    coverGradient: '#F5EEFD',
     readingTime: '۶ دقیقه مطالعه',
     readingTimeEn: '6 min read',
     keyTakeaways: [
@@ -1308,7 +1308,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['استخدام ادیتور', 'مقایسه هزینه', 'ریتینر استودیو', 'ادیتور فریلنسر', 'بهره‌وری'],
     tagsEn: ['In-House Editor', 'Studio Retainer', 'Cost Comparison', 'Freelance vs Agency', 'Production ROI'],
     featuredProjectSlug: 'founder-routine-podcast',
-    coverGradient: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #a7f3d0 100%)',
+    coverGradient: '#E9F7F4',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -1437,7 +1437,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['اسپارک ادز', 'ریلز ارگانیک', 'تبلیغات ویدیویی', 'نرخ کلیک CTR', 'طراحی CTA'],
     tagsEn: ['Spark Ads', 'Organic Reels', 'Video Advertising', 'CTR Optimization', 'CTA Engineering'],
     featuredProjectSlug: 'wireless-headphone-commercial',
-    coverGradient: 'linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbcfe8 100%)',
+    coverGradient: '#FCEEF6',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -1538,7 +1538,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['تایپوگرافی کینتیک', 'فیزیک انیمیشن', 'پریست کپ‌کات', 'طراحی بصری', 'اعتبار برند'],
     tagsEn: ['Kinetic Typography', 'Animation Physics', 'CapCut Presets', 'Visual Authority', 'Motion Branding'],
     featuredProjectSlug: 'crypto-empire-documentary',
-    coverGradient: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fde68a 100%)',
+    coverGradient: '#F5EEFD',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [
@@ -1639,7 +1639,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['ناحیه امن', 'Safe Zones', 'ابعاد عمودی ۹:۱۶', 'اینستاگرام ریلز', 'تیک‌تاک'],
     tagsEn: ['Safe Zones', 'Aspect Ratios', '9:16 Format', 'Reels Interface', 'TikTok UI Layout'],
     featuredProjectSlug: 'tokyo-24h-vlog',
-    coverGradient: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #bae6fd 100%)',
+    coverGradient: '#EEF5FD',
     readingTime: '۴ دقیقه مطالعه',
     readingTimeEn: '4 min read',
     keyTakeaways: [
@@ -1740,7 +1740,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
     tags: ['بی‌رول', 'ساند دیزاین', 'ویدیو تاکینگ‌هد', 'ریتم تدوین', 'لایه صوتی'],
     tagsEn: ['B-Roll Hierarchy', 'Tactile Sound Design', 'Talking-Head Edits', 'Pacing Rhythm', 'Audio Layers'],
     featuredProjectSlug: 'ai-tools-breakdown',
-    coverGradient: 'linear-gradient(135deg, #14b8a6 0%, #2dd4bf 50%, #99f6e4 100%)',
+    coverGradient: '#E9F7F4',
     readingTime: '۵ دقیقه مطالعه',
     readingTimeEn: '5 min read',
     keyTakeaways: [

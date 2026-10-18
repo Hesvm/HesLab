@@ -870,7 +870,7 @@ export const HowItWorks: FC = () => {
         className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto relative z-10"
       >
         <h2 className="tracking-tight text-white">
-          <span className="font-serif-italic font-normal block text-slate-400 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
+          <span className="font-serif-italic font-normal block text-slate-400 text-[19.5px] sm:text-[23px] md:text-[27.5px] leading-none mb-0">
             {t.tag}
           </span>
           <span className="font-['Plus_Jakarta_Display',sans-serif] text-2xl sm:text-4xl md:text-[48px] font-black text-white block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">
@@ -910,9 +910,9 @@ export const HowItWorks: FC = () => {
                     'bg-sky-500/15 text-sky-300',
                   ][idx];
                   return (
-                    <div className={`self-start inline-flex items-center gap-2 mb-3 pl-3 pr-4 py-1.5 rounded-full text-[14px] font-semibold tracking-tight ${tagColor}`}>
-                      <TagIcon size={17} variant="Bold" color="currentColor" />
-                      <span className="lowercase first-letter:uppercase">{step.badge}</span>
+                    <div className={`self-start inline-flex items-center gap-2 mb-3 pl-3 pr-4 py-1.5 rounded-full text-[13px] sm:text-[13.5px] font-semibold tracking-tight ${tagColor}`}>
+                      <TagIcon size={16} variant="Bold" color="currentColor" />
+                      <span className="capitalize leading-none">{step.badge}</span>
                     </div>
                   );
                 })()}

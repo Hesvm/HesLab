@@ -25,7 +25,7 @@ export const TargetAudience: FC = () => {
             </>
           ) : (
             <>
-              <span className="font-serif-italic font-normal block text-slate-600 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
+              <span className="font-serif-italic font-normal block text-slate-600 text-[19.5px] sm:text-[23px] md:text-[27.5px] leading-none mb-0">
                 {t.title1}
               </span>
               <span className="font-['Plus_Jakarta_Display'] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight">

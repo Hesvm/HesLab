@@ -37,7 +37,10 @@ export const HomePage: FC = () => {
 
       {/* 1. Top White Section (Hero, Stats) */}
       <div className="relative w-full bg-[#0B0B0C]">
-        <div className="w-full bg-white rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] overflow-x-clip">
+        {/* Seamless backdrop for bottom rounded corners matching Manifesto dark tone #0B0B0C */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-[#0B0B0C] pointer-events-none" />
+
+        <div className="relative w-full bg-white rounded-b-[22px] sm:rounded-b-[28px] md:rounded-b-[34px] [clip-path:inset(0_0_0_0_round_0_0_22px_22px)] sm:[clip-path:inset(0_0_0_0_round_0_0_28px_28px)] md:[clip-path:inset(0_0_0_0_round_0_0_34px_34px)] overflow-x-clip">
           <Hero />
           <StatsBar />
         </div>

@@ -110,7 +110,7 @@ export const ServicePillarPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white pb-20 pt-28 text-slate-900 ${fa ? 'font-fa' : 'font-en'}`}
+      className={`min-h-screen bg-white pb-20 pt-32 sm:pt-36 text-slate-900 ${fa ? 'font-fa' : 'font-en'}`}
     >
       <SEOHead
         title={fa ? `${service.nameFa} برای کریتورها و برندها` : `${service.nameEn} for Creators & Brands`}
@@ -130,7 +130,9 @@ export const ServicePillarPage: FC = () => {
               className="h-14 w-14 sm:h-16 sm:w-16 object-contain select-none"
             />
           </div>
-          <h1 className="text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
+          <h1
+            className="text-[28px] sm:text-[38px] md:text-[44px] leading-[1.15] tracking-tight text-slate-950 font-post-title"
+          >
             {name}
           </h1>
           <p className={`mt-4 sm:mt-5 text-[17px] sm:text-[19px] text-slate-600 font-medium w-full ${fa ? 'leading-[2]' : 'leading-[1.7]'}`}>

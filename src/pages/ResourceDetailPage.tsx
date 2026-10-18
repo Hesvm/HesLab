@@ -22,7 +22,7 @@ import { generateArticleSchema } from '../utils/schema';
 import { playBenchoSound } from '../content/soundData';
 import { analytics } from '../lib/analytics';
 import { useLanguage } from '../context/LanguageContext';
-import { ArrowLeft, ArrowRight, Clock } from 'iconsax-react';
+import { ArrowLeft2, ArrowRight2, Clock } from 'iconsax-react';
 
 // Dynamic Vibekit Interactive Widgets
 import {
@@ -98,7 +98,7 @@ export const ResourceDetailPage: FC = () => {
         </p>
         <Link
           to="/blog"
-          className="bg-slate-950 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors"
+          className="push-btn-primary text-white px-6 py-2.5 rounded-[14px] text-sm font-semibold cursor-pointer select-none"
         >
           {lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}
         </Link>
@@ -132,7 +132,7 @@ export const ResourceDetailPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white text-slate-900 pt-28 pb-20 ${
+      className={`min-h-screen bg-white text-slate-900 pt-32 sm:pt-36 pb-20 ${
         lang === 'fa' ? 'font-fa' : 'font-en'
       }`}
     >
@@ -163,18 +163,27 @@ export const ResourceDetailPage: FC = () => {
 
       <div ref={articleContainerRef} className="mx-auto max-w-4xl px-4 sm:px-6 page-article-zoom">
         <article className="pt-3">
-          {/* Back */}
-          <div className="mb-6">
+          {/* Title row with inline Back button */}
+          <div className="flex items-start gap-3 sm:gap-4.5">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-950"
+              className="mt-1 sm:mt-2 shrink-0 inline-flex items-center justify-center size-9 sm:size-10 rounded-full border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-600 hover:text-slate-950 transition-all select-none shadow-2xs group cursor-pointer"
+              title={lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}
+              aria-label={lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}
             >
-              {isRtl ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
-              <span>{lang === 'fa' ? 'بازگشت به بلاگ' : 'Back to Blog'}</span>
+              {isRtl ? (
+                <ArrowRight2 size={16} className="transition-transform group-hover:translate-x-0.5" />
+              ) : (
+                <ArrowLeft2 size={16} className="transition-transform group-hover:-translate-x-0.5" />
+              )}
             </Link>
-          </div>
 
-          <h1 className="w-full text-3xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">{title}</h1>
+            <h1
+              className="flex-1 text-[28px] sm:text-[38px] md:text-[44px] leading-[1.15] tracking-tight text-slate-950 font-post-title"
+            >
+              {title}
+            </h1>
+          </div>
 
           <div className="mt-6">
             <ArticleMetaBar
@@ -185,8 +194,15 @@ export const ResourceDetailPage: FC = () => {
           </div>
 
           {/* Cover */}
-          <div className="mt-8 overflow-hidden rounded-[26px] sm:rounded-[32px]">
-            <BlogIllustrationCover gradient={article.coverGradient} title={title} aspectRatio="16/9" />
+          <div className="mt-8 overflow-hidden rounded-[28px] sm:rounded-[34px]">
+            <BlogIllustrationCover
+              gradient={article.coverGradient}
+              title={title}
+              slug={article.slug}
+              category={article.category}
+              featuredImage={article.featuredImage}
+              aspectRatio="16/9"
+            />
           </div>
 
           {/* Key takeaways */}

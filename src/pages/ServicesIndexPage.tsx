@@ -25,7 +25,7 @@ export const ServicesIndexPage: FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className={`min-h-screen bg-white pt-28 pb-24 text-slate-900 ${lang === 'fa' ? 'font-fa' : 'font-en'}`}
+      className={`min-h-screen bg-white pt-32 sm:pt-36 pb-24 text-slate-900 ${lang === 'fa' ? 'font-fa' : 'font-en'}`}
     >
       <SEOHead
         title={lang === 'fa' ? 'خدمات استودیو حس‌لب | تدوین شورتس، موشن دیزاین و پکیج ماهانه' : 'Services | HesLab Short-Form Video Editing & Motion Design'}
@@ -57,7 +57,11 @@ export const ServicesIndexPage: FC = () => {
                       alt=""
                       className="h-12 w-12 object-contain transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:-rotate-6"
                     />
-                    <h2 className="mt-5 text-[21px] font-bold tracking-tight text-slate-950">{item.title}</h2>
+                    <h2
+                      className="mt-5 text-[20px] sm:text-[22px] tracking-tight text-slate-950 font-post-title"
+                    >
+                      {item.title}
+                    </h2>
                     <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{item.desc}</p>
                   </div>
                   <span className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold text-slate-950">

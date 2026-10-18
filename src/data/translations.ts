@@ -6,7 +6,7 @@ export const translations = {
       resources: 'منابع و مقالات',
       pricing: 'قیمت‌گذاری',
       about: 'درباره ما',
-      cta: 'Lets build',
+      cta: 'شروع همکاری',
       switchLang: 'EN',
       servicesList: [
         {
@@ -42,12 +42,12 @@ export const translations = {
       ],
     },
     hero: {
-      tag: '۲ جایگاه پروژه جدید',
+      tag: '۲ جایگاه در دسترس',
       titleLine1: 'Good ideas',
       titleLine2: 'deserve great edits',
       subLine1: 'ادیت ریلز و ویدیوهای کوتاه برای کریتورها و برندها،',
       subLine2: 'با استراتژی و طراحی اختصاصی.',
-      subtitle: 'ادیت ریلز و ویدیوهای کوتاه برای کریتورها و برندها، با استراتژی و طراحی اختصاصی.',
+      subtitle: '',
       viewWorkBtn: 'مشاهده نمونه‌کارها',
       pricingBtn: 'قیمت‌گذاری',
       showreelBadge: 'شو ریل ۲۰۲۶',
@@ -84,6 +84,7 @@ export const translations = {
     work: {
       tag: 'آنچه تحویل می‌گیرید',
       title: 'پروژه‌های منتخب',
+      seeMore: 'مشاهده بیشتر',
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
         { id: 'all', name: 'همه' },
@@ -342,7 +343,7 @@ export const translations = {
             { text: 'موزیک + طراحی صدا (SFX)', icon: 'music' },
             { text: '۲ دور بازبینی و ویرایش', icon: 'repeat' },
           ],
-          cta: 'Start a project',
+          cta: 'شروع پروژه',
         },
         {
           name: 'Content Pack',
@@ -359,7 +360,7 @@ export const translations = {
             { text: 'تحویل هر ویدیو ظرف ۳ روز', icon: 'timer' },
             { text: '۳ دور بازبینی و ویرایش', icon: 'repeat' },
           ],
-          cta: 'Get the pack',
+          cta: 'دریافت پکیج',
         },
       ],
     },
@@ -506,12 +507,12 @@ export const translations = {
       ],
     },
     hero: {
-      tag: '2 Project Spots Available',
+      tag: '2 spots available',
       titleLine1: 'Good ideas',
       titleLine2: 'deserve great edits',
-      subLine1: 'You bring the footage.',
-      subLine2: 'We make it worth watching.',
-      subtitle: 'Short-form video editing for creators and brands, powered by custom strategy and design.',
+      subLine1: 'Short-form video editing for creators and brands,',
+      subLine2: 'powered by custom strategy and design.',
+      subtitle: '',
       viewWorkBtn: 'View our work',
       pricingBtn: 'Pricing',
       showreelBadge: 'Showreel 2026',
@@ -548,6 +549,7 @@ export const translations = {
     work: {
       tag: "What you'll get",
       title: 'Selected Work',
+      seeMore: 'See more',
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
         { id: 'all', name: 'All' },
@@ -769,19 +771,19 @@ export const translations = {
       steps: [
         {
           step: '01',
-          badge: 'SEND',
+          badge: 'Send',
           title: 'Send your footage',
           desc: 'Footage, references, ideas — send over everything you need me to know.',
         },
         {
           step: '02',
-          badge: 'EDIT',
+          badge: 'Edit',
           title: 'Shape the story',
           desc: 'I cut, pace, caption, and add motion to turn your footage into a polished short.',
         },
         {
           step: '03',
-          badge: 'REFINE',
+          badge: 'Refine',
           title: 'Review & refine',
           desc: 'Give feedback, I polish the details, and your final cut is ready to post.',
         },

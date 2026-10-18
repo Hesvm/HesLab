@@ -64,9 +64,9 @@ const CountUp: FC<CountUpProps> = ({ target, duration = 1400 }) => {
   const { value, suffix } = formatViewCount(n);
 
   return (
-    <span className="tabular-nums font-black inline-flex items-baseline gap-0.5">
+    <span className="tabular-nums font-black inline-block">
       <span>{value}</span>
-      <span className="font-black text-slate-950">{suffix}</span>
+      <span>{suffix}</span>
     </span>
   );
 };
@@ -174,9 +174,9 @@ export const RollingViewCounter: FC = () => {
   // 1. Initial / Top of page ("great edits")
   if (phase === 'great') {
     return (
-      <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none">
-        <span className="text-slate-950 font-black">great</span>
-        <span>edits</span>
+      <span dir="ltr" className="inline-flex items-center gap-2 sm:gap-2.5 font-black select-none">
+        <span className="hero-line-gradient">great</span>
+        <span className="hero-line-gradient">edits</span>
       </span>
     );
   }
@@ -184,23 +184,25 @@ export const RollingViewCounter: FC = () => {
   // 2. Progressive Character-by-Character Morph Transition ("gre8K edits")
   if (phase === 'morphing') {
     return (
-      <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none">
-        <span className="inline-block font-black text-slate-950 tracking-tight transition-all">
+      <span dir="ltr" className="inline-flex items-center gap-2 sm:gap-2.5 font-black select-none">
+        <span className="hero-line-gradient inline-block tracking-tight transition-all">
           {morphText}
         </span>
-        <span>edits</span>
+        <span className="hero-line-gradient">edits</span>
       </span>
     );
   }
 
   // 3. Active Scroll Counter with Eye Icon and CountUp (" [Eye] 550K edits ")
   return (
-    <span className="inline-flex items-center gap-2 sm:gap-2.5 align-baseline font-black text-slate-950 select-none animate-in fade-in duration-150">
-      <span dir="ltr" className="inline-flex items-center gap-1.5 sm:gap-2 font-en tracking-tight text-slate-950">
-        <InstagramEyeIcon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 -translate-y-0.5" />
-        <CountUp target={targetNumber} duration={1400} />
+    <span dir="ltr" className="inline-flex items-center gap-2 sm:gap-2.5 font-black select-none animate-in fade-in duration-150">
+      <span dir="ltr" className="inline-flex items-center gap-1.5 sm:gap-2 font-en tracking-tight">
+        <InstagramEyeIcon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 text-slate-950" />
+        <span className="hero-line-gradient">
+          <CountUp target={targetNumber} duration={1400} />
+        </span>
       </span>
-      <span>edits</span>
+      <span className="hero-line-gradient">edits</span>
     </span>
   );
 };

@@ -73,7 +73,7 @@ export const Pricing: FC = () => {
         <h2 className="tracking-tight text-slate-950 max-w-2xl mx-auto">
           {lang === 'fa' ? (
             <>
-              <span className="font-serif-italic font-normal block text-slate-600 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
+              <span className="font-serif-italic font-normal block text-slate-600 text-[19.5px] sm:text-[23px] md:text-[27.5px] leading-none mb-0">
                 {t.tag}
               </span>
               <span className="font-sans text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 leading-tight">
@@ -82,7 +82,7 @@ export const Pricing: FC = () => {
             </>
           ) : (
             <>
-              <span className="font-serif-italic font-normal block text-slate-600 text-[17px] sm:text-[20px] md:text-[24px] leading-none mb-0">
+              <span className="font-serif-italic font-normal block text-slate-600 text-[19.5px] sm:text-[23px] md:text-[27.5px] leading-none mb-0">
                 {t.tag}
               </span>
               <span className="font-['Plus_Jakarta_Display'] text-2xl sm:text-4xl md:text-[48px] font-black text-slate-950 block -mt-1 sm:-mt-1.5 md:-mt-2 tracking-tight leading-tight">
@@ -169,10 +169,7 @@ export const Pricing: FC = () => {
                     <div className="px-4 sm:px-5 sm:px-6 pt-2.5 sm:pt-3 pb-2">
                       {/* Title & Price Header */}
                       <div className="flex items-start justify-between mb-4 sm:mb-5">
-                        <h3
-                          className="text-[20px] sm:text-[23.5px] font-medium text-white tracking-tight font-kansas"
-                          style={{ fontFamily: "'KansasNew', Georgia, serif" }}
-                        >
+                        <h3 className="text-[21px] sm:text-[24px] font-medium text-white tracking-tight font-serif">
                           {plan.name}
                         </h3>
                         <div className="text-right">
@@ -213,7 +210,7 @@ export const Pricing: FC = () => {
                                       <InfoCircle size={13} variant="Linear" />
                                     </button>
                                     {/* Small Popover Tooltip */}
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tooltip:flex flex-col items-center z-50 pointer-events-none w-52 sm:w-56">
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/tooltip:flex group-focus-within/tooltip:flex flex-col items-center z-50 pointer-events-none w-52 sm:w-56">
                                       <div className="bg-[#121214] text-white text-[10.5px] sm:text-[11px] leading-relaxed p-2.5 rounded-xl border border-white/15 shadow-2xl backdrop-blur-md text-center">
                                         {lang === 'fa'
                                           ? 'تدوین، فونت، تم رنگی و هویت بصری تمام ویدیوها یکدست و منطبق بر گایدلاین برند شما طراحی می‌شود.'
@@ -232,11 +229,11 @@ export const Pricing: FC = () => {
                   </div>
 
                   {/* CTA Button (Matching Navbar Button Exactly) */}
-                  <div className="p-4 sm:p-5 sm:px-6 pt-0">
+                  <div className="p-4 sm:p-5 sm:px-6 pt-0 pb-[19px] sm:pb-[23px]">
                     <button
                       type="button"
                       onClick={() => openModal('standard')}
-                      className="w-full py-3.5 rounded-full font-semibold text-xs sm:text-[13.5px] text-center bg-[#5566FF] hover:bg-[#4859F5] text-white border border-white/20 shadow-[inset_0_0_14px_1px_rgba(195,208,255,0.55),inset_0_1px_2px_rgba(255,255,255,0.7)] active:scale-95 transition-all block select-none cursor-pointer"
+                      className="w-full h-[46px] rounded-[14px] font-bold text-xs sm:text-[13.5px] text-center push-btn-blue text-white flex items-center justify-center select-none cursor-pointer"
                     >
                       {plan.cta}
                     </button>
@@ -267,10 +264,7 @@ export const Pricing: FC = () => {
                 <div className="px-4 sm:px-5 sm:px-6 pt-2.5 sm:pt-3 pb-2">
                   {/* Title & Price Header */}
                   <div className="flex items-start justify-between mb-4 sm:mb-5">
-                    <h3
-                      className="text-[20px] sm:text-[23.5px] font-medium text-slate-950 tracking-tight font-kansas"
-                      style={{ fontFamily: "'KansasNew', Georgia, serif" }}
-                    >
+                    <h3 className="text-[21px] sm:text-[24px] font-medium text-slate-950 tracking-tight font-serif">
                       {plan.name}
                     </h3>
                     <div className="text-right">
@@ -306,12 +300,12 @@ export const Pricing: FC = () => {
                 </div>
               </div>
 
-              {/* CTA Button (Borderless soft button) */}
-              <div className="p-4 sm:p-5 sm:px-6 pt-0">
+              {/* CTA Button (Tactile 3D Push Button) */}
+              <div className="p-4 sm:p-5 sm:px-6 pt-0 pb-[19px] sm:pb-[23px]">
                 <button
                   type="button"
                   onClick={() => openModal('starter')}
-                  className="w-full py-3.5 rounded-full font-bold text-xs sm:text-[13.5px] text-center bg-slate-950 hover:bg-slate-800 text-white border-0 shadow-none active:scale-95 transition-all block select-none cursor-pointer"
+                  className="w-full h-[46px] rounded-[14px] font-bold text-xs sm:text-[13.5px] text-center push-btn-primary text-white flex items-center justify-center select-none cursor-pointer"
                 >
                   {plan.cta}
                 </button>
