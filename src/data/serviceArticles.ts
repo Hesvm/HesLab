@@ -265,7 +265,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     examples: {
       heading: 'Style in motion',
       text: 'Frames from our own edits, shown here as a sample of how a consistent look carries across videos. See the full [portfolio](/work).',
-      videos: [V(2), V(4), V(5)],
+      videos: [V(2), V(4), V(1)],
     },
     faq: [
       {
@@ -361,7 +361,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     examples: {
       heading: 'Motion in our edits',
       text: 'Frames from our own videos where captions and graphics move with the story. More in the [portfolio](/work).',
-      videos: [V(3), V(5), V(6)],
+      videos: [V(3), V(1), V(6)],
     },
     faq: [
       {
@@ -494,8 +494,8 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'A more polished, story-driven look: considered color, composition and pacing, built for the vertical frame.',
     heroVisual: {
-      image: '/mock/work_5.webp',
-      video: V(5),
+      image: '/mock/work_7.webp',
+      video: V(1),
       emojis: ['/emojis/clapper_board.png', '/emojis/eyes.png'],
       chips: ['Color', 'Framing', 'Emotion'],
       alt: 'Vertical video frame with a cinematic color grade and a color wheel overlay',
@@ -571,7 +571,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     examples: {
       heading: 'A cinematic look in practice',
       text: 'Frames from our own edits, graded and paced for the vertical frame. Explore more in the [portfolio](/work).',
-      videos: [V(5), V(3), V(2)],
+      videos: [V(6), V(3), V(2)],
     },
     faq: [
       {

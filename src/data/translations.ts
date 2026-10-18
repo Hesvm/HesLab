@@ -145,8 +145,8 @@ export const translations = {
           creator: 'آموزش تکنولوژی و ابزارهای AI',
           views: '۸۹۰K',
           tag: 'نرم‌افزار و هوش مصنوعی',
-          image: '/mock/work_5.webp',
-          video: '/videos/video_5.mp4',
+          image: '/mock/work_7.webp',
+          video: '/videos/video_3.mp4',
         },
         {
           id: 6,
@@ -206,7 +206,7 @@ export const translations = {
           views: '۹۲۰K',
           tag: 'بنیان‌گذاران و کریتورها',
           image: '/mock/work_11.webp',
-          video: '/videos/video_5.mp4',
+          video: '/videos/video_3.mp4',
         },
         {
           id: 12,
@@ -610,8 +610,8 @@ export const translations = {
           creator: 'Tech & SaaS Creator',
           views: '890K',
           tag: 'SaaS & AI',
-          image: '/mock/work_5.webp',
-          video: '/videos/video_5.mp4',
+          image: '/mock/work_7.webp',
+          video: '/videos/video_3.mp4',
         },
         {
           id: 6,
@@ -671,7 +671,7 @@ export const translations = {
           views: '920K',
           tag: 'Founders & Creators',
           image: '/mock/work_11.webp',
-          video: '/videos/video_5.mp4',
+          video: '/videos/video_3.mp4',
         },
         {
           id: 12,

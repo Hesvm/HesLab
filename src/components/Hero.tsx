@@ -240,8 +240,8 @@ export const Hero: FC = () => {
             <div ref={card5Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
-                  video="/videos/video_5.mp4"
-                  poster="/mock/work_5.webp"
+                  video="/videos/video_3.mp4"
+                  poster="/mock/work_7.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(11deg) rotateZ(-5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(4deg) rotateZ(-2deg) scale(1.06)"
