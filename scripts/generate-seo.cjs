@@ -537,9 +537,9 @@ const seoManifest = {
   routes: allManifestRoutes.map((r) => ({
     route: r.path,
     canonical: r.path === '/' ? SITE_URL : `${SITE_URL}${r.path}`,
-    title: r.titleFa,
+    title: r.titleEn,
     titleEn: r.titleEn,
-    description: r.descriptionFa,
+    description: r.descriptionEn,
     descriptionEn: r.descriptionEn,
     pageType: r.pageType,
     searchIntent: r.searchIntent,
