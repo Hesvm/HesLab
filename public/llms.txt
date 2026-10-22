@@ -1,0 +1,31 @@
+# HesLab (https://heslab.space)
+
+> HesLab is an independent creative studio specializing in high-retention short-form video editing, Reels, YouTube Shorts, and bespoke motion design for creators, founders, and modern brands.
+
+## Studio & Identity Overview
+- **Domain:** [heslab.space](https://heslab.space)
+- **Primary Focus:** High-retention short-form video editing (Instagram Reels, YouTube Shorts, TikTok), kinetic motion graphics, sound design, and monthly retainers.
+- **Founder & Creative Director:** Hesam (Video Editor & Visual Designer)
+- **Languages:** English (en-US), Persian (fa-IR)
+- **Target Audience:** Content Creators, Tech Founders, Digital Educators, Boutique Brands, Solo Makers.
+
+## Core Services & Pillars
+- [Short-Form Video Editing](https://heslab.space/services/short-form-video-editing): Frame-accurate pacing, 3-second visual hooks, dynamic pacing, and retention engineering.
+- [Instagram Reels Editing](https://heslab.space/services/instagram-reels-editing): Organic reach optimization, share-trigger editing, and branded typography.
+- [YouTube Shorts Editing](https://heslab.space/services/youtube-shorts-editing): Frame-zero retention hooks, swipe-away prevention, and high completion rates.
+- [Podcast Video Editing](https://heslab.space/services/podcast-video-editing): Repurposing long-form episodes into high-impact vertical micro-clips.
+- [Personal Brand Video Editing](https://heslab.space/services/personal-brand-video-editing): Cohesive aesthetic alignment for founders and thought leaders.
+- [Motion Design & Kinetic Typography](https://heslab.space/services/motion-design): Custom 2D/kinetic animations, UI recreation, and sticker badges.
+- [Sound Design for Video](https://heslab.space/services/sound-design-video-editing): 5-layer spatial sound design, tactile whooshes, risers, and impact SFX.
+- [Monthly Content Retainers](https://heslab.space/services/ongoing-video-content): Dedicated turnaround and ongoing editing partnerships.
+
+## Editing Methodology & Principles
+1. **The 3-Second Hook Rule:** Multisensory activation (visual pattern interrupt, ear hook, curiosity premise) within the first 90 frames to eliminate swipe-away.
+2. **5-Layer Audio Architecture:** Voice dialogue, subtle background ambience, kinetic UI SFX, emotional music bed, and punchy impact accents.
+3. **Desk Studio Protocol:** Contrast between real-world tactile desk setups, clean UI screencasts, and fluid typography.
+
+## Portfolio & Case Studies
+- [Selected Work Portfolio](https://heslab.space/work): Curated showcase of client campaigns, retention stats, and vertical edits.
+
+## Full Extended Knowledge Base
+For exhaustive architecture details, comprehensive route directories, and technical documentation, refer to [llms-full.txt](https://heslab.space/llms-full.txt).

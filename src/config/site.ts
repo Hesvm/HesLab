@@ -9,11 +9,37 @@
 // Fallback canonical domain (production-ready format, configurable via VITE_SITE_URL)
 const RAW_SITE_URL = (
   (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SITE_URL) ||
-  'https://heslab.studio'
+  'https://heslab.space'
 ).trim();
 
 // Strip any trailing slash for consistent URL composition
 export const SITE_URL = RAW_SITE_URL.replace(/\/+$/, '');
+
+// Global Video CDN Base URL (GitHub Releases / External CDN, zero egress fees)
+const RAW_MEDIA_URL = (
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_MEDIA_URL) ||
+  'https://github.com/Hesvm/HesLab/releases/download/v1.0.0-media'
+).trim();
+
+export const MEDIA_URL = RAW_MEDIA_URL.replace(/\/+$/, '');
+
+/**
+ * Resolves a media (video/audio/large asset) URL.
+ * If VITE_MEDIA_URL is configured (e.g. Cloudflare R2), it prepends the CDN host.
+ * Otherwise, it falls back cleanly to local public/ asset paths.
+ */
+export function getMediaUrl(relativePath: string): string {
+  if (!relativePath) return '';
+  if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) {
+    return relativePath;
+  }
+  const clean = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+  if (!MEDIA_URL) return clean;
+  // If using GitHub Releases as CDN, assets are flat without subdirectories
+  const isFlatCdn = MEDIA_URL.includes('releases/download');
+  const targetPath = isFlatCdn ? clean.replace(/^\/videos\//, '/') : clean;
+  return `${MEDIA_URL}${targetPath}`;
+}
 
 export const SITE_CONFIG = {
   brandName: 'HesLab',

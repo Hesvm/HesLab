@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Extract or derive SITE_URL from env or default
-const RAW_SITE_URL = (process.env.VITE_SITE_URL || 'https://heslab.studio').trim();
+const RAW_SITE_URL = (process.env.VITE_SITE_URL || 'https://heslab.space').trim();
 const SITE_URL = RAW_SITE_URL.replace(/\/+$/, '');
 
 // Static Core Routes

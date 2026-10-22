@@ -1,5 +1,5 @@
 # HesLab Production Robots Configuration
-# Canonical domain: https://heslab.studio
+# Canonical domain: https://heslab.space
 # Explicitly configured for modern crawlers, LLM search agents, and AI discovery bots.
 
 User-agent: *
@@ -36,4 +36,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Canonical Sitemap Reference
-Sitemap: https://heslab.studio/sitemap.xml
+Sitemap: https://heslab.space/sitemap.xml

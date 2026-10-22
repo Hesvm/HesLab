@@ -5,6 +5,7 @@ import { VolumeHigh, VolumeCross } from 'iconsax-react';
 import { CategoryPills } from './CategoryPills';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
+import { getMediaUrl } from '../config/site';
 
 interface VideoCardProps {
   item: {
@@ -82,7 +83,7 @@ export const VideoCard: FC<VideoCardProps> = ({
       {/* HTML5 Video with IntersectionObserver playback */}
       <video
         ref={videoRef}
-        src={item.video}
+        src={getMediaUrl(item.video)}
         poster={item.image}
         loop
         muted={!isUnmuted}

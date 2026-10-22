@@ -13,6 +13,7 @@ import {
 import { Play, TickCircle, Send2, Magicpen, MessageText1, Music, VolumeHigh } from 'iconsax-react';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
+import { getMediaUrl } from '../config/site';
 
 // =========================================================================
 // SHARED DATA — the same three files travel through the whole story:
@@ -248,7 +249,7 @@ const ProcessVisualStage: FC<{ state: number }> = ({ state }) => {
           <div className="absolute inset-0 rounded-[24px] overflow-hidden">
             <motion.video
               ref={videoRef}
-              src="/videos/video_1.mp4"
+              src={getMediaUrl('/videos/video_1.mp4')}
               poster="/mock/work_vertical_1.webp"
               autoPlay
               muted

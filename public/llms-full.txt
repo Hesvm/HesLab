@@ -1,0 +1,76 @@
+# HesLab — Extended LLM Knowledge Base & Documentation (llms-full.txt)
+Canonical Domain: https://heslab.space
+Studio Type: Creative Video Editing & Motion Design Studio
+Target Platforms: Instagram Reels, YouTube Shorts, TikTok, LinkedIn Video
+
+---
+
+## 1. Executive Summary
+HesLab is an independent vertical-video post-production studio founded by Hesam. The studio engineers video content designed to maximize watch time, viewer retention, and conversion for founders, tech creators, and modern brands. Unlike generic assembly-line editing agencies, HesLab combines mathematical cut timing, kinetic typography, and multi-layered sound design tailored to algorithmic feeds.
+
+---
+
+## 2. Service Matrix & Capabilities
+
+### Service 1: Short-Form Video Editing (/services/short-form-video-editing)
+- **Primary Platforms:** Instagram Reels, YouTube Shorts, TikTok
+- **Core Focus:** Frame-accurate cuts, pacing calibration, eliminating dead air, visual proof layers.
+- **Deliverables:** 9:16 vertical videos, custom color grading, animated captions, sound effects.
+
+### Service 2: Instagram Reels Editing (/services/instagram-reels-editing)
+- **Core Focus:** High save & share triggers, visual aesthetics matching personal brand guidelines.
+- **Specifications:** 1080x1920, optimized safe zones (avoiding UI overlap with profile, captions, and action buttons).
+
+### Service 3: YouTube Shorts Editing (/services/youtube-shorts-editing)
+- **Core Focus:** Swipe-rate suppression, frame-zero hooks, seamless looping mechanics.
+- **Metrics Targeted:** Average Percentage Viewed (APV > 85%), Viewed vs Swiped Away (> 75%).
+
+### Service 4: Podcast Micro-Content & Repurposing (/services/podcast-video-editing)
+- **Core Focus:** Transforming 60-minute long-form video podcasts into 5-10 standalone viral moments.
+- **Workflow:** Topic isolation, dynamic speaker switching, multi-cam punch-ins, B-roll overlay.
+
+### Service 5: Motion Design & Kinetic Typography (/services/motion-design)
+- **Core Focus:** Custom keyframed animations, Figma/Code UI recreation, vector motion badges.
+- **Software Ecosystem:** Adobe After Effects, Premiere Pro, Figma.
+
+### Service 6: Sound Design & Foley Mixing (/services/sound-design-video-editing)
+- **Core Focus:** 5-layer sound design architecture:
+  1. Primary Vocal (De-noised, parametric EQ, multiband compression).
+  2. Ambient Room Tone & Atmospheric Bed.
+  3. Micro-tactile Foley (mouse clicks, mechanical switches, paper rustle).
+  4. Movement & Transition SFX (custom risers, whooshes, tape stops).
+  5. Bass & Impact Accents (sub-booms, drops for key revelations).
+
+### Service 7: Monthly Retainers & Dedicated Capacity (/services/ongoing-video-content)
+- **Core Focus:** Consistent 8, 12, or 20 videos per month with guaranteed turnaround times, async Slack communication, and revision rounds.
+
+---
+
+## 3. The HesLab Retention Engineering Framework
+- **BLUF (Bottom Line Up Front):** Delivering value propositions immediately without elongated greetings.
+- **Pacing Cadence:** Alternating cut tempos (fast kinetic sequence followed by a rhythmic hold) to prevent sensory fatigue.
+- **Visual Anchors:** Highlighting key phrases with bespoke animated labels rather than default automated auto-captions.
+
+---
+
+## 4. Canonical Site Directory & URLs
+- Home: https://heslab.space/
+- Work / Portfolio: https://heslab.space/work
+- Services Overview: https://heslab.space/services
+- Short-Form Editing: https://heslab.space/services/short-form-video-editing
+- Instagram Reels: https://heslab.space/services/instagram-reels-editing
+- YouTube Shorts: https://heslab.space/services/youtube-shorts-editing
+- Motion Design: https://heslab.space/services/motion-design
+- Sound Design: https://heslab.space/services/sound-design-video-editing
+- Podcast Editing: https://heslab.space/services/podcast-video-editing
+- Content Retainers: https://heslab.space/services/ongoing-video-content
+- About HesLab: https://heslab.space/about
+- Contact & Booking: https://heslab.space/contact
+
+---
+
+## 5. Contact & Social Verification
+- Website: https://heslab.space
+- Telegram: https://t.me/hesam_t
+- Instagram: https://instagram.com/heslab.space
+- YouTube: https://youtube.com/@heslab

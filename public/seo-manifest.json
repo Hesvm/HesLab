@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
-  "generatedAt": "2026-10-18T11:58:01.938Z",
-  "canonicalDomain": "https://heslab.studio",
+  "generatedAt": "2026-10-22T07:49:39.017Z",
+  "canonicalDomain": "https://heslab.space",
   "brand": {
     "name": "HesLab",
     "nameFa": "حس‌لب",
@@ -22,7 +22,7 @@
   "routes": [
     {
       "route": "/",
-      "canonical": "https://heslab.studio",
+      "canonical": "https://heslab.space",
       "title": "حس‌لب | استودیو تدوین ویدیوهای کوتاه و موشن دیزاین",
       "titleEn": "HesLab — Short-Form Video Editing & Motion Design Studio",
       "description": "استودیو تخصصی تدوین ریلز، یوتیوب شورتس و تیک‌تاک با هوک‌های ۳ ثانیه‌ای، موشن کینتیک و طراحی صدای سه‌بعدی برای کریتورها و برندها.",
@@ -36,7 +36,7 @@
     },
     {
       "route": "/work",
-      "canonical": "https://heslab.studio/work",
+      "canonical": "https://heslab.space/work",
       "title": "نمونه‌کارها و پروژه‌های منتخب تدوین ویدیو | حس‌لب",
       "titleEn": "Selected Work & Portfolio | HesLab",
       "description": "نمونه‌کارهای ادیت ریلز، شورتس، موشن دیزاین و ویدیوهای عمودی پربازدید ادیت شده در استودیو حس‌لب.",
@@ -50,7 +50,7 @@
     },
     {
       "route": "/services",
-      "canonical": "https://heslab.studio/services",
+      "canonical": "https://heslab.space/services",
       "title": "خدمات استودیو حس‌لب | تدوین شورتس، موشن دیزاین و پکیج ماهانه",
       "titleEn": "Services | HesLab Short-Form Video & Motion Studio",
       "description": "خدمات تخصصی تدوین ریلز، یوتیوب شورتس، موشن دیزاین کینتیک و پکیج‌های منظم ماهانه برای کریتورها، بنیان‌گذاران و برندها.",
@@ -64,7 +64,7 @@
     },
     {
       "route": "/services/short-form-video-editing",
-      "canonical": "https://heslab.studio/services/short-form-video-editing",
+      "canonical": "https://heslab.space/services/short-form-video-editing",
       "title": "تدوین شورتس و ریلز برای کریتورها و برندها | حس‌لب",
       "titleEn": "Short-Form Video Editing for Creators & Brands | HesLab",
       "description": "خدمات تخصصی تدوین ویدیوهای کوتاه، اینستاگرام ریلز، یوتیوب شورتس و تیک‌تاک توسط حس‌لب با تمرکز بر حفظ حداکثری نگاه مخاطب و هویت بصری یکپارچه.",
@@ -79,7 +79,7 @@
     },
     {
       "route": "/services/instagram-reels-editing",
-      "canonical": "https://heslab.studio/services/instagram-reels-editing",
+      "canonical": "https://heslab.space/services/instagram-reels-editing",
       "title": "خدمات تدوین حرفه‌ای اینستاگرام ریلز | حس‌لب",
       "titleEn": "Instagram Reels Video Editing Services | HesLab",
       "description": "ادیتور تخصصی اینستاگرام ریلز. افزایش بازدید ارگانیک و نرخ شیر ویدیوها با تدوین سرعتی، هوک ۳ ثانیه‌ای و طراحی صدای اختصاصی توسط حس‌لب.",
@@ -94,7 +94,7 @@
     },
     {
       "route": "/services/youtube-shorts-editing",
-      "canonical": "https://heslab.studio/services/youtube-shorts-editing",
+      "canonical": "https://heslab.space/services/youtube-shorts-editing",
       "title": "تدوین یوتیوب شورتس با نگه‌داشت بالا و ضد سوایپ | حس‌لب",
       "titleEn": "YouTube Shorts Video Editing with High Retention | HesLab",
       "description": "خدمات تخصصی تدوین یوتیوب شورتس برای کانال‌های یوتیوب با تکنیک‌های حفظ مخاطب، کات‌های میلی‌ثانیه‌ای و طراحی صدای ضربه‌ای.",
@@ -109,7 +109,7 @@
     },
     {
       "route": "/services/social-media-video-editing",
-      "canonical": "https://heslab.studio/services/social-media-video-editing",
+      "canonical": "https://heslab.space/services/social-media-video-editing",
       "title": "تدوین ویدیوی شبکه‌های اجتماعی برای برندها و کسب‌وکارها | حس‌لب",
       "titleEn": "Social Media Video Editing for Brands & Startups | HesLab",
       "description": "تدوین چندسکویی ویدیو برای اینستاگرام، تیک‌تاک، لینکدین و توییتر با انطباق کادر و هویت بصری یکپارچه.",
@@ -124,7 +124,7 @@
     },
     {
       "route": "/services/personal-brand-video-editing",
-      "canonical": "https://heslab.studio/services/personal-brand-video-editing",
+      "canonical": "https://heslab.space/services/personal-brand-video-editing",
       "title": "تدوین ویدیو برای پرسنال برندها و بنیان‌گذاران | حس‌لب",
       "titleEn": "Personal Brand & Founder Video Editing | HesLab",
       "description": "خدمات تخصصی ادیت ویدیوهای گفتاری و پرستیژ بصری برای مدیران، بنیان‌گذاران و متخصصان در لینکدین و اینستاگرام.",
@@ -139,7 +139,7 @@
     },
     {
       "route": "/services/podcast-video-editing",
-      "canonical": "https://heslab.studio/services/podcast-video-editing",
+      "canonical": "https://heslab.space/services/podcast-video-editing",
       "title": "تدوین پادکست ویدیویی و خرد کردن مصاحبه | حس‌لب",
       "titleEn": "Video Podcast Editing & Dialogue Reframing | HesLab",
       "description": "تبدیل اپیزودهای صوتی و تصویری پادکست به ویدیوهای تعامل‌برانگیز عمودی و افقی با کادربندی داینامیک و بیست‌کات هوشمند.",
@@ -154,7 +154,7 @@
     },
     {
       "route": "/services/content-repurposing",
-      "canonical": "https://heslab.studio/services/content-repurposing",
+      "canonical": "https://heslab.space/services/content-repurposing",
       "title": "بازآفرینی و تبدیل محتوای طولانی به شورتس و ریلز | حس‌لب",
       "titleEn": "Long-Form to Short-Form Video Repurposing | HesLab",
       "description": "سرویس تبدیل وبینارها، پادکست‌ها و ویدیوهای یوتیوب به ده‌ها میکرومحتوای عمودی با پتانسیل وایرال بالا توسط استودیو حس‌لب.",
@@ -169,7 +169,7 @@
     },
     {
       "route": "/services/motion-design",
-      "canonical": "https://heslab.studio/services/motion-design",
+      "canonical": "https://heslab.space/services/motion-design",
       "title": "موشن دیزاین و هویت بصری برای ویدیو | حس‌لب",
       "titleEn": "Motion Design & Visual Identity for Video | HesLab",
       "description": "خدمات طراحی موشن دیزاین و انیمیشن متن، استیکر و عناصر بصری برای ویدیوهای یوتیوب و اینستاگرام توسط استودیو حس‌لب.",
@@ -184,7 +184,7 @@
     },
     {
       "route": "/services/ongoing-video-content",
-      "canonical": "https://heslab.studio/services/ongoing-video-content",
+      "canonical": "https://heslab.space/services/ongoing-video-content",
       "title": "پکیج‌های منظم ماهانه تدوین ویدیو (ریتینر) | حس‌لب",
       "titleEn": "Ongoing Video Content Retainers | HesLab",
       "description": "پکیج‌های ماهانه تدوین ویدیوهای کوتاه حس‌لب برای تولید مداوم محتوا در شبکه‌های اجتماعی با تحویل منظم ۲۴ تا ۴۸ ساعته.",
@@ -199,7 +199,7 @@
     },
     {
       "route": "/services/ongoing-content",
-      "canonical": "https://heslab.studio/services/ongoing-content",
+      "canonical": "https://heslab.space/services/ongoing-content",
       "title": "اشتراک ماهانه تدوین محتوای مستمر | حس‌لب",
       "titleEn": "Continuous Video Production Retainers | HesLab",
       "description": "همکاری پیوسته با استودیو حس‌لب برای تامین بدون وقفه محتوای ویدیویی عمودی با کیفیت استودیویی.",
@@ -214,7 +214,7 @@
     },
     {
       "route": "/resources",
-      "canonical": "https://heslab.studio/resources",
+      "canonical": "https://heslab.space/resources",
       "title": "منابع و مقالات تخصصی تدوین شورتس و موشن دیزاین | حس‌لب",
       "titleEn": "Resources & Video Editing Guides | HesLab",
       "description": "راهنماها، کالبدشکافی هوک‌ها و تجربیات عملی استودیو حس‌لب در تدوین ریلز، یوتیوب شورتس، موشن دیزاین و فیزیک انیمیشن.",
@@ -228,7 +228,7 @@
     },
     {
       "route": "/blog",
-      "canonical": "https://heslab.studio/blog",
+      "canonical": "https://heslab.space/blog",
       "title": "بلاگ تخصصی حس‌لب | مقالات تدوین شورتس و موشن",
       "titleEn": "HesLab Blog | Video Editing & Motion Insights",
       "description": "راهنماها، کالبدشکافی هوک‌ها و تجربیات عملی استودیو حس‌لب در تدوین ریلز، یوتیوب شورتس، موشن دیزاین و فیزیک انیمیشن.",
@@ -242,7 +242,7 @@
     },
     {
       "route": "/about",
-      "canonical": "https://heslab.studio/about",
+      "canonical": "https://heslab.space/about",
       "title": "درباره حس‌لب | استودیو تخصصی تدوین ویدیوی کوتاه",
       "titleEn": "About HesLab | Independent Video Editing & Motion Studio",
       "description": "آشنایی با حس‌لب، فلسفه تدوین ویدیوی کوتاه، رویکرد ما در نگه‌داشت نگاه مخاطب و بنیان‌گذار استودیو.",
@@ -256,7 +256,7 @@
     },
     {
       "route": "/contact",
-      "canonical": "https://heslab.studio/contact",
+      "canonical": "https://heslab.space/contact",
       "title": "دریافت برآورد هزینه و ثبت سفارش تدوین ویدیو | حس‌لب",
       "titleEn": "Get a Project Quote & Contact | HesLab",
       "description": "ارسال اطلاعات پروژه، فوتیج‌های خام یا درخواست پکیج ماهانه تدوین ریلز و شورتس به استودیو حس‌لب.",
@@ -270,7 +270,7 @@
     },
     {
       "route": "/work/tokyo-24h-vlog",
-      "canonical": "https://heslab.studio/work/tokyo-24h-vlog",
+      "canonical": "https://heslab.space/work/tokyo-24h-vlog",
       "title": "۲۴ ساعت در توکیو با ریتم سرعتی و ساند دیزاین سینمایی | نمونه‌کار تدوین حس‌لب",
       "titleEn": "۲۴ ساعت در توکیو با ریتم سرعتی و ساند دیزاین سینمایی | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه ۲۴ ساعت در توکیو با ریتم سرعتی و ساند دیزاین سینمایی در استودیو حس‌لب.",
@@ -284,7 +284,7 @@
     },
     {
       "route": "/work/crypto-empire-documentary",
-      "canonical": "https://heslab.studio/work/crypto-empire-documentary",
+      "canonical": "https://heslab.space/work/crypto-empire-documentary",
       "title": "ظهور و سقوط امپراتوری‌های کریپتو در ۳ دقیقه | نمونه‌کار تدوین حس‌لب",
       "titleEn": "ظهور و سقوط امپراتوری‌های کریپتو در ۳ دقیقه | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه ظهور و سقوط امپراتوری‌های کریپتو در ۳ دقیقه در استودیو حس‌لب.",
@@ -298,7 +298,7 @@
     },
     {
       "route": "/work/founder-routine-podcast",
-      "canonical": "https://heslab.studio/work/founder-routine-podcast",
+      "canonical": "https://heslab.space/work/founder-routine-podcast",
       "title": "راز واقعی برنامه‌ریزی روزانه بنیان‌گذاران ۱۰ میلیون دلاری | نمونه‌کار تدوین حس‌لب",
       "titleEn": "راز واقعی برنامه‌ریزی روزانه بنیان‌گذاران ۱۰ میلیون دلاری | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه راز واقعی برنامه‌ریزی روزانه بنیان‌گذاران ۱۰ میلیون دلاری در استودیو حس‌لب.",
@@ -312,7 +312,7 @@
     },
     {
       "route": "/work/wireless-headphone-commercial",
-      "canonical": "https://heslab.studio/work/wireless-headphone-commercial",
+      "canonical": "https://heslab.space/work/wireless-headphone-commercial",
       "title": "تیزر رونمایی هدفون نسل جدید با موشن گرافیک سه‌بعدی | نمونه‌کار تدوین حس‌لب",
       "titleEn": "تیزر رونمایی هدفون نسل جدید با موشن گرافیک سه‌بعدی | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه تیزر رونمایی هدفون نسل جدید با موشن گرافیک سه‌بعدی در استودیو حس‌لب.",
@@ -326,7 +326,7 @@
     },
     {
       "route": "/work/ai-tools-breakdown",
-      "canonical": "https://heslab.studio/work/ai-tools-breakdown",
+      "canonical": "https://heslab.space/work/ai-tools-breakdown",
       "title": "۳ ابزار هوش مصنوعی که جای یک آژانس کامل را می‌گیرند | نمونه‌کار تدوین حس‌لب",
       "titleEn": "۳ ابزار هوش مصنوعی که جای یک آژانس کامل را می‌گیرند | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه ۳ ابزار هوش مصنوعی که جای یک آژانس کامل را می‌گیرند در استودیو حس‌لب.",
@@ -340,7 +340,7 @@
     },
     {
       "route": "/work/creator-growth-story",
-      "canonical": "https://heslab.studio/work/creator-growth-story",
+      "canonical": "https://heslab.space/work/creator-growth-story",
       "title": "چگونه در ۱ سال از صفر به ۱۰۰ هزار مخاطب رسیدم؟ | نمونه‌کار تدوین حس‌لب",
       "titleEn": "چگونه در ۱ سال از صفر به ۱۰۰ هزار مخاطب رسیدم؟ | HesLab Portfolio",
       "description": "کالبدشکافی تدوین، مشخصات فنی ویدیوی عمودی و مراحل اجرای پروژه چگونه در ۱ سال از صفر به ۱۰۰ هزار مخاطب رسیدم؟ در استودیو حس‌لب.",
@@ -354,7 +354,7 @@
     },
     {
       "route": "/blog/short-form-video-hooks-retention",
-      "canonical": "https://heslab.studio/blog/short-form-video-hooks-retention",
+      "canonical": "https://heslab.space/blog/short-form-video-hooks-retention",
       "title": "چگونه در ۳ ثانیه اول نگاه مخاطب را قفل کنیم؟ | بلاگ حس‌لب",
       "titleEn": "چگونه در ۳ ثانیه اول نگاه مخاطب را قفل کنیم؟ | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره چگونه در ۳ ثانیه اول نگاه مخاطب را قفل کنیم؟.",
@@ -369,7 +369,7 @@
     },
     {
       "route": "/blog/podcast-to-shorts-workflow",
-      "canonical": "https://heslab.studio/blog/podcast-to-shorts-workflow",
+      "canonical": "https://heslab.space/blog/podcast-to-shorts-workflow",
       "title": "تبدیل پادکست طولانی به شورتس و ریلزهای پربازدید | بلاگ حس‌لب",
       "titleEn": "تبدیل پادکست طولانی به شورتس و ریلزهای پربازدید | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره تبدیل پادکست طولانی به شورتس و ریلزهای پربازدید.",
@@ -384,7 +384,7 @@
     },
     {
       "route": "/blog/kinetic-typography-motion-design",
-      "canonical": "https://heslab.studio/blog/kinetic-typography-motion-design",
+      "canonical": "https://heslab.space/blog/kinetic-typography-motion-design",
       "title": "موشن دیزاین و فیزیک انیمیشن در ویدیوهای کوتاه | بلاگ حس‌لب",
       "titleEn": "موشن دیزاین و فیزیک انیمیشن در ویدیوهای کوتاه | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره موشن دیزاین و فیزیک انیمیشن در ویدیوهای کوتاه.",
@@ -399,7 +399,7 @@
     },
     {
       "route": "/blog/short-form-video-editing-cost-guide",
-      "canonical": "https://heslab.studio/blog/short-form-video-editing-cost-guide",
+      "canonical": "https://heslab.space/blog/short-form-video-editing-cost-guide",
       "title": "راهنمای شفاف قیمت‌گذاری و هزینه تدوین ویدیو | بلاگ حس‌لب",
       "titleEn": "راهنمای شفاف قیمت‌گذاری و هزینه تدوین ویدیو | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره راهنمای شفاف قیمت‌گذاری و هزینه تدوین ویدیو.",
@@ -414,7 +414,7 @@
     },
     {
       "route": "/blog/how-many-short-form-videos-per-month",
-      "canonical": "https://heslab.studio/blog/how-many-short-form-videos-per-month",
+      "canonical": "https://heslab.space/blog/how-many-short-form-videos-per-month",
       "title": "چند ویدیوی کوتاه در ماه برای رشد لازم است؟ | بلاگ حس‌لب",
       "titleEn": "چند ویدیوی کوتاه در ماه برای رشد لازم است؟ | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره چند ویدیوی کوتاه در ماه برای رشد لازم است؟.",
@@ -429,7 +429,7 @@
     },
     {
       "route": "/blog/creative-production-system-retainers",
-      "canonical": "https://heslab.studio/blog/creative-production-system-retainers",
+      "canonical": "https://heslab.space/blog/creative-production-system-retainers",
       "title": "سیستم تولید ویدیو با ظرفیت منظم ماهانه | بلاگ حس‌لب",
       "titleEn": "سیستم تولید ویدیو با ظرفیت منظم ماهانه | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره سیستم تولید ویدیو با ظرفیت منظم ماهانه.",
@@ -444,7 +444,7 @@
     },
     {
       "route": "/blog/three-second-hook-visual-mechanics",
-      "canonical": "https://heslab.studio/blog/three-second-hook-visual-mechanics",
+      "canonical": "https://heslab.space/blog/three-second-hook-visual-mechanics",
       "title": "معماری هوک ۳ ثانیه‌ای: تریگرهای بصری و صوتی | بلاگ حس‌لب",
       "titleEn": "معماری هوک ۳ ثانیه‌ای: تریگرهای بصری و صوتی | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره معماری هوک ۳ ثانیه‌ای: تریگرهای بصری و صوتی.",
@@ -459,7 +459,7 @@
     },
     {
       "route": "/blog/podcast-repurposing-pipeline-playbook",
-      "canonical": "https://heslab.studio/blog/podcast-repurposing-pipeline-playbook",
+      "canonical": "https://heslab.space/blog/podcast-repurposing-pipeline-playbook",
       "title": "پایپ‌لاین بازآفرینی پادکست: تبدیل ۱ به ۱۲ شورتس | بلاگ حس‌لب",
       "titleEn": "پایپ‌لاین بازآفرینی پادکست: تبدیل ۱ به ۱۲ شورتس | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره پایپ‌لاین بازآفرینی پادکست: تبدیل ۱ به ۱۲ شورتس.",
@@ -474,7 +474,7 @@
     },
     {
       "route": "/blog/dark-posting-short-form-testing",
-      "canonical": "https://heslab.studio/blog/dark-posting-short-form-testing",
+      "canonical": "https://heslab.space/blog/dark-posting-short-form-testing",
       "title": "تست محتوای دارک‌پستینگ و واریانت‌های هوک | بلاگ حس‌لب",
       "titleEn": "تست محتوای دارک‌پستینگ و واریانت‌های هوک | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره تست محتوای دارک‌پستینگ و واریانت‌های هوک.",
@@ -489,7 +489,7 @@
     },
     {
       "route": "/blog/in-house-vs-outsourced-video-editing",
-      "canonical": "https://heslab.studio/blog/in-house-vs-outsourced-video-editing",
+      "canonical": "https://heslab.space/blog/in-house-vs-outsourced-video-editing",
       "title": "ادیتور تمام‌وقت داخلی یا ریتینر استودیو | بلاگ حس‌لب",
       "titleEn": "ادیتور تمام‌وقت داخلی یا ریتینر استودیو | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره ادیتور تمام‌وقت داخلی یا ریتینر استودیو.",
@@ -504,7 +504,7 @@
     },
     {
       "route": "/blog/tiktok-spark-ads-vs-organic-reels",
-      "canonical": "https://heslab.studio/blog/tiktok-spark-ads-vs-organic-reels",
+      "canonical": "https://heslab.space/blog/tiktok-spark-ads-vs-organic-reels",
       "title": "اسپارک ادز تیک‌تاک در برابر ریلز ارگانیک | بلاگ حس‌لب",
       "titleEn": "اسپارک ادز تیک‌تاک در برابر ریلز ارگانیک | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره اسپارک ادز تیک‌تاک در برابر ریلز ارگانیک.",
@@ -519,7 +519,7 @@
     },
     {
       "route": "/blog/kinetic-typography-animation-physics",
-      "canonical": "https://heslab.studio/blog/kinetic-typography-animation-physics",
+      "canonical": "https://heslab.space/blog/kinetic-typography-animation-physics",
       "title": "چرا پریست‌های آماده زیرنویس اعتبار برند را کم می‌کنند؟ | بلاگ حس‌لب",
       "titleEn": "چرا پریست‌های آماده زیرنویس اعتبار برند را کم می‌کنند؟ | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره چرا پریست‌های آماده زیرنویس اعتبار برند را کم می‌کنند؟.",
@@ -534,7 +534,7 @@
     },
     {
       "route": "/blog/vertical-video-safe-zones-cheat-sheet",
-      "canonical": "https://heslab.studio/blog/vertical-video-safe-zones-cheat-sheet",
+      "canonical": "https://heslab.space/blog/vertical-video-safe-zones-cheat-sheet",
       "title": "چیت‌شیت نواحی امن (Safe Zones) ویدیوهای عمودی | بلاگ حس‌لب",
       "titleEn": "چیت‌شیت نواحی امن (Safe Zones) ویدیوهای عمودی | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره چیت‌شیت نواحی امن (Safe Zones) ویدیوهای عمودی.",
@@ -549,7 +549,7 @@
     },
     {
       "route": "/blog/b-roll-pacing-sound-design-mastery",
-      "canonical": "https://heslab.studio/blog/b-roll-pacing-sound-design-mastery",
+      "canonical": "https://heslab.space/blog/b-roll-pacing-sound-design-mastery",
       "title": "سلسله‌مراتب بی-رول و طراحی صدای لمسی | بلاگ حس‌لب",
       "titleEn": "سلسله‌مراتب بی-رول و طراحی صدای لمسی | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره سلسله‌مراتب بی-رول و طراحی صدای لمسی.",
@@ -564,7 +564,7 @@
     },
     {
       "route": "/blog/short-form-video-editing",
-      "canonical": "https://heslab.studio/blog/short-form-video-editing",
+      "canonical": "https://heslab.space/blog/short-form-video-editing",
       "title": "تدوین ویدیوی کوتاه برای ریلز، تیک‌تاک و شورتس | بلاگ حس‌لب",
       "titleEn": "تدوین ویدیوی کوتاه برای ریلز، تیک‌تاک و شورتس | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره تدوین ویدیوی کوتاه برای ریلز، تیک‌تاک و شورتس.",
@@ -579,7 +579,7 @@
     },
     {
       "route": "/blog/video-brand-style",
-      "canonical": "https://heslab.studio/blog/video-brand-style",
+      "canonical": "https://heslab.space/blog/video-brand-style",
       "title": "استایل بصری برند در ویدیو | بلاگ حس‌لب",
       "titleEn": "استایل بصری برند در ویدیو | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره استایل بصری برند در ویدیو.",
@@ -594,7 +594,7 @@
     },
     {
       "route": "/blog/motion-design-short-videos",
-      "canonical": "https://heslab.studio/blog/motion-design-short-videos",
+      "canonical": "https://heslab.space/blog/motion-design-short-videos",
       "title": "موشن دیزاین برای ویدیوهای کوتاه | بلاگ حس‌لب",
       "titleEn": "موشن دیزاین برای ویدیوهای کوتاه | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره موشن دیزاین برای ویدیوهای کوتاه.",
@@ -609,7 +609,7 @@
     },
     {
       "route": "/blog/sound-design-video-editing",
-      "canonical": "https://heslab.studio/blog/sound-design-video-editing",
+      "canonical": "https://heslab.space/blog/sound-design-video-editing",
       "title": "طراحی صدا در تدوین ویدیو | بلاگ حس‌لب",
       "titleEn": "طراحی صدا در تدوین ویدیو | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره طراحی صدا در تدوین ویدیو.",
@@ -624,7 +624,7 @@
     },
     {
       "route": "/blog/cinematic-video-editing",
-      "canonical": "https://heslab.studio/blog/cinematic-video-editing",
+      "canonical": "https://heslab.space/blog/cinematic-video-editing",
       "title": "تدوین سینمایی برای ویدیوهای کوتاه | بلاگ حس‌لب",
       "titleEn": "تدوین سینمایی برای ویدیوهای کوتاه | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره تدوین سینمایی برای ویدیوهای کوتاه.",
@@ -639,7 +639,7 @@
     },
     {
       "route": "/blog/content-packs-video-editing",
-      "canonical": "https://heslab.studio/blog/content-packs-video-editing",
+      "canonical": "https://heslab.space/blog/content-packs-video-editing",
       "title": "پکیج محتوای ماهانه ویدیو | بلاگ حس‌لب",
       "titleEn": "پکیج محتوای ماهانه ویدیو | HesLab Blog",
       "description": "مقاله تخصصی استودیو حس‌لب درباره پکیج محتوای ماهانه ویدیو.",

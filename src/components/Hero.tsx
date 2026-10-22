@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import { RollingViewCounter } from './RollingViewCounter';
 import { Floating, FloatingElement } from './ParallaxFloating';
+import { getMediaUrl } from '../config/site';
 
 interface PerspectiveVideoCardProps {
   video: string;
@@ -60,7 +61,7 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
         {/* Video Element */}
         <video
           ref={videoRef}
-          src={video}
+          src={getMediaUrl(video)}
           poster={poster}
           muted
           loop
@@ -68,7 +69,7 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
           disablePictureInPicture
           disableRemotePlayback
           controlsList="nodownload nofullscreen noplaybackrate noremoteplayback"
-          preload="metadata"
+          preload="none"
           className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-700"
         />
 

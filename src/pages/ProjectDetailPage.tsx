@@ -8,6 +8,7 @@ import { generateVideoSchema } from '../utils/schema';
 import { useLanguage } from '../context/LanguageContext';
 import { analytics } from '../lib/analytics';
 import { playBenchoSound } from '../content/soundData';
+import { getMediaUrl } from '../config/site';
 
 export const ProjectDetailPage: FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -91,7 +92,7 @@ export const ProjectDetailPage: FC = () => {
     description: lang === 'fa' ? project.descriptionFa : project.descriptionEn,
     thumbnailUrl: project.image,
     uploadDate: project.uploadDate,
-    contentUrl: project.video,
+    contentUrl: getMediaUrl(project.video),
     duration: project.durationIso,
   });
 
@@ -153,7 +154,7 @@ export const ProjectDetailPage: FC = () => {
             <div className="w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden bg-slate-950 shadow-2xl relative border border-slate-200">
               <video
                 ref={videoRef}
-                src={project.video}
+                src={getMediaUrl(project.video)}
                 poster={project.image}
                 muted={isMuted}
                 autoPlay
