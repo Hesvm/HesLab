@@ -119,7 +119,7 @@ export const Navbar: FC = () => {
           }
         }}
         onMouseLeave={closeServicesWithDelay}
-        className={`relative pointer-events-auto w-full max-w-[620px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
+        className={`relative pointer-events-auto w-full max-w-[585px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
           servicesDropdownOpen
             ? 'rounded-[26px] shadow-[0_24px_50px_rgba(0,0,0,0.55)]'
             : 'rounded-[21px] shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
@@ -131,7 +131,7 @@ export const Navbar: FC = () => {
         aria-label="Main Navigation"
       >
         {/* Top Navbar Row */}
-        <div className="h-[58px] w-full flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] shrink-0">
+        <div className="relative h-[58px] w-full flex items-center justify-between pl-4 sm:pl-6 pr-2 md:pr-[7px] shrink-0">
           {/* Brand Logo & Logotype */}
           <Link
             to={getHref('/')}
@@ -152,15 +152,15 @@ export const Navbar: FC = () => {
             {/* Beta Badge */}
             <span
               dir="ltr"
-              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#0d231a] text-[#34d399] border border-[#1b4d36] text-[10.5px] font-semibold tracking-tight select-none shadow-[0_0_12px_rgba(52,211,153,0.1)] group-hover:bg-[#123124] group-hover:border-[#276e4e] transition-colors leading-none shrink-0"
+              className="inline-flex items-center gap-1 px-2 py-[3.5px] rounded-full bg-emerald-500/[0.20] text-emerald-400 text-[10.5px] font-semibold tracking-tight select-none group-hover:bg-emerald-500/[0.28] transition-colors leading-none shrink-0"
             >
               <span>Beta</span>
-              <span className="text-[10px] leading-none opacity-90">🧪</span>
+              <span className="text-[10px] leading-none opacity-85">🧪</span>
             </span>
           </Link>
 
           {/* Navigation Items */}
-          <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6]">
+          <div className="hidden md:flex items-center gap-[18px] text-[14.5px] font-medium text-[#A5A5A6] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
             <Link
               to={getHref('/work')}
               onMouseEnter={closeServicesImmediately}
