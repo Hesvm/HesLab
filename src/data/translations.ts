@@ -87,11 +87,11 @@ export const translations = {
       seeMore: 'مشاهده بیشتر',
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
+        { id: 'all', name: 'همه' },
         { id: 'documentary', name: 'مستند و داستانی' },
         { id: '3d-motion', name: 'سه‌بعدی و موشن' },
-        { id: 'talking-head', name: 'تاکینگ‌هد و پرسنال برند' },
-        { id: 'podcasts', name: 'پادکست و چند دوربینه' },
-        { id: 'all', name: 'همه' },
+        { id: 'talking-head', name: 'تاکینگ‌هد' },
+        { id: 'podcasts', name: 'پادکست' },
       ],
       items: [
         {
@@ -568,11 +568,11 @@ export const translations = {
       seeMore: 'See more',
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
-        { id: 'documentary', name: 'Documentary & Story' },
-        { id: '3d-motion', name: '3D & Motion Explainers' },
-        { id: 'talking-head', name: 'Talking Head & Authority' },
-        { id: 'podcasts', name: 'Podcasts & Multi-Cam' },
         { id: 'all', name: 'All' },
+        { id: 'documentary', name: 'Doc & Story' },
+        { id: '3d-motion', name: '3D & Explainer' },
+        { id: 'talking-head', name: 'Talking Head' },
+        { id: 'podcasts', name: 'Podcasts' },
       ],
       items: [
         {
