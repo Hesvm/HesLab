@@ -1,7 +1,7 @@
 export interface ProjectItem {
   id: number;
   slug: string;
-  category: 'vlog' | 'documentary' | 'podcast' | 'commercial' | 'educational' | '3d';
+  category: 'vlog' | 'documentary' | 'podcast' | 'commercial' | 'educational' | '3d' | '3d-motion' | 'talking-head' | 'podcasts' | 'all';
   titleFa: string;
   titleEn: string;
   creatorFa: string;

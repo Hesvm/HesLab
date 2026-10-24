@@ -2,29 +2,19 @@ import { useCallback, useEffect, useRef, useState, type FC } from 'react';
 import {
   ArrowLeft2,
   ArrowRight2,
-  Bag2,
-  Briefcase,
-  Chart2,
-  Cpu,
   Grid5,
-  Health,
-  Home2,
   I3Dcube,
   Microphone2,
-  Teacher,
+  Profile2User,
+  VideoPlay,
 } from 'iconsax-react';
 
 export const categoryIcons: Record<string, typeof Grid5> = {
-  all: Grid5,
-  '3d': I3Dcube,
-  education: Teacher,
-  creators: Briefcase,
-  saas: Cpu,
-  realestate: Home2,
-  health: Health,
+  documentary: VideoPlay,
+  '3d-motion': I3Dcube,
+  'talking-head': Profile2User,
   podcasts: Microphone2,
-  finance: Chart2,
-  ecommerce: Bag2,
+  all: Grid5,
 };
 
 interface CategoryPillsProps {

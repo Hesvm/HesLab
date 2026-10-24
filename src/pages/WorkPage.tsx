@@ -8,7 +8,7 @@ import { translations } from '../data/translations';
 export const WorkPage: FC = () => {
   const { lang, isRtl } = useLanguage();
   const t = translations[lang].work;
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('documentary');
   const [unmutedVideoId, setUnmutedVideoId] = useState<number | null>(null);
   const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
 

@@ -87,21 +87,16 @@ export const translations = {
       seeMore: 'مشاهده بیشتر',
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
+        { id: 'documentary', name: 'مستند و داستانی' },
+        { id: '3d-motion', name: 'سه‌بعدی و موشن' },
+        { id: 'talking-head', name: 'تاکینگ‌هد و پرسنال برند' },
+        { id: 'podcasts', name: 'پادکست و چند دوربینه' },
         { id: 'all', name: 'همه' },
-        { id: '3d', name: 'سه‌بعدی و 3D' },
-        { id: 'education', name: 'آموزش' },
-        { id: 'creators', name: 'کریتورها' },
-        { id: 'saas', name: 'SaaS و AI' },
-        { id: 'realestate', name: 'املاک' },
-        { id: 'health', name: 'سلامت' },
-        { id: 'podcasts', name: 'پادکست' },
-        { id: 'finance', name: 'مالی' },
-        { id: 'ecommerce', name: 'فروشگاه' },
       ],
       items: [
         {
           id: 101,
-          category: '3d',
+          category: '3d-motion',
           title: 'شبیه‌سازی سه‌بعدی سقوط آسانسور (سبک Zack D.)',
           creator: 'شبیه‌سازی علمی و انیمیشن سه‌بعدی',
           views: '۳.۲M',
@@ -111,7 +106,7 @@ export const translations = {
         },
         {
           id: 102,
-          category: '3d',
+          category: '3d-motion',
           title: 'تیزر سینمایی پروداکت دیزاین و موشن سه‌بعدی',
           creator: 'تیزر محصول و برندینگ لوکس',
           views: '۱.۹M',
@@ -121,7 +116,7 @@ export const translations = {
         },
         {
           id: 1,
-          category: 'creators',
+          category: 'documentary',
           title: '۲۴ ساعت در توکیو با ریتم سرعتی و ساند دیزاین سینمایی',
           creator: 'ولاگ سبک زندگی و سفر',
           views: '۱.۸M',
@@ -131,7 +126,7 @@ export const translations = {
         },
         {
           id: 2,
-          category: 'finance',
+          category: 'documentary',
           title: 'ظهور و سقوط امپراتوری‌های کریپتو در ۳ دقیقه',
           creator: 'مستند کوتاه و داستانی',
           views: '۲.۴M',
@@ -141,7 +136,7 @@ export const translations = {
         },
         {
           id: 3,
-          category: 'creators',
+          category: 'talking-head',
           title: 'راز واقعی برنامه‌ریزی روزانه بنیان‌گذاران ۱۰ میلیون دلاری',
           creator: 'پادکست رشد و بنیان‌گذاران',
           views: '۱.۴M',
@@ -151,7 +146,7 @@ export const translations = {
         },
         {
           id: 4,
-          category: 'ecommerce',
+          category: '3d-motion',
           title: 'تیزر رونمایی هدفون نسل جدید با موشن گرافیک سه‌بعدی',
           creator: 'تبلیغات محصول و برندینگ',
           views: '۹۵۰K',
@@ -161,7 +156,7 @@ export const translations = {
         },
         {
           id: 5,
-          category: 'saas',
+          category: 'talking-head',
           title: '۳ ابزار هوش مصنوعی که جای یک آژانس کامل را می‌گیرند',
           creator: 'آموزش تکنولوژی و ابزارهای AI',
           views: '۸۹۰K',
@@ -171,7 +166,7 @@ export const translations = {
         },
         {
           id: 6,
-          category: 'creators',
+          category: 'talking-head',
           title: 'چگونه در ۱ سال از صفر به ۱۰۰ هزار مخاطب رسیدم؟',
           creator: 'ولاگ شخصی و داستان رشد',
           views: '۱.۲M',
@@ -181,7 +176,7 @@ export const translations = {
         },
         {
           id: 7,
-          category: 'saas',
+          category: 'documentary',
           title: 'داستان تاریک و ناگفته پشت الگوریتم‌های تیک‌تاک',
           creator: 'مینی داکیومنتری پژوهشی',
           views: '۳.۱M',
@@ -201,7 +196,7 @@ export const translations = {
         },
         {
           id: 9,
-          category: 'saas',
+          category: '3d-motion',
           title: 'کمپین معرفی استارتاپ هوش مصنوعی در سیلیکون ولی',
           creator: 'ویدیوی تبلیغاتی استارتاپی',
           views: '۷۸۰K',
@@ -211,7 +206,7 @@ export const translations = {
         },
         {
           id: 10,
-          category: 'education',
+          category: 'talking-head',
           title: 'روانشناسی ساخت ویدیوهای میلیونی در ۳ ثانیه اول',
           creator: 'آموزش تولید محتوا و هوک',
           views: '۱.۶M',
@@ -221,7 +216,7 @@ export const translations = {
         },
         {
           id: 11,
-          category: 'creators',
+          category: 'podcasts',
           title: 'تجربه ۱ ماه کار ریموت در کوه‌های آلپ با تجهیزات پرتابل',
           creator: 'ولاگ نومد و سبک زندگی',
           views: '۹۲۰K',
@@ -231,7 +226,7 @@ export const translations = {
         },
         {
           id: 12,
-          category: 'saas',
+          category: 'documentary',
           title: 'بزرگترین کلاهبرداری تاریخ هوش مصنوعی فاش شد',
           creator: 'داستان مستند و گزارش ویژه',
           views: '۲.۱M',
@@ -573,21 +568,16 @@ export const translations = {
       seeMore: 'See more',
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
+        { id: 'documentary', name: 'Documentary & Story' },
+        { id: '3d-motion', name: '3D & Motion Explainers' },
+        { id: 'talking-head', name: 'Talking Head & Authority' },
+        { id: 'podcasts', name: 'Podcasts & Multi-Cam' },
         { id: 'all', name: 'All' },
-        { id: '3d', name: '3D' },
-        { id: 'education', name: 'Coaching' },
-        { id: 'creators', name: 'Creators' },
-        { id: 'saas', name: 'SaaS & AI' },
-        { id: 'realestate', name: 'Real Estate' },
-        { id: 'health', name: 'Health' },
-        { id: 'podcasts', name: 'Podcasts' },
-        { id: 'finance', name: 'Finance' },
-        { id: 'ecommerce', name: 'E-commerce' },
       ],
       items: [
         {
           id: 101,
-          category: '3d',
+          category: '3d-motion',
           title: '3D Elevator Physics Simulation (Zack D. Style)',
           creator: '3D Simulation & Scientific Animation',
           views: '3.2M',
@@ -597,7 +587,7 @@ export const translations = {
         },
         {
           id: 102,
-          category: '3d',
+          category: '3d-motion',
           title: 'Cinematic 3D Product Visual & Luxury Showcase',
           creator: 'Commercial & Luxury 3D Visuals',
           views: '1.9M',
@@ -607,7 +597,7 @@ export const translations = {
         },
         {
           id: 1,
-          category: 'creators',
+          category: 'documentary',
           title: '24 Hours in Tokyo with Kinetic Cuts and Spatial Audio',
           creator: 'Travel & Lifestyle Creator',
           views: '1.8M',
@@ -617,7 +607,7 @@ export const translations = {
         },
         {
           id: 2,
-          category: 'finance',
+          category: 'documentary',
           title: 'The Rise and Fall of Crypto Empires in 3 Minutes',
           creator: 'Story-Driven Mini Doc',
           views: '2.4M',
@@ -627,7 +617,7 @@ export const translations = {
         },
         {
           id: 3,
-          category: 'creators',
+          category: 'talking-head',
           title: 'How $10M Founders Actually Structure Their Day',
           creator: 'Alex Hormozi Style Breakdown',
           views: '1.4M',
@@ -637,7 +627,7 @@ export const translations = {
         },
         {
           id: 4,
-          category: 'ecommerce',
+          category: '3d-motion',
           title: 'Next-Gen ANC Headphones Commercial with 3D Motion',
           creator: 'Hardware & D2C Brand',
           views: '950K',
@@ -647,7 +637,7 @@ export const translations = {
         },
         {
           id: 5,
-          category: 'saas',
+          category: 'talking-head',
           title: '3 AI Tools That Will Replace Your Entire Marketing Agency',
           creator: 'Tech & SaaS Creator',
           views: '890K',
@@ -657,7 +647,7 @@ export const translations = {
         },
         {
           id: 6,
-          category: 'creators',
+          category: 'talking-head',
           title: 'How I Gained 100,000 Subscribers in 1 Year from Scratch',
           creator: 'Personal Growth & Studio Vlog',
           views: '1.2M',
@@ -667,7 +657,7 @@ export const translations = {
         },
         {
           id: 7,
-          category: 'saas',
+          category: 'documentary',
           title: 'The Dark Secret Behind the TikTok Algorithm',
           creator: 'Investigative Tech Essay',
           views: '3.1M',
@@ -687,7 +677,7 @@ export const translations = {
         },
         {
           id: 9,
-          category: 'saas',
+          category: '3d-motion',
           title: 'Silicon Valley AI Startup Launch Campaign',
           creator: 'Brand Ad & Product Reel',
           views: '780K',
@@ -697,7 +687,7 @@ export const translations = {
         },
         {
           id: 10,
-          category: 'education',
+          category: 'talking-head',
           title: 'The Psychology of 3-Second Hooks that Go Viral',
           creator: 'Content Strategy Masterclass',
           views: '1.6M',
@@ -707,7 +697,7 @@ export const translations = {
         },
         {
           id: 11,
-          category: 'creators',
+          category: 'podcasts',
           title: '1 Month Working Remotely in the Swiss Alps',
           creator: 'Nomad & Lifestyle Essay',
           views: '920K',
@@ -717,7 +707,7 @@ export const translations = {
         },
         {
           id: 12,
-          category: 'saas',
+          category: 'documentary',
           title: 'The Biggest AI Scam in History Exposed',
           creator: 'Deep Dive Investigative Cut',
           views: '2.1M',
