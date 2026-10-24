@@ -1,7 +1,7 @@
 export interface ProjectItem {
   id: number;
   slug: string;
-  category: 'vlog' | 'documentary' | 'podcast' | 'commercial' | 'educational';
+  category: 'vlog' | 'documentary' | 'podcast' | 'commercial' | 'educational' | '3d';
   titleFa: string;
   titleEn: string;
   creatorFa: string;
@@ -23,7 +23,75 @@ export interface ProjectItem {
   featuresEn: string[];
 }
 
-export const PROJECTS: ProjectItem[] = [
+export const PROJECTS: ProjectItem[] = [  {
+    id: 101,
+    slug: '3d-elevator-simulation',
+    category: '3d',
+    titleFa: 'شبیه‌سازی سه‌بعدی سقوط آسانسور (سبک Zack D.)',
+    titleEn: '3D Elevator Physics Simulation (Zack D. Style)',
+    creatorFa: 'شبیه‌سازی علمی و انیمیشن سه‌بعدی',
+    creatorEn: '3D Simulation & Scientific Animation',
+    descriptionFa: 'شبیه‌سازی فیزیک سقوط آزاد آسانسور و عملکرد سیستم ترمز اضطراری با رندرینگ سه‌بعدی واقع‌گرایانه و طراحی صدای پرتعلیق.',
+    descriptionEn: 'Physics-accurate 3D freefall simulation detailing the mechanics of safety brakes, styled after viral Zack D. scientific breakdowns.',
+    views: '۳.۲M',
+    tag: '3D Animation',
+    image: '/mock/work_3d_1.webp',
+    video: '/videos/video_3d_1.mp4',
+    durationSeconds: 10,
+    durationIso: 'PT10S',
+    aspectRatio: '9:16',
+    resolution: '1080x1920 60FPS',
+    uploadDate: '2026-03-01',
+    workflowStepsFa: [
+      'مدل‌سازی سه‌بعدی چاه و کابین آسانسور',
+      'انیمیت فیزیک برخورد و کابل‌ها',
+      'طراحی صدای پرتنش سینمایی و زنگ هشدار',
+      'رندرینگ با نورپردازی متالیک و دیتیل‌های صنعتی'
+    ],
+    workflowStepsEn: [
+      '3D modeling of shaft and mechanical components',
+      'Physics simulation of cable snap and braking response',
+      'Suspenseful spatial audio and alarm sound design',
+      'Photorealistic metallic lighting pass'
+    ],
+    featuresFa: ['رندرینگ 3D بلندر', 'شبیه‌سازی فیزیک', 'افکت‌های صوتی SFX سه‌بعدی', 'فرم 9:16 برای ریلز و شورتس'],
+    featuresEn: ['3D Blender Simulation', 'Physics Dynamics', '3D Spatial SFX', '9:16 Vertical Optimization']
+  },
+  {
+    id: 102,
+    slug: '3d-product-showcase',
+    category: '3d',
+    titleFa: 'تیزر سینمایی پروداکت دیزاین و موشن سه‌بعدی',
+    titleEn: 'Cinematic 3D Product Visual & Luxury Showcase',
+    creatorFa: 'تیزر محصول و برندینگ لوکس',
+    creatorEn: 'Commercial & Luxury 3D Visuals',
+    descriptionFa: 'تیزر تجاری لوکس با جلوه‌های بصری خیره‌کننده، متریال‌های واقع‌گرایانه، نورپردازی استودیویی سینمایی و موسیقی اختصاصی.',
+    descriptionEn: 'High-end commercial 3D animation featuring macro texture detail, luxury studio lighting, and synchronized cinematic scoring.',
+    views: '۱.۹M',
+    tag: '3D Motion',
+    image: '/mock/work_3d_2.webp',
+    video: '/videos/video_3d_2.mp4',
+    durationSeconds: 30,
+    durationIso: 'PT30S',
+    aspectRatio: '16:9',
+    resolution: '4K 60FPS',
+    uploadDate: '2026-03-01',
+    workflowStepsFa: [
+      'نورپردازی استودیویی سه نقطه‌ای و رفلکشن‌های دقیق',
+      'تکسچرینگ و متریال‌های PBR فوق باکیفیت',
+      'کمرا موومنت‌های نرم و ماکرو سینمایی',
+      'میکس و مسترینگ صدا با ترنزیشن‌های هوشمند'
+    ],
+    workflowStepsEn: [
+      'Studio 3-point lighting setup with precise caustics',
+      'Photorealistic PBR shader materials',
+      'Smooth macro camera movements and depth of field',
+      'Custom sound design and audio sync'
+    ],
+    featuresFa: ['کیفیت 4K', 'تکسچرینگ واقع‌گرایانه', 'نورپردازی استودیویی', 'طراحی صدای لایه‌ای'],
+    featuresEn: ['4K Resolution', 'Photorealistic Textures', 'Studio Lighting', 'Layered Sound Design']
+  },
+
   {
     id: 1,
     slug: 'tokyo-24h-vlog',

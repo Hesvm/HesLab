@@ -88,6 +88,7 @@ export const translations = {
       desc: 'ادیت‌های سرعتی و باکیفیت طراحی‌شده برای جذب ویو، شیر و تبدیل مخاطب به مشتری.',
       categories: [
         { id: 'all', name: 'همه' },
+        { id: '3d', name: 'سه‌بعدی و 3D' },
         { id: 'education', name: 'آموزش' },
         { id: 'creators', name: 'کریتورها' },
         { id: 'saas', name: 'SaaS و AI' },
@@ -98,6 +99,26 @@ export const translations = {
         { id: 'ecommerce', name: 'فروشگاه' },
       ],
       items: [
+        {
+          id: 101,
+          category: '3d',
+          title: 'شبیه‌سازی سه‌بعدی سقوط آسانسور (سبک Zack D.)',
+          creator: 'شبیه‌سازی علمی و انیمیشن سه‌بعدی',
+          views: '۳.۲M',
+          tag: 'انیمیشن سه‌بعدی',
+          image: '/mock/work_3d_1.webp',
+          video: '/videos/video_3d_1.mp4',
+        },
+        {
+          id: 102,
+          category: '3d',
+          title: 'تیزر سینمایی پروداکت دیزاین و موشن سه‌بعدی',
+          creator: 'تیزر محصول و برندینگ لوکس',
+          views: '۱.۹M',
+          tag: 'موشن سه‌بعدی',
+          image: '/mock/work_3d_2.webp',
+          video: '/videos/video_3d_2.mp4',
+        },
         {
           id: 1,
           category: 'creators',
@@ -334,7 +355,7 @@ export const translations = {
         {
           name: 'One-Off',
           image: '/mock/pricing_oneoff.png',
-          price: '$۴۰',
+          price: '$۵۰',
           priceSubtext: '۱ ویدیوی کوتاه',
           popular: false,
           features: [
@@ -348,7 +369,7 @@ export const translations = {
         {
           name: 'Content Pack',
           image: '/mock/pricing_pack.png',
-          price: '$۳۰۰',
+          price: '$۴۰۰',
           priceSubtext: '۱۰ ویدیوی کوتاه',
           popular: true,
           features: [
@@ -439,8 +460,8 @@ export const translations = {
       emailError: 'لطفاً ایمیل معتبر یا آیدی تلگرام وارد کنید',
       planLabel: 'انتخاب پلن همکاری',
       plans: {
-        starter: { name: 'One-Off', price: '$۴۰', videos: '۱ ویدیو' },
-        standard: { name: 'Content Pack', price: '$۳۰۰', videos: '۱۰ ویدیو', badge: 'محبوب' },
+        starter: { name: 'One-Off', price: '$۵۰', videos: '۱ ویدیو' },
+        standard: { name: 'Content Pack', price: '$۴۰۰', videos: '۱۰ ویدیو', badge: 'محبوب' },
         custom: { name: 'Custom', price: 'سفارشی', videos: 'تعداد دلخواه' },
       },
       descLabel: 'توضیحات و اهداف پروژه',
@@ -553,6 +574,7 @@ export const translations = {
       desc: 'High-energy edits designed to generate retention, shares, and converted leads.',
       categories: [
         { id: 'all', name: 'All' },
+        { id: '3d', name: '3D' },
         { id: 'education', name: 'Coaching' },
         { id: 'creators', name: 'Creators' },
         { id: 'saas', name: 'SaaS & AI' },
@@ -563,6 +585,26 @@ export const translations = {
         { id: 'ecommerce', name: 'E-commerce' },
       ],
       items: [
+        {
+          id: 101,
+          category: '3d',
+          title: '3D Elevator Physics Simulation (Zack D. Style)',
+          creator: '3D Simulation & Scientific Animation',
+          views: '3.2M',
+          tag: '3D Animation',
+          image: '/mock/work_3d_1.webp',
+          video: '/videos/video_3d_1.mp4',
+        },
+        {
+          id: 102,
+          category: '3d',
+          title: 'Cinematic 3D Product Visual & Luxury Showcase',
+          creator: 'Commercial & Luxury 3D Visuals',
+          views: '1.9M',
+          tag: '3D Motion',
+          image: '/mock/work_3d_2.webp',
+          video: '/videos/video_3d_2.mp4',
+        },
         {
           id: 1,
           category: 'creators',
@@ -799,7 +841,7 @@ export const translations = {
         {
           name: 'One-Off',
           image: '/mock/pricing_oneoff.png',
-          price: '$40',
+          price: '$50',
           priceSubtext: '1 short-form video',
           popular: false,
           features: [
@@ -813,7 +855,7 @@ export const translations = {
         {
           name: 'Content Pack',
           image: '/mock/pricing_pack.png',
-          price: '$300',
+          price: '$400',
           priceSubtext: '10 short-form videos',
           popular: true,
           features: [
@@ -904,8 +946,8 @@ export const translations = {
       emailError: 'Please enter a valid email or @telegram handle',
       planLabel: 'Choice Plan',
       plans: {
-        starter: { name: 'One-Off', price: '$40', videos: '1 Video' },
-        standard: { name: 'Content Pack', price: '$300', videos: '10 Videos', badge: 'Popular' },
+        starter: { name: 'One-Off', price: '$50', videos: '1 Video' },
+        standard: { name: 'Content Pack', price: '$400', videos: '10 Videos', badge: 'Popular' },
         custom: { name: 'Custom', price: 'Custom', videos: 'Flexible' },
       },
       descLabel: 'Description',

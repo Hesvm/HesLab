@@ -119,7 +119,7 @@ export const Navbar: FC = () => {
           }
         }}
         onMouseLeave={closeServicesWithDelay}
-        className={`relative pointer-events-auto w-full max-w-[530px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
+        className={`relative pointer-events-auto w-full max-w-[558px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
           servicesDropdownOpen
             ? 'rounded-[26px] shadow-[0_24px_50px_rgba(0,0,0,0.55)]'
             : 'rounded-[21px] shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
@@ -149,6 +149,14 @@ export const Navbar: FC = () => {
               alt="Hēs lab"
               className="h-[28px] w-auto object-contain select-none group-hover:opacity-90 transition-opacity duration-200 brightness-0 invert"
             />
+            {/* Beta Badge */}
+            <span
+              dir="ltr"
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#D4F7DF] text-[#057A4C] text-[10.5px] font-bold tracking-tight select-none shadow-xs group-hover:bg-[#C6F3D4] transition-colors leading-none shrink-0"
+            >
+              <span>Beta</span>
+              <span className="text-[11px] leading-none">🧪</span>
+            </span>
           </Link>
 
           {/* Navigation Items */}

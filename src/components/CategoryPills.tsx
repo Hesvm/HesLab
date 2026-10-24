@@ -9,12 +9,14 @@ import {
   Grid5,
   Health,
   Home2,
+  I3Dcube,
   Microphone2,
   Teacher,
 } from 'iconsax-react';
 
 export const categoryIcons: Record<string, typeof Grid5> = {
   all: Grid5,
+  '3d': I3Dcube,
   education: Teacher,
   creators: Briefcase,
   saas: Cpu,

@@ -116,7 +116,7 @@ export const VideoCard: FC<VideoCardProps> = ({
 export const SelectedWork: FC = () => {
   const { lang, isRtl } = useLanguage();
   const t = translations[lang].work;
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('3d');
   const [unmutedVideoId, setUnmutedVideoId] = useState<number | null>(null);
   const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
