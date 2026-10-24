@@ -119,7 +119,7 @@ export const Navbar: FC = () => {
           }
         }}
         onMouseLeave={closeServicesWithDelay}
-        className={`relative pointer-events-auto w-full max-w-[558px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
+        className={`relative pointer-events-auto w-full max-w-[620px] transition-all duration-300 ease-out origin-top flex flex-col overflow-hidden ${
           servicesDropdownOpen
             ? 'rounded-[26px] shadow-[0_24px_50px_rgba(0,0,0,0.55)]'
             : 'rounded-[21px] shadow-[0_8px_30px_rgba(0,0,0,0.35)]'
@@ -152,10 +152,10 @@ export const Navbar: FC = () => {
             {/* Beta Badge */}
             <span
               dir="ltr"
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#D4F7DF] text-[#057A4C] text-[10.5px] font-bold tracking-tight select-none shadow-xs group-hover:bg-[#C6F3D4] transition-colors leading-none shrink-0"
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#0d231a] text-[#34d399] border border-[#1b4d36] text-[10.5px] font-semibold tracking-tight select-none shadow-[0_0_12px_rgba(52,211,153,0.1)] group-hover:bg-[#123124] group-hover:border-[#276e4e] transition-colors leading-none shrink-0"
             >
               <span>Beta</span>
-              <span className="text-[11px] leading-none">🧪</span>
+              <span className="text-[10px] leading-none opacity-90">🧪</span>
             </span>
           </Link>
 
