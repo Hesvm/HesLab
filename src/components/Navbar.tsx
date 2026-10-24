@@ -206,15 +206,6 @@ export const Navbar: FC = () => {
 
           {/* CTA & Language Switcher */}
           <div className="flex items-center gap-2">
-            {/* Desktop Language Switcher */}
-            <button
-              type="button"
-              onClick={toggleLang}
-              className="hidden md:inline-flex items-center justify-center text-xs font-bold text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-white/10 hover:border-white/25 transition-colors cursor-pointer select-none"
-              aria-label="Switch language"
-            >
-              {lang === 'fa' ? 'EN' : 'فا'}
-            </button>
 
             <button
               type="button"
