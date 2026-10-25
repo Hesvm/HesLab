@@ -23,7 +23,42 @@ export interface ProjectItem {
   featuresEn: string[];
 }
 
-export const PROJECTS: ProjectItem[] = [  {
+export const PROJECTS: ProjectItem[] = [
+  {
+    id: 103,
+    slug: 'porsche-heritage-documentary',
+    category: 'documentary',
+    titleFa: 'داستان خلق پورشه: چگونه یک رویا افسانه ۹۱۱ را ساخت؟',
+    titleEn: 'The Birth of Porsche: How Ferry Built the 911 Legend',
+    creatorFa: 'مستند داستانی و بیوگرافی برند',
+    creatorEn: 'Brand Documentary & Heritage',
+    descriptionFa: 'مستند کوتاه داستانی درباره ماجرای تولد اولین پورشه توسط فری پورشه در اتریش، سیر تحول تاریخی پورشه ۹۱۱ و تلفیق تصویرسازی نقاشی آلپ با فوتیج‌های واقعی موزه.',
+    descriptionEn: 'Narrative brand mini-documentary detailing Ferry Porsche’s vision, the engineering legacy of the 356 in Gmünd, and the timeless evolution of the 911 silhouette.',
+    views: '۲.۷M',
+    tag: 'Documentary',
+    image: '/mock/work_porsche.webp',
+    video: '/videos/video_porsche.mp4',
+    durationSeconds: 60,
+    durationIso: 'PT60S',
+    aspectRatio: '9:16',
+    resolution: '1080x1920 60FPS',
+    uploadDate: '2026-03-05',
+    workflowStepsFa: [
+      'تصویرسازی دست‌کشیده و نقاشی‌های کوهستان آلپ',
+      'گردآوری و بازسازی فوتیج‌های آرشیوی تاریخی پورشه',
+      'طراحی صدای لایه‌ای، صدای موتور ۳۵۶ و امبیانس اتریش',
+      'تایپوگرافی کلاسیک و ترنزیشن‌های انیمیت‌شده'
+    ],
+    workflowStepsEn: [
+      'Hand-illustrated Alpine backdrop animation',
+      'Archival historical footage restoration and parallax cutouts',
+      'Authentic Porsche 356 exhaust note & spatial sound design',
+      'Classic editorial typography and paper transitions'
+    ],
+    featuresFa: ['سبک مستند داستانی', 'تصویرسازی متحرک', 'طراحی صدای سینمایی', 'کپشن‌های کلاسیک'],
+    featuresEn: ['Story Documentary', 'Motion Illustration', 'Cinematic Sound Design', 'Editorial Typography']
+  },
+  {
     id: 101,
     slug: '3d-elevator-simulation',
     category: '3d',

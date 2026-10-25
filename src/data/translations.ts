@@ -57,6 +57,16 @@ export const translations = {
     },
     stats: {
       items: [
+        {
+          id: 103,
+          category: 'documentary',
+          title: 'داستان خلق پورشه: چگونه یک رویا افسانه ۹۱۱ را ساخت؟',
+          creator: 'مستند داستانی و بیوگرافی برند',
+          views: '۲.۷M',
+          tag: 'مستند و داستانی',
+          image: '/mock/work_porsche.webp',
+          video: '/videos/video_porsche.mp4',
+        },
         { image: '/stats-icons/shortform.svg', label: 'تمرکز اختصاصی روی فرم کوتاه' },
         { image: '/stats-icons/turnaround.svg', label: 'تحویل ظرف ۳ روز' },
         { image: '/stats-icons/custom_edit.svg', label: 'استایل ادیت اختصاصی' },
@@ -886,6 +896,16 @@ export const translations = {
       tag: 'Questions & Answers',
       title: 'FAQ',
       items: [
+        {
+          id: 103,
+          category: 'documentary',
+          title: 'The Birth of Porsche: How Ferry Built the 911 Legend',
+          creator: 'Brand Documentary & Heritage',
+          views: '2.7M',
+          tag: 'Documentary',
+          image: '/mock/work_porsche.webp',
+          video: '/videos/video_porsche.mp4',
+        },
         {
           q: 'How do I send you my raw footage?',
           a: 'You can share your footage through Google Drive, Dropbox, Frame.io, or any file-sharing platform you prefer. Just send your raw videos, references, and any ideas you have — I\'ll take care of the editing process from there.',
