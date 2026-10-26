@@ -177,8 +177,8 @@ export const Hero: FC = () => {
             <div ref={card1Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-1">
                 <PerspectiveVideoCard
-                  video="/videos/video_1.mp4"
-                  poster="/mock/work_vertical_1.webp"
+                  video="/videos/video_porsche.mp4"
+                  poster="/mock/work_porsche.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(15deg) rotateY(-11deg) rotateZ(-6deg)"
                   hoverTransform="perspective(1100px) rotateX(4deg) rotateY(-4deg) rotateZ(-2deg) scale(1.06)"
@@ -193,12 +193,12 @@ export const Hero: FC = () => {
             <div ref={card2Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-4">
                 <PerspectiveVideoCard
-                  video="/videos/video_2.mp4"
-                  poster="/mock/work_vertical_2.webp"
+                  video="/videos/video_3d_2.mp4"
+                  poster="/mock/work_3d_2.webp"
                   className="w-[130px] sm:w-[150px] lg:w-[170px] xl:w-[190px]"
                   defaultTransform="perspective(1100px) rotateX(15deg) rotateY(11deg) rotateZ(6deg)"
                   hoverTransform="perspective(1100px) rotateX(4deg) rotateY(4deg) rotateZ(2deg) scale(1.06)"
-                  aspect="aspect-[16/11]"
+                  aspect="aspect-[16/10]"
                 />
               </div>
             </div>
@@ -209,8 +209,8 @@ export const Hero: FC = () => {
             <div ref={card3Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
-                  video="/videos/video_3.mp4"
-                  poster="/mock/work_vertical_3.webp"
+                  video="/videos/video_3d_1.mp4"
+                  poster="/mock/work_3d_1.webp"
                   className="w-[110px] sm:w-[120px] lg:w-[135px] xl:w-[150px]"
                   defaultTransform="perspective(1100px) rotateX(4deg) rotateY(-18deg) rotateZ(-2deg)"
                   hoverTransform="perspective(1100px) rotateX(0deg) rotateY(-4deg) rotateZ(0deg) scale(1.06)"
@@ -225,8 +225,8 @@ export const Hero: FC = () => {
             <div ref={card4Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-3">
                 <PerspectiveVideoCard
-                  video="/videos/video_4.mp4"
-                  poster="/mock/work_4.webp"
+                  video="/videos/video_2.mp4"
+                  poster="/mock/work_zinc.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(-11deg) rotateZ(5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(-4deg) rotateZ(2deg) scale(1.06)"
@@ -241,8 +241,8 @@ export const Hero: FC = () => {
             <div ref={card5Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
-                  video="/videos/video_3.mp4"
-                  poster="/mock/work_7.webp"
+                  video="/videos/video_4.mp4"
+                  poster="/mock/work_cigar.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(11deg) rotateZ(-5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(4deg) rotateZ(-2deg) scale(1.06)"
@@ -258,7 +258,7 @@ export const Hero: FC = () => {
               <div className="animate-float-3">
                 <PerspectiveVideoCard
                   video="/videos/video_6.mp4"
-                  poster="/mock/work_6.webp"
+                  poster="/mock/work_monster.webp"
                   className="w-[110px] sm:w-[120px] lg:w-[135px] xl:w-[150px]"
                   defaultTransform="perspective(1100px) rotateX(4deg) rotateY(18deg) rotateZ(2deg)"
                   hoverTransform="perspective(1100px) rotateX(0deg) rotateY(4deg) rotateZ(0deg) scale(1.06)"
