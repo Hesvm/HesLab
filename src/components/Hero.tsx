@@ -1,4 +1,4 @@
-import { useRef, useEffect, type FC } from 'react';
+import { useRef, useEffect, useState, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../data/translations';
@@ -13,6 +13,8 @@ interface PerspectiveVideoCardProps {
   defaultTransform: string;
   hoverTransform: string;
   aspect?: string;
+  isPlaying?: boolean;
+  onHoverChange?: (hovered: boolean) => void;
 }
 
 const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
@@ -22,37 +24,50 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
   defaultTransform,
   hoverTransform,
   aspect = 'aspect-[9/16]',
+  isPlaying = false,
+  onHoverChange,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  };
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
 
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
+    if (isPlaying) {
+      const playPromise = el.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      el.pause();
     }
-  };
+  }, [isPlaying]);
 
   return (
     <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      ref={containerRef}
+      onMouseEnter={() => {
+        onHoverChange?.(true);
+        if (containerRef.current) {
+          containerRef.current.style.transform = hoverTransform;
+          containerRef.current.style.zIndex = '30';
+        }
+      }}
+      onMouseLeave={() => {
+        onHoverChange?.(false);
+        if (containerRef.current) {
+          containerRef.current.style.transform = defaultTransform;
+          containerRef.current.style.zIndex = '10';
+        }
+      }}
+      onClick={() => {
+        onHoverChange?.(!isPlaying);
+      }}
       className={`pointer-events-auto cursor-pointer transition-all duration-500 ease-out group ${className}`}
       style={{
         transform: defaultTransform,
         transformStyle: 'preserve-3d',
-      }}
-      onMouseOver={(e) => {
-        e.currentTarget.style.transform = hoverTransform;
-        e.currentTarget.style.zIndex = '30';
-      }}
-      onMouseOut={(e) => {
-        e.currentTarget.style.transform = defaultTransform;
-        e.currentTarget.style.zIndex = '10';
       }}
     >
       <div
@@ -69,7 +84,7 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
           disablePictureInPicture
           disableRemotePlayback
           controlsList="nodownload nofullscreen noplaybackrate noremoteplayback"
-          preload="none"
+          preload="metadata"
           className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-700"
         />
 
@@ -92,6 +107,127 @@ export const Hero: FC = () => {
   const card5Ref = useRef<HTMLDivElement>(null);
   const card6Ref = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
+
+  // Active playing card management (ambient random rotation + hover priority)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [ambientIndex, setAmbientIndex] = useState<number | null>(null);
+
+  const hoveredIndexRef = useRef<number | null>(null);
+  const ambientIndexRef = useRef<number | null>(null);
+  const isHeroVisibleRef = useRef<boolean>(true);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const scheduleAmbientRef = useRef<(delay?: number) => void>(() => {});
+
+  hoveredIndexRef.current = hoveredIndex;
+  ambientIndexRef.current = ambientIndex;
+
+  useEffect(() => {
+    let active = true;
+
+    const clearActiveTimer = () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+
+    const pickNextAmbientCard = (prev: number | null): number => {
+      const candidates = [0, 1, 2, 3, 4, 5].filter((i) => i !== prev);
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    };
+
+    const runAmbientCycle = () => {
+      clearActiveTimer();
+      if (!active || !isHeroVisibleRef.current || hoveredIndexRef.current !== null) {
+        return;
+      }
+
+      // Pick next card
+      const nextCard = pickNextAmbientCard(ambientIndexRef.current);
+      setAmbientIndex(nextCard);
+
+      // Random play duration between 5 and 10 seconds (5000ms - 10000ms)
+      const playDuration = 5000 + Math.floor(Math.random() * 5000);
+
+      timerRef.current = setTimeout(() => {
+        if (!active || !isHeroVisibleRef.current || hoveredIndexRef.current !== null) {
+          return;
+        }
+        runAmbientCycle();
+      }, playDuration);
+    };
+
+    scheduleAmbientRef.current = (delay = 1000) => {
+      clearActiveTimer();
+      timerRef.current = setTimeout(() => {
+        runAmbientCycle();
+      }, delay);
+    };
+
+    // Initial delay before starting the first ambient playback
+    timerRef.current = setTimeout(() => {
+      runAmbientCycle();
+    }, 1500);
+
+    // Viewport Intersection Observer (pause when hero is scrolled out of view)
+    const heroEl = sectionRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (heroEl) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          const isVisible = entry.isIntersecting;
+          isHeroVisibleRef.current = isVisible;
+          if (!isVisible) {
+            clearActiveTimer();
+            setAmbientIndex(null);
+          } else if (hoveredIndexRef.current === null) {
+            scheduleAmbientRef.current(1000);
+          }
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(heroEl);
+    }
+
+    // Document visibility change (tab hidden/visible)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearActiveTimer();
+        setAmbientIndex(null);
+      } else if (isHeroVisibleRef.current && hoveredIndexRef.current === null) {
+        scheduleAmbientRef.current(800);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      active = false;
+      clearActiveTimer();
+      if (observer) observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  const handleCardHoverChange = (index: number, isHovered: boolean) => {
+    if (isHovered) {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      setHoveredIndex(index);
+    } else {
+      setHoveredIndex((curr) => (curr === index ? null : curr));
+      scheduleAmbientRef.current(1200);
+    }
+  };
+
+  const isCardPlaying = (index: number) => {
+    if (hoveredIndex !== null) {
+      return hoveredIndex === index;
+    }
+    return ambientIndex === index;
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -183,6 +319,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(15deg) rotateY(-11deg) rotateZ(-6deg)"
                   hoverTransform="perspective(1100px) rotateX(4deg) rotateY(-4deg) rotateZ(-2deg) scale(1.06)"
                   aspect="aspect-[9/16]"
+                  isPlaying={isCardPlaying(0)}
+                  onHoverChange={(hovered) => handleCardHoverChange(0, hovered)}
                 />
               </div>
             </div>
@@ -199,6 +337,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(15deg) rotateY(11deg) rotateZ(6deg)"
                   hoverTransform="perspective(1100px) rotateX(4deg) rotateY(4deg) rotateZ(2deg) scale(1.06)"
                   aspect="aspect-[16/10]"
+                  isPlaying={isCardPlaying(1)}
+                  onHoverChange={(hovered) => handleCardHoverChange(1, hovered)}
                 />
               </div>
             </div>
@@ -215,6 +355,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(4deg) rotateY(-18deg) rotateZ(-2deg)"
                   hoverTransform="perspective(1100px) rotateX(0deg) rotateY(-4deg) rotateZ(0deg) scale(1.06)"
                   aspect="aspect-[9/16]"
+                  isPlaying={isCardPlaying(2)}
+                  onHoverChange={(hovered) => handleCardHoverChange(2, hovered)}
                 />
               </div>
             </div>
@@ -231,6 +373,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(-11deg) rotateZ(5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(-4deg) rotateZ(2deg) scale(1.06)"
                   aspect="aspect-[9/16]"
+                  isPlaying={isCardPlaying(3)}
+                  onHoverChange={(hovered) => handleCardHoverChange(3, hovered)}
                 />
               </div>
             </div>
@@ -247,6 +391,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(11deg) rotateZ(-5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(4deg) rotateZ(-2deg) scale(1.06)"
                   aspect="aspect-[9/16]"
+                  isPlaying={isCardPlaying(4)}
+                  onHoverChange={(hovered) => handleCardHoverChange(4, hovered)}
                 />
               </div>
             </div>
@@ -263,6 +409,8 @@ export const Hero: FC = () => {
                   defaultTransform="perspective(1100px) rotateX(4deg) rotateY(18deg) rotateZ(2deg)"
                   hoverTransform="perspective(1100px) rotateX(0deg) rotateY(4deg) rotateZ(0deg) scale(1.06)"
                   aspect="aspect-[9/16]"
+                  isPlaying={isCardPlaying(5)}
+                  onHoverChange={(hovered) => handleCardHoverChange(5, hovered)}
                 />
               </div>
             </div>
