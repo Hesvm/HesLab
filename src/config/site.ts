@@ -34,6 +34,10 @@ export function getMediaUrl(relativePath: string): string {
     return relativePath;
   }
   const clean = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+  // In development, serve directly from local public/ directory for instant 0ms playback
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+    return clean;
+  }
   if (!MEDIA_URL) return clean;
   // If using GitHub Releases as CDN, assets are flat without subdirectories
   const isFlatCdn = MEDIA_URL.includes('releases/download');

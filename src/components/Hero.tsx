@@ -30,39 +30,73 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Guarantee HTML5 video muted DOM property is set for browser autoplay policies
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
+    el.muted = true;
+    el.defaultMuted = true;
+  }, []);
+
+  // React to ambient or hover play state
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = true;
+    el.defaultMuted = true;
 
     if (isPlaying) {
-      const playPromise = el.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+      const p = el.play();
+      if (p !== undefined) {
+        p.catch(() => {});
       }
     } else {
       el.pause();
     }
   }, [isPlaying]);
 
+  const handleMouseEnter = () => {
+    const el = videoRef.current;
+    if (el) {
+      el.muted = true;
+      el.defaultMuted = true;
+      el.play().catch(() => {});
+    }
+    onHoverChange?.(true);
+    if (containerRef.current) {
+      containerRef.current.style.transform = hoverTransform;
+      containerRef.current.style.zIndex = '30';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const el = videoRef.current;
+    if (el) {
+      el.pause();
+    }
+    onHoverChange?.(false);
+    if (containerRef.current) {
+      containerRef.current.style.transform = defaultTransform;
+      containerRef.current.style.zIndex = '10';
+    }
+  };
+
   return (
     <div
       ref={containerRef}
-      onMouseEnter={() => {
-        onHoverChange?.(true);
-        if (containerRef.current) {
-          containerRef.current.style.transform = hoverTransform;
-          containerRef.current.style.zIndex = '30';
-        }
-      }}
-      onMouseLeave={() => {
-        onHoverChange?.(false);
-        if (containerRef.current) {
-          containerRef.current.style.transform = defaultTransform;
-          containerRef.current.style.zIndex = '10';
-        }
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onClick={() => {
-        onHoverChange?.(!isPlaying);
+        const el = videoRef.current;
+        if (!isPlaying && el) {
+          el.muted = true;
+          el.defaultMuted = true;
+          el.play().catch(() => {});
+          onHoverChange?.(true);
+        } else if (el) {
+          el.pause();
+          onHoverChange?.(false);
+        }
       }}
       className={`pointer-events-auto cursor-pointer transition-all duration-500 ease-out group ${className}`}
       style={{
@@ -81,10 +115,11 @@ const PerspectiveVideoCard: FC<PerspectiveVideoCardProps> = ({
           muted
           loop
           playsInline
+          autoPlay={false}
           disablePictureInPicture
           disableRemotePlayback
           controlsList="nodownload nofullscreen noplaybackrate noremoteplayback"
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-700"
         />
 
@@ -167,7 +202,7 @@ export const Hero: FC = () => {
     // Initial delay before starting the first ambient playback
     timerRef.current = setTimeout(() => {
       runAmbientCycle();
-    }, 1500);
+    }, 800);
 
     // Viewport Intersection Observer (pause when hero is scrolled out of view)
     const heroEl = sectionRef.current;
@@ -185,7 +220,7 @@ export const Hero: FC = () => {
             scheduleAmbientRef.current(1000);
           }
         },
-        { threshold: 0.15 }
+        { threshold: 0 }
       );
       observer.observe(heroEl);
     }
