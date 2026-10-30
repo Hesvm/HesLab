@@ -205,7 +205,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
         answer: 'Reasonable revisions regarding text, audio balancing, or pacing adjustments are completely included until you are fully satisfied.',
       },
     ],
-    relatedWorkSlugs: ['tokyo-24h-vlog', 'crypto-empire-documentary', 'founder-routine-podcast'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['short-form-video-hooks-retention', 'podcast-to-shorts-workflow'],
   },
 
@@ -310,7 +310,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
       { question: 'Do you edit footage shot on smartphones/iPhones?', answer: 'Absolutely. High-grade smartphone footage can look studio-grade with our color and sound grading.' },
       { question: 'Do you provide cover frames?', answer: 'Yes, we select and style a clean cover frame fitting seamlessly into your profile grid.' },
     ],
-    relatedWorkSlugs: ['tokyo-24h-vlog', 'founder-routine-podcast', 'creator-growth-story'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['short-form-video-hooks-retention', 'short-form-video-editing-cost-guide'],
   },
 
@@ -415,7 +415,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
       { question: 'Do you recommend titles and tags?', answer: 'Yes, each Shorts delivery includes an algorithmic-friendly title recommendation.' },
       { question: 'What is the ideal Shorts duration?', answer: 'Highest completion rates are consistently observed between 25 and 42 seconds.' },
     ],
-    relatedWorkSlugs: ['crypto-empire-documentary', 'ai-tools-breakdown'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['podcast-to-shorts-workflow', 'short-form-video-hooks-retention'],
   },
 
@@ -516,7 +516,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
     faqsEn: [
       { question: 'Do you edit specifically for LinkedIn video?', answer: 'Yes, LinkedIn videos are styled with high visual prestige, concise pacing, and clear professional titling.' },
     ],
-    relatedWorkSlugs: ['ai-tools-breakdown', 'tokyo-24h-vlog'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['short-form-video-editing-cost-guide', 'podcast-to-shorts-workflow'],
   },
 
@@ -619,7 +619,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
     faqsEn: [
       { question: 'I pause frequently and stumble on words. Can editing fix this?', answer: 'Yes. Our micro-cadence cuts and seamless jump transitions make your delivery sound fluid and effortless.' },
     ],
-    relatedWorkSlugs: ['founder-routine-podcast', 'creator-growth-story'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['how-to-make-talking-head-videos-engaging', 'how-to-brief-a-video-editor'],
   },
 
@@ -722,7 +722,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
     faqsEn: [
       { question: 'Do you find the moments yourself or do I provide timestamps?', answer: 'We independently identify the highest-retention moments, but you are always welcome to designate priority timestamps.' },
     ],
-    relatedWorkSlugs: ['founder-routine-podcast', 'crypto-empire-documentary'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['how-to-turn-podcast-into-short-form-content', 'how-to-make-talking-head-videos-engaging'],
   },
 
@@ -823,7 +823,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
     faqsEn: [
       { question: 'Is older footage suitable for modern Reels?', answer: 'With our sharpening, color grading, and framing, even older 1080p recordings look crisp on mobile screens.' },
     ],
-    relatedWorkSlugs: ['founder-routine-podcast', 'ai-tools-breakdown'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['how-to-turn-podcast-into-short-form-content', 'how-to-turn-youtube-videos-into-shorts'],
   },
 
@@ -962,7 +962,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
         answer: 'Yes, we supply ProRes 4444 and WebM with alpha channels for seamless overlay in any editing workflow.',
       },
     ],
-    relatedWorkSlugs: ['wireless-headphone-commercial', 'ai-tools-breakdown'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['kinetic-typography-motion-design'],
   },
 
@@ -1101,7 +1101,7 @@ export const SERVICES_DATA: Record<string, ServicePillar> = {
         answer: 'Yes, retainers are flexible monthly agreements with no lock-in contracts; you can adjust tiers anytime between billing cycles.',
       },
     ],
-    relatedWorkSlugs: ['tokyo-24h-vlog', 'founder-routine-podcast', 'creator-growth-story'],
+    relatedWorkSlugs: ['porsche-heritage-documentary', '3d-elevator-simulation', '3d-product-showcase'],
     relatedResourceSlugs: ['short-form-video-editing-cost-guide', 'podcast-to-shorts-workflow'],
   },
 };

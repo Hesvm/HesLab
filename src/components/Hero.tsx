@@ -402,8 +402,8 @@ export const Hero: FC = () => {
             <div ref={card4Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-3">
                 <PerspectiveVideoCard
-                  video="/videos/video_2.mp4"
-                  poster="/mock/work_zinc.webp"
+                  video="/videos/video_porsche.mp4"
+                  poster="/mock/work_porsche.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(-11deg) rotateZ(5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(-4deg) rotateZ(2deg) scale(1.06)"
@@ -420,8 +420,8 @@ export const Hero: FC = () => {
             <div ref={card5Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-2">
                 <PerspectiveVideoCard
-                  video="/videos/video_4.mp4"
-                  poster="/mock/work_cigar.webp"
+                  video="/videos/video_3d_2.mp4"
+                  poster="/mock/work_3d_2.webp"
                   className="w-[115px] sm:w-[130px] lg:w-[145px] xl:w-[160px]"
                   defaultTransform="perspective(1100px) rotateX(-15deg) rotateY(11deg) rotateZ(-5deg)"
                   hoverTransform="perspective(1100px) rotateX(-4deg) rotateY(4deg) rotateZ(-2deg) scale(1.06)"
@@ -438,8 +438,8 @@ export const Hero: FC = () => {
             <div ref={card6Ref} style={{ willChange: 'transform, opacity' }}>
               <div className="animate-float-3">
                 <PerspectiveVideoCard
-                  video="/videos/video_6.mp4"
-                  poster="/mock/work_monster.webp"
+                  video="/videos/video_3d_1.mp4"
+                  poster="/mock/work_3d_1.webp"
                   className="w-[110px] sm:w-[120px] lg:w-[135px] xl:w-[150px]"
                   defaultTransform="perspective(1100px) rotateX(4deg) rotateY(18deg) rotateZ(2deg)"
                   hoverTransform="perspective(1100px) rotateX(0deg) rotateY(4deg) rotateZ(0deg) scale(1.06)"

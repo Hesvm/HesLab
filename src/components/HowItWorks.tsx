@@ -22,7 +22,7 @@ import { getMediaUrl } from '../config/site';
 const FILES = [
   {
     id: 0,
-    thumb: '/mock/work_vertical_1.webp',
+    thumb: '/mock/work_porsche.webp',
     name: 'VIDEO_01.mp4',
     meta: '00:42 · 248 MB',
     tag: '4K',
@@ -34,7 +34,7 @@ const FILES = [
   },
   {
     id: 1,
-    thumb: '/mock/work_vertical_2.webp',
+    thumb: '/mock/work_3d_1.webp',
     name: 'VIDEO_02.mp4',
     meta: '00:28 · 184 MB',
     tag: 'MP4',
@@ -46,7 +46,7 @@ const FILES = [
   },
   {
     id: 2,
-    thumb: '/mock/work_vertical_3.webp',
+    thumb: '/mock/work_3d_2.webp',
     name: 'REFERENCE.mov',
     meta: '00:15 · 92 MB',
     tag: 'MOV',
@@ -250,7 +250,7 @@ const ProcessVisualStage: FC<{ state: number }> = ({ state }) => {
             <motion.video
               ref={videoRef}
               src={getMediaUrl('/videos/video_1.mp4')}
-              poster="/mock/work_vertical_1.webp"
+              poster="/mock/work_porsche.webp"
               autoPlay
               muted
               loop

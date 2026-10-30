@@ -61,7 +61,12 @@ export interface ServiceArticle {
   cta: { title: string; text: string };
 }
 
-const V = (n: number) => `/videos/video_${n}.mp4`;
+const realVideos = [
+  '/videos/video_porsche.mp4',
+  '/videos/video_3d_1.mp4',
+  '/videos/video_3d_2.mp4',
+];
+const V = (n: number) => realVideos[(n - 1) % realVideos.length];
 
 export const SERVICE_ARTICLES: ServiceArticle[] = [
   // =====================================================================
@@ -189,7 +194,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'A consistent editing language helps creators and brands become recognizable across every piece of content.',
     heroVisual: {
-      image: '/mock/work_vertical_2.webp',
+      image: '/mock/work_3d_1.webp',
       video: V(2),
       emojis: ['/emojis/memo.png', '/emojis/magic_wand.png'],
       chips: ['Colors', 'Type', 'Pacing'],
@@ -303,7 +308,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'Motion design adds visual hierarchy and guides viewers through information, so important moments land and the video feels alive.',
     heroVisual: {
-      image: '/mock/work_vertical_3.webp',
+      image: '/mock/work_3d_2.webp',
       video: V(3),
       emojis: ['/emojis/magic_wand.png', '/emojis/clapper_board.png'],
       chips: ['Kinetic text', 'Callouts', 'Transitions'],
@@ -399,7 +404,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'Sound shapes how a video feels. We choose music, add effects and clean the audio so every cut lands the way it should.',
     heroVisual: {
-      image: '/mock/work_4.webp',
+      image: '/mock/work_3d_2.webp',
       video: V(4),
       emojis: ['/emojis/clapper_board.png', '/emojis/eyes.png'],
       chips: ['Music', 'SFX', 'Clean audio'],
@@ -494,7 +499,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'A more polished, story-driven look: considered color, composition and pacing, built for the vertical frame.',
     heroVisual: {
-      image: '/mock/work_7.webp',
+      image: '/mock/work_porsche.webp',
       video: V(1),
       emojis: ['/emojis/clapper_board.png', '/emojis/eyes.png'],
       chips: ['Color', 'Framing', 'Emotion'],
@@ -609,7 +614,7 @@ export const SERVICE_ARTICLES: ServiceArticle[] = [
     heroSub:
       'Content packs provide creators and brands with recurring edited videos while maintaining a consistent visual style.',
     heroVisual: {
-      image: '/mock/work_6.webp',
+      image: '/mock/work_3d_1.webp',
       video: V(6),
       emojis: ['/emojis/package.png', '/emojis/clapper_board.png'],
       chips: ['10 videos', 'One style', 'On schedule'],

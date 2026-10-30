@@ -269,12 +269,9 @@ const coreRoutes = [
 
 // Project Routes
 const projectSlugs = [
-  { slug: 'tokyo-24h-vlog', titleFa: '۲۴ ساعت در توکیو با ریتم سرعتی و ساند دیزاین سینمایی', date: '2026-01-15' },
-  { slug: 'crypto-empire-documentary', titleFa: 'ظهور و سقوط امپراتوری‌های کریپتو در ۳ دقیقه', date: '2026-02-02' },
-  { slug: 'founder-routine-podcast', titleFa: 'راز واقعی برنامه‌ریزی روزانه بنیان‌گذاران ۱۰ میلیون دلاری', date: '2026-02-18' },
-  { slug: 'wireless-headphone-commercial', titleFa: 'تیزر رونمایی هدفون نسل جدید با موشن گرافیک سه‌بعدی', date: '2026-03-01' },
-  { slug: 'ai-tools-breakdown', titleFa: '۳ ابزار هوش مصنوعی که جای یک آژانس کامل را می‌گیرند', date: '2026-03-12' },
-  { slug: 'creator-growth-story', titleFa: 'چگونه در ۱ سال از صفر به ۱۰۰ هزار مخاطب رسیدم؟', date: '2026-03-20' },
+  { slug: 'porsche-heritage-documentary', titleFa: 'داستان خلق پورشه: چگونه یک رویا افسانه ۹۱۱ را ساخت؟', date: '2026-03-05' },
+  { slug: '3d-elevator-simulation', titleFa: 'شبیه‌سازی سه‌بعدی سقوط آسانسور (سبک Zack D.)', date: '2026-03-01' },
+  { slug: '3d-product-showcase', titleFa: 'تیزر سینمایی پروداکت دیزاین و موشن سه‌بعدی', date: '2026-03-01' },
 ];
 
 const projectRoutes = projectSlugs.map((p) => ({
